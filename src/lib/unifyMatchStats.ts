@@ -1,11 +1,11 @@
-import {
-    RawMatchData,
-    RawStatsBlock,
-    StatIdMap,
-    DEFAULT_STAT_IDS,
-    StatsFilterKey,
-    extractStatValue,
-} from "@/lib/parseExternalStats";
+// import {
+//     RawMatchData,
+//     RawStatsBlock,
+//     StatIdMap,
+//     DEFAULT_STAT_IDS,
+//     StatsFilterKey,
+// } from "@/lib/parseExternalStats";
+import { DEFAULT_STAT_IDS, RawMatchData, RawStatEntry, RawStatsBlock, StatIdMap, StatsFilterKey } from "@/types/externalStats";
 import { MatchMetrics, TeamMetrics, UnifiedMatch } from "@/types/unifiedStats";
 
 export interface BlockWeights {
@@ -28,6 +28,21 @@ interface TeamBlockStats {
     shots: number;
     shotsOnTarget: number;
     corners: number
+}
+
+function extractStatValue(
+    statistics: RawStatEntry[],
+    statId: number,
+    competitorId: number,
+    statisticGroup: number | null
+): number {
+    const entry = statistics.find(
+        (s) =>
+            s.id === statId &&
+            s.competitorId === competitorId &&
+            (statisticGroup === null || s.statisticGroup === statisticGroup)
+    );
+    return entry ? parseFloat(entry.value) || 0 : 0;
 }
 
 /** Extrae las 6 métricas base de un equipo dentro de UN bloque (todos/ultimos5/ultimos5LocalVisita) */
