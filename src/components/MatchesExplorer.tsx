@@ -19,6 +19,7 @@ import {
     Gauge,
     BarChart,
     Info,
+    Circle,
 } from "lucide-react";
 
 // Interfaz para las métricas de un equipo
@@ -52,6 +53,38 @@ interface PredictionResult {
 
 interface MatchesExplorerProps {
     predictions: PredictionResult[];
+}
+
+// Función de Poisson para calcular probabilidades de marcadores exactos
+function poisson(k: number, lambda: number): number {
+    if (lambda === 0) return k === 0 ? 1 : 0;
+    return (Math.exp(-lambda) * Math.pow(lambda, k)) / factorial(k);
+}
+
+function factorial(n: number): number {
+    if (n === 0 || n === 1) return 1;
+    let result = 1;
+    for (let i = 2; i <= n; i++) {
+        result *= i;
+    }
+    return result;
+}
+
+function getTopScoreProbabilities(
+    homeLambda: number,
+    awayLambda: number,
+    maxGoals: number = 5,
+    topN: number = 5
+): { home: number; away: number; prob: number }[] {
+    const scores: { home: number; away: number; prob: number }[] = [];
+    for (let h = 0; h <= maxGoals; h++) {
+        for (let a = 0; a <= maxGoals; a++) {
+            const prob = poisson(h, homeLambda) * poisson(a, awayLambda);
+            scores.push({ home: h, away: a, prob });
+        }
+    }
+    scores.sort((a, b) => b.prob - a.prob);
+    return scores.slice(0, topN);
 }
 
 export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
@@ -92,6 +125,8 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
         trend,
         secondary,
         description,
+        onClick,
+        className = "",
     }: {
         label: string;
         value: number | string;
@@ -99,12 +134,15 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
         trend?: "up" | "down" | "neutral";
         secondary?: boolean;
         description?: string;
+        onClick?: (e: React.MouseEvent) => void;
+        className?: string;
     }) => {
         const [showTooltip, setShowTooltip] = useState(false);
 
-        const toggleTooltip = (e: React.MouseEvent) => {
-            e.stopPropagation(); // Evita que el clic llegue al padre
-            setShowTooltip((prev) => !prev);
+        const handleClick = (e: React.MouseEvent) => {
+            e.stopPropagation();
+            if (onClick) onClick(e);
+            if (description) setShowTooltip((prev) => !prev);
         };
 
         const trendIcon = {
@@ -119,8 +157,8 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
 
         return (
             <span
-                className={`relative inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs border ${baseClass} whitespace-nowrap transition-colors cursor-pointer`}
-                onClick={toggleTooltip}
+                className={`relative inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs border ${baseClass} whitespace-nowrap transition-colors cursor-pointer ${className}`}
+                onClick={handleClick}
                 title={description} // Tooltip nativo para desktop (hover)
             >
                 {Icon && <Icon className="w-3 h-3 text-gray-400" />}
@@ -285,6 +323,11 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
                                 ? r.away.teamName
                                 : "Empate";
 
+                    // Calcular marcadores exactos más probables
+                    const homeLambda = r.prediction.homeExpectedGoals || 0;
+                    const awayLambda = r.prediction.awayExpectedGoals || 0;
+                    const topScores = getTopScoreProbabilities(homeLambda, awayLambda, 6, 5);
+
                     return (
                         <div
                             key={r.matchUrl}
@@ -330,7 +373,35 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
                                     <TeamStatsBlock team={r.away} title="Visitante" />
                                 </div>
 
-                                {/* Fila 4: Badges rápidos de Over/Under y BTTS */}
+                                {/* Fila 4: Marcadores exactos más probables */}
+                                <div className="mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
+                                    <div className="flex items-center gap-2 mb-1">
+                                        <span className="text-xs font-medium text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                                            <Circle className="w-3 h-3" />
+                                            Marcadores más probables
+                                            <span title="Probabilidad calculada con modelo de Poisson">
+                                                <Info className="..." />
+                                            </span>                                         </span>
+                                    </div>
+                                    <div className="flex flex-wrap gap-1">
+                                        {topScores.map((score, idx) => (
+                                            <StatBadge
+                                                key={idx}
+                                                label={`${(score.prob * 100).toFixed(1)}%`}
+                                                value={`${score.home}-${score.away}`}
+                                                icon={Goal}
+                                                secondary
+                                                description={`Probabilidad de que el marcador sea ${score.home}-${score.away}`}
+                                                className="bg-indigo-50/70 dark:bg-indigo-900/20 border-indigo-100 dark:border-indigo-800"
+                                            />
+                                        ))}
+                                        {topScores.length === 0 && (
+                                            <span className="text-xs text-gray-400">No hay datos suficientes</span>
+                                        )}
+                                    </div>
+                                </div>
+
+                                {/* Fila 5: Badges rápidos de Over/Under y BTTS */}
                                 <div className="flex flex-wrap items-center gap-2 mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
                                     <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-gray-50 dark:bg-neutral-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-neutral-700">
                                         {r.prediction.goalLines[1]?.overProb > 70 ? "Over 2.5" : "Under 2.5"}
