@@ -73,7 +73,7 @@ function factorial(n: number): number {
 function getTopScoreProbabilities(
     homeLambda: number,
     awayLambda: number,
-    maxGoals: number = 5,
+    maxGoals: number = 8,
     topN: number = 5
 ): { home: number; away: number; prob: number }[] {
     const scores: { home: number; away: number; prob: number }[] = [];
@@ -416,7 +416,7 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
 
                             {/* Panel de odds expandible */}
                             <div
-                                className={`overflow-hidden transition-all duration-300 ease-in-out ${isSelected ? "max-h-[800px] opacity-100" : "max-h-0 opacity-0"
+                                className={`overflow-hidden transition-all duration-300 ease-in-out ${isSelected ? "opacity-100" : "max-h-0 opacity-0"
                                     }`}
                             >
                                 <div className="border-t border-gray-100 dark:border-neutral-800 p-4 bg-gray-50/50 dark:bg-neutral-800/50">
