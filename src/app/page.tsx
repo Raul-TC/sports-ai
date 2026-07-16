@@ -28,9 +28,7 @@ export default async function HomePage() {
           <h1 className="text-xl font-semibold tracking-tight text-center">Sports AI</h1>
           <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5 text-center">
             Predicciones con modelo de Poisson
-
           </p>
-          <p className="bold text-green-500">La Fija: Yaya se la come toda momio: -100000</p>
         </div>
         {/* <ThemeToggle /> */}
       </header>
