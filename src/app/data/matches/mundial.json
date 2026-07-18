@@ -1,1627 +1,1628 @@
-[{
-    "matchUrl": "https://www.365scores.com/es/football/match/mls-104/los-angeles-fc-los-angeles-galaxy-1342-51178-104#id=4621503",
-    "stats": {
-      "todos": {
-        "statistics": [
-          {
-            "id": 141,
-            "name": "Partidos ganados",
-            "competitorId": 1342,
-            "value": "5 (33%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1,
-            "bettingOpportunity": {
-              "gameId": 4621503,
-              "lineId": 0,
-              "text": "51% predice que Los Angeles FC ganará",
-              "textCTA": "Apuesta $400 y gana $840",
-              "optionNum": 0,
-              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
-              "bookmakerId": 4
+[
+    {
+        "matchUrl": "https://www.365scores.com/es/football/match/mls-104/los-angeles-fc-los-angeles-galaxy-1342-51178-104#id=4621503",
+        "stats": {
+            "todos": {
+                "statistics": [
+                    {
+                        "id": 141,
+                        "name": "Partidos ganados",
+                        "competitorId": 1342,
+                        "value": "5 (33%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1,
+                        "bettingOpportunity": {
+                            "gameId": 4621503,
+                            "lineId": 0,
+                            "text": "51% predice que Los Angeles FC ganará",
+                            "textCTA": "Apuesta $400 y gana $840",
+                            "optionNum": 0,
+                            "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+                            "bookmakerId": 4
+                        }
+                    },
+                    {
+                        "id": 142,
+                        "name": "Ambos equipos marcaron",
+                        "competitorId": 1342,
+                        "value": "13 (87%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 143,
+                        "name": "Más de 2.5 goles",
+                        "competitorId": 1342,
+                        "value": "10 (67%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 144,
+                        "name": "Marcó primero",
+                        "competitorId": 1342,
+                        "value": "7 (47%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 146,
+                        "name": "Recibió gol primero",
+                        "competitorId": 1342,
+                        "value": "8 (53%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 148,
+                        "name": "Empató o Ganó",
+                        "competitorId": 1342,
+                        "value": "10 (67%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 149,
+                        "name": "Ganador del primer tiempo",
+                        "competitorId": 1342,
+                        "value": "4 (27%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 150,
+                        "name": "Valla invicta",
+                        "competitorId": 1342,
+                        "value": "2 (13%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 153,
+                        "name": "Goles convertidos",
+                        "competitorId": 1342,
+                        "value": "1.47",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 156,
+                        "name": "Goles recibidos",
+                        "competitorId": 1342,
+                        "value": "1.47",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 159,
+                        "name": "Goles esperados",
+                        "competitorId": 1342,
+                        "value": "1.49",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 1
+                    },
+                    {
+                        "id": 162,
+                        "name": "Goles esperados recibidos",
+                        "competitorId": 1342,
+                        "value": "1.22",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 165,
+                        "name": "Remates",
+                        "competitorId": 1342,
+                        "value": "13.47",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 168,
+                        "name": "Remates al arco",
+                        "competitorId": 1342,
+                        "value": "5.73",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 1
+                    },
+                    {
+                        "id": 171,
+                        "name": "Corners",
+                        "competitorId": 1342,
+                        "value": "5.07",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 174,
+                        "name": "Tarjetas",
+                        "competitorId": 1342,
+                        "value": "2.27",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 175,
+                        "name": "Penales convertidos/penales ejecutados",
+                        "competitorId": 1342,
+                        "value": "1/0",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 1
+                    },
+                    {
+                        "id": 141,
+                        "name": "Partidos ganados",
+                        "competitorId": 51178,
+                        "value": "7 (47%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1,
+                        "bettingOpportunity": {
+                            "gameId": 4621503,
+                            "lineId": 0,
+                            "text": "51% predice que Los Angeles FC ganará",
+                            "textCTA": "Apuesta $400 y gana $840",
+                            "optionNum": 0,
+                            "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+                            "bookmakerId": 4
+                        }
+                    },
+                    {
+                        "id": 142,
+                        "name": "Ambos equipos marcaron",
+                        "competitorId": 51178,
+                        "value": "6 (40%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 143,
+                        "name": "Más de 2.5 goles",
+                        "competitorId": 51178,
+                        "value": "8 (53%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 144,
+                        "name": "Marcó primero",
+                        "competitorId": 51178,
+                        "value": "7 (47%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 146,
+                        "name": "Recibió gol primero",
+                        "competitorId": 51178,
+                        "value": "6 (40%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 148,
+                        "name": "Empató o Ganó",
+                        "competitorId": 51178,
+                        "value": "10 (67%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 149,
+                        "name": "Ganador del primer tiempo",
+                        "competitorId": 51178,
+                        "value": "3 (20%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 150,
+                        "name": "Valla invicta",
+                        "competitorId": 51178,
+                        "value": "9 (60%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 153,
+                        "name": "Goles convertidos",
+                        "competitorId": 51178,
+                        "value": "1.6",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 156,
+                        "name": "Goles recibidos",
+                        "competitorId": 51178,
+                        "value": "1.13",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 159,
+                        "name": "Goles esperados",
+                        "competitorId": 51178,
+                        "value": "1.29",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 1
+                    },
+                    {
+                        "id": 162,
+                        "name": "Goles esperados recibidos",
+                        "competitorId": 51178,
+                        "value": "1.06",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 165,
+                        "name": "Remates",
+                        "competitorId": 51178,
+                        "value": "14.13",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 168,
+                        "name": "Remates al arco",
+                        "competitorId": 51178,
+                        "value": "4.87",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 1
+                    },
+                    {
+                        "id": 171,
+                        "name": "Corners",
+                        "competitorId": 51178,
+                        "value": "6",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 174,
+                        "name": "Tarjetas",
+                        "competitorId": 51178,
+                        "value": "2.07",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 175,
+                        "name": "Penales convertidos/penales ejecutados",
+                        "competitorId": 51178,
+                        "value": "0/0",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 1
+                    }
+                ],
+                "statisticsGroups": [
+                    {
+                        "id": 1,
+                        "name": "Todas las competiciones"
+                    },
+                    {
+                        "id": 2,
+                        "name": "Estadísticas promedio"
+                    }
+                ],
+                "statisticsFilters": [
+                    {
+                        "filterGroup": 1,
+                        "name": "Todas las competiciones",
+                        "selected": false,
+                        "value": -1
+                    },
+                    {
+                        "filterGroup": 1,
+                        "name": "MLS",
+                        "selected": true,
+                        "value": 104
+                    },
+                    {
+                        "filterGroup": 1,
+                        "name": "CONCACAF Copa de Campeones",
+                        "selected": false,
+                        "value": 171
+                    },
+                    {
+                        "filterGroup": 2,
+                        "name": "Todos",
+                        "selected": true,
+                        "value": 0
+                    },
+                    {
+                        "filterGroup": 2,
+                        "name": "Últimos 5",
+                        "selected": false,
+                        "value": 1
+                    },
+                    {
+                        "filterGroup": 2,
+                        "name": "Todos - Local/Visitante",
+                        "selected": false,
+                        "value": 2
+                    },
+                    {
+                        "filterGroup": 2,
+                        "name": "Útimos 5 - Local/Visitante",
+                        "selected": false,
+                        "value": 4
+                    }
+                ],
+                "statisticGamesPlayed": {
+                    "homeText": "Últimos 15 partidos",
+                    "awayText": "Últimos 15 partidos"
+                },
+                "sports": [
+                    {
+                        "id": 1,
+                        "name": "Fútbol",
+                        "nameForURL": "football",
+                        "drawSupport": true,
+                        "imageVersion": 1
+                    }
+                ],
+                "countries": [
+                    {
+                        "id": 323,
+                        "name": "California (EEUU)",
+                        "nameForURL": "california-(usa)",
+                        "imageVersion": 2,
+                        "isInternational": false
+                    },
+                    {
+                        "id": 18,
+                        "name": "Estados Unidos",
+                        "nameForURL": "usa",
+                        "sportTypes": [
+                            1,
+                            2,
+                            4,
+                            6,
+                            7,
+                            8,
+                            9
+                        ],
+                        "imageVersion": 1,
+                        "isInternational": false
+                    }
+                ],
+                "competitions": [
+                    {
+                        "id": 104,
+                        "countryId": 18,
+                        "sportId": 1,
+                        "name": "MLS",
+                        "hasStandings": true,
+                        "hasLiveStandings": true,
+                        "hasStandingsGroups": false,
+                        "hasBrackets": false,
+                        "hasStats": true,
+                        "nameForURL": "mls",
+                        "popularityRank": 8515488,
+                        "imageVersion": 2,
+                        "currentStageType": 1,
+                        "color": "#325CB1",
+                        "competitorsType": 1,
+                        "currentPhaseNum": -1,
+                        "currentSeasonNum": 32,
+                        "currentStageNum": 1,
+                        "isInternational": false,
+                        "hasHistory": true
+                    }
+                ],
+                "competitors": [
+                    {
+                        "id": 1342,
+                        "countryId": 323,
+                        "sportId": 1,
+                        "name": "LA Galaxy",
+                        "shortName": "LA Galaxy",
+                        "longName": "LA Galaxy",
+                        "nameForURL": "los-angeles-galaxy",
+                        "popularityRank": 1322749,
+                        "imageVersion": 1,
+                        "mainCompetitionId": 104,
+                        "hasTransfers": false,
+                        "competitorNum": 0,
+                        "mainCompetitionName": "MLS"
+                    },
+                    {
+                        "id": 51178,
+                        "createdAt": "2018-01-21T12:17:52.957",
+                        "countryId": 323,
+                        "sportId": 1,
+                        "name": "Los Angeles FC",
+                        "shortName": "Los Angeles FC",
+                        "longName": "Los Angeles FC",
+                        "nameForURL": "los-angeles-fc",
+                        "popularityRank": 815005,
+                        "imageVersion": 1,
+                        "mainCompetitionId": 104,
+                        "hasTransfers": false,
+                        "competitorNum": 0,
+                        "mainCompetitionName": "MLS"
+                    }
+                ],
+                "games": [
+                    {
+                        "id": 4621503,
+                        "sportId": 1,
+                        "competitionId": 104,
+                        "seasonNum": 32,
+                        "stageNum": 1,
+                        "groupNum": 2,
+                        "competitionDisplayName": "MLS",
+                        "startTime": "2026-07-17T20:25:00-06:00",
+                        "statusGroup": 2,
+                        "statusText": "Prog.",
+                        "shortStatusText": "Prog.",
+                        "gameTimeAndStatusDisplayType": 0,
+                        "homeCompetitor": {
+                            "id": 1342,
+                            "countryId": 323,
+                            "sportId": 1,
+                            "name": "LA Galaxy",
+                            "score": -1,
+                            "isWinner": false,
+                            "nameForURL": "los-angeles-galaxy",
+                            "type": 1,
+                            "popularityRank": 1322,
+                            "imageVersion": 1,
+                            "color": "#FAFAFA",
+                            "awayColor": "#504270",
+                            "hasSquad": true,
+                            "hasTransfers": false,
+                            "competitorNum": 1,
+                            "hideOnSearch": false,
+                            "hideOnCatalog": false
+                        },
+                        "awayCompetitor": {
+                            "id": 51178,
+                            "createdAt": "2018-01-21T12:17:52.957",
+                            "countryId": 323,
+                            "sportId": 1,
+                            "name": "Los Angeles FC",
+                            "score": -1,
+                            "isWinner": false,
+                            "nameForURL": "los-angeles-fc",
+                            "type": 1,
+                            "popularityRank": 815,
+                            "imageVersion": 1,
+                            "color": "#141414",
+                            "awayColor": "#F5F5F5",
+                            "hasSquad": true,
+                            "hasTransfers": false,
+                            "competitorNum": 2,
+                            "hideOnSearch": false,
+                            "hideOnCatalog": false
+                        },
+                        "winner": -1,
+                        "scores": [
+                            -1,
+                            -1
+                        ],
+                        "homeAwayTeamOrder": 1,
+                        "hasPointByPoint": false,
+                        "hasVideo": false
+                    }
+                ],
+                "bookmakers": [
+                    {
+                        "id": 4,
+                        "name": "BWIN",
+                        "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+                        "nameForURL": "bwin",
+                        "actionButton": {
+                            "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+                            "label": "Apuesta ahora"
+                        },
+                        "color": "#000000",
+                        "imageVersion": 1,
+                        "offerText": "100% Bono de Bienvenida",
+                        "offerUrl": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+                        "promotionText": "Ven a vivir la emoción"
+                    }
+                ]
+            },
+            "ultimos5": {
+                "statistics": [
+                    {
+                        "id": 141,
+                        "name": "Partidos ganados",
+                        "competitorId": 1342,
+                        "value": "2 (40%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1,
+                        "bettingOpportunity": {
+                            "gameId": 4621503,
+                            "lineId": 0,
+                            "text": "51% predice que Los Angeles FC ganará",
+                            "textCTA": "Apuesta $400 y gana $840",
+                            "optionNum": 0,
+                            "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+                            "bookmakerId": 4
+                        }
+                    },
+                    {
+                        "id": 142,
+                        "name": "Ambos equipos marcaron",
+                        "competitorId": 1342,
+                        "value": "4 (80%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 143,
+                        "name": "Más de 2.5 goles",
+                        "competitorId": 1342,
+                        "value": "2 (40%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 144,
+                        "name": "Marcó primero",
+                        "competitorId": 1342,
+                        "value": "3 (60%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 146,
+                        "name": "Recibió gol primero",
+                        "competitorId": 1342,
+                        "value": "2 (40%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 148,
+                        "name": "Empató o Ganó",
+                        "competitorId": 1342,
+                        "value": "4 (80%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 149,
+                        "name": "Ganador del primer tiempo",
+                        "competitorId": 1342,
+                        "value": "1 (20%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 150,
+                        "name": "Valla invicta",
+                        "competitorId": 1342,
+                        "value": "1 (20%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 153,
+                        "name": "Goles convertidos",
+                        "competitorId": 1342,
+                        "value": "1.4",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2
+                    },
+                    {
+                        "id": 156,
+                        "name": "Goles recibidos",
+                        "competitorId": 1342,
+                        "value": "1.2",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 1
+                    },
+                    {
+                        "id": 159,
+                        "name": "Goles esperados",
+                        "competitorId": 1342,
+                        "value": "1.79",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 1
+                    },
+                    {
+                        "id": 162,
+                        "name": "Goles esperados recibidos",
+                        "competitorId": 1342,
+                        "value": "1.63",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 165,
+                        "name": "Remates",
+                        "competitorId": 1342,
+                        "value": "12.4",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 168,
+                        "name": "Remates al arco",
+                        "competitorId": 1342,
+                        "value": "4.6",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 171,
+                        "name": "Corners",
+                        "competitorId": 1342,
+                        "value": "4.6",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 174,
+                        "name": "Tarjetas",
+                        "competitorId": 1342,
+                        "value": "2.6",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 175,
+                        "name": "Penales convertidos/penales ejecutados",
+                        "competitorId": 1342,
+                        "value": "0/0",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2
+                    },
+                    {
+                        "id": 141,
+                        "name": "Partidos ganados",
+                        "competitorId": 51178,
+                        "value": "1 (20%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1,
+                        "bettingOpportunity": {
+                            "gameId": 4621503,
+                            "lineId": 0,
+                            "text": "51% predice que Los Angeles FC ganará",
+                            "textCTA": "Apuesta $400 y gana $840",
+                            "optionNum": 0,
+                            "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+                            "bookmakerId": 4
+                        }
+                    },
+                    {
+                        "id": 142,
+                        "name": "Ambos equipos marcaron",
+                        "competitorId": 51178,
+                        "value": "4 (80%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 143,
+                        "name": "Más de 2.5 goles",
+                        "competitorId": 51178,
+                        "value": "4 (80%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 144,
+                        "name": "Marcó primero",
+                        "competitorId": 51178,
+                        "value": "1 (20%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 146,
+                        "name": "Recibió gol primero",
+                        "competitorId": 51178,
+                        "value": "4 (80%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 148,
+                        "name": "Empató o Ganó",
+                        "competitorId": 51178,
+                        "value": "2 (40%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 149,
+                        "name": "Ganador del primer tiempo",
+                        "competitorId": 51178,
+                        "value": "0 (0%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 150,
+                        "name": "Valla invicta",
+                        "competitorId": 51178,
+                        "value": "1 (20%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 153,
+                        "name": "Goles convertidos",
+                        "competitorId": 51178,
+                        "value": "1.4",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2
+                    },
+                    {
+                        "id": 156,
+                        "name": "Goles recibidos",
+                        "competitorId": 51178,
+                        "value": "2.2",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 1
+                    },
+                    {
+                        "id": 159,
+                        "name": "Goles esperados",
+                        "competitorId": 51178,
+                        "value": "1.38",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 1
+                    },
+                    {
+                        "id": 162,
+                        "name": "Goles esperados recibidos",
+                        "competitorId": 51178,
+                        "value": "1.14",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 165,
+                        "name": "Remates",
+                        "competitorId": 51178,
+                        "value": "16.4",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 168,
+                        "name": "Remates al arco",
+                        "competitorId": 51178,
+                        "value": "5.2",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 171,
+                        "name": "Corners",
+                        "competitorId": 51178,
+                        "value": "7.8",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 174,
+                        "name": "Tarjetas",
+                        "competitorId": 51178,
+                        "value": "2.2",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 175,
+                        "name": "Penales convertidos/penales ejecutados",
+                        "competitorId": 51178,
+                        "value": "0/0",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2
+                    }
+                ],
+                "statisticsGroups": [
+                    {
+                        "id": 1,
+                        "name": "Todas las competiciones"
+                    },
+                    {
+                        "id": 2,
+                        "name": "Estadísticas promedio"
+                    }
+                ],
+                "statisticsFilters": [
+                    {
+                        "filterGroup": 1,
+                        "name": "Todas las competiciones",
+                        "selected": false,
+                        "value": -1
+                    },
+                    {
+                        "filterGroup": 1,
+                        "name": "MLS",
+                        "selected": true,
+                        "value": 104
+                    },
+                    {
+                        "filterGroup": 1,
+                        "name": "CONCACAF Copa de Campeones",
+                        "selected": false,
+                        "value": 171
+                    },
+                    {
+                        "filterGroup": 2,
+                        "name": "Todos",
+                        "selected": false,
+                        "value": 0
+                    },
+                    {
+                        "filterGroup": 2,
+                        "name": "Últimos 5",
+                        "selected": true,
+                        "value": 1
+                    },
+                    {
+                        "filterGroup": 2,
+                        "name": "Todos - Local/Visitante",
+                        "selected": false,
+                        "value": 2
+                    },
+                    {
+                        "filterGroup": 2,
+                        "name": "Útimos 5 - Local/Visitante",
+                        "selected": false,
+                        "value": 4
+                    }
+                ],
+                "statisticGamesPlayed": {
+                    "homeText": "Últimos 5 partidos",
+                    "awayText": "Últimos 5 partidos"
+                },
+                "sports": [
+                    {
+                        "id": 1,
+                        "name": "Fútbol",
+                        "nameForURL": "football",
+                        "drawSupport": true,
+                        "imageVersion": 1
+                    }
+                ],
+                "countries": [
+                    {
+                        "id": 323,
+                        "name": "California (EEUU)",
+                        "nameForURL": "california-(usa)",
+                        "imageVersion": 2,
+                        "isInternational": false
+                    },
+                    {
+                        "id": 18,
+                        "name": "Estados Unidos",
+                        "nameForURL": "usa",
+                        "sportTypes": [
+                            2,
+                            8,
+                            6,
+                            9,
+                            4,
+                            1,
+                            7
+                        ],
+                        "imageVersion": 1,
+                        "isInternational": false
+                    }
+                ],
+                "competitions": [
+                    {
+                        "id": 104,
+                        "countryId": 18,
+                        "sportId": 1,
+                        "name": "MLS",
+                        "hasStandings": true,
+                        "hasLiveStandings": true,
+                        "hasStandingsGroups": false,
+                        "hasBrackets": false,
+                        "hasStats": true,
+                        "nameForURL": "mls",
+                        "popularityRank": 8515488,
+                        "imageVersion": 2,
+                        "currentStageType": 1,
+                        "color": "#325CB1",
+                        "competitorsType": 1,
+                        "currentPhaseNum": -1,
+                        "currentSeasonNum": 32,
+                        "currentStageNum": 1,
+                        "isInternational": false,
+                        "hasHistory": true
+                    }
+                ],
+                "competitors": [
+                    {
+                        "id": 1342,
+                        "countryId": 323,
+                        "sportId": 1,
+                        "name": "LA Galaxy",
+                        "shortName": "LA Galaxy",
+                        "longName": "LA Galaxy",
+                        "nameForURL": "los-angeles-galaxy",
+                        "popularityRank": 1322749,
+                        "imageVersion": 1,
+                        "mainCompetitionId": 104,
+                        "hasTransfers": false,
+                        "competitorNum": 0,
+                        "mainCompetitionName": "MLS"
+                    },
+                    {
+                        "id": 51178,
+                        "createdAt": "2018-01-21T12:17:52.957",
+                        "countryId": 323,
+                        "sportId": 1,
+                        "name": "Los Angeles FC",
+                        "shortName": "Los Angeles FC",
+                        "longName": "Los Angeles FC",
+                        "nameForURL": "los-angeles-fc",
+                        "popularityRank": 815005,
+                        "imageVersion": 1,
+                        "mainCompetitionId": 104,
+                        "hasTransfers": false,
+                        "competitorNum": 0,
+                        "mainCompetitionName": "MLS"
+                    }
+                ],
+                "games": [
+                    {
+                        "id": 4621503,
+                        "sportId": 1,
+                        "competitionId": 104,
+                        "seasonNum": 32,
+                        "stageNum": 1,
+                        "groupNum": 2,
+                        "competitionDisplayName": "MLS",
+                        "startTime": "2026-07-17T20:25:00-06:00",
+                        "statusGroup": 2,
+                        "statusText": "Prog.",
+                        "shortStatusText": "Prog.",
+                        "gameTimeAndStatusDisplayType": 0,
+                        "homeCompetitor": {
+                            "id": 1342,
+                            "countryId": 323,
+                            "sportId": 1,
+                            "name": "LA Galaxy",
+                            "score": -1,
+                            "isWinner": false,
+                            "nameForURL": "los-angeles-galaxy",
+                            "type": 1,
+                            "popularityRank": 1322,
+                            "imageVersion": 1,
+                            "color": "#FAFAFA",
+                            "awayColor": "#504270",
+                            "hasSquad": true,
+                            "hasTransfers": false,
+                            "competitorNum": 1,
+                            "hideOnSearch": false,
+                            "hideOnCatalog": false
+                        },
+                        "awayCompetitor": {
+                            "id": 51178,
+                            "createdAt": "2018-01-21T12:17:52.957",
+                            "countryId": 323,
+                            "sportId": 1,
+                            "name": "Los Angeles FC",
+                            "score": -1,
+                            "isWinner": false,
+                            "nameForURL": "los-angeles-fc",
+                            "type": 1,
+                            "popularityRank": 815,
+                            "imageVersion": 1,
+                            "color": "#141414",
+                            "awayColor": "#F5F5F5",
+                            "hasSquad": true,
+                            "hasTransfers": false,
+                            "competitorNum": 2,
+                            "hideOnSearch": false,
+                            "hideOnCatalog": false
+                        },
+                        "winner": -1,
+                        "scores": [
+                            -1,
+                            -1
+                        ],
+                        "homeAwayTeamOrder": 1,
+                        "hasPointByPoint": false,
+                        "hasVideo": false
+                    }
+                ],
+                "bookmakers": [
+                    {
+                        "id": 4,
+                        "name": "BWIN",
+                        "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+                        "nameForURL": "bwin",
+                        "actionButton": {
+                            "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+                            "label": "Apuesta ahora"
+                        },
+                        "color": "#000000",
+                        "imageVersion": 1,
+                        "offerText": "100% Bono de Bienvenida",
+                        "offerUrl": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+                        "promotionText": "Ven a vivir la emoción"
+                    }
+                ]
+            },
+            "ultimos5LocalVisita": {
+                "statistics": [
+                    {
+                        "id": 141,
+                        "name": "Partidos ganados",
+                        "competitorId": 1342,
+                        "value": "1 (20%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1,
+                        "bettingOpportunity": {
+                            "gameId": 4621503,
+                            "lineId": 0,
+                            "text": "51% predice que Los Angeles FC ganará",
+                            "textCTA": "Apuesta $400 y gana $840",
+                            "optionNum": 0,
+                            "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+                            "bookmakerId": 4
+                        }
+                    },
+                    {
+                        "id": 142,
+                        "name": "Ambos equipos marcaron",
+                        "competitorId": 1342,
+                        "value": "5 (100%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 143,
+                        "name": "Más de 2.5 goles",
+                        "competitorId": 1342,
+                        "value": "3 (60%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 144,
+                        "name": "Marcó primero",
+                        "competitorId": 1342,
+                        "value": "3 (60%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 146,
+                        "name": "Recibió gol primero",
+                        "competitorId": 1342,
+                        "value": "2 (40%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 148,
+                        "name": "Empató o Ganó",
+                        "competitorId": 1342,
+                        "value": "3 (60%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 149,
+                        "name": "Ganador del primer tiempo",
+                        "competitorId": 1342,
+                        "value": "0 (0%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 150,
+                        "name": "Valla invicta",
+                        "competitorId": 1342,
+                        "value": "0 (0%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 153,
+                        "name": "Goles convertidos",
+                        "competitorId": 1342,
+                        "value": "1.2",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 156,
+                        "name": "Goles recibidos",
+                        "competitorId": 1342,
+                        "value": "1.4",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 1
+                    },
+                    {
+                        "id": 159,
+                        "name": "Goles esperados",
+                        "competitorId": 1342,
+                        "value": "1.96",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 1
+                    },
+                    {
+                        "id": 162,
+                        "name": "Goles esperados recibidos",
+                        "competitorId": 1342,
+                        "value": "1.38",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 165,
+                        "name": "Remates",
+                        "competitorId": 1342,
+                        "value": "15.6",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 1
+                    },
+                    {
+                        "id": 168,
+                        "name": "Remates al arco",
+                        "competitorId": 1342,
+                        "value": "5.4",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 171,
+                        "name": "Corners",
+                        "competitorId": 1342,
+                        "value": "6.6",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 1
+                    },
+                    {
+                        "id": 174,
+                        "name": "Tarjetas",
+                        "competitorId": 1342,
+                        "value": "2.6",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 175,
+                        "name": "Penales convertidos/penales ejecutados",
+                        "competitorId": 1342,
+                        "value": "1/0",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 1
+                    },
+                    {
+                        "id": 141,
+                        "name": "Partidos ganados",
+                        "competitorId": 51178,
+                        "value": "1 (20%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1,
+                        "bettingOpportunity": {
+                            "gameId": 4621503,
+                            "lineId": 0,
+                            "text": "51% predice que Los Angeles FC ganará",
+                            "textCTA": "Apuesta $400 y gana $840",
+                            "optionNum": 0,
+                            "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+                            "bookmakerId": 4
+                        }
+                    },
+                    {
+                        "id": 142,
+                        "name": "Ambos equipos marcaron",
+                        "competitorId": 51178,
+                        "value": "4 (80%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 143,
+                        "name": "Más de 2.5 goles",
+                        "competitorId": 51178,
+                        "value": "4 (80%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 144,
+                        "name": "Marcó primero",
+                        "competitorId": 51178,
+                        "value": "1 (20%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 146,
+                        "name": "Recibió gol primero",
+                        "competitorId": 51178,
+                        "value": "4 (80%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 148,
+                        "name": "Empató o Ganó",
+                        "competitorId": 51178,
+                        "value": "2 (40%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 149,
+                        "name": "Ganador del primer tiempo",
+                        "competitorId": 51178,
+                        "value": "1 (20%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 150,
+                        "name": "Valla invicta",
+                        "competitorId": 51178,
+                        "value": "1 (20%)",
+                        "valuePercentage": 0,
+                        "statisticGroup": 1
+                    },
+                    {
+                        "id": 153,
+                        "name": "Goles convertidos",
+                        "competitorId": 51178,
+                        "value": "1.4",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 156,
+                        "name": "Goles recibidos",
+                        "competitorId": 51178,
+                        "value": "1.8",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 1
+                    },
+                    {
+                        "id": 159,
+                        "name": "Goles esperados",
+                        "competitorId": 51178,
+                        "value": "1.16",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 1
+                    },
+                    {
+                        "id": 162,
+                        "name": "Goles esperados recibidos",
+                        "competitorId": 51178,
+                        "value": "1.22",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 165,
+                        "name": "Remates",
+                        "competitorId": 51178,
+                        "value": "14.2",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 1
+                    },
+                    {
+                        "id": 168,
+                        "name": "Remates al arco",
+                        "competitorId": 51178,
+                        "value": "5.8",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 171,
+                        "name": "Corners",
+                        "competitorId": 51178,
+                        "value": "6.2",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 1
+                    },
+                    {
+                        "id": 174,
+                        "name": "Tarjetas",
+                        "competitorId": 51178,
+                        "value": "2.4",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 2
+                    },
+                    {
+                        "id": 175,
+                        "name": "Penales convertidos/penales ejecutados",
+                        "competitorId": 51178,
+                        "value": "0/0",
+                        "valuePercentage": 0,
+                        "statisticGroup": 2,
+                        "markedTeam": 1
+                    }
+                ],
+                "statisticsGroups": [
+                    {
+                        "id": 1,
+                        "name": "Todas las competiciones"
+                    },
+                    {
+                        "id": 2,
+                        "name": "Estadísticas promedio"
+                    }
+                ],
+                "statisticsFilters": [
+                    {
+                        "filterGroup": 1,
+                        "name": "Todas las competiciones",
+                        "selected": false,
+                        "value": -1
+                    },
+                    {
+                        "filterGroup": 1,
+                        "name": "MLS",
+                        "selected": true,
+                        "value": 104
+                    },
+                    {
+                        "filterGroup": 1,
+                        "name": "CONCACAF Copa de Campeones",
+                        "selected": false,
+                        "value": 171
+                    },
+                    {
+                        "filterGroup": 2,
+                        "name": "Todos",
+                        "selected": false,
+                        "value": 0
+                    },
+                    {
+                        "filterGroup": 2,
+                        "name": "Últimos 5",
+                        "selected": false,
+                        "value": 1
+                    },
+                    {
+                        "filterGroup": 2,
+                        "name": "Todos - Local/Visitante",
+                        "selected": false,
+                        "value": 2
+                    },
+                    {
+                        "filterGroup": 2,
+                        "name": "Útimos 5 - Local/Visitante",
+                        "selected": true,
+                        "value": 4
+                    }
+                ],
+                "statisticGamesPlayed": {
+                    "homeText": "Últimos 5 partidos",
+                    "awayText": "Últimos 5 partidos"
+                },
+                "sports": [
+                    {
+                        "id": 1,
+                        "name": "Fútbol",
+                        "nameForURL": "football",
+                        "drawSupport": true,
+                        "imageVersion": 1
+                    }
+                ],
+                "countries": [
+                    {
+                        "id": 323,
+                        "name": "California (EEUU)",
+                        "nameForURL": "california-(usa)",
+                        "imageVersion": 2,
+                        "isInternational": false
+                    },
+                    {
+                        "id": 18,
+                        "name": "Estados Unidos",
+                        "nameForURL": "usa",
+                        "sportTypes": [
+                            2,
+                            8,
+                            6,
+                            9,
+                            4,
+                            1,
+                            7
+                        ],
+                        "imageVersion": 1,
+                        "isInternational": false
+                    }
+                ],
+                "competitions": [
+                    {
+                        "id": 104,
+                        "countryId": 18,
+                        "sportId": 1,
+                        "name": "MLS",
+                        "hasStandings": true,
+                        "hasLiveStandings": true,
+                        "hasStandingsGroups": false,
+                        "hasBrackets": false,
+                        "hasStats": true,
+                        "nameForURL": "mls",
+                        "popularityRank": 8515488,
+                        "imageVersion": 2,
+                        "currentStageType": 1,
+                        "color": "#325CB1",
+                        "competitorsType": 1,
+                        "currentPhaseNum": -1,
+                        "currentSeasonNum": 32,
+                        "currentStageNum": 1,
+                        "isInternational": false,
+                        "hasHistory": true
+                    }
+                ],
+                "competitors": [
+                    {
+                        "id": 1342,
+                        "countryId": 323,
+                        "sportId": 1,
+                        "name": "LA Galaxy",
+                        "shortName": "LA Galaxy",
+                        "longName": "LA Galaxy",
+                        "nameForURL": "los-angeles-galaxy",
+                        "popularityRank": 1322749,
+                        "imageVersion": 1,
+                        "mainCompetitionId": 104,
+                        "hasTransfers": false,
+                        "competitorNum": 0,
+                        "mainCompetitionName": "MLS"
+                    },
+                    {
+                        "id": 51178,
+                        "createdAt": "2018-01-21T12:17:52.957",
+                        "countryId": 323,
+                        "sportId": 1,
+                        "name": "Los Angeles FC",
+                        "shortName": "Los Angeles FC",
+                        "longName": "Los Angeles FC",
+                        "nameForURL": "los-angeles-fc",
+                        "popularityRank": 815005,
+                        "imageVersion": 1,
+                        "mainCompetitionId": 104,
+                        "hasTransfers": false,
+                        "competitorNum": 0,
+                        "mainCompetitionName": "MLS"
+                    }
+                ],
+                "games": [
+                    {
+                        "id": 4621503,
+                        "sportId": 1,
+                        "competitionId": 104,
+                        "seasonNum": 32,
+                        "stageNum": 1,
+                        "groupNum": 2,
+                        "competitionDisplayName": "MLS",
+                        "startTime": "2026-07-17T20:25:00-06:00",
+                        "statusGroup": 2,
+                        "statusText": "Prog.",
+                        "shortStatusText": "Prog.",
+                        "gameTimeAndStatusDisplayType": 0,
+                        "homeCompetitor": {
+                            "id": 1342,
+                            "countryId": 323,
+                            "sportId": 1,
+                            "name": "LA Galaxy",
+                            "score": -1,
+                            "isWinner": false,
+                            "nameForURL": "los-angeles-galaxy",
+                            "type": 1,
+                            "popularityRank": 1322,
+                            "imageVersion": 1,
+                            "color": "#FAFAFA",
+                            "awayColor": "#504270",
+                            "hasSquad": true,
+                            "hasTransfers": false,
+                            "competitorNum": 1,
+                            "hideOnSearch": false,
+                            "hideOnCatalog": false
+                        },
+                        "awayCompetitor": {
+                            "id": 51178,
+                            "createdAt": "2018-01-21T12:17:52.957",
+                            "countryId": 323,
+                            "sportId": 1,
+                            "name": "Los Angeles FC",
+                            "score": -1,
+                            "isWinner": false,
+                            "nameForURL": "los-angeles-fc",
+                            "type": 1,
+                            "popularityRank": 815,
+                            "imageVersion": 1,
+                            "color": "#141414",
+                            "awayColor": "#F5F5F5",
+                            "hasSquad": true,
+                            "hasTransfers": false,
+                            "competitorNum": 2,
+                            "hideOnSearch": false,
+                            "hideOnCatalog": false
+                        },
+                        "winner": -1,
+                        "scores": [
+                            -1,
+                            -1
+                        ],
+                        "homeAwayTeamOrder": 1,
+                        "hasPointByPoint": false,
+                        "hasVideo": false
+                    }
+                ],
+                "bookmakers": [
+                    {
+                        "id": 4,
+                        "name": "BWIN",
+                        "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+                        "nameForURL": "bwin",
+                        "actionButton": {
+                            "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+                            "label": "Apuesta ahora"
+                        },
+                        "color": "#000000",
+                        "imageVersion": 1,
+                        "offerText": "100% Bono de Bienvenida",
+                        "offerUrl": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+                        "promotionText": "Ven a vivir la emoción"
+                    }
+                ]
             }
-          },
-          {
-            "id": 142,
-            "name": "Ambos equipos marcaron",
-            "competitorId": 1342,
-            "value": "13 (87%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 143,
-            "name": "Más de 2.5 goles",
-            "competitorId": 1342,
-            "value": "10 (67%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 144,
-            "name": "Marcó primero",
-            "competitorId": 1342,
-            "value": "7 (47%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 146,
-            "name": "Recibió gol primero",
-            "competitorId": 1342,
-            "value": "8 (53%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 148,
-            "name": "Empató o Ganó",
-            "competitorId": 1342,
-            "value": "10 (67%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 149,
-            "name": "Ganador del primer tiempo",
-            "competitorId": 1342,
-            "value": "4 (27%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 150,
-            "name": "Valla invicta",
-            "competitorId": 1342,
-            "value": "2 (13%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 153,
-            "name": "Goles convertidos",
-            "competitorId": 1342,
-            "value": "1.47",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 156,
-            "name": "Goles recibidos",
-            "competitorId": 1342,
-            "value": "1.47",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 159,
-            "name": "Goles esperados",
-            "competitorId": 1342,
-            "value": "1.49",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 1
-          },
-          {
-            "id": 162,
-            "name": "Goles esperados recibidos",
-            "competitorId": 1342,
-            "value": "1.22",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 165,
-            "name": "Remates",
-            "competitorId": 1342,
-            "value": "13.47",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 168,
-            "name": "Remates al arco",
-            "competitorId": 1342,
-            "value": "5.73",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 1
-          },
-          {
-            "id": 171,
-            "name": "Corners",
-            "competitorId": 1342,
-            "value": "5.07",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 174,
-            "name": "Tarjetas",
-            "competitorId": 1342,
-            "value": "2.27",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 175,
-            "name": "Penales convertidos/penales ejecutados",
-            "competitorId": 1342,
-            "value": "1/0",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 1
-          },
-          {
-            "id": 141,
-            "name": "Partidos ganados",
-            "competitorId": 51178,
-            "value": "7 (47%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1,
-            "bettingOpportunity": {
-              "gameId": 4621503,
-              "lineId": 0,
-              "text": "51% predice que Los Angeles FC ganará",
-              "textCTA": "Apuesta $400 y gana $840",
-              "optionNum": 0,
-              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
-              "bookmakerId": 4
-            }
-          },
-          {
-            "id": 142,
-            "name": "Ambos equipos marcaron",
-            "competitorId": 51178,
-            "value": "6 (40%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 143,
-            "name": "Más de 2.5 goles",
-            "competitorId": 51178,
-            "value": "8 (53%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 144,
-            "name": "Marcó primero",
-            "competitorId": 51178,
-            "value": "7 (47%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 146,
-            "name": "Recibió gol primero",
-            "competitorId": 51178,
-            "value": "6 (40%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 148,
-            "name": "Empató o Ganó",
-            "competitorId": 51178,
-            "value": "10 (67%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 149,
-            "name": "Ganador del primer tiempo",
-            "competitorId": 51178,
-            "value": "3 (20%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 150,
-            "name": "Valla invicta",
-            "competitorId": 51178,
-            "value": "9 (60%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 153,
-            "name": "Goles convertidos",
-            "competitorId": 51178,
-            "value": "1.6",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 156,
-            "name": "Goles recibidos",
-            "competitorId": 51178,
-            "value": "1.13",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 159,
-            "name": "Goles esperados",
-            "competitorId": 51178,
-            "value": "1.29",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 1
-          },
-          {
-            "id": 162,
-            "name": "Goles esperados recibidos",
-            "competitorId": 51178,
-            "value": "1.06",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 165,
-            "name": "Remates",
-            "competitorId": 51178,
-            "value": "14.13",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 168,
-            "name": "Remates al arco",
-            "competitorId": 51178,
-            "value": "4.87",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 1
-          },
-          {
-            "id": 171,
-            "name": "Corners",
-            "competitorId": 51178,
-            "value": "6",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 174,
-            "name": "Tarjetas",
-            "competitorId": 51178,
-            "value": "2.07",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 175,
-            "name": "Penales convertidos/penales ejecutados",
-            "competitorId": 51178,
-            "value": "0/0",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 1
-          }
-        ],
-        "statisticsGroups": [
-          {
-            "id": 1,
-            "name": "Todas las competiciones"
-          },
-          {
-            "id": 2,
-            "name": "Estadísticas promedio"
-          }
-        ],
-        "statisticsFilters": [
-          {
-            "filterGroup": 1,
-            "name": "Todas las competiciones",
-            "selected": false,
-            "value": -1
-          },
-          {
-            "filterGroup": 1,
-            "name": "MLS",
-            "selected": true,
-            "value": 104
-          },
-          {
-            "filterGroup": 1,
-            "name": "CONCACAF Copa de Campeones",
-            "selected": false,
-            "value": 171
-          },
-          {
-            "filterGroup": 2,
-            "name": "Todos",
-            "selected": true,
-            "value": 0
-          },
-          {
-            "filterGroup": 2,
-            "name": "Últimos 5",
-            "selected": false,
-            "value": 1
-          },
-          {
-            "filterGroup": 2,
-            "name": "Todos - Local/Visitante",
-            "selected": false,
-            "value": 2
-          },
-          {
-            "filterGroup": 2,
-            "name": "Útimos 5 - Local/Visitante",
-            "selected": false,
-            "value": 4
-          }
-        ],
-        "statisticGamesPlayed": {
-          "homeText": "Últimos 15 partidos",
-          "awayText": "Últimos 15 partidos"
-        },
-        "sports": [
-          {
-            "id": 1,
-            "name": "Fútbol",
-            "nameForURL": "football",
-            "drawSupport": true,
-            "imageVersion": 1
-          }
-        ],
-        "countries": [
-          {
-            "id": 323,
-            "name": "California (EEUU)",
-            "nameForURL": "california-(usa)",
-            "imageVersion": 2,
-            "isInternational": false
-          },
-          {
-            "id": 18,
-            "name": "Estados Unidos",
-            "nameForURL": "usa",
-            "sportTypes": [
-              1,
-              2,
-              4,
-              6,
-              7,
-              8,
-              9
-            ],
-            "imageVersion": 1,
-            "isInternational": false
-          }
-        ],
-        "competitions": [
-          {
-            "id": 104,
-            "countryId": 18,
-            "sportId": 1,
-            "name": "MLS",
-            "hasStandings": true,
-            "hasLiveStandings": true,
-            "hasStandingsGroups": false,
-            "hasBrackets": false,
-            "hasStats": true,
-            "nameForURL": "mls",
-            "popularityRank": 8515488,
-            "imageVersion": 2,
-            "currentStageType": 1,
-            "color": "#325CB1",
-            "competitorsType": 1,
-            "currentPhaseNum": -1,
-            "currentSeasonNum": 32,
-            "currentStageNum": 1,
-            "isInternational": false,
-            "hasHistory": true
-          }
-        ],
-        "competitors": [
-          {
-            "id": 1342,
-            "countryId": 323,
-            "sportId": 1,
-            "name": "LA Galaxy",
-            "shortName": "LA Galaxy",
-            "longName": "LA Galaxy",
-            "nameForURL": "los-angeles-galaxy",
-            "popularityRank": 1322749,
-            "imageVersion": 1,
-            "mainCompetitionId": 104,
-            "hasTransfers": false,
-            "competitorNum": 0,
-            "mainCompetitionName": "MLS"
-          },
-          {
-            "id": 51178,
-            "createdAt": "2018-01-21T12:17:52.957",
-            "countryId": 323,
-            "sportId": 1,
-            "name": "Los Angeles FC",
-            "shortName": "Los Angeles FC",
-            "longName": "Los Angeles FC",
-            "nameForURL": "los-angeles-fc",
-            "popularityRank": 815005,
-            "imageVersion": 1,
-            "mainCompetitionId": 104,
-            "hasTransfers": false,
-            "competitorNum": 0,
-            "mainCompetitionName": "MLS"
-          }
-        ],
-        "games": [
-          {
-            "id": 4621503,
-            "sportId": 1,
-            "competitionId": 104,
-            "seasonNum": 32,
-            "stageNum": 1,
-            "groupNum": 2,
-            "competitionDisplayName": "MLS",
-            "startTime": "2026-07-17T20:25:00-06:00",
-            "statusGroup": 2,
-            "statusText": "Prog.",
-            "shortStatusText": "Prog.",
-            "gameTimeAndStatusDisplayType": 0,
-            "homeCompetitor": {
-              "id": 1342,
-              "countryId": 323,
-              "sportId": 1,
-              "name": "LA Galaxy",
-              "score": -1,
-              "isWinner": false,
-              "nameForURL": "los-angeles-galaxy",
-              "type": 1,
-              "popularityRank": 1322,
-              "imageVersion": 1,
-              "color": "#FAFAFA",
-              "awayColor": "#504270",
-              "hasSquad": true,
-              "hasTransfers": false,
-              "competitorNum": 1,
-              "hideOnSearch": false,
-              "hideOnCatalog": false
-            },
-            "awayCompetitor": {
-              "id": 51178,
-              "createdAt": "2018-01-21T12:17:52.957",
-              "countryId": 323,
-              "sportId": 1,
-              "name": "Los Angeles FC",
-              "score": -1,
-              "isWinner": false,
-              "nameForURL": "los-angeles-fc",
-              "type": 1,
-              "popularityRank": 815,
-              "imageVersion": 1,
-              "color": "#141414",
-              "awayColor": "#F5F5F5",
-              "hasSquad": true,
-              "hasTransfers": false,
-              "competitorNum": 2,
-              "hideOnSearch": false,
-              "hideOnCatalog": false
-            },
-            "winner": -1,
-            "scores": [
-              -1,
-              -1
-            ],
-            "homeAwayTeamOrder": 1,
-            "hasPointByPoint": false,
-            "hasVideo": false
-          }
-        ],
-        "bookmakers": [
-          {
-            "id": 4,
-            "name": "BWIN",
-            "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
-            "nameForURL": "bwin",
-            "actionButton": {
-              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
-              "label": "Apuesta ahora"
-            },
-            "color": "#000000",
-            "imageVersion": 1,
-            "offerText": "100% Bono de Bienvenida",
-            "offerUrl": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
-            "promotionText": "Ven a vivir la emoción"
-          }
-        ]
-      },
-      "ultimos5": {
-        "statistics": [
-          {
-            "id": 141,
-            "name": "Partidos ganados",
-            "competitorId": 1342,
-            "value": "2 (40%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1,
-            "bettingOpportunity": {
-              "gameId": 4621503,
-              "lineId": 0,
-              "text": "51% predice que Los Angeles FC ganará",
-              "textCTA": "Apuesta $400 y gana $840",
-              "optionNum": 0,
-              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
-              "bookmakerId": 4
-            }
-          },
-          {
-            "id": 142,
-            "name": "Ambos equipos marcaron",
-            "competitorId": 1342,
-            "value": "4 (80%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 143,
-            "name": "Más de 2.5 goles",
-            "competitorId": 1342,
-            "value": "2 (40%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 144,
-            "name": "Marcó primero",
-            "competitorId": 1342,
-            "value": "3 (60%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 146,
-            "name": "Recibió gol primero",
-            "competitorId": 1342,
-            "value": "2 (40%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 148,
-            "name": "Empató o Ganó",
-            "competitorId": 1342,
-            "value": "4 (80%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 149,
-            "name": "Ganador del primer tiempo",
-            "competitorId": 1342,
-            "value": "1 (20%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 150,
-            "name": "Valla invicta",
-            "competitorId": 1342,
-            "value": "1 (20%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 153,
-            "name": "Goles convertidos",
-            "competitorId": 1342,
-            "value": "1.4",
-            "valuePercentage": 0,
-            "statisticGroup": 2
-          },
-          {
-            "id": 156,
-            "name": "Goles recibidos",
-            "competitorId": 1342,
-            "value": "1.2",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 1
-          },
-          {
-            "id": 159,
-            "name": "Goles esperados",
-            "competitorId": 1342,
-            "value": "1.79",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 1
-          },
-          {
-            "id": 162,
-            "name": "Goles esperados recibidos",
-            "competitorId": 1342,
-            "value": "1.63",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 165,
-            "name": "Remates",
-            "competitorId": 1342,
-            "value": "12.4",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 168,
-            "name": "Remates al arco",
-            "competitorId": 1342,
-            "value": "4.6",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 171,
-            "name": "Corners",
-            "competitorId": 1342,
-            "value": "4.6",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 174,
-            "name": "Tarjetas",
-            "competitorId": 1342,
-            "value": "2.6",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 175,
-            "name": "Penales convertidos/penales ejecutados",
-            "competitorId": 1342,
-            "value": "0/0",
-            "valuePercentage": 0,
-            "statisticGroup": 2
-          },
-          {
-            "id": 141,
-            "name": "Partidos ganados",
-            "competitorId": 51178,
-            "value": "1 (20%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1,
-            "bettingOpportunity": {
-              "gameId": 4621503,
-              "lineId": 0,
-              "text": "51% predice que Los Angeles FC ganará",
-              "textCTA": "Apuesta $400 y gana $840",
-              "optionNum": 0,
-              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
-              "bookmakerId": 4
-            }
-          },
-          {
-            "id": 142,
-            "name": "Ambos equipos marcaron",
-            "competitorId": 51178,
-            "value": "4 (80%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 143,
-            "name": "Más de 2.5 goles",
-            "competitorId": 51178,
-            "value": "4 (80%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 144,
-            "name": "Marcó primero",
-            "competitorId": 51178,
-            "value": "1 (20%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 146,
-            "name": "Recibió gol primero",
-            "competitorId": 51178,
-            "value": "4 (80%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 148,
-            "name": "Empató o Ganó",
-            "competitorId": 51178,
-            "value": "2 (40%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 149,
-            "name": "Ganador del primer tiempo",
-            "competitorId": 51178,
-            "value": "0 (0%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 150,
-            "name": "Valla invicta",
-            "competitorId": 51178,
-            "value": "1 (20%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 153,
-            "name": "Goles convertidos",
-            "competitorId": 51178,
-            "value": "1.4",
-            "valuePercentage": 0,
-            "statisticGroup": 2
-          },
-          {
-            "id": 156,
-            "name": "Goles recibidos",
-            "competitorId": 51178,
-            "value": "2.2",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 1
-          },
-          {
-            "id": 159,
-            "name": "Goles esperados",
-            "competitorId": 51178,
-            "value": "1.38",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 1
-          },
-          {
-            "id": 162,
-            "name": "Goles esperados recibidos",
-            "competitorId": 51178,
-            "value": "1.14",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 165,
-            "name": "Remates",
-            "competitorId": 51178,
-            "value": "16.4",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 168,
-            "name": "Remates al arco",
-            "competitorId": 51178,
-            "value": "5.2",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 171,
-            "name": "Corners",
-            "competitorId": 51178,
-            "value": "7.8",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 174,
-            "name": "Tarjetas",
-            "competitorId": 51178,
-            "value": "2.2",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 175,
-            "name": "Penales convertidos/penales ejecutados",
-            "competitorId": 51178,
-            "value": "0/0",
-            "valuePercentage": 0,
-            "statisticGroup": 2
-          }
-        ],
-        "statisticsGroups": [
-          {
-            "id": 1,
-            "name": "Todas las competiciones"
-          },
-          {
-            "id": 2,
-            "name": "Estadísticas promedio"
-          }
-        ],
-        "statisticsFilters": [
-          {
-            "filterGroup": 1,
-            "name": "Todas las competiciones",
-            "selected": false,
-            "value": -1
-          },
-          {
-            "filterGroup": 1,
-            "name": "MLS",
-            "selected": true,
-            "value": 104
-          },
-          {
-            "filterGroup": 1,
-            "name": "CONCACAF Copa de Campeones",
-            "selected": false,
-            "value": 171
-          },
-          {
-            "filterGroup": 2,
-            "name": "Todos",
-            "selected": false,
-            "value": 0
-          },
-          {
-            "filterGroup": 2,
-            "name": "Últimos 5",
-            "selected": true,
-            "value": 1
-          },
-          {
-            "filterGroup": 2,
-            "name": "Todos - Local/Visitante",
-            "selected": false,
-            "value": 2
-          },
-          {
-            "filterGroup": 2,
-            "name": "Útimos 5 - Local/Visitante",
-            "selected": false,
-            "value": 4
-          }
-        ],
-        "statisticGamesPlayed": {
-          "homeText": "Últimos 5 partidos",
-          "awayText": "Últimos 5 partidos"
-        },
-        "sports": [
-          {
-            "id": 1,
-            "name": "Fútbol",
-            "nameForURL": "football",
-            "drawSupport": true,
-            "imageVersion": 1
-          }
-        ],
-        "countries": [
-          {
-            "id": 323,
-            "name": "California (EEUU)",
-            "nameForURL": "california-(usa)",
-            "imageVersion": 2,
-            "isInternational": false
-          },
-          {
-            "id": 18,
-            "name": "Estados Unidos",
-            "nameForURL": "usa",
-            "sportTypes": [
-              2,
-              8,
-              6,
-              9,
-              4,
-              1,
-              7
-            ],
-            "imageVersion": 1,
-            "isInternational": false
-          }
-        ],
-        "competitions": [
-          {
-            "id": 104,
-            "countryId": 18,
-            "sportId": 1,
-            "name": "MLS",
-            "hasStandings": true,
-            "hasLiveStandings": true,
-            "hasStandingsGroups": false,
-            "hasBrackets": false,
-            "hasStats": true,
-            "nameForURL": "mls",
-            "popularityRank": 8515488,
-            "imageVersion": 2,
-            "currentStageType": 1,
-            "color": "#325CB1",
-            "competitorsType": 1,
-            "currentPhaseNum": -1,
-            "currentSeasonNum": 32,
-            "currentStageNum": 1,
-            "isInternational": false,
-            "hasHistory": true
-          }
-        ],
-        "competitors": [
-          {
-            "id": 1342,
-            "countryId": 323,
-            "sportId": 1,
-            "name": "LA Galaxy",
-            "shortName": "LA Galaxy",
-            "longName": "LA Galaxy",
-            "nameForURL": "los-angeles-galaxy",
-            "popularityRank": 1322749,
-            "imageVersion": 1,
-            "mainCompetitionId": 104,
-            "hasTransfers": false,
-            "competitorNum": 0,
-            "mainCompetitionName": "MLS"
-          },
-          {
-            "id": 51178,
-            "createdAt": "2018-01-21T12:17:52.957",
-            "countryId": 323,
-            "sportId": 1,
-            "name": "Los Angeles FC",
-            "shortName": "Los Angeles FC",
-            "longName": "Los Angeles FC",
-            "nameForURL": "los-angeles-fc",
-            "popularityRank": 815005,
-            "imageVersion": 1,
-            "mainCompetitionId": 104,
-            "hasTransfers": false,
-            "competitorNum": 0,
-            "mainCompetitionName": "MLS"
-          }
-        ],
-        "games": [
-          {
-            "id": 4621503,
-            "sportId": 1,
-            "competitionId": 104,
-            "seasonNum": 32,
-            "stageNum": 1,
-            "groupNum": 2,
-            "competitionDisplayName": "MLS",
-            "startTime": "2026-07-17T20:25:00-06:00",
-            "statusGroup": 2,
-            "statusText": "Prog.",
-            "shortStatusText": "Prog.",
-            "gameTimeAndStatusDisplayType": 0,
-            "homeCompetitor": {
-              "id": 1342,
-              "countryId": 323,
-              "sportId": 1,
-              "name": "LA Galaxy",
-              "score": -1,
-              "isWinner": false,
-              "nameForURL": "los-angeles-galaxy",
-              "type": 1,
-              "popularityRank": 1322,
-              "imageVersion": 1,
-              "color": "#FAFAFA",
-              "awayColor": "#504270",
-              "hasSquad": true,
-              "hasTransfers": false,
-              "competitorNum": 1,
-              "hideOnSearch": false,
-              "hideOnCatalog": false
-            },
-            "awayCompetitor": {
-              "id": 51178,
-              "createdAt": "2018-01-21T12:17:52.957",
-              "countryId": 323,
-              "sportId": 1,
-              "name": "Los Angeles FC",
-              "score": -1,
-              "isWinner": false,
-              "nameForURL": "los-angeles-fc",
-              "type": 1,
-              "popularityRank": 815,
-              "imageVersion": 1,
-              "color": "#141414",
-              "awayColor": "#F5F5F5",
-              "hasSquad": true,
-              "hasTransfers": false,
-              "competitorNum": 2,
-              "hideOnSearch": false,
-              "hideOnCatalog": false
-            },
-            "winner": -1,
-            "scores": [
-              -1,
-              -1
-            ],
-            "homeAwayTeamOrder": 1,
-            "hasPointByPoint": false,
-            "hasVideo": false
-          }
-        ],
-        "bookmakers": [
-          {
-            "id": 4,
-            "name": "BWIN",
-            "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
-            "nameForURL": "bwin",
-            "actionButton": {
-              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
-              "label": "Apuesta ahora"
-            },
-            "color": "#000000",
-            "imageVersion": 1,
-            "offerText": "100% Bono de Bienvenida",
-            "offerUrl": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
-            "promotionText": "Ven a vivir la emoción"
-          }
-        ]
-      },
-      "ultimos5LocalVisita": {
-        "statistics": [
-          {
-            "id": 141,
-            "name": "Partidos ganados",
-            "competitorId": 1342,
-            "value": "1 (20%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1,
-            "bettingOpportunity": {
-              "gameId": 4621503,
-              "lineId": 0,
-              "text": "51% predice que Los Angeles FC ganará",
-              "textCTA": "Apuesta $400 y gana $840",
-              "optionNum": 0,
-              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
-              "bookmakerId": 4
-            }
-          },
-          {
-            "id": 142,
-            "name": "Ambos equipos marcaron",
-            "competitorId": 1342,
-            "value": "5 (100%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 143,
-            "name": "Más de 2.5 goles",
-            "competitorId": 1342,
-            "value": "3 (60%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 144,
-            "name": "Marcó primero",
-            "competitorId": 1342,
-            "value": "3 (60%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 146,
-            "name": "Recibió gol primero",
-            "competitorId": 1342,
-            "value": "2 (40%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 148,
-            "name": "Empató o Ganó",
-            "competitorId": 1342,
-            "value": "3 (60%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 149,
-            "name": "Ganador del primer tiempo",
-            "competitorId": 1342,
-            "value": "0 (0%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 150,
-            "name": "Valla invicta",
-            "competitorId": 1342,
-            "value": "0 (0%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 153,
-            "name": "Goles convertidos",
-            "competitorId": 1342,
-            "value": "1.2",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 156,
-            "name": "Goles recibidos",
-            "competitorId": 1342,
-            "value": "1.4",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 1
-          },
-          {
-            "id": 159,
-            "name": "Goles esperados",
-            "competitorId": 1342,
-            "value": "1.96",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 1
-          },
-          {
-            "id": 162,
-            "name": "Goles esperados recibidos",
-            "competitorId": 1342,
-            "value": "1.38",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 165,
-            "name": "Remates",
-            "competitorId": 1342,
-            "value": "15.6",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 1
-          },
-          {
-            "id": 168,
-            "name": "Remates al arco",
-            "competitorId": 1342,
-            "value": "5.4",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 171,
-            "name": "Corners",
-            "competitorId": 1342,
-            "value": "6.6",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 1
-          },
-          {
-            "id": 174,
-            "name": "Tarjetas",
-            "competitorId": 1342,
-            "value": "2.6",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 175,
-            "name": "Penales convertidos/penales ejecutados",
-            "competitorId": 1342,
-            "value": "1/0",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 1
-          },
-          {
-            "id": 141,
-            "name": "Partidos ganados",
-            "competitorId": 51178,
-            "value": "1 (20%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1,
-            "bettingOpportunity": {
-              "gameId": 4621503,
-              "lineId": 0,
-              "text": "51% predice que Los Angeles FC ganará",
-              "textCTA": "Apuesta $400 y gana $840",
-              "optionNum": 0,
-              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
-              "bookmakerId": 4
-            }
-          },
-          {
-            "id": 142,
-            "name": "Ambos equipos marcaron",
-            "competitorId": 51178,
-            "value": "4 (80%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 143,
-            "name": "Más de 2.5 goles",
-            "competitorId": 51178,
-            "value": "4 (80%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 144,
-            "name": "Marcó primero",
-            "competitorId": 51178,
-            "value": "1 (20%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 146,
-            "name": "Recibió gol primero",
-            "competitorId": 51178,
-            "value": "4 (80%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 148,
-            "name": "Empató o Ganó",
-            "competitorId": 51178,
-            "value": "2 (40%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 149,
-            "name": "Ganador del primer tiempo",
-            "competitorId": 51178,
-            "value": "1 (20%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 150,
-            "name": "Valla invicta",
-            "competitorId": 51178,
-            "value": "1 (20%)",
-            "valuePercentage": 0,
-            "statisticGroup": 1
-          },
-          {
-            "id": 153,
-            "name": "Goles convertidos",
-            "competitorId": 51178,
-            "value": "1.4",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 156,
-            "name": "Goles recibidos",
-            "competitorId": 51178,
-            "value": "1.8",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 1
-          },
-          {
-            "id": 159,
-            "name": "Goles esperados",
-            "competitorId": 51178,
-            "value": "1.16",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 1
-          },
-          {
-            "id": 162,
-            "name": "Goles esperados recibidos",
-            "competitorId": 51178,
-            "value": "1.22",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 165,
-            "name": "Remates",
-            "competitorId": 51178,
-            "value": "14.2",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 1
-          },
-          {
-            "id": 168,
-            "name": "Remates al arco",
-            "competitorId": 51178,
-            "value": "5.8",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 171,
-            "name": "Corners",
-            "competitorId": 51178,
-            "value": "6.2",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 1
-          },
-          {
-            "id": 174,
-            "name": "Tarjetas",
-            "competitorId": 51178,
-            "value": "2.4",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 2
-          },
-          {
-            "id": 175,
-            "name": "Penales convertidos/penales ejecutados",
-            "competitorId": 51178,
-            "value": "0/0",
-            "valuePercentage": 0,
-            "statisticGroup": 2,
-            "markedTeam": 1
-          }
-        ],
-        "statisticsGroups": [
-          {
-            "id": 1,
-            "name": "Todas las competiciones"
-          },
-          {
-            "id": 2,
-            "name": "Estadísticas promedio"
-          }
-        ],
-        "statisticsFilters": [
-          {
-            "filterGroup": 1,
-            "name": "Todas las competiciones",
-            "selected": false,
-            "value": -1
-          },
-          {
-            "filterGroup": 1,
-            "name": "MLS",
-            "selected": true,
-            "value": 104
-          },
-          {
-            "filterGroup": 1,
-            "name": "CONCACAF Copa de Campeones",
-            "selected": false,
-            "value": 171
-          },
-          {
-            "filterGroup": 2,
-            "name": "Todos",
-            "selected": false,
-            "value": 0
-          },
-          {
-            "filterGroup": 2,
-            "name": "Últimos 5",
-            "selected": false,
-            "value": 1
-          },
-          {
-            "filterGroup": 2,
-            "name": "Todos - Local/Visitante",
-            "selected": false,
-            "value": 2
-          },
-          {
-            "filterGroup": 2,
-            "name": "Útimos 5 - Local/Visitante",
-            "selected": true,
-            "value": 4
-          }
-        ],
-        "statisticGamesPlayed": {
-          "homeText": "Últimos 5 partidos",
-          "awayText": "Últimos 5 partidos"
-        },
-        "sports": [
-          {
-            "id": 1,
-            "name": "Fútbol",
-            "nameForURL": "football",
-            "drawSupport": true,
-            "imageVersion": 1
-          }
-        ],
-        "countries": [
-          {
-            "id": 323,
-            "name": "California (EEUU)",
-            "nameForURL": "california-(usa)",
-            "imageVersion": 2,
-            "isInternational": false
-          },
-          {
-            "id": 18,
-            "name": "Estados Unidos",
-            "nameForURL": "usa",
-            "sportTypes": [
-              2,
-              8,
-              6,
-              9,
-              4,
-              1,
-              7
-            ],
-            "imageVersion": 1,
-            "isInternational": false
-          }
-        ],
-        "competitions": [
-          {
-            "id": 104,
-            "countryId": 18,
-            "sportId": 1,
-            "name": "MLS",
-            "hasStandings": true,
-            "hasLiveStandings": true,
-            "hasStandingsGroups": false,
-            "hasBrackets": false,
-            "hasStats": true,
-            "nameForURL": "mls",
-            "popularityRank": 8515488,
-            "imageVersion": 2,
-            "currentStageType": 1,
-            "color": "#325CB1",
-            "competitorsType": 1,
-            "currentPhaseNum": -1,
-            "currentSeasonNum": 32,
-            "currentStageNum": 1,
-            "isInternational": false,
-            "hasHistory": true
-          }
-        ],
-        "competitors": [
-          {
-            "id": 1342,
-            "countryId": 323,
-            "sportId": 1,
-            "name": "LA Galaxy",
-            "shortName": "LA Galaxy",
-            "longName": "LA Galaxy",
-            "nameForURL": "los-angeles-galaxy",
-            "popularityRank": 1322749,
-            "imageVersion": 1,
-            "mainCompetitionId": 104,
-            "hasTransfers": false,
-            "competitorNum": 0,
-            "mainCompetitionName": "MLS"
-          },
-          {
-            "id": 51178,
-            "createdAt": "2018-01-21T12:17:52.957",
-            "countryId": 323,
-            "sportId": 1,
-            "name": "Los Angeles FC",
-            "shortName": "Los Angeles FC",
-            "longName": "Los Angeles FC",
-            "nameForURL": "los-angeles-fc",
-            "popularityRank": 815005,
-            "imageVersion": 1,
-            "mainCompetitionId": 104,
-            "hasTransfers": false,
-            "competitorNum": 0,
-            "mainCompetitionName": "MLS"
-          }
-        ],
-        "games": [
-          {
-            "id": 4621503,
-            "sportId": 1,
-            "competitionId": 104,
-            "seasonNum": 32,
-            "stageNum": 1,
-            "groupNum": 2,
-            "competitionDisplayName": "MLS",
-            "startTime": "2026-07-17T20:25:00-06:00",
-            "statusGroup": 2,
-            "statusText": "Prog.",
-            "shortStatusText": "Prog.",
-            "gameTimeAndStatusDisplayType": 0,
-            "homeCompetitor": {
-              "id": 1342,
-              "countryId": 323,
-              "sportId": 1,
-              "name": "LA Galaxy",
-              "score": -1,
-              "isWinner": false,
-              "nameForURL": "los-angeles-galaxy",
-              "type": 1,
-              "popularityRank": 1322,
-              "imageVersion": 1,
-              "color": "#FAFAFA",
-              "awayColor": "#504270",
-              "hasSquad": true,
-              "hasTransfers": false,
-              "competitorNum": 1,
-              "hideOnSearch": false,
-              "hideOnCatalog": false
-            },
-            "awayCompetitor": {
-              "id": 51178,
-              "createdAt": "2018-01-21T12:17:52.957",
-              "countryId": 323,
-              "sportId": 1,
-              "name": "Los Angeles FC",
-              "score": -1,
-              "isWinner": false,
-              "nameForURL": "los-angeles-fc",
-              "type": 1,
-              "popularityRank": 815,
-              "imageVersion": 1,
-              "color": "#141414",
-              "awayColor": "#F5F5F5",
-              "hasSquad": true,
-              "hasTransfers": false,
-              "competitorNum": 2,
-              "hideOnSearch": false,
-              "hideOnCatalog": false
-            },
-            "winner": -1,
-            "scores": [
-              -1,
-              -1
-            ],
-            "homeAwayTeamOrder": 1,
-            "hasPointByPoint": false,
-            "hasVideo": false
-          }
-        ],
-        "bookmakers": [
-          {
-            "id": 4,
-            "name": "BWIN",
-            "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
-            "nameForURL": "bwin",
-            "actionButton": {
-              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
-              "label": "Apuesta ahora"
-            },
-            "color": "#000000",
-            "imageVersion": 1,
-            "offerText": "100% Bono de Bienvenida",
-            "offerUrl": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
-            "promotionText": "Ven a vivir la emoción"
-          }
-        ]
-      }
-    }
-  },
+        }
+    },
     {
         "matchUrl": "https://www.365scores.com/es/football/match/fifa-world-cup-5930/france-spain-5050-5061-5930#id=4764951",
         "stats": {
