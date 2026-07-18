@@ -15,8 +15,8 @@ export interface BlockWeights {
 }
 
 export const DEFAULT_WEIGHTS: BlockWeights = {
-    todos: 0.1,
-    ultimos5: 0.6,
+    todos: 0.2,
+    ultimos5: 0.5,
     ultimos5LocalVisita: 0.3,
 };
 
@@ -159,7 +159,8 @@ export function unifyMatchStats(
             const xGATotalLocal = weightedBlend(homeTodos.xGAgainst, homeU5.xGAgainst, homeU5LV.xGAgainst, weights);
             const xGTotalesVisita = weightedBlend(awayTodos.xGFor, awayU5.xGFor, awayU5LV.xGFor, weights);
             const xGATotalVisita = weightedBlend(awayTodos.xGAgainst, awayU5.xGAgainst, awayU5LV.xGAgainst, weights);
-            // console.log({ xGATotalVisita, xGTotalesVisita })
+            console.log({ xGTotalLocal, xGATotalLocal })
+            console.log({ xGTotalesVisita, xGATotalVisita })
 
             const golesRecibidosLocal = weightedBlend(homeTodos.goalsAgainst, homeU5.goalsAgainst, homeU5LV.goalsAgainst, weights)
             const golesRecibidosVisita = weightedBlend(awayTodos.goalsAgainst, awayU5.goalsAgainst, awayU5LV.goalsAgainst, weights)
@@ -171,24 +172,26 @@ export function unifyMatchStats(
             // const golesEsperadoss = golesEsperadosLocal + golesEsperadosVisita
 
             // ---- Goles esperados del partido (modelo cruzado clásico de Poisson) ----
-            // const homeLambdaClassicNormal = (xGTotalLocal + xGATotalVisita) / 2;
-            // const awayLambdaClassic = (xGTotalesVisita + xGATotalLocal) / 2;
+            const homeLambdaClassicNormal = (xGTotalLocal + xGATotalVisita) / 2;
+            const awayLambdaClassic = (xGTotalesVisita + xGATotalLocal) / 2;
             // const golesEsperados = homeLambdaClassic + awayLambdaClassic;
 
 
             // ---- shot_factor: blend ponderado de (remates / remates al arco) ----
             const shotFactorLocal =
-                weights.todos * safeDiv(homeTodos.shotsOnTarget, homeTodos.shots) +
-                weights.ultimos5 * safeDiv(homeU5.shotsOnTarget, homeU5.shots) +
-                weights.ultimos5LocalVisita * safeDiv(homeU5LV.shotsOnTarget, homeU5LV.shots);
+                (weights.todos * safeDiv(homeTodos.shotsOnTarget, homeTodos.shots)) +
+                (weights.ultimos5 * safeDiv(homeU5.shotsOnTarget, homeU5.shots)) +
+                (weights.ultimos5LocalVisita * safeDiv(homeU5LV.shotsOnTarget, homeU5LV.shots));
 
             const shotFactorAway =
-                weights.todos * safeDiv(awayTodos.shotsOnTarget, awayTodos.shots) +
-                weights.ultimos5 * safeDiv(awayU5.shotsOnTarget, awayU5.shots) +
-                weights.ultimos5LocalVisita * safeDiv(awayU5LV.shotsOnTarget, awayU5LV.shots);
+                (weights.todos * safeDiv(awayTodos.shotsOnTarget, awayTodos.shots)) +
+                (weights.ultimos5 * safeDiv(awayU5.shotsOnTarget, awayU5.shots)) +
+                (weights.ultimos5LocalVisita * safeDiv(awayU5LV.shotsOnTarget, awayU5LV.shots));
+
+            // console.log({ shotFactorLocal, shotFactorAway })
             // ---- xG ajustado por volumen de tiro ----
-            // const xGLocalMatch = golesEsperadosLocal * (0.8 + shotFactorLocal);
-            // const xGAwayMatch = golesEsperadosVisita * (0.8 + shotFactorAway);
+            const xGLocalMatch = homeLambdaClassicNormal * (0.8 + shotFactorLocal);
+            const xGAwayMatch = awayLambdaClassic * (0.8 + shotFactorAway);
             // const xgTotal = xGLocalMatch + xGAwayMatch;
 
             // console.log({ xGLocalMatch, xGAwayMatch, xgTotal })
@@ -364,20 +367,22 @@ export function unifyMatchStats(
                 0.10 * consistency;
 
 
-            const homeLambda =
-                0.55 * xGTotalLocal +
-                0.20 * xGATotalVisita +
-                0.15 * teamStrength +
-                0.05 * momentumRating +
-                0.05 * consistency;
+            const homeLambda = xGLocalMatch
+            // const homeLambda =
+            //     0.55 * xGTotalLocal +
+            //     0.20 * xGATotalVisita +
+            //     0.15 * teamStrength +
+            //     0.05 * momentumRating +
+            //     0.05 * consistency;
 
 
-            const awayLambda =
-                0.55 * xGTotalesVisita +
-                0.20 * xGATotalLocal +
-                0.15 * teamStrengthAway +
-                0.05 * momentumAway +
-                0.05 * consistency;
+            const awayLambda = xGAwayMatch
+            // const awayLambda =
+            //     0.55 * xGTotalesVisita +
+            //     0.20 * xGATotalLocal +
+            //     0.15 * teamStrengthAway +
+            //     0.05 * momentumAway +
+            //     0.05 * consistency;
 
             const chanceQuality =
 
@@ -438,7 +443,7 @@ export function unifyMatchStats(
 
             });
 
-            const expectedGoals = Number(homeLambda + awayLambda.toFixed(3))
+            const expectedGoals = Number((homeLambda + awayLambda).toFixed(3));
             const metrics: MatchMetrics = {
                 home: buildTeamMetrics(
                     homeLambda,

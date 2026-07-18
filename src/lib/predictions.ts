@@ -87,12 +87,12 @@ export function calculateExtendedPrediction(home: TeamMetrics, away: TeamMetrics
     const goalLinesConfig = options.goalLines ?? DEFAULT_GOAL_LINES;
     const cornerLinesConfig = options.cornerLines ?? DEFAULT_CORNER_LINES;
 
-    // console.log({ home, away })
+    console.log({ home, away })
     // const homeExpectedGoals = home.xG_local_match;
-    const homeExpectedGoals = home.xG || 0.1;
-    const awayExpectedGoals = away.xG || 0.1;
+    const homeExpectedGoals = home.expectedGoals ?? 0.1;
+    const awayExpectedGoals = away.expectedGoals ?? 0.1;
     // const awayExpectedGoals = away.XG_away_match;
-
+    console.log({ homeExpectedGoals, awayExpectedGoals })
     let homeWin = 0;
     let draw = 0;
     let awayWin = 0;
