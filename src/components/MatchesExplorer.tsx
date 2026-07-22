@@ -311,7 +311,7 @@ function getBestPicks(
     pred: ExtendedMatchPrediction,
     homeTeam: string,
     awayTeam: string
-): { best: Pick | null; plays: Pick[]; allPicks: Pick[]; ratoneras: Pick[]; medias: Pick[] } {
+): { best: Pick | null; plays: Pick[]; allPicks: Pick[]; ratoneras: Pick[]; medias: Pick[]; altas: Pick[] } {
     const allPicks: Pick[] = [];
 
     // 1. Moneyline (Resultado)
@@ -427,14 +427,19 @@ function getBestPicks(
     });
 
     const positiveEV = allPicks.filter(p => p.ev > 0.05);
-    const ratoneras = allPicks.filter(p => p.odd >= 1.18 && p.odd <= 1.30);
-    console.log({ ratoneras })
+    const ratoneras = allPicks.filter(p => p.odd >= 1.15 && p.odd <= 1.30);
+    // console.log({ ratoneras })
     const medias = allPicks.filter(p => {
-        const isML = p.market === "Resultado";
-        const limit = isML ? 2.5 : 2.0;
-        return p.odd > 1.30 && p.odd <= limit;
+        // const isML = p.market === "Resultado";
+        // const limit = isML ? 2.5 : 2.0;
+        return p.odd > 1.30 && p.odd <= 1.80;
     });
 
+    const altas = allPicks.filter(p => {
+        const isML = p.market === "Resultado";
+        const limit = isML ? 2.5 : 2.0;
+        return p.odd > 1.80 && p.odd <= limit;
+    })
     // El mejor pick será el de mayor EV entre los candidatos (si hay)
     const best = positiveEV.length > 0 ? positiveEV[0] : null;
 
@@ -450,7 +455,7 @@ function getBestPicks(
     //     .filter((p) => p.odd > 5.0 && p.ev > 0.05)
     //     .slice(0, 2);
 
-    return { best, plays, allPicks: positiveEV, ratoneras, medias };
+    return { best, plays, allPicks: positiveEV, ratoneras, medias, altas };
 }
 
 // ============================================================
@@ -901,7 +906,7 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
                                     : "hidden";
 
                     // Calcular el mejor pick
-                    const { best: bestPick, plays, allPicks, ratoneras, medias } = getBestPicks(r.prediction, r.home.teamName, r.away.teamName);
+                    const { best: bestPick, plays, altas, ratoneras, medias } = getBestPicks(r.prediction, r.home.teamName, r.away.teamName);
                     return (
                         <div
                             key={r.matchUrl}
@@ -988,7 +993,7 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
                                 </div>
 
                                 {/* Fila 5: Over/Under y BTTS */}
-                                <div className="flex flex-wrap items-center gap-2 mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
+                                {/* <div className="flex flex-wrap items-center gap-2 mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
                                     <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-gray-50 dark:bg-neutral-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-neutral-700">
                                         {r.prediction.goalLines[1].overProb > 60 ? "Over 2.5" : "Under 2.5"}
                                     </span>
@@ -997,7 +1002,7 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
                                             {r.prediction.btts.yes.prob > 60 ? "BTTS Sí" : "BTTS No"}
                                         </span>
                                     )}
-                                </div>
+                                </div> */}
 
                                 {/* NUEVA SECCIÓN: Riesgo y Pick Recomendado */}
                                 {/* NUEVA SECCIÓN: Riesgo y Pick Recomendado (siempre visible) */}
@@ -1084,7 +1089,7 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
                                             {/* Cuotas medias */}
                                             {medias.length > 0 && (
                                                 <div className="mt-1">
-                                                    <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">🔸 Medias (1.30 - 2.0/2.5)</span>
+                                                    <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">🔸 Medias (1.30 - 1.8)</span>
                                                     <div className="flex flex-wrap gap-1 mt-0.5">
                                                         {medias.map((pick, idx) => (
                                                             <div
@@ -1104,8 +1109,30 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
                                                 </div>
                                             )}
 
+                                            {altas.length > 0 && (
+                                                <div className="mt-1">
+                                                    <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">🔶 Altas (1.8 - 2.5)</span>
+                                                    <div className="flex flex-wrap gap-1 mt-0.5">
+                                                        {altas.map((pick, idx) => (
+                                                            <div
+                                                                key={idx}
+                                                                className="flex items-center gap-1 text-xs bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-full px-2 py-0.5"
+                                                            >
+                                                                <span className="text-gray-600 dark:text-gray-300">{pick.market}</span>
+                                                                <span className="font-bold text-gray-800 dark:text-gray-100">{pick.selection}</span>
+                                                                <span className="text-gray-400">Cuota {pick.odd}</span>
+                                                                <span className="text-green-600 font-medium">EV {(pick.ev * 100).toFixed(1)}%</span>
+                                                            </div>
+                                                        ))}
+                                                        {/* {altas.length > 5 && (
+                                                            <span className="text-xs text-gray-400">+{altas.length - 5} más</span>
+                                                        )} */}
+                                                    </div>
+                                                </div>
+                                            )}
+
                                             {/* Jugadas (si no hay ratoneras/medias y hay plays) */}
-                                            {ratoneras.length === 0 && medias.length === 0 && plays.length > 0 && (
+                                            {ratoneras.length === 0 && medias.length === 0 && plays.length > 0 && altas.length === 0 && (
                                                 <div className="mt-1">
                                                     <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">Jugadas alternativas</span>
                                                     <div className="flex flex-wrap gap-1 mt-0.5">

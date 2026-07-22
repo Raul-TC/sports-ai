@@ -20,7 +20,7 @@ export default async function HomePage() {
   });
 
   // console.log()
-  console.log({ predictions })
+  // console.log({ predictions })
   return (
     <main className="max-w-5xl mx-auto px-6 py-12">
       <header className="flex items-center justify-between mb-10">
