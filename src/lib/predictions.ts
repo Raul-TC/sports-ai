@@ -167,5 +167,6 @@ export function calculateAllPredictions(matches: UnifiedMatch[], options: Predic
         home: match.home,
         away: match.away,
         prediction: calculateExtendedPrediction(match.home.metrics, match.away.metrics, options),
+        volatility: match.matchMetrics.volatility,
     }));
 }
