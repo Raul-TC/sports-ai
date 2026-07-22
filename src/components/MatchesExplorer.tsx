@@ -1063,7 +1063,7 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
                                                 <div className="mt-1">
                                                     <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">🔹 Ratoneras (≤1.30)</span>
                                                     <div className="flex flex-wrap gap-1 mt-0.5">
-                                                        {ratoneras.slice(0, 5).map((pick, idx) => (
+                                                        {ratoneras.map((pick, idx) => (
                                                             <div
                                                                 key={idx}
                                                                 className="flex items-center gap-1 text-xs bg-gray-100 dark:bg-neutral-800 border border-gray-300 dark:border-neutral-600 rounded-full px-2 py-0.5"
@@ -1074,9 +1074,9 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
                                                                 <span className="text-green-600 font-medium">EV {(pick.ev * 100).toFixed(1)}%</span>
                                                             </div>
                                                         ))}
-                                                        {ratoneras.length > 5 && (
+                                                        {/* {ratoneras.length > 5 && (
                                                             <span className="text-xs text-gray-400">+{ratoneras.length - 5} más</span>
-                                                        )}
+                                                        )} */}
                                                     </div>
                                                 </div>
                                             )}
@@ -1086,7 +1086,7 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
                                                 <div className="mt-1">
                                                     <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">🔸 Medias (1.30 - 2.0/2.5)</span>
                                                     <div className="flex flex-wrap gap-1 mt-0.5">
-                                                        {medias.slice(0, 5).map((pick, idx) => (
+                                                        {medias.map((pick, idx) => (
                                                             <div
                                                                 key={idx}
                                                                 className="flex items-center gap-1 text-xs bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-full px-2 py-0.5"
@@ -1097,9 +1097,9 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
                                                                 <span className="text-green-600 font-medium">EV {(pick.ev * 100).toFixed(1)}%</span>
                                                             </div>
                                                         ))}
-                                                        {medias.length > 5 && (
+                                                        {/* {medias.length > 5 && (
                                                             <span className="text-xs text-gray-400">+{medias.length - 5} más</span>
-                                                        )}
+                                                        )} */}
                                                     </div>
                                                 </div>
                                             )}
