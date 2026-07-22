@@ -486,7 +486,7 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
             if (activeTab === "today") return isSameDay(matchDate, today);
             if (activeTab === "future") return matchDate > today;
             return matchDate < today;
-        });
+        }).sort((a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime());
     }, [predictions, activeTab, today]);
 
     const todayCount = predictions.filter((p) => isSameDay(getDateWithoutTime(p.startTime), today)).length;
