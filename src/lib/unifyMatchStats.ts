@@ -493,8 +493,8 @@ export function unifyMatchStats(
                 matchUrl: match.matchUrl,
                 competitionName: game.competitionDisplayName,
                 startTime: game.startTime,
-                home: { teamId: homeId, teamName: game.homeCompetitor.name, metrics: metrics.home },
-                away: { teamId: awayId, teamName: game.awayCompetitor.name, metrics: metrics.away },
+                home: { teamId: homeId, teamName: game.homeCompetitor.name, metrics: metrics.home, id: game.homeCompetitor.id },
+                away: { teamId: awayId, teamName: game.awayCompetitor.name, metrics: metrics.away, id: game.awayCompetitor.id },
                 matchMetrics: metrics.match,
             } satisfies UnifiedMatch;
         })

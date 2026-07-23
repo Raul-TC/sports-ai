@@ -2,6 +2,7 @@ import { PredictionOptions } from "@/lib/predictions";
 
 export interface UnifiedTeamInfo {
     teamId: number;
+    id: number;
     teamName: string;
     metrics: TeamMetrics;
 }
