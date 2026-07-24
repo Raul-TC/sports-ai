@@ -1473,6 +1473,7 @@ import {
     AlertCircle,
 } from "lucide-react";
 import Image from "next/image";
+import { getBestPickFromData } from "@/utils/picks";
 
 // ============================================================
 // INTERFACES (igual que antes)
@@ -1869,7 +1870,7 @@ function getBestPicks(
     awayTeam: string,
     riskLevel: "low" | "medium" | "high" | "none",
     excludedMarkets: string[] = []  // nuevo parámetro
-): { best: Pick | null; plays: Pick[]; allPicks: Pick[]; ratoneras: Pick[]; medias: Pick[]; altas: Pick[] } {
+): { plays: Pick[]; ratoneras: Pick[]; medias: Pick[]; altas: Pick[] } {
     const allPicks: Pick[] = [];
 
     // 1. Moneyline (Resultado)
@@ -1984,7 +1985,7 @@ function getBestPicks(
         return p.odd < 2.5 && p.prob > 60;
     });
 
-    const positiveEV = allPicks.filter(p => p.ev > 0.05);
+    // const positiveEV = allPicks.filter(p => p.ev > 0.05);
     const ratoneras = allPicks.filter(p => p.odd >= 1.15 && p.odd <= 1.30);
     // console.log({ ratoneras })
     const medias = allPicks.filter(p => {
@@ -1999,12 +2000,12 @@ function getBestPicks(
         return p.odd > 1.80 && p.odd <= limit;
     })
     // El mejor pick será el de mayor EV entre los candidatos (si hay)
-    const best = positiveEV.length > 0 ? positiveEV[0] : null;
+    // const best = positiveEV.length > 0 ? positiveEV[0] : null;
 
     // --- JUGADAS (plays) ---
     // Picks con cuota < 2.00 y EV > 0.05 (independientemente del mercado)
     const plays = allPicks
-        .filter(p => p.odd < 2.0 && p !== best)
+        .filter(p => p.odd < 2.0)
         .slice(0, 3);
 
     // --- ALTO RIESGO (opcional) ---
@@ -2033,7 +2034,7 @@ function getBestPicks(
     }
 
 
-    return { best, plays, allPicks: positiveEV, ratoneras, medias, altas };
+    return { plays, ratoneras, medias, altas };
 }
 
 // ============================================================
@@ -2525,7 +2526,8 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
                                     : "hidden";
 
                     // Calcular el mejor pick
-                    const { best: bestPick, plays, altas, ratoneras, medias } = getBestPicks(r.prediction, r.home.teamName, r.away.teamName, trap.level, excludedMarkets);
+                    const { plays, altas, ratoneras, medias } = getBestPicks(r.prediction, r.home.teamName, r.away.teamName, trap.level, excludedMarkets);
+                    const bestPickData = getBestPickFromData(r.home, r.away, r.prediction, r.volatility);
                     return (
                         <div
                             key={r.matchUrl}
@@ -2759,18 +2761,29 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
                                                 </div>
                                             )}
                                             {/* Pick recomendado (el de mayor EV) */}
-                                            {bestPick && (
+                                            {bestPickData && (
                                                 <div className="flex flex-wrap items-center gap-2 text-xs bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800 rounded-lg px-3 py-1.5">
                                                     <Sparkles className="w-3 h-3 text-indigo-500" />
-                                                    <span className="font-medium text-indigo-700 dark:text-indigo-300">{bestPick.market}</span>
-                                                    <span className="font-bold text-gray-800 dark:text-gray-100">{bestPick.selection}</span>
-                                                    <span className="text-gray-500 dark:text-gray-400">Cuota {bestPick.odd} · EV {(bestPick.ev * 100).toFixed(1)}%</span>
-                                                    <span className="text-gray-400 text-[10px]">{bestPick.reason}</span>
-                                                    {getOddsCategory(bestPick) === "ratonera" && (
-                                                        <span className="text-[10px] bg-gray-200 dark:bg-neutral-700 text-gray-600 dark:text-gray-400 px-1.5 py-0.5 rounded">Ratonera</span>
-                                                    )}
-                                                    {getOddsCategory(bestPick) === "media" && (
-                                                        <span className="text-[10px] bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-1.5 py-0.5 rounded">Media</span>
+                                                    <span className="font-medium text-indigo-700 dark:text-indigo-300">{bestPickData.market}</span>
+                                                    <span className="font-bold text-gray-800 dark:text-gray-100">{bestPickData.selection}</span>
+                                                    <span className="text-gray-500 dark:text-gray-400">
+                                                        {bestPickData.confidence === 'alta' && '🔵 Alta confianza'}
+                                                        {bestPickData.confidence === 'media' && '🟡 Media confianza'}
+                                                        {bestPickData.confidence === 'baja' && '🔴 Baja confianza'}
+                                                    </span>
+                                                    <span className="text-gray-400 text-[10px]">{bestPickData.reason}</span>
+                                                    <div className="w-full mt-0.5 flex flex-wrap gap-1">
+                                                        <span className="text-[10px] bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 px-1.5 py-0.5 rounded">
+                                                            ✅ Apostar: {bestPickData.recommendation.betOn}
+                                                        </span>
+                                                        <span className="text-[10px] bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 px-1.5 py-0.5 rounded">
+                                                            ❌ Evitar: {bestPickData.recommendation.avoid}
+                                                        </span>
+                                                    </div>
+                                                    {bestPickData.warning && (
+                                                        <span className="text-[10px] bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 px-1.5 py-0.5 rounded">
+                                                            {bestPickData.warning}
+                                                        </span>
                                                     )}
                                                 </div>
                                             )}
@@ -2863,11 +2876,11 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
                                                 </div>
                                             )}
 
-                                            {!bestPick && ratoneras.length === 0 && medias.length === 0 && plays.length === 0 && (
+                                            {/*  {!bestPick && ratoneras.length === 0 && medias.length === 0 && plays.length === 0 && (
                                                 <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                                                     No hay picks con cuota razonable y valor positivo.
                                                 </div>
-                                            )}
+                                            )}*/}
                                         </div>
                                     </div>
                                 </div>
