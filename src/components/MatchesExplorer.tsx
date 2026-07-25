@@ -2602,7 +2602,7 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
                                             <span>{r.away.teamName}</span>
                                         </div>
                                     </div>
-                                    <div className="flex flex-wrap items-center gap-2 ml-auto">
+                                    {/* <div className="flex flex-wrap items-center gap-2 ml-auto">
                                         <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-800">
                                             <Trophy className="w-3 h-3" />
                                             {favTeam}
@@ -2616,7 +2616,7 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
                                                 Trampa {trap.level}
                                             </span>
                                         )}
-                                    </div>
+                                    </div> */}
                                     {/* Botones para marcar equipo como perdedor */}
                                     <div className="flex items-center gap-1 ml-2">
                                         {(() => {
