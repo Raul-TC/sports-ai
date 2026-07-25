@@ -125,7 +125,7 @@ export function unifyMatchStats(
     const statIds = options.statIds ?? DEFAULT_STAT_IDS;
     const statisticGroup = options.statisticGroup === undefined ? 2 : options.statisticGroup;
 
-    console.log({ raw })
+    // console.log({ raw })
     return raw
         .map((match): UnifiedMatch | null => {
             const requiredKeys: StatsFilterKey[] = ["todos", "ultimos5", "ultimos5LocalVisita"];
@@ -159,8 +159,8 @@ export function unifyMatchStats(
             const xGATotalLocal = weightedBlend(homeTodos.xGAgainst, homeU5.xGAgainst, homeU5LV.xGAgainst, weights);
             const xGTotalesVisita = weightedBlend(awayTodos.xGFor, awayU5.xGFor, awayU5LV.xGFor, weights);
             const xGATotalVisita = weightedBlend(awayTodos.xGAgainst, awayU5.xGAgainst, awayU5LV.xGAgainst, weights);
-            console.log({ xGTotalLocal, xGATotalLocal })
-            console.log({ xGTotalesVisita, xGATotalVisita })
+            // console.log({ xGTotalLocal, xGATotalLocal })
+            // console.log({ xGTotalesVisita, xGATotalVisita })
 
             const golesRecibidosLocal = weightedBlend(homeTodos.goalsAgainst, homeU5.goalsAgainst, homeU5LV.goalsAgainst, weights)
             const golesRecibidosVisita = weightedBlend(awayTodos.goalsAgainst, awayU5.goalsAgainst, awayU5LV.goalsAgainst, weights)
