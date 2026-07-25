@@ -2433,10 +2433,10 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
                         <div><strong>Tiros:</strong> Disparos totales.</div>
                         <div><strong>Tiro a Puerta:</strong> Disparos entre palos.</div>
                         <div><strong>Córners:</strong> Saques de esquina a favor.</div>
-                        <div><strong>Eficiencia Of:</strong> Goles reales / xG. Indica si el equipo rinde más o menos de lo esperado.</div>
+                        <div><strong>Eficiencia Of:</strong> Indica si el equipo rinde más o menos de lo esperado.</div>
                         <div><strong>Goles Previstos:</strong> Predicción de goles (Poisson) para este partido.</div>
-                        <div><strong>Puntería:</strong> Tiros a puerta / tiros totales. Alta = eficacia en el disparo.</div>
-                        <div><strong>Eficiencia Bruta:</strong> Goles / tiros totales. Mide la conversión.</div>
+                        <div><strong>Puntería:</strong> Alta = eficacia en el disparo.</div>
+                        <div><strong>Eficiencia Bruta:</strong> Mide la conversión.</div>
                         <div><strong>Caída Precisión:</strong> Cambio en la puntería (histórico vs últimos 5 partidos).</div>
                     </div>
                     <p className="text-xs text-gray-500 mt-2">Pasa el ratón o haz clic en cualquier badge para más detalles.</p>
@@ -2545,16 +2545,16 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
                                         <span className="hidden md:inline">·</span>
                                         <span className="truncate">{r.competitionName}</span>
                                     </div>
-                                    <div className="flex items-center gap-1">
+                                    {/* <div className="flex items-center gap-1">
                                         {isSelected ? (
                                             <ChevronUp className="w-5 h-5" />
                                         ) : (
                                             <ChevronDown className="w-5 h-5" />
                                         )}
-                                    </div>
+                                    </div> */}
                                 </div>
                                 {/* Notas de equipos excluidos */}
-                                {(excludedTeams.some(t => t.name === r.home.teamName || t.name === r.away.teamName)) && (
+                                {/* {(excludedTeams.some(t => t.name === r.home.teamName || t.name === r.away.teamName)) && (
                                     <div className="mt-2 pt-2 border-t border-red-200 dark:border-red-800/30">
                                         <div className="text-xs font-medium text-red-600 dark:text-red-400 flex items-center gap-1">
                                             <span>⚠️</span> Alertas de equipos en racha negativa
@@ -2588,9 +2588,9 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
                                                 ))}
                                         </div>
                                     </div>
-                                )}
+                                )} */}
                                 {/* Fila 2: Equipos y favorito + badge de trampa */}
-                                <div className="flex flex-wrap items-center gap-2 mb-3">
+                                <div className="flex flex-wrap items-center  justify-center gap-2 mb-3 m-auto w-full">
                                     <div className="flex items-center gap-2 font-medium text-gray-800 dark:text-gray-100">
                                         <div className="flex items-center gap-2 font-medium text-gray-800 dark:text-gray-100">
                                             <Image src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.home.id}`} alt={r.home.teamName} width={64} height={64} />
@@ -2598,8 +2598,8 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
                                         </div>
                                         <span className="text-gray-400 text-sm">vs</span>
                                         <div className="flex items-center gap-2 font-medium text-gray-800 dark:text-gray-100">
-                                            <Image src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.away.id}`} alt={r.away.teamName} width={64} height={64} />
                                             <span>{r.away.teamName}</span>
+                                            <Image src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.away.id}`} alt={r.away.teamName} width={64} height={64} />
                                         </div>
                                     </div>
                                     {/* <div className="flex flex-wrap items-center gap-2 ml-auto">
@@ -2618,7 +2618,7 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
                                         )}
                                     </div> */}
                                     {/* Botones para marcar equipo como perdedor */}
-                                    <div className="flex items-center gap-1 ml-2">
+                                    {/* <div className="flex items-center gap-1 ml-2">
                                         {(() => {
                                             const homeExcluded = excludedTeams.find(t => t.name === r.home.teamName);
                                             const awayExcluded = excludedTeams.find(t => t.name === r.away.teamName);
@@ -2655,7 +2655,7 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
                                                 </>
                                             );
                                         })()}
-                                    </div>
+                                    </div> */}
                                 </div>
 
                                 {/* Fila 3: Estadísticas completas */}
@@ -2761,7 +2761,7 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
                                                 </div>
                                             )}
                                             {/* Pick recomendado (el de mayor EV) */}
-                                            {bestPickData && (
+                                            {/* {bestPickData && (
                                                 <div className="flex flex-wrap items-center gap-2 text-xs bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800 rounded-lg px-3 py-1.5">
                                                     <Sparkles className="w-3 h-3 text-indigo-500" />
                                                     <span className="font-medium text-indigo-700 dark:text-indigo-300">{bestPickData.market}</span>
@@ -2786,7 +2786,7 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
                                                         </span>
                                                     )}
                                                 </div>
-                                            )}
+                                            )} */}
 
                                             {/* Cuotas ratoneras */}
                                             {ratoneras.length > 0 && (
