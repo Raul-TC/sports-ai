@@ -66,6 +66,7 @@ export interface ExtendedMatchPrediction {
         expectedTotal: number;
         lines: GoalLineMarket[];
     };
+    volatility?: number;
 }
 
 export interface PredictionOptions {

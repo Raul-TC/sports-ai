@@ -81,9 +81,13 @@ export default function OddsPanel({ prediction, homeTeam, awayTeam }: OddsPanelP
                         <span className="font-medium">Córners</span>
                         <span className="text-indigo-600 font-bold">{corners.expectedTotal}</span>
                     </span>
-                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 text-xs font-medium border border-indigo-100 dark:border-indigo-800">
-                        ⭐ {favorite}
+                    <span className="flex items-center gap-1 text-neutral-500">
+                        <span className="font-medium">Goles Esperados</span>
+                        <span className="text-indigo-600 font-bold">{homeExpectedGoals + awayExpectedGoals}</span>
                     </span>
+                    {/* <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 text-xs font-medium border border-indigo-100 dark:border-indigo-800">
+                        ⭐ {favorite}
+                    </span> */}
                 </div>
             </div>
 

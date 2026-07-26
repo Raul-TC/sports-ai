@@ -1474,6 +1474,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { getBestPickFromData } from "@/utils/picks";
+import { scorePicks } from "@/utils/scoringEngine";
 
 // ============================================================
 // INTERFACES (igual que antes)
@@ -2527,7 +2528,8 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
 
                     // Calcular el mejor pick
                     const { plays, altas, ratoneras, medias } = getBestPicks(r.prediction, r.home.teamName, r.away.teamName, trap.level, excludedMarkets);
-                    const bestPickData = getBestPickFromData(r.home, r.away, r.prediction, r.volatility);
+                    const scoredPicks = scorePicks(r.home, r.away, r.prediction);
+                    const bestPick = scoredPicks.length > 0 ? scoredPicks[0] : null;
                     return (
                         <div
                             key={r.matchUrl}
@@ -2761,32 +2763,32 @@ export default function MatchesExplorer({ predictions }: MatchesExplorerProps) {
                                                 </div>
                                             )}
                                             {/* Pick recomendado (el de mayor EV) */}
-                                            {/* {bestPickData && (
+                                            {bestPick && (
                                                 <div className="flex flex-wrap items-center gap-2 text-xs bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800 rounded-lg px-3 py-1.5">
                                                     <Sparkles className="w-3 h-3 text-indigo-500" />
-                                                    <span className="font-medium text-indigo-700 dark:text-indigo-300">{bestPickData.market}</span>
-                                                    <span className="font-bold text-gray-800 dark:text-gray-100">{bestPickData.selection}</span>
+                                                    <span className="font-medium text-indigo-700 dark:text-indigo-300">{bestPick.market}</span>
+                                                    <span className="font-bold text-gray-800 dark:text-gray-100">{bestPick.selection}</span>
                                                     <span className="text-gray-500 dark:text-gray-400">
-                                                        {bestPickData.confidence === 'alta' && '🔵 Alta confianza'}
-                                                        {bestPickData.confidence === 'media' && '🟡 Media confianza'}
-                                                        {bestPickData.confidence === 'baja' && '🔴 Baja confianza'}
+                                                        {bestPick.confidence === 'alta' && '🔵 Alta confianza'}
+                                                        {bestPick.confidence === 'media' && '🟡 Media confianza'}
+                                                        {bestPick.confidence === 'baja' && '🔴 Baja confianza'}
                                                     </span>
-                                                    <span className="text-gray-400 text-[10px]">{bestPickData.reason}</span>
+                                                    <span className="text-gray-400 text-[10px]">{bestPick.reason}</span>
                                                     <div className="w-full mt-0.5 flex flex-wrap gap-1">
                                                         <span className="text-[10px] bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 px-1.5 py-0.5 rounded">
-                                                            ✅ Apostar: {bestPickData.recommendation.betOn}
+                                                            ✅ Apostar: {bestPick.recommendation.betOn}
                                                         </span>
-                                                        <span className="text-[10px] bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 px-1.5 py-0.5 rounded">
-                                                            ❌ Evitar: {bestPickData.recommendation.avoid}
-                                                        </span>
+                                                        {/* <span className="text-[10px] bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 px-1.5 py-0.5 rounded">
+                                                            ❌ Evitar: {bestPick.recommendation.avoid}
+                                                        </span> */}
                                                     </div>
-                                                    {bestPickData.warning && (
+                                                    {bestPick.warning && (
                                                         <span className="text-[10px] bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 px-1.5 py-0.5 rounded">
-                                                            {bestPickData.warning}
+                                                            {bestPick.warning}
                                                         </span>
                                                     )}
                                                 </div>
-                                            )} */}
+                                            )}
 
                                             {/* Cuotas ratoneras */}
                                             {ratoneras.length > 0 && (
