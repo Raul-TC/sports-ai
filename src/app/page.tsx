@@ -1,6 +1,7 @@
 import { calculateAllPredictions } from "@/lib/predictions";
 import MatchesExplorer from "@/components/MatchesExplorer";
 import data from '@/app/data/matches/mundial.json'
+import dataResults from '@/app/data/matches/results.json'
 import { unifyMatchStats } from "@/lib/unifyMatchStats";
 // Fuerza lectura fresca del filesystem en cada request — así si
 // agregas/editas un .json en data/matches/, se refleja sin rebuild.
@@ -20,7 +21,7 @@ export default async function HomePage() {
   });
 
   // console.log()
-  // console.log({ predictions })
+  // console.log({ pred: predictions.slice(0, 20) })
   return (
     <main className="max-w-5xl mx-auto px-6 py-12">
       <header className="flex items-center justify-between mb-10">
@@ -39,7 +40,7 @@ export default async function HomePage() {
           <code>data/matches/</code> en la raíz del proyecto y recarga la página.
         </p>
       ) : (
-        <MatchesExplorer predictions={predictions} />
+        <MatchesExplorer predictions={predictions} results={dataResults} />
       )}
     </main>
   );

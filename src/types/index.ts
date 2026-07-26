@@ -14,6 +14,7 @@ export interface TeamMetrics {
 }
 
 export interface TeamInfo {
+    id: number;
     teamId: number;
     teamName: string;
     metrics?: TeamMetrics;

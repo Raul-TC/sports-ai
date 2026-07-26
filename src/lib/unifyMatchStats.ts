@@ -188,6 +188,8 @@ export function unifyMatchStats(
                 (weights.ultimos5 * safeDiv(awayU5.shotsOnTarget, awayU5.shots)) +
                 (weights.ultimos5LocalVisita * safeDiv(awayU5LV.shotsOnTarget, awayU5LV.shots));
 
+
+
             // console.log({ shotFactorLocal, shotFactorAway })
             // ---- xG ajustado por volumen de tiro ----
             const xGLocalMatch = homeLambdaClassicNormal * (0.8 + shotFactorLocal);
@@ -346,8 +348,10 @@ export function unifyMatchStats(
                 0.10 * chanceQualityRatingAway;
 
             const consistency = 1 - normalize(volatilidad, 0, 1);
-            const defenseRating = 0.50 * (1 - xGARating) + 0.25 * (1 - normalize(precisionDropLocal, -0.5, 0.5)) + 0.25 * (1 - normalize(volatilidad, 0, 1));
-            const defenseRatingAway = 0.50 * (1 - xGARatingAway) + 0.25 * (1 - normalize(precisionDropAway, -0.5, 0.5)) + 0.25 * (1 - normalize(volatilidad, 0, 1));
+            // const defenseRating = 0.50 * (1 - xGARating) + 0.25 * (1 - normalize(precisionDropLocal, -0.5, 0.5)) + 0.25 * (1 - normalize(volatilidad, 0, 1));
+            const defenseRating = 0.70 * (1 - xGARating) + 0.30 * defensiveEfficiencyLocal;
+            // const defenseRatingAway = 0.50 * (1 - xGARatingAway) + 0.25 * (1 - normalize(precisionDropAway, -0.5, 0.5)) + 0.25 * (1 - normalize(volatilidad, 0, 1));
+            const defenseRatingAway = 0.70 * (1 - xGARatingAway) + 0.30 * defensiveEfficiencyVisita;
 
             const momentum = safeDiv(homeU5.xGFor - homeTodos.xGFor, homeTodos.xGFor);
             const momentumAway = safeDiv(awayU5.xGFor - awayTodos.xGFor, awayTodos.xGFor);
@@ -366,41 +370,76 @@ export function unifyMatchStats(
                 0.20 * momentumRatingAway +
                 0.10 * consistency;
 
+            const attackMultiplierLocal = 1 + (shotFactorLocal - 0.35) * 0.30 + (eficienciaOfensivaLocal - 1) * 0.15 + (momentumRating - 0.5) * 0.10 + (consistency - 0.5) * 0.05;
+            const attackMultiplierAway = 1 + (shotFactorAway - 0.35) * 0.30 + (eficienciaOfensivaAway - 1) * 0.15 + (momentumRatingAway - 0.5) * 0.10 + (consistency - 0.5) * 0.05;
 
-            const homeLambda = xGLocalMatch
+            // const homeLambda = xGLocalMatch
+            const homeLambda = homeLambdaClassicNormal * attackMultiplierLocal;
             // const homeLambda =
-            //     0.55 * xGTotalLocal +
-            //     0.20 * xGATotalVisita +
-            //     0.15 * teamStrength +
-            //     0.05 * momentumRating +
-            //     0.05 * consistency;
+            //     0.60 * xGTotalLocal +
+            //     0.30 * xGATotalVisita +
+            //     0.10 * momentumRating
+            // 0.15 * teamStrength +
+            // 0.05 * consistency;
 
 
-            const awayLambda = xGAwayMatch
+            // const awayLambda = xGAwayMatch
+            const awayLambda = awayLambdaClassic * attackMultiplierAway;
             // const awayLambda =
-            //     0.55 * xGTotalesVisita +
-            //     0.20 * xGATotalLocal +
-            //     0.15 * teamStrengthAway +
-            //     0.05 * momentumAway +
-            //     0.05 * consistency;
+            //     0.60 * xGTotalesVisita +
+            //     0.30 * xGATotalLocal +
+            //     0.10 * momentumAway
+            // 0.15 * teamStrengthAway +
+            // 0.05 * consistency;
 
-            const chanceQuality =
+            const chanceQuality = safeDiv(xGTotalLocal, shotsHomePonderado);
 
-                safeDiv(xGTotalLocal,
+            const shotAccuracy = safeDiv(shotsOTHomePonderado, shotsHomePonderado);
 
-                    shotsHomePonderado);
 
-            const shotAccuracy =
+            function calculateCornerIndex(
+                corners: number,
+                shots: number,
+                shotsOT: number,
+                xG: number
+            ): number {
+                const cornerRating = normalize(corners, 2, 8);
+                const shotsRating = normalize(shots, 6, 20);
+                const shotsOTRating = normalize(shotsOT, 2, 8);
+                const xGRating = normalize(xG, 0.5, 2.5);
 
-                safeDiv(
-
-                    shotsOTHomePonderado,
-
-                    shotsHomePonderado
-
+                return (
+                    0.45 * cornerRating +
+                    0.25 * shotsRating +
+                    0.15 * shotsOTRating +
+                    0.15 * xGRating
                 );
+            }
 
+            const cornerIndexHome = calculateCornerIndex(
+                cornersHomePonderado,
+                shotsHomePonderado,
+                shotsOTHomePonderado,
+                homeLambda
+            );
+
+            const cornerIndexAway = calculateCornerIndex(
+                cornersAwayPonderado,
+                shotsAwayPonderado,
+                shotsOTAwayPonderado,
+                awayLambda
+            );
+
+
+            const dominance = homeLambda - awayLambda;
+
+            const expectedHomeCorners =
+                cornersHomePonderado * (0.9 + shotFactorLocal * 0.3);
+
+            const expectedAwayCorners =
+                cornersAwayPonderado * (0.9 + shotFactorAway * 0.3);
             //  const goalConversion =
+            const expectedCorners = expectedHomeCorners + expectedAwayCorners;
 
             //      safeDiv(
             //         golesEsperadosLocal,
@@ -417,7 +456,6 @@ export function unifyMatchStats(
 
             //     );
 
-            // console.log({ homeLambda, goalConversion, finishing })
             const buildTeamMetrics = (
                 xG: number,
                 xGA: number,
@@ -453,7 +491,7 @@ export function unifyMatchStats(
                     eficienciaOfensivaLocal,
                     eficienciaLocal,
                     precisionDropLocal,
-                    cornersHomePonderado,
+                    expectedHomeCorners,
                     shotsHomePonderado,
                     shotsOTHomePonderado
 
@@ -467,7 +505,7 @@ export function unifyMatchStats(
                     eficienciaOfensivaAway,
                     eficienciaVisita,
                     precisionDropAway,
-                    cornersAwayPonderado,
+                    expectedAwayCorners,
                     shotsAwayPonderado,
                     shotsOTAwayPonderado
                 ),
@@ -477,7 +515,7 @@ export function unifyMatchStats(
                     expectedGoals,
                     // expectedGoals: +golesEsperados.toFixed(3),
                     volatility: +volatilidad.toFixed(3),
-                    corners: +cornersPromedio.toFixed(3)
+                    corners: +expectedCorners.toFixed(3)
                 },
             };
 

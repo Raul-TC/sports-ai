@@ -3,7 +3,7 @@
 import { TeamInfo } from "@/types";
 import { ExtendedMatchPrediction } from "@/lib/predictions";
 
-interface ScoreResult {
+export interface ScoreResult {
     market: string;
     selection: string;
     score: number;          // 0-100
@@ -20,6 +20,7 @@ export function scorePicks(
     home: TeamInfo,
     away: TeamInfo,
     pred: ExtendedMatchPrediction,
+    volatility?: number,
     excludedTeams: string[] = []
 ): ScoreResult[] {
     const homeM = home.metrics;
@@ -29,29 +30,29 @@ export function scorePicks(
     const results: ScoreResult[] = [];
 
     // --- 1. Resultado: Local ---
-    results.push(scoreResultado(home, away, pred, 'home'));
+    results.push(scoreResultado(home, away, pred, volatility, 'home'));
 
     // --- 2. Resultado: Empate ---
-    results.push(scoreResultado(home, away, pred, 'draw'));
+    results.push(scoreResultado(home, away, pred, volatility, 'draw'));
 
     // --- 3. Resultado: Visitante ---
-    results.push(scoreResultado(home, away, pred, 'away'));
+    results.push(scoreResultado(home, away, pred, volatility, 'away'));
 
     // --- 4. Total de goles: Over 2.5 ---
-    results.push(scoreOverUnder(home, away, pred, 'over'));
+    results.push(scoreOverUnder(home, away, pred, volatility, 'over'));
 
     // --- 5. Total de goles: Under 2.5 ---
-    results.push(scoreOverUnder(home, away, pred, 'under'));
+    results.push(scoreOverUnder(home, away, pred, volatility, 'under'));
 
     // --- 6. BTTS: Sí ---
-    results.push(scoreBTTS(home, away, pred, 'yes'));
+    results.push(scoreBTTS(home, away, pred, volatility, 'yes'));
 
     // --- 7. BTTS: No ---
-    results.push(scoreBTTS(home, away, pred, 'no'));
+    results.push(scoreBTTS(home, away, pred, volatility, 'no'));
 
     // --- 8. Corners (si hay datos) ---
     if (pred.corners?.lines?.length) {
-        const cornerResult = scoreCorners(home, away, pred);
+        const cornerResult = scoreCorners(home, away, pred, volatility);
         if (cornerResult) results.push(cornerResult);
     }
 
@@ -69,6 +70,7 @@ function scoreResultado(
     home: TeamInfo,
     away: TeamInfo,
     pred: ExtendedMatchPrediction,
+    volatility: number | undefined,
     type: 'home' | 'away' | 'draw',
 ): ScoreResult {
     const homeM = home.metrics!;
@@ -85,8 +87,7 @@ function scoreResultado(
     const awayShot = awayM.shotFactor;
     const homePrecDrop = homeM.precisionDrop;
     const awayPrecDrop = awayM.precisionDrop;
-    const vol = pred.volatility || 0;
-
+    const vol = volatility || 0;
     // Si el equipo está excluido, penaliza su victoria
     // const homeExcluded = excludedTeams.includes(home.teamName);
     // const awayExcluded = excludedTeams.includes(away.teamName);
@@ -181,6 +182,7 @@ function scoreOverUnder(
     home: TeamInfo,
     away: TeamInfo,
     pred: ExtendedMatchPrediction,
+    volatility: number | undefined,
     type: 'over' | 'under'
 ): ScoreResult {
     const homeM = home.metrics!;
@@ -196,7 +198,7 @@ function scoreOverUnder(
     const awayShot = awayM.shotFactor;
     const homePrecDrop = homeM.precisionDrop;
     const awayPrecDrop = awayM.precisionDrop;
-    const vol = pred.volatility || 0;
+    const vol = volatility || 0;
     const totalXG = homeXG + awayXG;
 
     // 1. xG total (20%)
@@ -275,6 +277,7 @@ function scoreBTTS(
     home: TeamInfo,
     away: TeamInfo,
     pred: ExtendedMatchPrediction,
+    volatility: number | undefined,
     type: 'yes' | 'no'
 ): ScoreResult {
     const homeM = home.metrics!;
@@ -290,7 +293,7 @@ function scoreBTTS(
     const awayShot = awayM.shotFactor;
     const homePrecDrop = homeM.precisionDrop;
     const awayPrecDrop = awayM.precisionDrop;
-    const vol = pred.volatility || 0;
+    const vol = volatility || 0;
 
     // 1. xG (30%)
     if (type === 'yes') {
@@ -377,7 +380,8 @@ function scoreBTTS(
 function scoreCorners(
     home: TeamInfo,
     away: TeamInfo,
-    pred: ExtendedMatchPrediction
+    pred: ExtendedMatchPrediction,
+    volatility: number | undefined
 ): ScoreResult | null {
     const homeM = home.metrics!;
     const awayM = away.metrics!;
@@ -422,7 +426,7 @@ function scoreCorners(
     else if (!isOver && diff < -0.5) { score += 5; reasons.push('Línea por encima del esperado'); }
 
     // Volatilidad
-    const vol = pred.volatility || 0;
+    const vol = volatility || 0;
     if (vol > 0.3) { score -= 5; reasons.push(`Alta volatilidad (${vol.toFixed(2)})`); }
 
     score = Math.max(0, Math.min(100, score));
