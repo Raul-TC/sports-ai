@@ -217,6 +217,20 @@ interface BestPickResult {
     warning?: string;      // Leyenda de advertencia si aplica
 }
 
+export interface MarketScore {
+
+    market: string;
+
+    selection: string;
+
+    score: number;
+
+    confidence: number;
+
+    reasons: string[];
+
+}
+
 // utils/picks.ts
 
 interface BestPickResult {
