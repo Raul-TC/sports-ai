@@ -687,7 +687,7 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
                 if (isSameDay(matchDate, today) && (now - startTimeMs >= twoHoursMs)) return true;
                 return false;
             })
-            .sort((a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime());
+            .sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime());
     }, [predictions, activeTab, today]);
 
     // Contadores (actualizados con la misma lógica)
@@ -1120,7 +1120,7 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
                     const bestPick = scoredPicks.length > 0 ? scoredPicks : null;
                     return (
 
-                        <MatchCard key={r.matchUrl} prediction={r} onToggle={() => toggleMatch(r.matchUrl)} results={r.result} isSelected />
+                        <MatchCard key={r.matchUrl} prediction={r} onToggle={toggleMatch} results={r.result} isSelected={isSelected} bestPick={bestPick} plays={plays} altas={altas} ratoneras={ratoneras} medias={medias} />
                         // <div
                         //     key={r.matchUrl}
                         //     className="bg-white dark:bg-neutral-900 rounded-xl shadow-sm border border-gray-100 dark:border-neutral-800 overflow-hidden transition-all duration-200 hover:shadow-md"
