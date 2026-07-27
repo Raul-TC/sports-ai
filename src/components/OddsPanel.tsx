@@ -1,9 +1,11 @@
 import { ExtendedMatchPrediction } from "@/lib/predictions";
+import { MatchResult } from "@/utils/extractMatchResult";
 
 interface OddsPanelProps {
     prediction: ExtendedMatchPrediction;
     homeTeam: string;
     awayTeam: string;
+    results: MatchResult | undefined;
 }
 
 function MarketRow({ label, prob, odd }: { label: string; prob: number; odd: number }) {
@@ -49,8 +51,15 @@ function MarketSection({ title, children }: { title: string; children: React.Rea
     );
 }
 
-export default function OddsPanel({ prediction, homeTeam, awayTeam }: OddsPanelProps) {
+export default function OddsPanel({ prediction, homeTeam, awayTeam, results }: OddsPanelProps) {
     const { moneyline, btts, goalLines, corners, homeExpectedGoals, awayExpectedGoals } = prediction;
+
+    const hasHomeXGResult = results?.homeXG != null;
+    const hasAwayXGResult = results?.awayXG != null;
+    const homeXGExceeded = hasHomeXGResult && results.homeXG > homeExpectedGoals;
+    const awayXGExceeded = hasAwayXGResult && results.awayXG > awayExpectedGoals;
+    const hasCornersResult = results?.homeCorners != null && results?.awayCorners != null;
+    const cornersExceeded = hasCornersResult && results.homeCorners + results.awayCorners > corners.expectedTotal;
 
     const favorite = (() => {
         const { homeWin, draw, awayWin } = moneyline;
@@ -66,24 +75,45 @@ export default function OddsPanel({ prediction, homeTeam, awayTeam }: OddsPanelP
                 <div className="flex flex-wrap items-center gap-2 text-sm">
                     <span className="flex items-center gap-1">
                         <span className="font-medium text-neutral-700 dark:text-neutral-200">{homeTeam}</span>
-                        <span className="text-indigo-600 dark:text-indigo-400 font-bold">{homeExpectedGoals}</span>
-                        <span className="text-neutral-400">xG</span>
+                        <span className={`font-bold ${homeXGExceeded ? 'text-green-500' : 'text-red-500'}`}>{homeExpectedGoals}</span>
+                        <span className="text-neutral-400">Goles Local Esperados</span>
+
+                        {results && <>
+                            <span className={` dark:text-indigo-400 font-bold`}>{results.homeXG}</span>
+                            <span className="text-neutral-400">xG Realizado</span>
+                        </>
+                        }
                     </span>
                     <span className="text-neutral-300">vs</span>
-                    <span className="flex items-center gap-1">
+                    <span className="flex items-center gap-1 justify-center">
                         <span className="font-medium text-neutral-700 dark:text-neutral-200">{awayTeam}</span>
-                        <span className="text-indigo-600 dark:text-indigo-400 font-bold">{awayExpectedGoals}</span>
-                        <span className="text-neutral-400">xG</span>
+                        <span className={`font-bold ${awayXGExceeded ? 'text-green-500' : 'text-red-500'}`}>{awayExpectedGoals}</span>
+                        <span className="text-neutral-400">Goles Visitante Esperados</span>
+
+                        {results && <>
+
+                            <span className={` dark:text-indigo-400 font-bold`}>{results?.awayXG}</span>
+                            <span className="text-neutral-400">xG Realizado</span>
+                        </>
+                        }
                     </span>
                 </div>
                 <div className="flex flex-wrap items-center gap-3 text-xs">
                     <span className="flex items-center gap-1 text-neutral-500">
-                        <span className="font-medium">Córners</span>
-                        <span className="text-indigo-600 font-bold">{corners.expectedTotal}</span>
+                        <span className="font-medium">Córners Esperados</span>
+                        <span className={`${cornersExceeded ? 'text-green-500' : 'text-red-500'} font-bold`}>
+                            {corners.expectedTotal}
+                        </span>
+
+                        {results && <>
+                            <span className="font-medium">Córners Finales: </span>
+                            <span className="text-indigo-600 font-bold">{results.homeCorners + results.awayCorners}</span>
+                        </>
+                        }
                     </span>
                     <span className="flex items-center gap-1 text-neutral-500">
                         <span className="font-medium">Goles Esperados</span>
-                        <span className="text-indigo-600 font-bold">{homeExpectedGoals + awayExpectedGoals}</span>
+                        <span className="text-indigo-600 font-bold">{Number(homeExpectedGoals + awayExpectedGoals).toFixed(2)}</span>
                     </span>
                     {/* <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 text-xs font-medium border border-indigo-100 dark:border-indigo-800">
                         ⭐ {favorite}

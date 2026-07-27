@@ -29,6 +29,7 @@ import Image from "next/image";
 import { scorePicks } from "@/utils/scoringEngine";
 import { enrichPredictions } from "@/utils/enrichPredictions";
 import { isPickCorrect } from "@/utils/pickValidation";
+import { MatchCard } from "./MatchCard";
 // import { useMatchFilters } from "@/hooks/useMatchFilters";
 
 // ============================================================
@@ -602,38 +603,38 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
     const [selectedMatchUrl, setSelectedMatchUrl] = useState<string | null>(null);
     const [activeTab, setActiveTab] = useState<"today" | "future" | "past">("today");
     const [showHelp, setShowHelp] = useState(false);
-    const [excludedTeams, setExcludedTeams] = useState<ExcludedTeam[]>([]);
-    const updateExcludedTeam = (teamName: string, scoredGoals: number, isWin: boolean) => {
-        setExcludedTeams(prev => {
-            const existing = prev.find(t => t.name === teamName);
-            if (existing) {
-                // Si ya existe, actualizamos sus estadísticas
-                const updated = prev.map(t => {
-                    if (t.name === teamName) {
-                        return {
-                            ...t,
-                            losses: isWin ? 0 : t.losses + 1, // si gana, reseteamos las derrotas
-                            goalsScored: t.goalsScored + scoredGoals,
-                            lastUpdate: new Date().toISOString(),
-                        };
-                    }
-                    return t;
-                });
-                return updated;
-            } else {
-                // Si no existe, lo añadimos
-                return [
-                    ...prev,
-                    {
-                        name: teamName,
-                        losses: isWin ? 0 : 1,
-                        goalsScored: scoredGoals,
-                        lastUpdate: new Date().toISOString(),
-                    },
-                ];
-            }
-        });
-    };
+    // const [excludedTeams, setExcludedTeams] = useState<ExcludedTeam[]>([]);
+    // const updateExcludedTeam = (teamName: string, scoredGoals: number, isWin: boolean) => {
+    //     setExcludedTeams(prev => {
+    //         const existing = prev.find(t => t.name === teamName);
+    //         if (existing) {
+    //             // Si ya existe, actualizamos sus estadísticas
+    //             const updated = prev.map(t => {
+    //                 if (t.name === teamName) {
+    //                     return {
+    //                         ...t,
+    //                         losses: isWin ? 0 : t.losses + 1, // si gana, reseteamos las derrotas
+    //                         goalsScored: t.goalsScored + scoredGoals,
+    //                         lastUpdate: new Date().toISOString(),
+    //                     };
+    //                 }
+    //                 return t;
+    //             });
+    //             return updated;
+    //         } else {
+    //             // Si no existe, lo añadimos
+    //             return [
+    //                 ...prev,
+    //                 {
+    //                     name: teamName,
+    //                     losses: isWin ? 0 : 1,
+    //                     goalsScored: scoredGoals,
+    //                     lastUpdate: new Date().toISOString(),
+    //                 },
+    //             ];
+    //         }
+    //     });
+    // };
 
     const enrichedPredictions = useMemo(() => {
         return enrichPredictions(predictions, results);
@@ -643,9 +644,9 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
     // const { activeTab, setActiveTab, filteredPredictions, todayCount, futureCount, pastCount } =
     //     useMatchFilters(enrichedPredictions)
     // Función para eliminar un equipo de la lista negra
-    const removeExcludedTeam = (teamName: string) => {
-        setExcludedTeams(prev => prev.filter(t => t.name !== teamName));
-    };
+    // const removeExcludedTeam = (teamName: string) => {
+    //     setExcludedTeams(prev => prev.filter(t => t.name !== teamName));
+    // };
     // console.log({ DATA: predictions })
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -664,19 +665,6 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
         return d;
     };
 
-    // const filteredPredictions = useMemo(() => {
-    //     return predictions.filter((p) => {
-    //         const matchDate = getDateWithoutTime(p.startTime);
-    //         if (activeTab === "today") return isSameDay(matchDate, today);
-    //         if (activeTab === "future") return matchDate > today;
-    //         return matchDate < today;
-    //     }).sort((a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime());
-    // }, [predictions, activeTab, today]);
-
-    // const todayCount = predictions.filter((p) => isSameDay(getDateWithoutTime(p.startTime), today)).length;
-    // const futureCount = predictions.filter((p) => getDateWithoutTime(p.startTime) > today).length;
-    // const pastCount = predictions.filter((p) => getDateWithoutTime(p.startTime) < today).length;
-    // Dentro del componente MatchesExplorer
     const now = new Date().getTime();
     const twoHoursMs = 2 * 60 * 60 * 1000; // 2 horas en milisegundos
 
@@ -1131,446 +1119,448 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
                     const scoredPicks = scorePicks(r.home, r.away, r.prediction, r.volatility);
                     const bestPick = scoredPicks.length > 0 ? scoredPicks : null;
                     return (
-                        <div
-                            key={r.matchUrl}
-                            className="bg-white dark:bg-neutral-900 rounded-xl shadow-sm border border-gray-100 dark:border-neutral-800 overflow-hidden transition-all duration-200 hover:shadow-md"
-                        >
-                            <div
-                                className="p-4 cursor-pointer"
-                                onClick={() => toggleMatch(r.matchUrl)}
-                            >
-                                {/* Fila 1: Competición y hora */}
-                                <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 mb-2">
-                                    <div className="flex items-center gap-2">
-                                        <Clock className="w-4 h-4" />
-                                        <span>{formatTime(r.startTime)}</span>
-                                        <span className="hidden md:inline">·</span>
-                                        <span className="truncate">{r.competitionName}</span>
-                                    </div>
-                                    {/* <div className="flex items-center gap-1">
-                                        {isSelected ? (
-                                            <ChevronUp className="w-5 h-5" />
-                                        ) : (
-                                            <ChevronDown className="w-5 h-5" />
-                                        )}
-                                    </div> */}
-                                </div>
-                                {/* Notas de equipos excluidos */}
-                                {/* {(excludedTeams.some(t => t.name === r.home.teamName || t.name === r.away.teamName)) && (
-                                    <div className="mt-2 pt-2 border-t border-red-200 dark:border-red-800/30">
-                                        <div className="text-xs font-medium text-red-600 dark:text-red-400 flex items-center gap-1">
-                                            <span>⚠️</span> Alertas de equipos en racha negativa
-                                        </div>
-                                        <div className="flex flex-wrap gap-2 mt-1">
-                                            {excludedTeams
-                                                .filter(t => t.name === r.home.teamName || t.name === r.away.teamName)
-                                                .map((team) => (
-                                                    <div
-                                                        key={team.name}
-                                                        className="text-xs bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md px-2 py-1 flex items-center gap-1"
-                                                    >
-                                                        <span className="font-medium text-red-700 dark:text-red-300">{team.name}</span>
-                                                        <span className="text-red-500 dark:text-red-400">
-                                                            {team.losses > 0 ? `${team.losses} derrotas consecutivas` : 'Sin derrotas recientes'}
-                                                        </span>
-                                                        {team.goalsScored === 0 && (
-                                                            <span className="text-red-400 dark:text-red-500">(no ha anotado)</span>
-                                                        )}
-                                                        <button
-                                                            onClick={(e) => {
-                                                                e.stopPropagation();
-                                                                removeExcludedTeam(team.name);
-                                                            }}
-                                                            className="text-red-400 hover:text-red-600 dark:text-red-500 dark:hover:text-red-300 ml-1"
-                                                            title="Eliminar de la lista negra"
-                                                        >
-                                                            ✕
-                                                        </button>
-                                                    </div>
-                                                ))}
-                                        </div>
-                                    </div>
-                                )} */}
-                                {/* Fila 2: Equipos y favorito + badge de trampa */}
-                                <div className="flex flex-wrap items-center  justify-center gap-2 mb-3 m-auto w-full">
-                                    <div className="flex items-center gap-2 font-medium text-gray-800 dark:text-gray-100">
-                                        <div className="flex items-center gap-2 font-medium text-gray-800 dark:text-gray-100">
-                                            <Image src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.home.id}`} alt={r.home.teamName} width={64} height={64} />
-                                            <span>{r.home.teamName}</span>
-                                            {r.result && (
-                                                <span className="text-sm font-bold text-gray-600 dark:text-gray-400">
-                                                    {r.result.homeScore} - {r.result.awayScore}
-                                                </span>
-                                            )}
-                                        </div>
-                                        <span className="text-gray-400 text-sm">vs</span>
-                                        <div className="flex items-center gap-2 font-medium text-gray-800 dark:text-gray-100">
-                                            <span>{r.away.teamName}</span>
-                                            <Image src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.away.id}`} alt={r.away.teamName} width={64} height={64} />
-                                        </div>
-                                        {r.accuracy && (
-                                            <span className={`ml-2 px-2 py-0.5 rounded-full text-xs font-medium ${r.accuracy.overallAccuracy > 70 ? 'bg-green-100 text-green-700' :
-                                                r.accuracy.overallAccuracy > 40 ? 'bg-yellow-100 text-yellow-700' :
-                                                    'bg-red-100 text-red-700'
-                                                }`}>
-                                                {r.accuracy.overallAccuracy.toFixed(0)}% acierto
-                                            </span>
-                                        )}
-                                    </div>
-                                    {/* <div className="flex flex-wrap items-center gap-2 ml-auto">
-                                        <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-800">
-                                            <Trophy className="w-3 h-3" />
-                                            {favTeam}
-                                        </span>
-                                        {trap.isTrap && (
-                                            <span
-                                                className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border ${trapLevelColor} cursor-help`}
-                                                title={`Nivel de riesgo: ${trap.level.toUpperCase()}\n${trap.details.map(d => `${d.team}: ${d.reason}`).join("\n")}`}
-                                            >
-                                                <ShieldAlert className="w-3 h-3" />
-                                                Trampa {trap.level}
-                                            </span>
-                                        )}
-                                    </div> */}
-                                    {/* Botones para marcar equipo como perdedor */}
-                                    {/* <div className="flex items-center gap-1 ml-2">
-                                        {(() => {
-                                            const homeExcluded = excludedTeams.find(t => t.name === r.home.teamName);
-                                            const awayExcluded = excludedTeams.find(t => t.name === r.away.teamName);
-                                            return (
-                                                <>
-                                                    <button
-                                                        onClick={(e) => {
-                                                            e.stopPropagation();
-                                                            if (homeExcluded) {
-                                                                removeExcludedTeam(r.home.teamName);
-                                                            } else {
-                                                                updateExcludedTeam(r.home.teamName, 0, false);
-                                                            }
-                                                        }}
-                                                        className={`text-xs px-1.5 py-0.5 rounded ${homeExcluded ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400' : 'bg-gray-100 dark:bg-neutral-800 text-gray-500 dark:text-gray-400'} hover:opacity-70 transition-opacity`}
-                                                        title={homeExcluded ? `Eliminar ${r.home.teamName} de la lista negra` : `Marcar ${r.home.teamName} como perdedor`}
-                                                    >
-                                                        {homeExcluded ? '❌' : '🚫'}
-                                                    </button>
-                                                    <button
-                                                        onClick={(e) => {
-                                                            e.stopPropagation();
-                                                            if (awayExcluded) {
-                                                                removeExcludedTeam(r.away.teamName);
-                                                            } else {
-                                                                updateExcludedTeam(r.away.teamName, 0, false);
-                                                            }
-                                                        }}
-                                                        className={`text-xs px-1.5 py-0.5 rounded ${awayExcluded ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400' : 'bg-gray-100 dark:bg-neutral-800 text-gray-500 dark:text-gray-400'} hover:opacity-70 transition-opacity`}
-                                                        title={awayExcluded ? `Eliminar ${r.away.teamName} de la lista negra` : `Marcar ${r.away.teamName} como perdedor`}
-                                                    >
-                                                        {awayExcluded ? '❌' : '🚫'}
-                                                    </button>
-                                                </>
-                                            );
-                                        })()}
-                                    </div> */}
-                                </div>
 
-                                {/* Fila 3: Estadísticas completas */}
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
-                                    <TeamStatsBlock team={r.home} title="Local" />
-                                    <TeamStatsBlock team={r.away} title="Visitante" />
-                                </div>
+                        <MatchCard key={r.matchUrl} prediction={r} onToggle={() => toggleMatch(r.matchUrl)} results={r.result} isSelected />
+                        // <div
+                        //     key={r.matchUrl}
+                        //     className="bg-white dark:bg-neutral-900 rounded-xl shadow-sm border border-gray-100 dark:border-neutral-800 overflow-hidden transition-all duration-200 hover:shadow-md"
+                        // >
+                        //     <div
+                        //         className="p-4 cursor-pointer"
+                        //         onClick={() => toggleMatch(r.matchUrl)}
+                        //     >
+                        //         {/* Fila 1: Competición y hora */}
+                        //         <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 mb-2">
+                        //             <div className="flex items-center gap-2">
+                        //                 <Clock className="w-4 h-4" />
+                        //                 <span>{formatTime(r.startTime)}</span>
+                        //                 <span className="hidden md:inline">·</span>
+                        //                 <span className="truncate">{r.competitionName}</span>
+                        //             </div>
+                        //             {/* <div className="flex items-center gap-1">
+                        //                 {isSelected ? (
+                        //                     <ChevronUp className="w-5 h-5" />
+                        //                 ) : (
+                        //                     <ChevronDown className="w-5 h-5" />
+                        //                 )}
+                        //             </div> */}
+                        //         </div>
+                        //         {/* Notas de equipos excluidos */}
+                        //         {/* {(excludedTeams.some(t => t.name === r.home.teamName || t.name === r.away.teamName)) && (
+                        //             <div className="mt-2 pt-2 border-t border-red-200 dark:border-red-800/30">
+                        //                 <div className="text-xs font-medium text-red-600 dark:text-red-400 flex items-center gap-1">
+                        //                     <span>⚠️</span> Alertas de equipos en racha negativa
+                        //                 </div>
+                        //                 <div className="flex flex-wrap gap-2 mt-1">
+                        //                     {excludedTeams
+                        //                         .filter(t => t.name === r.home.teamName || t.name === r.away.teamName)
+                        //                         .map((team) => (
+                        //                             <div
+                        //                                 key={team.name}
+                        //                                 className="text-xs bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md px-2 py-1 flex items-center gap-1"
+                        //                             >
+                        //                                 <span className="font-medium text-red-700 dark:text-red-300">{team.name}</span>
+                        //                                 <span className="text-red-500 dark:text-red-400">
+                        //                                     {team.losses > 0 ? `${team.losses} derrotas consecutivas` : 'Sin derrotas recientes'}
+                        //                                 </span>
+                        //                                 {team.goalsScored === 0 && (
+                        //                                     <span className="text-red-400 dark:text-red-500">(no ha anotado)</span>
+                        //                                 )}
+                        //                                 <button
+                        //                                     onClick={(e) => {
+                        //                                         e.stopPropagation();
+                        //                                         removeExcludedTeam(team.name);
+                        //                                     }}
+                        //                                     className="text-red-400 hover:text-red-600 dark:text-red-500 dark:hover:text-red-300 ml-1"
+                        //                                     title="Eliminar de la lista negra"
+                        //                                 >
+                        //                                     ✕
+                        //                                 </button>
+                        //                             </div>
+                        //                         ))}
+                        //                 </div>
+                        //             </div>
+                        //         )} */}
+                        //         {/* Fila 2: Equipos y favorito + badge de trampa */}
+                        //         <div className="flex flex-wrap items-center  justify-center gap-2 mb-3 m-auto w-full">
+                        //             <div className="flex items-center gap-2 font-medium text-gray-800 dark:text-gray-100">
+                        //                 <div className="flex items-center gap-2 font-medium text-gray-800 dark:text-gray-100">
+                        //                     <Image src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.home.id}`} alt={r.home.teamName} width={64} height={64} />
+                        //                     <span>{r.home.teamName}</span>
+                        //                     {r.result && (
+                        //                         <span className="text-sm font-bold text-gray-600 dark:text-gray-400">
+                        //                             {r.result.homeScore} - {r.result.awayScore}
+                        //                         </span>
+                        //                     )}
+                        //                 </div>
+                        //                 <span className="text-gray-400 text-sm">vs</span>
+                        //                 <div className="flex items-center gap-2 font-medium text-gray-800 dark:text-gray-100">
+                        //                     <span>{r.away.teamName}</span>
+                        //                     <Image src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.away.id}`} alt={r.away.teamName} width={64} height={64} />
+                        //                 </div>
+                        //                 {r.accuracy && (
+                        //                     <span className={`ml-2 px-2 py-0.5 rounded-full text-xs font-medium ${r.accuracy.overallAccuracy > 70 ? 'bg-green-100 text-green-700' :
+                        //                         r.accuracy.overallAccuracy > 40 ? 'bg-yellow-100 text-yellow-700' :
+                        //                             'bg-red-100 text-red-700'
+                        //                         }`}>
+                        //                         {r.accuracy.overallAccuracy.toFixed(0)}% acierto
+                        //                     </span>
+                        //                 )}
+                        //             </div>
+                        //             {/* <div className="flex flex-wrap items-center gap-2 ml-auto">
+                        //                 <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-800">
+                        //                     <Trophy className="w-3 h-3" />
+                        //                     {favTeam}
+                        //                 </span>
+                        //                 {trap.isTrap && (
+                        //                     <span
+                        //                         className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border ${trapLevelColor} cursor-help`}
+                        //                         title={`Nivel de riesgo: ${trap.level.toUpperCase()}\n${trap.details.map(d => `${d.team}: ${d.reason}`).join("\n")}`}
+                        //                     >
+                        //                         <ShieldAlert className="w-3 h-3" />
+                        //                         Trampa {trap.level}
+                        //                     </span>
+                        //                 )}
+                        //             </div> */}
+                        //             {/* Botones para marcar equipo como perdedor */}
+                        //             {/* <div className="flex items-center gap-1 ml-2">
+                        //                 {(() => {
+                        //                     const homeExcluded = excludedTeams.find(t => t.name === r.home.teamName);
+                        //                     const awayExcluded = excludedTeams.find(t => t.name === r.away.teamName);
+                        //                     return (
+                        //                         <>
+                        //                             <button
+                        //                                 onClick={(e) => {
+                        //                                     e.stopPropagation();
+                        //                                     if (homeExcluded) {
+                        //                                         removeExcludedTeam(r.home.teamName);
+                        //                                     } else {
+                        //                                         updateExcludedTeam(r.home.teamName, 0, false);
+                        //                                     }
+                        //                                 }}
+                        //                                 className={`text-xs px-1.5 py-0.5 rounded ${homeExcluded ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400' : 'bg-gray-100 dark:bg-neutral-800 text-gray-500 dark:text-gray-400'} hover:opacity-70 transition-opacity`}
+                        //                                 title={homeExcluded ? `Eliminar ${r.home.teamName} de la lista negra` : `Marcar ${r.home.teamName} como perdedor`}
+                        //                             >
+                        //                                 {homeExcluded ? '❌' : '🚫'}
+                        //                             </button>
+                        //                             <button
+                        //                                 onClick={(e) => {
+                        //                                     e.stopPropagation();
+                        //                                     if (awayExcluded) {
+                        //                                         removeExcludedTeam(r.away.teamName);
+                        //                                     } else {
+                        //                                         updateExcludedTeam(r.away.teamName, 0, false);
+                        //                                     }
+                        //                                 }}
+                        //                                 className={`text-xs px-1.5 py-0.5 rounded ${awayExcluded ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400' : 'bg-gray-100 dark:bg-neutral-800 text-gray-500 dark:text-gray-400'} hover:opacity-70 transition-opacity`}
+                        //                                 title={awayExcluded ? `Eliminar ${r.away.teamName} de la lista negra` : `Marcar ${r.away.teamName} como perdedor`}
+                        //                             >
+                        //                                 {awayExcluded ? '❌' : '🚫'}
+                        //                             </button>
+                        //                         </>
+                        //                     );
+                        //                 })()}
+                        //             </div> */}
+                        //         </div>
 
-                                {/* Fila 4: Marcadores exactos */}
-                                <div className="mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
-                                    <div className="flex items-center gap-2 mb-1">
-                                        <span className="text-xs font-medium text-gray-500 dark:text-gray-400 flex items-center gap-1">
-                                            <Circle className="w-3 h-3" />
-                                            Marcadores más probables
-                                            <span title="Probabilidad calculada con modelo de Poisson">
-                                                <Info className="w-3 h-3 text-gray-400 opacity-50 cursor-help" />
-                                            </span>
-                                        </span>
-                                    </div>
-                                    <div className="flex flex-wrap gap-1">
-                                        {topScores.map((score, idx) => (
-                                            <StatBadge
-                                                key={idx}
-                                                label={`${(score.prob * 100).toFixed(1)}%`}
-                                                value={`${score.home}-${score.away}`}
-                                                icon={Goal}
-                                                secondary
-                                                description={`Probabilidad de que el marcador sea ${score.home}-${score.away}`}
-                                                className="bg-indigo-50/70 dark:bg-indigo-900/20 border-indigo-100 dark:border-indigo-800"
-                                            />
-                                        ))}
-                                        {topScores.length === 0 && (
-                                            <span className="text-xs text-gray-400">No hay datos suficientes</span>
-                                        )}
-                                    </div>
-                                </div>
+                        //         {/* Fila 3: Estadísticas completas */}
+                        //         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
+                        //             <TeamStatsBlock team={r.home} title="Local" />
+                        //             <TeamStatsBlock team={r.away} title="Visitante" />
+                        //         </div>
 
-                                {/* Fila 5: Over/Under y BTTS */}
-                                {/* <div className="flex flex-wrap items-center gap-2 mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
-                                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-gray-50 dark:bg-neutral-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-neutral-700">
-                                        {r.prediction.goalLines[1].overProb > 60 ? "Over 2.5" : "Under 2.5"}
-                                    </span>
-                                    {r.prediction.btts.yes !== undefined && (
-                                        <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-gray-50 dark:bg-neutral-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-neutral-700">
-                                            {r.prediction.btts.yes.prob > 60 ? "BTTS Sí" : "BTTS No"}
-                                        </span>
-                                    )}
-                                </div> */}
+                        //         {/* Fila 4: Marcadores exactos */}
+                        //         <div className="mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
+                        //             <div className="flex items-center gap-2 mb-1">
+                        //                 <span className="text-xs font-medium text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                        //                     <Circle className="w-3 h-3" />
+                        //                     Marcadores más probables
+                        //                     <span title="Probabilidad calculada con modelo de Poisson">
+                        //                         <Info className="w-3 h-3 text-gray-400 opacity-50 cursor-help" />
+                        //                     </span>
+                        //                 </span>
+                        //             </div>
+                        //             <div className="flex flex-wrap gap-1">
+                        //                 {topScores.map((score, idx) => (
+                        //                     <StatBadge
+                        //                         key={idx}
+                        //                         label={`${(score.prob * 100).toFixed(1)}%`}
+                        //                         value={`${score.home}-${score.away}`}
+                        //                         icon={Goal}
+                        //                         secondary
+                        //                         description={`Probabilidad de que el marcador sea ${score.home}-${score.away}`}
+                        //                         className="bg-indigo-50/70 dark:bg-indigo-900/20 border-indigo-100 dark:border-indigo-800"
+                        //                     />
+                        //                 ))}
+                        //                 {topScores.length === 0 && (
+                        //                     <span className="text-xs text-gray-400">No hay datos suficientes</span>
+                        //                 )}
+                        //             </div>
+                        //         </div>
 
-                                {/* NUEVA SECCIÓN: Riesgo y Pick Recomendado */}
-                                {/* NUEVA SECCIÓN: Riesgo y Pick Recomendado (siempre visible) */}
-                                {/* Riesgo y Pick Recomendado + Jugadas */}
-                                <div className="mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800 space-y-2">
-                                    <div className="flex items-start gap-2">
-                                        <AlertCircle className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" />
-                                        <div className="flex-1 space-y-1">
-                                            <div className="flex flex-wrap items-center gap-2">
-                                                <span className="text-xs font-semibold text-gray-700 dark:text-gray-300">
-                                                    Riesgo y Pick Recomendado
-                                                </span>
-                                                {trap.level === "high" && (
-                                                    <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 border border-red-300 dark:border-red-700">
-                                                        ALTO
-                                                    </span>
-                                                )}
-                                                {trap.level === "medium" && (
-                                                    <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 border border-amber-300 dark:border-amber-700">
-                                                        MEDIO
-                                                    </span>
-                                                )}
-                                                {trap.level === "low" && (
-                                                    <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-yellow-50 dark:bg-yellow-900/20 text-yellow-600 dark:text-yellow-400 border border-yellow-300 dark:border-yellow-700">
-                                                        BAJO
-                                                    </span>
-                                                )}
-                                                {trap.level === "none" && (
-                                                    <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 border border-green-300 dark:border-green-700">
-                                                        BAJO
-                                                    </span>
-                                                )}
-                                            </div>
+                        //         {/* Fila 5: Over/Under y BTTS */}
+                        //         {/* <div className="flex flex-wrap items-center gap-2 mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
+                        //             <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-gray-50 dark:bg-neutral-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-neutral-700">
+                        //                 {r.prediction.goalLines[1].overProb > 60 ? "Over 2.5" : "Under 2.5"}
+                        //             </span>
+                        //             {r.prediction.btts.yes !== undefined && (
+                        //                 <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-gray-50 dark:bg-neutral-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-neutral-700">
+                        //                     {r.prediction.btts.yes.prob > 60 ? "BTTS Sí" : "BTTS No"}
+                        //                 </span>
+                        //             )}
+                        //         </div> */}
 
-                                            {/* Razones solo si hay trampa */}
-                                            {trap.isTrap && trap.details.length > 0 && (
-                                                <div className="text-xs text-gray-600 dark:text-gray-400">
-                                                    <span className="font-medium">⚠️ </span>
-                                                    {trap.details.map(d => `${d.team}: ${d.reason}`).join(" · ")}
-                                                </div>
-                                            )}
+                        //         {/* NUEVA SECCIÓN: Riesgo y Pick Recomendado */}
+                        //         {/* NUEVA SECCIÓN: Riesgo y Pick Recomendado (siempre visible) */}
+                        //         {/* Riesgo y Pick Recomendado + Jugadas */}
+                        //         <div className="mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800 space-y-2">
+                        //             <div className="flex items-start gap-2">
+                        //                 <AlertCircle className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" />
+                        //                 <div className="flex-1 space-y-1">
+                        //                     <div className="flex flex-wrap items-center gap-2">
+                        //                         <span className="text-xs font-semibold text-gray-700 dark:text-gray-300">
+                        //                             Riesgo y Pick Recomendado
+                        //                         </span>
+                        //                         {trap.level === "high" && (
+                        //                             <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 border border-red-300 dark:border-red-700">
+                        //                                 ALTO
+                        //                             </span>
+                        //                         )}
+                        //                         {trap.level === "medium" && (
+                        //                             <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 border border-amber-300 dark:border-amber-700">
+                        //                                 MEDIO
+                        //                             </span>
+                        //                         )}
+                        //                         {trap.level === "low" && (
+                        //                             <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-yellow-50 dark:bg-yellow-900/20 text-yellow-600 dark:text-yellow-400 border border-yellow-300 dark:border-yellow-700">
+                        //                                 BAJO
+                        //                             </span>
+                        //                         )}
+                        //                         {trap.level === "none" && (
+                        //                             <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 border border-green-300 dark:border-green-700">
+                        //                                 BAJO
+                        //                             </span>
+                        //                         )}
+                        //                     </div>
 
-                                            {warnings.length > 0 && (
-                                                <div className="mt-1 space-y-0.5">
-                                                    {warnings.map((warning, idx) => (
-                                                        <div key={idx} className="text-xs text-amber-600 dark:text-amber-400 flex items-start gap-1">
-                                                            <span>{warning}</span>
-                                                        </div>
-                                                    ))}
-                                                    {excludedMarkets.length > 0 && (
-                                                        <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-                                                            🚫 Mercados excluidos: {excludedMarkets.join(", ")}
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            )}
-                                            {/* Pick recomendado (el de mayor EV) */}
-                                            {/* {bestPick && (
-                                                bestPick.map((pick, idx) => (
-                                                    <div key={idx} className="flex flex-wrap items-center gap-2 text-xs bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800 rounded-lg px-3 py-1.5">
-                                                        <Sparkles className="w-3 h-3 text-indigo-500" />
-                                                        <span className="font-medium text-indigo-700 dark:text-indigo-300">{pick.market}</span>
-                                                        <span className="font-bold text-gray-800 dark:text-gray-100">{pick.selection}</span>
-                                                        <span className="text-gray-500 dark:text-gray-400">
-                                                            {pick.confidence === 'alta' && '🔵 Alta confianza'}
-                                                            {pick.confidence === 'media' && '🟡 Media confianza'}
-                                                            {pick.confidence === 'baja' && '🔴 Baja confianza'}
-                                                        </span>
-                                                        <span className="text-gray-400 text-[10px]">{pick.reason}</span>
+                        //                     {/* Razones solo si hay trampa */}
+                        //                     {trap.isTrap && trap.details.length > 0 && (
+                        //                         <div className="text-xs text-gray-600 dark:text-gray-400">
+                        //                             <span className="font-medium">⚠️ </span>
+                        //                             {trap.details.map(d => `${d.team}: ${d.reason}`).join(" · ")}
+                        //                         </div>
+                        //                     )}
 
-                                                        {pick.warning && (
-                                                            <span className="text-[10px] bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 px-1.5 py-0.5 rounded">
-                                                                {pick.warning}
-                                                            </span>
-                                                        )}
-                                                    </div>))
-                                            )} */}
-                                            {/* Mejores picks (scoredPicks) */}
-                                            {bestPick && (
-                                                <div className="space-y-1 mt-1">
-                                                    {scoredPicks.slice(0, 5).map((pick, idx) => {
-                                                        const isCorrect = r.result && isPickCorrect(pick, r);
-                                                        return (
-                                                            <div
-                                                                key={idx}
-                                                                className="flex flex-wrap items-center gap-2 text-xs bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800 rounded-lg px-3 py-1.5"
-                                                            >
-                                                                <Sparkles className="w-3 h-3 text-indigo-500" />
-                                                                <span className="font-medium text-indigo-700 dark:text-indigo-300">{pick.market}</span>
-                                                                <span className="font-bold text-gray-800 dark:text-gray-100">{pick.selection}</span>
-                                                                <span className="text-gray-500 dark:text-gray-400">
-                                                                    {pick.confidence === 'alta' && '🔵 Alta confianza'}
-                                                                    {pick.confidence === 'media' && '🟡 Media confianza'}
-                                                                    {pick.confidence === 'baja' && '🔴 Baja confianza'}
-                                                                </span>
-                                                                <span className="text-gray-400 text-[10px]">{pick.reason}</span>
+                        //                     {warnings.length > 0 && (
+                        //                         <div className="mt-1 space-y-0.5">
+                        //                             {warnings.map((warning, idx) => (
+                        //                                 <div key={idx} className="text-xs text-amber-600 dark:text-amber-400 flex items-start gap-1">
+                        //                                     <span>{warning}</span>
+                        //                                 </div>
+                        //                             ))}
+                        //                             {excludedMarkets.length > 0 && (
+                        //                                 <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                        //                                     🚫 Mercados excluidos: {excludedMarkets.join(", ")}
+                        //                                 </div>
+                        //                             )}
+                        //                         </div>
+                        //                     )}
+                        //                     {/* Pick recomendado (el de mayor EV) */}
+                        //                     {/* {bestPick && (
+                        //                         bestPick.map((pick, idx) => (
+                        //                             <div key={idx} className="flex flex-wrap items-center gap-2 text-xs bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800 rounded-lg px-3 py-1.5">
+                        //                                 <Sparkles className="w-3 h-3 text-indigo-500" />
+                        //                                 <span className="font-medium text-indigo-700 dark:text-indigo-300">{pick.market}</span>
+                        //                                 <span className="font-bold text-gray-800 dark:text-gray-100">{pick.selection}</span>
+                        //                                 <span className="text-gray-500 dark:text-gray-400">
+                        //                                     {pick.confidence === 'alta' && '🔵 Alta confianza'}
+                        //                                     {pick.confidence === 'media' && '🟡 Media confianza'}
+                        //                                     {pick.confidence === 'baja' && '🔴 Baja confianza'}
+                        //                                 </span>
+                        //                                 <span className="text-gray-400 text-[10px]">{pick.reason}</span>
 
-                                                                {/* Badge de acierto/fallo (solo si hay resultado) */}
-                                                                {r.result && (
-                                                                    <span className={`ml-1 px-1.5 py-0.5 rounded text-[10px] font-medium ${isCorrect
-                                                                        ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300'
-                                                                        : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300'
-                                                                        }`}>
-                                                                        {isCorrect ? '✅ Acertado' : '❌ Fallado'}
-                                                                    </span>
-                                                                )}
+                        //                                 {pick.warning && (
+                        //                                     <span className="text-[10px] bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 px-1.5 py-0.5 rounded">
+                        //                                         {pick.warning}
+                        //                                     </span>
+                        //                                 )}
+                        //                             </div>))
+                        //                     )} */}
+                        //                     {/* Mejores picks (scoredPicks) */}
+                        //                     {bestPick && (
+                        //                         <div className="space-y-1 mt-1">
+                        //                             {scoredPicks.slice(0, 5).map((pick, idx) => {
+                        //                                 const isCorrect = r.result && isPickCorrect(pick, r);
+                        //                                 return (
+                        //                                     <div
+                        //                                         key={idx}
+                        //                                         className="flex flex-wrap items-center gap-2 text-xs bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800 rounded-lg px-3 py-1.5"
+                        //                                     >
+                        //                                         <Sparkles className="w-3 h-3 text-indigo-500" />
+                        //                                         <span className="font-medium text-indigo-700 dark:text-indigo-300">{pick.market}</span>
+                        //                                         <span className="font-bold text-gray-800 dark:text-gray-100">{pick.selection}</span>
+                        //                                         <span className="text-gray-500 dark:text-gray-400">
+                        //                                             {pick.confidence === 'alta' && '🔵 Alta confianza'}
+                        //                                             {pick.confidence === 'media' && '🟡 Media confianza'}
+                        //                                             {pick.confidence === 'baja' && '🔴 Baja confianza'}
+                        //                                         </span>
+                        //                                         <span className="text-gray-400 text-[10px]">{pick.reason}</span>
 
-                                                                {pick.warning && (
-                                                                    <span className="text-[10px] bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 px-1.5 py-0.5 rounded">
-                                                                        {pick.warning}
-                                                                    </span>
-                                                                )}
-                                                            </div>
-                                                        );
-                                                    })}
-                                                </div>
-                                            )}
-                                            {/* Cuotas ratoneras */}
-                                            {ratoneras.length > 0 && (
-                                                <div className="mt-1">
-                                                    <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">🔹 Ratoneras (≤1.30)</span>
-                                                    <div className="flex flex-wrap gap-1 mt-0.5">
-                                                        {ratoneras.map((pick, idx) => (
-                                                            <div
-                                                                key={idx}
-                                                                className="flex items-center gap-1 text-xs bg-gray-100 dark:bg-neutral-800 border border-gray-300 dark:border-neutral-600 rounded-full px-2 py-0.5"
-                                                            >
-                                                                <span className="text-gray-600 dark:text-gray-300">{pick.market}</span>
-                                                                <span className="font-bold text-gray-800 dark:text-gray-100">{pick.selection}</span>
-                                                                <span className="text-gray-400">Cuota {pick.odd}</span>
-                                                                {/* <span className="text-green-600 font-medium">EV {(pick.ev * 100).toFixed(1)}%</span> */}
-                                                            </div>
-                                                        ))}
-                                                        {/* {ratoneras.length > 5 && (
-                                                            <span className="text-xs text-gray-400">+{ratoneras.length - 5} más</span>
-                                                        )} */}
-                                                    </div>
-                                                </div>
-                                            )}
+                        //                                         {/* Badge de acierto/fallo (solo si hay resultado) */}
+                        //                                         {r.result && (
+                        //                                             <span className={`ml-1 px-1.5 py-0.5 rounded text-[10px] font-medium ${isCorrect
+                        //                                                 ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300'
+                        //                                                 : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300'
+                        //                                                 }`}>
+                        //                                                 {isCorrect ? '✅ Acertado' : '❌ Fallado'}
+                        //                                             </span>
+                        //                                         )}
 
-                                            {/* Cuotas medias */}
-                                            {medias.length > 0 && (
-                                                <div className="mt-1">
-                                                    <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">🔸 Medias (1.30 - 1.8)</span>
-                                                    <div className="flex flex-wrap gap-1 mt-0.5">
-                                                        {medias.map((pick, idx) => (
-                                                            <div
-                                                                key={idx}
-                                                                className="flex items-center gap-1 text-xs bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-full px-2 py-0.5"
-                                                            >
-                                                                <span className="text-gray-600 dark:text-gray-300">{pick.market}</span>
-                                                                <span className="font-bold text-gray-800 dark:text-gray-100">{pick.selection}</span>
-                                                                <span className="text-gray-400">Cuota {pick.odd}</span>
-                                                                {/* <span className="text-green-600 font-medium">EV {(pick.ev * 100).toFixed(1)}%</span> */}
-                                                            </div>
-                                                        ))}
-                                                        {/* {medias.length > 5 && (
-                                                            <span className="text-xs text-gray-400">+{medias.length - 5} más</span>
-                                                        )} */}
-                                                    </div>
-                                                </div>
-                                            )}
+                        //                                         {pick.warning && (
+                        //                                             <span className="text-[10px] bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 px-1.5 py-0.5 rounded">
+                        //                                                 {pick.warning}
+                        //                                             </span>
+                        //                                         )}
+                        //                                     </div>
+                        //                                 );
+                        //                             })}
+                        //                         </div>
+                        //                     )}
+                        //                     {/* Cuotas ratoneras */}
+                        //                     {ratoneras.length > 0 && (
+                        //                         <div className="mt-1">
+                        //                             <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">🔹 Ratoneras (≤1.30)</span>
+                        //                             <div className="flex flex-wrap gap-1 mt-0.5">
+                        //                                 {ratoneras.map((pick, idx) => (
+                        //                                     <div
+                        //                                         key={idx}
+                        //                                         className="flex items-center gap-1 text-xs bg-gray-100 dark:bg-neutral-800 border border-gray-300 dark:border-neutral-600 rounded-full px-2 py-0.5"
+                        //                                     >
+                        //                                         <span className="text-gray-600 dark:text-gray-300">{pick.market}</span>
+                        //                                         <span className="font-bold text-gray-800 dark:text-gray-100">{pick.selection}</span>
+                        //                                         <span className="text-gray-400">Cuota {pick.odd}</span>
+                        //                                         {/* <span className="text-green-600 font-medium">EV {(pick.ev * 100).toFixed(1)}%</span> */}
+                        //                                     </div>
+                        //                                 ))}
+                        //                                 {/* {ratoneras.length > 5 && (
+                        //                                     <span className="text-xs text-gray-400">+{ratoneras.length - 5} más</span>
+                        //                                 )} */}
+                        //                             </div>
+                        //                         </div>
+                        //                     )}
 
-                                            {altas.length > 0 && (
-                                                <div className="mt-1">
-                                                    <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">🔶 Altas (1.8 - 2.5)</span>
-                                                    <div className="flex flex-wrap gap-1 mt-0.5">
-                                                        {altas.map((pick, idx) => (
-                                                            <div
-                                                                key={idx}
-                                                                className="flex items-center gap-1 text-xs bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-full px-2 py-0.5"
-                                                            >
-                                                                <span className="text-gray-600 dark:text-gray-300">{pick.market}</span>
-                                                                <span className="font-bold text-gray-800 dark:text-gray-100">{pick.selection}</span>
-                                                                <span className="text-gray-400">Cuota {pick.odd}</span>
-                                                                {/* <span className="text-green-600 font-medium">EV {(pick.ev * 100).toFixed(1)}%</span> */}
-                                                            </div>
-                                                        ))}
-                                                        {/* {altas.length > 5 && (
-                                                            <span className="text-xs text-gray-400">+{altas.length - 5} más</span>
-                                                        )} */}
-                                                    </div>
-                                                </div>
-                                            )}
+                        //                     {/* Cuotas medias */}
+                        //                     {medias.length > 0 && (
+                        //                         <div className="mt-1">
+                        //                             <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">🔸 Medias (1.30 - 1.8)</span>
+                        //                             <div className="flex flex-wrap gap-1 mt-0.5">
+                        //                                 {medias.map((pick, idx) => (
+                        //                                     <div
+                        //                                         key={idx}
+                        //                                         className="flex items-center gap-1 text-xs bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-full px-2 py-0.5"
+                        //                                     >
+                        //                                         <span className="text-gray-600 dark:text-gray-300">{pick.market}</span>
+                        //                                         <span className="font-bold text-gray-800 dark:text-gray-100">{pick.selection}</span>
+                        //                                         <span className="text-gray-400">Cuota {pick.odd}</span>
+                        //                                         {/* <span className="text-green-600 font-medium">EV {(pick.ev * 100).toFixed(1)}%</span> */}
+                        //                                     </div>
+                        //                                 ))}
+                        //                                 {/* {medias.length > 5 && (
+                        //                                     <span className="text-xs text-gray-400">+{medias.length - 5} más</span>
+                        //                                 )} */}
+                        //                             </div>
+                        //                         </div>
+                        //                     )}
 
-                                            {/* Jugadas (si no hay ratoneras/medias y hay plays) */}
-                                            {ratoneras.length === 0 && medias.length === 0 && plays.length > 0 && altas.length === 0 && (
-                                                <div className="mt-1">
-                                                    <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">Jugadas alternativas</span>
-                                                    <div className="flex flex-wrap gap-1 mt-0.5">
-                                                        {plays.map((play, idx) => (
-                                                            <div
-                                                                key={idx}
-                                                                className="flex items-center gap-1 text-xs bg-gray-50 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-full px-2 py-0.5"
-                                                            >
-                                                                <span className="text-gray-600 dark:text-gray-300">{play.market}</span>
-                                                                <span className="font-bold text-gray-800 dark:text-gray-100">{play.selection}</span>
-                                                                <span className="text-gray-400">Cuota {play.odd}</span>
-                                                                <span className="text-green-600 font-medium">EV {(play.ev * 100).toFixed(1)}%</span>
-                                                            </div>
-                                                        ))}
-                                                    </div>
-                                                </div>
-                                            )}
+                        //                     {altas.length > 0 && (
+                        //                         <div className="mt-1">
+                        //                             <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">🔶 Altas (1.8 - 2.5)</span>
+                        //                             <div className="flex flex-wrap gap-1 mt-0.5">
+                        //                                 {altas.map((pick, idx) => (
+                        //                                     <div
+                        //                                         key={idx}
+                        //                                         className="flex items-center gap-1 text-xs bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-full px-2 py-0.5"
+                        //                                     >
+                        //                                         <span className="text-gray-600 dark:text-gray-300">{pick.market}</span>
+                        //                                         <span className="font-bold text-gray-800 dark:text-gray-100">{pick.selection}</span>
+                        //                                         <span className="text-gray-400">Cuota {pick.odd}</span>
+                        //                                         {/* <span className="text-green-600 font-medium">EV {(pick.ev * 100).toFixed(1)}%</span> */}
+                        //                                     </div>
+                        //                                 ))}
+                        //                                 {/* {altas.length > 5 && (
+                        //                                     <span className="text-xs text-gray-400">+{altas.length - 5} más</span>
+                        //                                 )} */}
+                        //                             </div>
+                        //                         </div>
+                        //                     )}
 
-                                            {/*  {!bestPick && ratoneras.length === 0 && medias.length === 0 && plays.length === 0 && (
-                                                <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                                                    No hay picks con cuota razonable y valor positivo.
-                                                </div>
-                                            )}*/}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        //                     {/* Jugadas (si no hay ratoneras/medias y hay plays) */}
+                        //                     {ratoneras.length === 0 && medias.length === 0 && plays.length > 0 && altas.length === 0 && (
+                        //                         <div className="mt-1">
+                        //                             <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">Jugadas alternativas</span>
+                        //                             <div className="flex flex-wrap gap-1 mt-0.5">
+                        //                                 {plays.map((play, idx) => (
+                        //                                     <div
+                        //                                         key={idx}
+                        //                                         className="flex items-center gap-1 text-xs bg-gray-50 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-full px-2 py-0.5"
+                        //                                     >
+                        //                                         <span className="text-gray-600 dark:text-gray-300">{play.market}</span>
+                        //                                         <span className="font-bold text-gray-800 dark:text-gray-100">{play.selection}</span>
+                        //                                         <span className="text-gray-400">Cuota {play.odd}</span>
+                        //                                         <span className="text-green-600 font-medium">EV {(play.ev * 100).toFixed(1)}%</span>
+                        //                                     </div>
+                        //                                 ))}
+                        //                             </div>
+                        //                         </div>
+                        //                     )}
 
-                            {/* Panel de odds expandible */}
-                            <div
-                                className={`overflow-hidden transition-all duration-300 ease-in-out ${isSelected ? "lg:max-h-200  opacity-100" : "max-h-0 opacity-0"
-                                    }`}
-                            >
-                                <div className="border-t border-gray-100 dark:border-neutral-800 p-4 bg-gray-50/50 dark:bg-neutral-800/50">
-                                    <OddsPanel
-                                        prediction={r.prediction}
-                                        homeTeam={r.home.teamName}
-                                        awayTeam={r.away.teamName}
-                                        results={r.result}
-                                    />
-                                    {/* Si el partido tiene resultado y precisión */}
-                                    {/* {r.result && r.accuracy && (
-                                        <div className="mt-2 pt-2 border-t border-gray-200 dark:border-neutral-700">
-                                            <div className="flex flex-wrap items-center gap-2 text-xs">
-                                                <span className="font-medium text-gray-600 dark:text-gray-400">Resultado real:</span>
-                                                <span className="font-bold">
-                                                    {r.result.homeScore} - {r.result.awayScore}
-                                                </span>
-                                                <span className={`px-2 py-0.5 rounded-full text-white ${r.accuracy.overallAccuracy > 70 ? 'bg-green-500' :
-                                                    r.accuracy.overallAccuracy > 40 ? 'bg-yellow-500' : 'bg-red-500'
-                                                    }`}>
-                                                    {r.accuracy.overallAccuracy.toFixed(0)}% acierto
-                                                </span>
-                                            </div>
-                                            <div className="flex flex-wrap gap-2 mt-1 text-[10px] text-gray-500 dark:text-gray-400">
-                                                <span>Ganador: {r.accuracy.winnerCorrect ? '✅' : '❌'}</span>
-                                                <span>Over/Under: {r.accuracy.overUnderCorrect ? '✅' : '❌'}</span>
-                                                <span>BTTS: {r.accuracy.bttsCorrect ? '✅' : '❌'}</span>
-                                                <span>Error córners: ±{r.accuracy.cornersError.toFixed(1)}</span>
-                                            </div>
-                                        </div>
-                                    )} */}
-                                </div>
-                            </div>
-                        </div>
+                        //                     {/*  {!bestPick && ratoneras.length === 0 && medias.length === 0 && plays.length === 0 && (
+                        //                         <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                        //                             No hay picks con cuota razonable y valor positivo.
+                        //                         </div>
+                        //                     )}*/}
+                        //                 </div>
+                        //             </div>
+                        //         </div>
+                        //     </div>
+
+                        //     {/* Panel de odds expandible */}
+                        //     <div
+                        //         className={`overflow-hidden transition-all duration-300 ease-in-out ${isSelected ? "lg:max-h-200  opacity-100" : "max-h-0 opacity-0"
+                        //             }`}
+                        //     >
+                        //         <div className="border-t border-gray-100 dark:border-neutral-800 p-4 bg-gray-50/50 dark:bg-neutral-800/50">
+                        //             <OddsPanel
+                        //                 prediction={r.prediction}
+                        //                 homeTeam={r.home.teamName}
+                        //                 awayTeam={r.away.teamName}
+                        //                 results={r.result}
+                        //             />
+                        //             {/* Si el partido tiene resultado y precisión */}
+                        //             {/* {r.result && r.accuracy && (
+                        //                 <div className="mt-2 pt-2 border-t border-gray-200 dark:border-neutral-700">
+                        //                     <div className="flex flex-wrap items-center gap-2 text-xs">
+                        //                         <span className="font-medium text-gray-600 dark:text-gray-400">Resultado real:</span>
+                        //                         <span className="font-bold">
+                        //                             {r.result.homeScore} - {r.result.awayScore}
+                        //                         </span>
+                        //                         <span className={`px-2 py-0.5 rounded-full text-white ${r.accuracy.overallAccuracy > 70 ? 'bg-green-500' :
+                        //                             r.accuracy.overallAccuracy > 40 ? 'bg-yellow-500' : 'bg-red-500'
+                        //                             }`}>
+                        //                             {r.accuracy.overallAccuracy.toFixed(0)}% acierto
+                        //                         </span>
+                        //                     </div>
+                        //                     <div className="flex flex-wrap gap-2 mt-1 text-[10px] text-gray-500 dark:text-gray-400">
+                        //                         <span>Ganador: {r.accuracy.winnerCorrect ? '✅' : '❌'}</span>
+                        //                         <span>Over/Under: {r.accuracy.overUnderCorrect ? '✅' : '❌'}</span>
+                        //                         <span>BTTS: {r.accuracy.bttsCorrect ? '✅' : '❌'}</span>
+                        //                         <span>Error córners: ±{r.accuracy.cornersError.toFixed(1)}</span>
+                        //                     </div>
+                        //                 </div>
+                        //             )} */}
+                        //         </div>
+                        //     </div>
+                        // </div>
                     );
                 })
             )}
