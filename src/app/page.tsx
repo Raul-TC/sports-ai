@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 export default async function HomePage() {
   // const rawMatches = await loadMatchesFromDisk();
   // const matches = computeAllMatches(data)
-  const matches = unifyMatchStats(data)
+  const matches = unifyMatchStats(data as any)
 
   // const matches = parseExternalStats(rawMatches);
 
@@ -26,10 +26,10 @@ export default async function HomePage() {
     <main className="max-w-5xl mx-auto px-6 py-12">
       <header className="flex items-center justify-between mb-10">
         <div className="w-full items-center justify-center">
-          <h1 className="text-xl font-semibold tracking-tight text-center">Sports AI</h1>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5 text-center">
+          {/* <h1 className="text-xl font-semibold tracking-tight text-center">Predicciones Futbol</h1> */}
+          {/* <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5 text-center">
             Predicciones con modelo de Poisson
-          </p>
+          </p> */}
         </div>
         {/* <ThemeToggle /> */}
       </header>
