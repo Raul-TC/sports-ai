@@ -276,34 +276,7 @@ export function unifyMatchStats(
             const defensiveEfficiencyVisita = normalize(defensiveVisita, 0.5, 1.5)
 
             const cornersPromedio = (0.5 * (cornersHomePonderado + cornersAwayPonderado)) + (0.5 * ((shotsHomePonderado + shotsAwayPonderado) * 0.3))
-            // const homeLambdaClassic =
 
-            //     0.40 * xGTotalLocal +
-
-            //     0.25 * xGATotalVisita +
-
-            //     0.15 * shotFactorLocal +
-
-            //     0.10 * eficienciaOfensivaLocal +
-            //     0.10 * defensiveEfficiencyVisita +
-
-            //     0.05 * eficienciaLocal -
-
-            //     0.05 * volatilidad;
-
-            // const awayLambdaClassic =
-
-            //     0.40 * xGTotalesVisita +
-
-            //     0.25 * xGATotalLocal +
-
-            //     0.15 * shotFactorAway +
-
-            //     0.10 * eficienciaOfensivaAway +
-
-            //     0.05 * eficienciaVisita -
-
-            //     0.05 * volatilidad;
             const chanceQualityLocal = safeDiv(xGTotalLocal, shotsHomePonderado);
             const chanceQualityAway = safeDiv(xGTotalesVisita, shotsAwayPonderado);
             const shotAccuracyLocal = safeDiv(shotsOTHomePonderado, shotsHomePonderado);
@@ -370,8 +343,28 @@ export function unifyMatchStats(
                 0.20 * momentumRatingAway +
                 0.10 * consistency;
 
-            const attackMultiplierLocal = 1 + (shotFactorLocal - 0.35) * 0.30 + (eficienciaOfensivaLocal - 1) * 0.15 + (momentumRating - 0.5) * 0.10 + (consistency - 0.5) * 0.05;
-            const attackMultiplierAway = 1 + (shotFactorAway - 0.35) * 0.30 + (eficienciaOfensivaAway - 1) * 0.15 + (momentumRatingAway - 0.5) * 0.10 + (consistency - 0.5) * 0.05;
+            const attackMultiplierLocal =
+                clamp(
+                    1
+                    + (shotFactorLocal - 0.35) * 0.25
+                    + (eficienciaOfensivaLocal - 1) * 0.12
+                    + (momentumRating - 0.5) * 0.08
+                    + (consistency - 0.5) * 0.05,
+                    0.85,
+                    1.20
+                );
+            const attackMultiplierAway =
+                clamp(
+                    1
+                    + (shotFactorAway - 0.35) * 0.25
+                    + (eficienciaOfensivaAway - 1) * 0.12
+                    + (momentumRatingAway - 0.5) * 0.08
+                    + (consistency - 0.5) * 0.05,
+                    0.85,
+                    1.20
+                );;
+            // const attackMultiplierLocal = 1 + (shotFactorLocal - 0.35) * 0.30 + (eficienciaOfensivaLocal - 1) * 0.15 + (momentumRating - 0.5) * 0.10 + (consistency - 0.5) * 0.05;
+            // const attackMultiplierAway = 1 + (shotFactorAway - 0.35) * 0.30 + (eficienciaOfensivaAway - 1) * 0.15 + (momentumRatingAway - 0.5) * 0.10 + (consistency - 0.5) * 0.05;
 
             // const homeLambda = xGLocalMatch
             const homeLambda = homeLambdaClassicNormal * attackMultiplierLocal;
@@ -441,20 +434,7 @@ export function unifyMatchStats(
             //  const goalConversion =
             const expectedCorners = expectedHomeCorners + expectedAwayCorners;
 
-            //      safeDiv(
-            //         golesEsperadosLocal,
-            //          shotsOTHomePonderado
-            //      );
 
-            // const finishing =
-
-            //     safeDiv(
-
-            //         golesEsperadosLocal,
-
-            //         xGTotalLocal
-
-            //     );
 
             const buildTeamMetrics = (
                 xG: number,
@@ -513,20 +493,10 @@ export function unifyMatchStats(
                 match: {
                     xG: expectedGoals,
                     expectedGoals,
-                    // expectedGoals: +golesEsperados.toFixed(3),
                     volatility: +volatilidad.toFixed(3),
                     corners: +expectedCorners.toFixed(3)
                 },
             };
-
-            // return {
-            //     matchUrl: match.matchUrl,
-            //     competitionName: game.competitionDisplayName,
-            //     startTime: game.startTime,
-            //     home: { teamId: homeId, teamName: game.homeCompetitor.name },
-            //     away: { teamId: awayId, teamName: game.awayCompetitor.name },
-            //     metrics,
-            // };
             return {
                 matchUrl: match.matchUrl,
                 competitionName: game.competitionDisplayName,
