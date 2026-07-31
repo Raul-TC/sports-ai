@@ -1,4 +1,5 @@
 import { ExtendedMatchPrediction } from "@/lib/predictions";
+import { Welcome } from "@/utils/enrichPredictions";
 
 export interface TeamMetrics {
     xG: number;
@@ -28,6 +29,7 @@ export interface PredictionResult {
     away: TeamInfo;
     prediction: ExtendedMatchPrediction;
     volatility?: number;
+    data?: Welcome[]
 }
 
 export interface ExcludedTeam {

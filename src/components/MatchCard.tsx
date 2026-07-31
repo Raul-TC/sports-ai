@@ -22,6 +22,7 @@ interface MatchCardProps {
     prediction: EnrichedPrediction;
     isSelected: boolean;
     onToggle: (url: string) => void;
+    activeTab: "today" | "future" | "past"
     // excludedTeams: ExcludedTeam[];
     // onExcludeTeam: (teamName: string, scoredGoals: number, isWin: boolean) => void;
     // onRemoveExcludedTeam: (teamName: string) => void;
@@ -34,16 +35,7 @@ const getFavorite = (pred: any) => {
     if (awayWin.prob > homeWin.prob && awayWin.prob > draw.prob) return "away";
     return "draw";
 };
-export function MatchCard({
-    prediction: r,
-    isSelected,
-    onToggle,
-
-    // excludedTeams,
-    // onExcludeTeam,
-    // onRemoveExcludedTeam,
-}: MatchCardProps) {
-    const favorite = getFavorite(r.prediction);
+export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: MatchCardProps) {
     const homeLambda = r.prediction.homeExpectedGoals || 0;
     const awayLambda = r.prediction.awayExpectedGoals || 0;
     const topScores = getTopScoreProbabilities(homeLambda, awayLambda, 10, 10);
@@ -68,6 +60,13 @@ export function MatchCard({
     const { plays, altas, ratoneras, medias } = getBestPicks(r.prediction, r.home.teamName, r.away.teamName, trap.level, excludedMarkets);
     const scoredPicks = scorePicks(r.home, r.away, r.prediction, r.volatility);
     const bestPick = scoredPicks.length > 0 ? scoredPicks : null;
+
+    const homeGames = r.data && r.data[0].games.filter(el => el.competitionDisplayName === r.competitionName && (el.homeCompetitor.id === r.home.id || el.awayCompetitor.id === r.home.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
+    const awayGames = r.data && r.data[1].games.filter(el => el.competitionDisplayName === r.competitionName && (el.homeCompetitor.id === r.away.id || el.awayCompetitor.id === r.away.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
+
+
+    // const homeMatches = homeGames.map(el => (`partido: ${el.homeCompetitor.name} vs ${el.awayCompetitor.name}  score: ${el.homeCompetitor.score} - ${el.awayCompetitor.score}`))
+    // console.log({ homeGames })
     return (
 
         <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-sm border border-gray-100 dark:border-neutral-800 overflow-hidden transition-all duration-200 hover:shadow-md">
@@ -129,29 +128,90 @@ export function MatchCard({
                                 )} */}
                 {/* Fila 2: Equipos y favorito + badge de trampa */}
                 <div className="flex flex-wrap items-center  justify-center gap-2 mb-3 m-auto w-full">
-                    <div className="flex items-center gap-2 font-medium text-gray-800 dark:text-gray-100">
-                        <div className="flex items-center gap-2 font-medium text-gray-800 dark:text-gray-100">
-                            <Image src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.home.id}`} alt={r.home.teamName} width={64} height={64} />
-                            <span>{r.home.teamName}</span>
-                            {r.result && (
-                                <span className="text-sm font-bold text-gray-600 dark:text-gray-400">
-                                    {r.result.homeScore} - {r.result.awayScore}
-                                </span>
-                            )}
+                    <div className="flex items-center gap-2 font-medium text-gray-800 dark:text-gray-100 w-full">
+                        <div className={`flex flex-col  items-center justify-center w-1/2`}>
+
+                            <div className="flex items-center justify-center gap-2 font-medium w-full text-gray-800 dark:text-gray-100 mx-auto">
+                                <Image src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.home.id}`} alt={r.home.teamName} width={64} height={64} />
+                                <span>{r.home.teamName}</span>
+                                {r.result &&
+                                    <div className="flex flex-col w-full items-center">
+
+                                        {r.result && (
+                                            <span className="text-sm font-bold text-gray-600 dark:text-gray-400">
+                                                {r.result.homeScore}
+                                            </span>
+                                        )}
+                                    </div>}
+
+
+                            </div>
+
+                            <p className="w-full text-sm">Ultimos juegos recientes</p>
+                            <div className=" w-full h-auto my-2  flex flex-col items-center flex-wrap justify-center gap-4">
+                                {homeGames ? homeGames.map(el => (
+                                    <div key={el.id} className="text-white flex items-center gap-1 ">
+                                        <span className="text-[12px] m-2">
+                                            {new Date(`${el.startTime}`).toLocaleDateString("es-MX")}
+                                        </span>
+                                        <Image src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.homeCompetitor.id}`} alt={`${el.homeCompetitor.nameForURL} vs ${el.awayCompetitor.nameForURL}`} width={20} height={20} />
+                                        <span>{el.homeCompetitor.score}</span>
+                                        <span >vs</span>
+                                        <span>{el.awayCompetitor.score}</span>
+
+                                        <Image src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.awayCompetitor.id}`} alt={`${el.homeCompetitor.nameForURL} vs ${el.awayCompetitor.nameForURL}`} width={20} height={20} />
+
+                                    </div>
+                                )) : <h2>Cargando Ultimos Partidos</h2>
+
+                                }
+                            </div>
                         </div>
                         <span className="text-gray-400 text-sm">vs</span>
-                        <div className="flex items-center gap-2 font-medium text-gray-800 dark:text-gray-100">
-                            <span>{r.away.teamName}</span>
-                            <Image src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.away.id}`} alt={r.away.teamName} width={64} height={64} />
-                        </div>
-                        {r.accuracy && (
+                        <div className={`flex items-center flex-col w-1/2`}>
+                            <div className="flex items-center gap-2 justify-center font-medium text-gray-800 dark:text-gray-100 mx-auto w-full">
+                                {r.result && <div className="flex flex-col items-center justify-center mx-auto">
+
+
+                                    <span className="text-sm font-bold text-gray-600 dark:text-gray-400">
+                                        {r.result.awayScore}
+                                    </span>
+
+                                </div>}
+                                <span>{r.away.teamName}</span>
+                                <Image src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.away.id}`} alt={r.away.teamName} width={64} height={64} />
+
+
+                            </div>
+
+                            <div className=" w-full h-auto my-2  flex flex-col items-center flex-wrap justify-center gap-4">
+
+                                <p className="w-full text-sm text-end">Ultimos juegos recientes</p>
+                                {awayGames ? awayGames.map(el => (
+                                    <div key={el.id} className="text-white flex items-center gap-1">
+                                        <span className="text-[12px] m-2">
+                                            {new Date(`${el.startTime}`).toLocaleDateString("es-MX")}
+                                        </span>
+                                        <Image src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.homeCompetitor.id}`} alt={`${el.homeCompetitor.nameForURL} vs ${el.awayCompetitor.nameForURL}`} width={20} height={20} className="max-h-[30px]" />
+                                        <span>{el.homeCompetitor.score}</span>
+                                        <span >vs</span>
+                                        <span>{el.awayCompetitor.score}</span>
+
+                                        <Image src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.awayCompetitor.id}`} alt={`${el.homeCompetitor.nameForURL} vs ${el.awayCompetitor.nameForURL}`} width={20} height={20} className="max-h-[30px]" />
+                                    </div>
+                                )) : <h2>Cargando Ultimos Partidos</h2>
+
+                                }
+                            </div>
+                            {/* {r.accuracy && (
                             <span className={`ml-2 px-2 py-0.5 rounded-full text-xs font-medium ${r.accuracy.overallAccuracy > 70 ? 'bg-green-100 text-green-700' :
                                 r.accuracy.overallAccuracy > 40 ? 'bg-yellow-100 text-yellow-700' :
-                                    'bg-red-100 text-red-700'
-                                }`}>
+                                'bg-red-100 text-red-700'
+                            }`}>
                                 {r.accuracy.overallAccuracy.toFixed(0)}% acierto
                             </span>
-                        )}
+                        )} */}
+                        </div>
                     </div>
                 </div>
 
@@ -452,6 +512,6 @@ export function MatchCard({
                                     )} */}
                 </div>
             </div>
-        </div>
+        </div >
     );
 }

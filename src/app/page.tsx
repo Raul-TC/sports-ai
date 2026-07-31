@@ -15,12 +15,12 @@ export default async function HomePage() {
   // const matches = parseExternalStats(rawMatches);
 
   const predictions = calculateAllPredictions(matches, {
-    goalLines: [1.5, 2.5, 3.5],
-    cornerLines: [6.5, 7.5, 8.5, 9.5, 10.5],
-    maxGoals: 8,
+    goalLines: [1.5, 2.5, 3.5, 4.5],
+    cornerLines: [6.5, 7.5, 8.5, 9.5, 10.5, 11.5, 12.5],
+    maxGoals: 10
   });
 
-  // console.log()
+  console.log({ data })
   // console.log({ pred: predictions.slice(0, 20) })
   return (
     <main className="max-w-5xl mx-auto px-6 py-12">

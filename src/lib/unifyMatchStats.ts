@@ -117,15 +117,12 @@ export interface UnifyOptions {
  * fórmulas especificadas. Requiere que el JSON de cada partido tenga los
  * 3 bloques presentes — si falta alguno, el partido se omite con un warning.
  */
-export function unifyMatchStats(
-    raw: RawMatchData[],
-    options: UnifyOptions = {}
-): UnifiedMatch[] {
+export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {}): UnifiedMatch[] {
     const weights = options.weights ?? DEFAULT_WEIGHTS;
     const statIds = options.statIds ?? DEFAULT_STAT_IDS;
     const statisticGroup = options.statisticGroup === undefined ? 2 : options.statisticGroup;
 
-    // console.log({ raw })
+    console.log({ raw })
     return raw
         .map((match): UnifiedMatch | null => {
             const requiredKeys: StatsFilterKey[] = ["todos", "ultimos5", "ultimos5LocalVisita"];
@@ -436,18 +433,7 @@ export function unifyMatchStats(
 
 
 
-            const buildTeamMetrics = (
-                xG: number,
-                xGA: number,
-                expectedGoals: number,
-                shotFactor: number,
-                offensiveEfficiency: number,
-                efficiency: number,
-                precisionDrop: number,
-                corners: number,
-                shots: number,
-                shotOT: number
-            ): TeamMetrics => ({
+            const buildTeamMetrics = (xG: number, xGA: number, expectedGoals: number, shotFactor: number, offensiveEfficiency: number, efficiency: number, precisionDrop: number, corners: number, shots: number, shotOT: number): TeamMetrics => ({
                 xG: +xG.toFixed(3),
                 xGA: +xGA.toFixed(3),
                 expectedGoals: +expectedGoals.toFixed(3),
@@ -464,7 +450,7 @@ export function unifyMatchStats(
             const expectedGoals = Number((homeLambda + awayLambda).toFixed(3));
             const metrics: MatchMetrics = {
                 home: buildTeamMetrics(
-                    homeLambda,
+                    xGTotalLocal,
                     xGATotalLocal,
                     homeLambda,
                     shotFactorLocal,
@@ -474,11 +460,10 @@ export function unifyMatchStats(
                     expectedHomeCorners,
                     shotsHomePonderado,
                     shotsOTHomePonderado
-
                 ),
 
                 away: buildTeamMetrics(
-                    awayLambda,
+                    xGTotalesVisita,
                     xGATotalVisita,
                     awayLambda,
                     shotFactorAway,

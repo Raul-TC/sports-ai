@@ -48,7 +48,7 @@ export function useMatchFilters(predictions: PredictionResult[], results: any[])
                 if (isSameDay(matchDate, today) && (now - startTimeMs >= twoHoursMs)) return true;
                 return false;
             })
-            .sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime());
+            .sort((a, b) => activeTab === 'today' ? new Date(a.startTime).getTime() - new Date(b.startTime).getTime() : new Date(b.startTime).getTime() - new Date(a.startTime).getTime()).slice(0, 20);
     }, [predictions, activeTab, today]);
 
     const todayCount = predictions.filter((p) => {

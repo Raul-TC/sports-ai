@@ -14,12 +14,10 @@ export interface EnrichedPrediction extends PredictionResult {
         awayXGError: number;
         overallAccuracy: number; // % de aciertos en mercados clave
     };
+    data?: Welcome[]
 }
 
-export function enrichPredictions(
-    predictions: PredictionResult[],
-    resultsData: any[] // array de objetos con matchUrl y stats
-): EnrichedPrediction[] {
+export function enrichPredictions(predictions: PredictionResult[], resultsData: any[]): EnrichedPrediction[] {
     // Crear un mapa de matchUrl -> MatchResult
     const resultsMap = new Map<string, MatchResult>();
     for (const item of resultsData) {
@@ -84,4 +82,152 @@ function getPredictedWinner(pred: ExtendedMatchPrediction): 'home' | 'away' | 'd
     if (homeWin.prob > draw.prob && homeWin.prob > awayWin.prob) return 'home';
     if (awayWin.prob > homeWin.prob && awayWin.prob > draw.prob) return 'away';
     return 'draw';
+}
+
+export interface Welcome {
+    lastUpdateId: number;
+    requestedUpdateId: number;
+    ttl: number;
+    paging: Paging;
+    summary: Summary;
+    competitionFilters: Competition[];
+    sports: Sport[];
+    countries: Country[];
+    competitions: Competition[];
+    competitors: Competitor[];
+    games: Game[];
+}
+
+export interface Competition {
+    id: number;
+    countryId: number;
+    sportId: number;
+    name: string;
+    hasBrackets: boolean;
+    nameForURL: string;
+    popularityRank: number;
+    imageVersion: number;
+    currentStageType: number;
+    color?: string;
+    competitorsType: number;
+    currentPhaseNum: number;
+    currentPhaseName?: string;
+    currentSeasonNum: number;
+    currentStageNum: number;
+    hideOnCatalog: boolean;
+    hideOnSearch: boolean;
+    isInternational: boolean;
+    hasStandings?: boolean;
+    hasLiveStandings?: boolean;
+    hasStandingsGroups?: boolean;
+    totalGames?: number;
+    liveGames?: number;
+    hasActiveGames?: boolean;
+}
+
+export interface Competitor {
+    id: number;
+    countryId: number;
+    sportId: number;
+    name: string;
+    symbolicName: string;
+    nameForURL: string;
+    type: number;
+    popularityRank: number;
+    imageVersion: number;
+    color: string;
+    awayColor?: string;
+    mainCompetitionId: number;
+    hasSquad: boolean;
+    hasTransfers: boolean;
+    competitorNum: number;
+    hideOnSearch: boolean;
+    hideOnCatalog: boolean;
+    shortName?: string;
+    longName?: string;
+    score?: number;
+    isQualified?: boolean;
+    toQualify?: boolean;
+    isWinner?: boolean;
+    redCards?: number;
+}
+
+export interface Country {
+    id: number;
+    name: string;
+    totalGames: number;
+    liveGames: number;
+    nameForURL: string;
+    imageVersion: number;
+    isInternational?: boolean;
+}
+
+export interface Game {
+    id: number;
+    sportId: number;
+    competitionId: number;
+    seasonNum?: number;
+    stageNum?: number;
+    groupNum?: number;
+    roundNum?: number;
+    roundName: RoundName;
+    stageName?: string;
+    competitionDisplayName: string;
+    startTime: Date;
+    statusGroup: number;
+    statusText: StatusText;
+    shortStatusText: ShortStatusText;
+    gameTimeAndStatusDisplayType: number;
+    justEnded: boolean;
+    gameTime: number;
+    gameTimeDisplay: string;
+    hasLineups?: boolean;
+    hasMissingPlayers?: boolean;
+    hasFieldPositions?: boolean;
+    lineupsStatus?: number;
+    lineupsStatusText?: LineupsStatusText;
+    hasTVNetworks: boolean;
+    winDescription: string;
+    homeCompetitor: Competitor;
+    awayCompetitor: Competitor;
+    isHomeAwayInverted: boolean;
+    hasStats: boolean;
+    hasStandings: boolean;
+    standingsName?: StandingsName;
+    hasBrackets: boolean;
+    hasPreviousMeetings: boolean;
+    hasRecentMatches: boolean;
+    hasBets?: boolean;
+    hasPlayerBets?: boolean;
+    winner: number;
+    homeAwayTeamOrder: number;
+    hasNews?: boolean;
+    hasPointByPoint: boolean;
+    hasVideo: boolean;
+}
+
+export type LineupsStatusText = "Alineaciones";
+
+export type RoundName = "Fecha";
+
+export type ShortStatusText = "Final" | "En Tiempo Extra";
+
+export type StandingsName = "Posiciones";
+
+export type StatusText = "Finalizado" | "En Tiempo Extra";
+
+export interface Paging {
+    previousPage: string;
+    nextPage: string;
+}
+
+export interface Sport {
+    id: number;
+    name: string;
+    nameForURL: string;
+    drawSupport: boolean;
+    imageVersion: number;
+}
+
+export interface Summary {
 }
