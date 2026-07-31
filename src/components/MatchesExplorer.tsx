@@ -122,7 +122,7 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
     const [selectedMatchUrl, setSelectedMatchUrl] = useState<string | null>(null);
     const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
     const { activeTab, setActiveTab, filteredPredictions, todayCount, futureCount, pastCount } = useMatchFilters(predictions, results);
-    const [matchesWithData, setMatchesWithData] = useState([]);
+    const [matchesWithData, setMatchesWithData] = useState<any[]>([]);
 
     const toggleMatch = (url: string) => {
         setSelectedMatchUrl(selectedMatchUrl === url ? null : url);
