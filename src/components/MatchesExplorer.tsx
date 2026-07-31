@@ -90,9 +90,7 @@ const INITIAL_VISIBLE = 10;
 const LOAD_MORE = 10;
 
 export default function MatchesExplorer({ predictions, results }: MatchesExplorerProps) {
-    const [showHelp, setShowHelp] = useState(false);
-    //     setExcludedTeams(prev => {
-    //         const existing = prev.find(t => t.name === teamName);
+    const [showHelp, setShowHelp] = useState(false);    //         const existing = prev.find(t => t.name === teamName);
     //         if (existing) {
     //             // Si ya existe, actualizamos sus estadísticas
     //             const updated = prev.map(t => {
@@ -123,13 +121,39 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
     // };
     const [selectedMatchUrl, setSelectedMatchUrl] = useState<string | null>(null);
     const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
-
-    const { activeTab, setActiveTab, filteredPredictions, todayCount, futureCount, pastCount } =
-        useMatchFilters(predictions, results);
+    const { activeTab, setActiveTab, filteredPredictions, todayCount, futureCount, pastCount } = useMatchFilters(predictions, results);
+    const [matchesWithData, setMatchesWithData] = useState([]);
 
     const toggleMatch = (url: string) => {
         setSelectedMatchUrl(selectedMatchUrl === url ? null : url);
     };
+
+    async function fetchMatchData(id: number) {
+        const res = await fetch(`https://webws.365scores.com/web/games/results/?appTypeId=5&langId=14&timezoneName=America%2FMexico_City&competitors=${id}&showOdds=true&includeTopBettingOpportunity=1&topBookmaker=4`);
+        return res.json();
+    }
+    useEffect(() => {
+        if (activeTab !== "today") return;
+        const loadData = async () => {
+            const data = await Promise.all(
+                visiblePredictions.map(async (match) => {
+                    const result = await fetchMatchData(match.home.teamId);
+                    const result2 = await fetchMatchData(match.away.teamId);
+
+                    return {
+                        ...match,
+                        data: [result, result2],
+                    };
+                })
+            );
+
+            setMatchesWithData(data);
+        };
+
+        loadData();
+
+    }, [activeTab]);
+
 
     const visiblePredictions = useMemo(() => {
         return filteredPredictions.slice(0, visibleCount);
@@ -173,26 +197,10 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
         setVisibleCount(INITIAL_VISIBLE);
     }, [activeTab, predictions])
 
-
-
-    const getTrend = (value: number) => {
-        if (value > 1.2) return "up";
-        if (value < 0.8) return "down";
-        return "neutral";
-    };
-
-    // ============================================================
-    // STAT BADGE (sin cambios)
-    // ============================================================
-
-    // ============================================================
-    // BLOQUE DE ESTADÍSTICAS (sin cambios)
-    // ============================================================
-
     // ============================================================
     // RENDER PRINCIPAL
     // ============================================================
-
+    const matches = activeTab === 'today' && matchesWithData.length > 0 ? matchesWithData : visiblePredictions
     return (
         <div className="max-w-4xl mx-auto px-4 py-6 space-y-4">
             <div className="flex items-center gap-2 flex-wrap">
@@ -251,8 +259,8 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
                         Mostrando {visiblePredictions.length} de {filteredPredictions.length} partidos
                     </p>
 
-                    {visiblePredictions.map(r => (
-                        <MatchCard key={r.matchUrl} prediction={r} onToggle={toggleMatch} isSelected={selectedMatchUrl === r.matchUrl} />
+                    {matches.map(r => (
+                        <MatchCard key={r.matchUrl} prediction={r} onToggle={toggleMatch} isSelected={selectedMatchUrl === r.matchUrl} activeTab={activeTab} />
                     ))
 
                     }

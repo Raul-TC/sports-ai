@@ -20,7 +20,7 @@ export default async function HomePage() {
     maxGoals: 10
   });
 
-  console.log({ data })
+  // console.log({ data })
   // console.log({ pred: predictions.slice(0, 20) })
   return (
     <main className="max-w-5xl mx-auto px-6 py-12">
