@@ -179,9 +179,9 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                         )}
                                     </div>}
                             </div>
-                            {activeTab === "today" && <p className="w-full text-sm text-center md:text-end">Ultimos juegos recientes</p>}
+                            {activeTab === "today" && <p className="w-full text-sm text-center md:text-start">Ultimos juegos recientes</p>}
 
-                            <div className=" w-full h-auto my-2  flex  items-center flex-wrap justify-center gap-4">
+                            <div className=" w-full h-auto my-2  flex flex-col  items-center flex-wrap justify-center gap-4">
                                 {homeGames ? homeGames.map(el => (
                                     <div key={el.id} className="text-white flex items-center gap-1 ">
                                         <span className="text-[12px] m-2 text-gray-600 dark:text-gray-400">
