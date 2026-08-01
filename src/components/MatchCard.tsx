@@ -167,7 +167,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                         <div className={`flex flex-col items-center justify-center mx-auto md:m-0 md:w-1/2`}>
 
                             <div className="flex items-center justify-center gap-2 font-medium w-full text-gray-800 dark:text-gray-100 mx-auto">
-                                <Image src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.home.id}`} alt={r.home.teamName} width={64} height={64} />
+                                <img src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.home.id}`} alt={r.home.teamName} className="w-8 h-8 md:w-16 md:h-16" />
                                 <span>{r.home.teamName}</span>
                                 {r.result &&
                                     <div className="flex flex-col w-full items-center">
@@ -179,8 +179,9 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                         )}
                                     </div>}
                             </div>
-                            <p className="w-full text-sm text-gray-600 dark:text-gray-400">Ultimos juegos recientes</p>
-                            <div className=" w-full h-auto my-2  flex flex-col items-center flex-wrap justify-center gap-4">
+                            {activeTab === "today" && <p className="w-full text-sm text-center md:text-end">Ultimos juegos recientes</p>}
+
+                            <div className=" w-full h-auto my-2  flex  items-center flex-wrap justify-center gap-4">
                                 {homeGames ? homeGames.map(el => (
                                     <div key={el.id} className="text-white flex items-center gap-1 ">
                                         <span className="text-[12px] m-2 text-gray-600 dark:text-gray-400">
@@ -194,7 +195,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                         <Image src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.awayCompetitor.id}`} alt={`${el.homeCompetitor.nameForURL} vs ${el.awayCompetitor.nameForURL}`} width={20} height={20} />
 
                                     </div>
-                                )) : <h2>Cargando Ultimos Partidos</h2>
+                                )) : (activeTab === "today" && <h2>Cargando Ultimos Partidos</h2>)
 
                                 }
                             </div>
@@ -211,27 +212,27 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
 
                                 </div>}
                                 <span>{r.away.teamName}</span>
-                                <Image src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.away.id}`} alt={r.away.teamName} width={64} height={64} />
+                                <img src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.away.id}`} alt={r.away.teamName} className="w-8 h-8 md:w-16 md:h-16" />
 
 
                             </div>
 
                             <div className=" w-full h-auto my-2  flex flex-col items-center flex-wrap justify-center gap-4">
 
-                                <p className="w-full text-sm text-end">Ultimos juegos recientes</p>
+                                {activeTab === "today" && <p className="w-full text-sm text-center md:text-end">Ultimos juegos recientes</p>}
                                 {awayGames ? awayGames.map(el => (
                                     <div key={el.id} className="text-gray-600 dark:text-gray-400 flex items-center gap-1">
                                         <span className="text-[12px] m-2 text-gray-600 dark:text-gray-400">
                                             {new Date(`${el.startTime}`).toLocaleDateString("es-MX")}
                                         </span>
-                                        <Image src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.homeCompetitor.id}`} alt={`${el.homeCompetitor.nameForURL} vs ${el.awayCompetitor.nameForURL}`} width={20} height={20} className="max-h-[30px]" />
+                                        <img src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.homeCompetitor.id}`} alt={`${el.homeCompetitor.nameForURL} vs ${el.awayCompetitor.nameForURL}`} className="w-5 h-5 md:w-10 md:h-10" />
                                         <span className="text-gray-600 dark:text-gray-400">{el.homeCompetitor.score}</span>
                                         <span className="text-gray-600 dark:text-gray-400">vs</span>
                                         <span className="text-gray-600 dark:text-gray-400">{el.awayCompetitor.score}</span>
 
-                                        <Image src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.awayCompetitor.id}`} alt={`${el.homeCompetitor.nameForURL} vs ${el.awayCompetitor.nameForURL}`} width={20} height={20} className="max-h-[30px]" />
+                                        <img src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.awayCompetitor.id}`} alt={`${el.homeCompetitor.nameForURL} vs ${el.awayCompetitor.nameForURL}`} className="w-5 h-5 md:w-10 md:h-10" />
                                     </div>
-                                )) : <h2>Cargando Ultimos Partidos</h2>
+                                )) : (activeTab === "today" && <h2>Cargando Ultimos Partidos</h2>)
 
                                 }
                             </div>

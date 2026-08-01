@@ -48,8 +48,8 @@ export function useMatchFilters(predictions: PredictionResult[], results: any[])
                 if (isSameDay(matchDate, today) && (now - startTimeMs >= twoHoursMs)) return true;
                 return false;
             })
-            .sort((a, b) => activeTab === 'today' ? new Date(a.startTime).getTime() - new Date(b.startTime).getTime() : new Date(b.startTime).getTime() - new Date(a.startTime).getTime()).slice(0, 20);
-    }, [predictions, activeTab, today]);
+            .sort((a, b) => activeTab === 'today' ? new Date(a.startTime).getTime() - new Date(b.startTime).getTime() : new Date(b.startTime).getTime() - new Date(a.startTime).getTime());
+    }, [enrichedPredictions, activeTab]);
 
     const todayCount = predictions.filter((p) => {
         const matchDate = getDateWithoutTime(p.startTime);

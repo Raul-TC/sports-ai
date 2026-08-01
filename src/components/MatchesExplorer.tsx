@@ -95,11 +95,22 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
         const res = await fetch(`https://webws.365scores.com/web/games/results/?appTypeId=5&langId=14&timezoneName=America%2FMexico_City&competitors=${id}&showOdds=true&includeTopBettingOpportunity=1&topBookmaker=4`);
         return res.json();
     }
+
+    const visiblePredictions = useMemo(() => {
+        return filteredPredictions.slice(0, visibleCount);
+    }, [filteredPredictions, visibleCount]);
     useEffect(() => {
         if (activeTab !== "today") return;
+
+        const pending = visiblePredictions.filter(
+            match => !matchesWithData.some(m => m.matchUrl === match.matchUrl)
+        );
+
+        if (pending.length === 0) return;
+
         const loadData = async () => {
             const data = await Promise.all(
-                visiblePredictions.map(async (match) => {
+                pending.map(async (match) => {
                     const result = await fetchMatchData(match.home.teamId);
                     const result2 = await fetchMatchData(match.away.teamId);
 
@@ -110,17 +121,13 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
                 })
             );
 
-            setMatchesWithData(data);
+            setMatchesWithData(prev => [...prev, ...data]);
         };
 
         loadData();
+    }, [activeTab, visiblePredictions, matchesWithData]);
 
-    }, [activeTab]);
 
-
-    const visiblePredictions = useMemo(() => {
-        return filteredPredictions.slice(0, visibleCount);
-    }, [filteredPredictions, visibleCount]);
 
     const hasMore = visibleCount < filteredPredictions.length;
 
@@ -137,23 +144,25 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
 
     // Intersection Observer para detectar cuando el centinela es visible
     useEffect(() => {
-        if (!loaderRef.current || !hasMore) return;
+        const loader = loaderRef.current;
+        if (!loader || !hasMore) return;
+        // if (!loaderRef.current || !hasMore) return;
 
         const observer = new IntersectionObserver(
-            (entries) => {
-                if (entries[0].isIntersecting) {
+            ([entry]) => {
+                if (entry.isIntersecting) {
                     loadMore();
                 }
             },
-            { root: null, rootMargin: "200px", threshold: 0.1 }
+            { root: null, rootMargin: "300px", threshold: 0 }
         );
 
-        observer.observe(loaderRef.current);
+        observer.observe(loader);
 
         return () => {
-            observer.disconnect();
+            observer.unobserve(loader);
         };
-    }, [loaderRef.current, hasMore, loadMore]);
+    }, [, hasMore, loadMore]);
 
     // Resetear el contador cuando cambia la pestaña o los filtros
     useEffect(() => {
@@ -164,6 +173,7 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
     // RENDER PRINCIPAL
     // ============================================================
     const matches = activeTab === 'today' && matchesWithData.length > 0 ? matchesWithData : visiblePredictions
+    console.log({ matches })
     return (
         <div className="max-w-4xl mx-auto px-4 py-6 space-y-4">
             <div className="flex items-center gap-2 flex-wrap">
