@@ -1,5 +1,3 @@
-import { isMatchTrap } from "@/utils/trapDetection";
-import { getWarningsAndExclusions, getBestPicks } from "@/utils/picks";
 import { getTopScoreProbabilities } from "@/utils/poisson";
 import { TeamStatsBlock } from "./TeamStatsBlock";
 import { StatBadge } from "./StatBadge";
@@ -11,12 +9,18 @@ import {
     Info,
     AlertCircle,
     Sparkles,
+    ShieldAlert,
 } from "lucide-react";
 
 import { EnrichedPrediction } from "@/utils/enrichPredictions";
 import Image from "next/image";
-import { scorePicks } from "@/utils/scoringEngine";
+import { scoreEngine } from "@/utils/scoringEngine";
 import { isPickCorrect } from "@/utils/pickValidation";
+import { gateEngine } from "@/utils/gateEngine";
+import { trapEngine } from "@/utils/trapEngine";
+import { recommendationEngine } from "@/utils/recomendationEngine";
+import { useMemo } from "react";
+import { getBestPicks } from "@/utils/picks";
 
 interface MatchCardProps {
     prediction: EnrichedPrediction;
@@ -38,15 +42,76 @@ const getFavorite = (pred: any) => {
 export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: MatchCardProps) {
     const homeLambda = r.prediction.homeExpectedGoals || 0;
     const awayLambda = r.prediction.awayExpectedGoals || 0;
-    const topScores = getTopScoreProbabilities(homeLambda, awayLambda, 10, 10);
+    const topScoresTwo = getTopScoreProbabilities(homeLambda, awayLambda, 10, 10);
 
-    const trap = isMatchTrap(r);
-    const { warnings, excludedMarkets } = getWarningsAndExclusions(
-        trap,
-        r.home.teamName,
-        r.away.teamName
+    // const trap = isMatchTrap(r);
+    // const { warnings, excludedMarkets } = getWarningsAndExclusions(
+    //     trap,
+    //     r.home.teamName,
+    //     r.away.teamName
+    // );
+
+    // const formatTime = (iso: string) => {
+    //     const date = new Date(iso);
+    //     return date.toLocaleString("es-ES", {
+    //         day: "2-digit",
+    //         month: "short",
+    //         hour: "2-digit",
+    //         minute: "2-digit",
+    //     });
+    // };
+
+    // Dentro del map
+    const gate = useMemo(
+        () => gateEngine(r.home, r.away, r.prediction),
+        [r.home, r.away, r.prediction]
     );
 
+    if (!gate.valid) {
+        return (
+            <div className="bg-gray-50 dark:bg-neutral-800 rounded-xl p-4 text-sm text-gray-500">
+                ⚠️ Datos insuficientes: {gate.reason}
+            </div>
+        );
+    }
+
+    const trap = useMemo(
+        () => trapEngine(r.home, r.away, r.prediction, r.volatility),
+        [r.home, r.away, r.prediction, r.volatility]
+    );
+
+    const scoredPicks = useMemo(
+        () =>
+            scoreEngine({
+                home: r.home,
+                away: r.away,
+                pred: r.prediction,
+                volatility: r.volatility,
+            }),
+        [r.home, r.away, r.prediction, r.volatility]
+    );
+
+
+    const recommendation = useMemo(
+        () => recommendationEngine(scoredPicks, trap, 5),
+        [scoredPicks, trap]
+    );
+
+    const topScores = useMemo(
+        () =>
+            getTopScoreProbabilities(
+                r.prediction.homeExpectedGoals || 0,
+                r.prediction.awayExpectedGoals || 0,
+                10,
+                10
+            ),
+        [r.prediction]
+    );
+
+    console.log({ recommendation })
+
+
+    // ---- 6. Funciones auxiliares ----
     const formatTime = (iso: string) => {
         const date = new Date(iso);
         return date.toLocaleString("es-ES", {
@@ -57,9 +122,34 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
         });
     };
 
-    const { plays, altas, ratoneras, medias } = getBestPicks(r.prediction, r.home.teamName, r.away.teamName, trap.level, excludedMarkets);
-    const scoredPicks = scorePicks(r.home, r.away, r.prediction, r.volatility);
-    const bestPick = scoredPicks.length > 0 ? scoredPicks : null;
+    const getFavorite = () => {
+        const { homeWin, draw, awayWin } = r.prediction.moneyline;
+        if (homeWin.prob > draw.prob && homeWin.prob > awayWin.prob) return "home";
+        if (awayWin.prob > homeWin.prob && awayWin.prob > draw.prob) return "away";
+        return "draw";
+    };
+
+    const favorite = getFavorite();
+    const favTeam =
+        favorite === "home"
+            ? r.home.teamName
+            : favorite === "away"
+                ? r.away.teamName
+                : "Empate";
+
+    const trapLevelColor =
+        trap.level === "high"
+            ? "text-red-600 dark:text-red-400 border-red-300 dark:border-red-700 bg-red-50 dark:bg-red-900/20"
+            : trap.level === "medium"
+                ? "text-amber-600 dark:text-amber-400 border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-900/20"
+                : trap.level === "low"
+                    ? "text-yellow-600 dark:text-yellow-400 border-yellow-300 dark:border-yellow-700 bg-yellow-50 dark:bg-yellow-900/20"
+                    : "hidden";
+
+
+    const { plays, altas, ratoneras, medias } = getBestPicks(r.prediction, r.home.teamName, r.away.teamName, trap.level);
+    // const scoredPicks = scorePicks(r.home, r.away, r.prediction, r.volatility);
+    // const bestPick = scoredPicks.length > 0 ? scoredPicks : null;
 
     const homeGames = r.data && r.data[0].games.filter(el => el.competitionDisplayName === r.competitionName && (el.homeCompetitor.id === r.home.id || el.awayCompetitor.id === r.home.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
     const awayGames = r.data && r.data[1].games.filter(el => el.competitionDisplayName === r.competitionName && (el.homeCompetitor.id === r.away.id || el.awayCompetitor.id === r.away.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
@@ -233,7 +323,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                         </span>
                     </div>
                     <div className="flex flex-wrap gap-1">
-                        {topScores.map((score, idx) => (
+                        {topScoresTwo.map((score, idx) => (
                             <StatBadge
                                 key={idx}
                                 label={`${(score.prob * 100).toFixed(1)}%`}
@@ -244,23 +334,78 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                 className="bg-indigo-50/70 dark:bg-indigo-900/20 border-indigo-100 dark:border-indigo-800"
                             />
                         ))}
-                        {topScores.length === 0 && (
+                        {topScoresTwo.length === 0 && (
                             <span className="text-xs text-gray-400">No hay datos suficientes</span>
                         )}
                     </div>
-                </div>
 
-                {/* Fila 5: Over/Under y BTTS */}
-                {/* <div className="flex flex-wrap items-center gap-2 mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
-                                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-gray-50 dark:bg-neutral-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-neutral-700">
-                                        {r.prediction.goalLines[1].overProb > 60 ? "Over 2.5" : "Under 2.5"}
+                </div>
+                {/* ---- RECOMENDACIÓN DEL MOTOR ---- */}
+                {recommendation && (
+                    <div className="mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
+                        <div className="p-2 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg border border-indigo-200 dark:border-indigo-800">
+                            <div className="text-xs font-semibold text-indigo-700 dark:text-indigo-300 flex items-center gap-1">
+                                <Sparkles className="w-3 h-3" />
+                                Pick recomendado
+                            </div>
+                            <div className="flex flex-wrap items-center gap-2 text-xs mt-1">
+                                <span className="font-medium">{recommendation.pick.market}</span>
+                                <span className="font-bold">{recommendation.pick.selection}</span>
+                                <span className="bg-indigo-50 dark:bg-indigo-900/20">
+                                    Confianza: {recommendation.pick.confidence}
+                                </span>
+                                <span className="bg-indigo-50 dark:bg-indigo-900/20 text-[10px]">
+                                    Probabilidad: {Number(recommendation.pick.score).toFixed(0)}%
+                                </span>
+                                <span className="bg-indigo-50 dark:bg-indigo-900/20 text-[10px]">
+                                    Momio: {recommendation.pick.odd}
+                                </span>
+                                {/* Badge de acierto/fallo si es partido pasado y tenemos resultado */}
+                                {/* {activeTab === "past" && (r as any).result && (
+                                    <span
+                                        className={`ml-1 px-1.5 py-0.5 rounded text-[10px] font-medium ${isPickCorrect(recommendation.pick, (r as any).result)
+                                            ? "bg-green-100 text-green-700"
+                                            : "bg-red-100 text-red-700"
+                                            }`}
+                                    >
+                                        {isPickCorrect(recommendation.pick, (r as any).result)
+                                            ? "✅ Acertado"
+                                            : "❌ Fallado"}
                                     </span>
-                                    {r.prediction.btts.yes !== undefined && (
-                                        <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-gray-50 dark:bg-neutral-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-neutral-700">
-                                            {r.prediction.btts.yes.prob > 60 ? "BTTS Sí" : "BTTS No"}
+                                )} */}
+                            </div>
+                            {/* <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                                {recommendation.reasoning}
+                            </div> */}
+                            {recommendation.alternatives.length > 0 && (
+                                <div className="mt-1 flex flex-wrap gap-1">
+                                    <span className="text-[10px] text-gray-500">Alternativas:</span>
+                                    {recommendation.alternatives.map((alt, i) => (
+                                        <span
+                                            key={i}
+                                            className="text-[10px] bg-gray-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded-full"
+                                        >
+                                            {alt.market}: {alt.selection} (prob: {Number(alt.score).toFixed(0)}%) (momio: {alt.odd})
                                         </span>
-                                    )}
-                                </div> */}
+
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                )}
+                {/* 
+                {trap.isTrap && (
+                    <span
+                        className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border ${trapLevelColor} cursor-help`}
+                        title={`Nivel de riesgo: ${trap.level.toUpperCase()}\n\n${trap.details
+                            .map((d) => `${d.team.toUpperCase()}: ${d.explanation || d.reason}`)
+                            .join("\n\n")}`}
+                    >
+                        <ShieldAlert className="w-3 h-3" />
+                        Trampa {trap.level}
+                    </span>
+                )} */}
 
                 {/* NUEVA SECCIÓN: Riesgo y Pick Recomendado */}
                 {/* NUEVA SECCIÓN: Riesgo y Pick Recomendado (siempre visible) */}
@@ -295,15 +440,20 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                 )}
                             </div>
 
-                            {/* Razones solo si hay trampa */}
-                            {trap.isTrap && trap.details.length > 0 && (
-                                <div className="text-xs text-gray-600 dark:text-gray-400">
-                                    <span className="font-medium">⚠️ </span>
-                                    {trap.details.map(d => `${d.team}: ${d.reason}`).join(" · ")}
+                            {trap.details.length > 0 && (
+                                <div className="mt-1 space-y-1 text-xs">
+                                    <div className="font-medium text-amber-600 dark:text-amber-400">⚠️ Señales de alerta:</div>
+                                    {trap.details.map((d, idx) => (
+                                        <div key={idx} className="pl-2 border-l-2 border-amber-300 dark:border-amber-700 text-gray-600 dark:text-gray-400">
+                                            <span className="font-medium text-amber-600 dark:text-amber-400">
+                                                {d.team === 'ambos' ? '📊 General' : `🔴 ${d.team}:`}
+                                            </span>
+                                            <span> {d.explanation || d.reason}</span>
+                                        </div>
+                                    ))}
                                 </div>
                             )}
-
-                            {warnings.length > 0 && (
+                            {/* {warnings.length > 0 && (
                                 <div className="mt-1 space-y-0.5">
                                     {warnings.map((warning, idx) => (
                                         <div key={idx} className="text-xs text-amber-600 dark:text-amber-400 flex items-start gap-1">
@@ -316,7 +466,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                         </div>
                                     )}
                                 </div>
-                            )}
+                            )} */}
                             {/* Pick recomendado (el de mayor EV) */}
                             {/* {bestPick && (
                                                 bestPick.map((pick, idx) => (
@@ -338,46 +488,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                                         )}
                                                     </div>))
                                             )} */}
-                            {/* Mejores picks (scoredPicks) */}
-                            {bestPick && (
-                                <div className="space-y-1 mt-1">
-                                    {bestPick.slice(0, 5).map((pick, idx) => {
-                                        const isCorrect = r.result && isPickCorrect(pick, r);
-                                        return (
-                                            <div
-                                                key={idx}
-                                                className="flex flex-wrap items-center gap-2 text-xs bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800 rounded-lg px-3 py-1.5"
-                                            >
-                                                <Sparkles className="w-3 h-3 text-indigo-500" />
-                                                <span className="font-medium text-indigo-700 dark:text-indigo-300">{pick.market}</span>
-                                                <span className="font-bold text-gray-800 dark:text-gray-100">{pick.selection}</span>
-                                                <span className="text-gray-500 dark:text-gray-400">
-                                                    {pick.confidence === 'alta' && '🔵 Alta confianza'}
-                                                    {pick.confidence === 'media' && '🟡 Media confianza'}
-                                                    {pick.confidence === 'baja' && '🔴 Baja confianza'}
-                                                </span>
-                                                <span className="text-gray-400 text-[10px]">{pick.reason}</span>
 
-                                                {/* Badge de acierto/fallo (solo si hay resultado) */}
-                                                {r.result && (
-                                                    <span className={`ml-1 px-1.5 py-0.5 rounded text-[10px] font-medium ${isCorrect
-                                                        ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300'
-                                                        : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300'
-                                                        }`}>
-                                                        {isCorrect ? '✅ Acertado' : '❌ Fallado'}
-                                                    </span>
-                                                )}
-
-                                                {pick.warning && (
-                                                    <span className="text-[10px] bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 px-1.5 py-0.5 rounded">
-                                                        {pick.warning}
-                                                    </span>
-                                                )}
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            )}
                             {/* Cuotas ratoneras */}
                             {ratoneras.length > 0 && (
                                 <div className="mt-1">

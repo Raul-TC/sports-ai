@@ -2,39 +2,10 @@
 
 import { useState, useMemo, useRef, useCallback, useEffect } from "react";
 import { ExtendedMatchPrediction } from "@/lib/predictions";
-import OddsPanel from "@/components/OddsPanel";
-import {
-    Trophy,
-    Clock,
-    TrendingUp,
-    TrendingDown,
-    Minus,
-    Goal,
-    Target,
-    CornerDownRight,
-    Activity,
-    Crosshair,
-    Gauge,
-    BarChart,
-    Info,
-    Circle,
-    Calendar,
-    CalendarClock,
-    HelpCircle,
-    Sparkles,
-    AlertCircle,
-    Loader2,
-} from "lucide-react";
-import Image from "next/image";
-// import { getBestPickFromData } from "@/utils/picks";
-import { scorePicks } from "@/utils/scoringEngine";
-import { enrichPredictions } from "@/utils/enrichPredictions";
-import { isPickCorrect } from "@/utils/pickValidation";
+import { Trophy, HelpCircle, Loader2 } from "lucide-react";
 import { MatchCard } from "./MatchCard";
 import { useMatchFilters } from "@/hooks/useMatchFilters";
 import { TabNavigation } from "./TabNavigation";
-import { StatBadge } from "./StatBadge";
-// import { useMatchFilters } from "@/hooks/useMatchFilters";
 
 // ============================================================
 // INTERFACES (igual que antes)
@@ -74,14 +45,6 @@ interface MatchesExplorerProps {
     predictions: PredictionResult[];
     results: any[]; // array de objetos con matchUrl y stats
 }
-// ============================================================
-// DETECCIÓN DE TRAMPAS (mejorada)
-// ============================================================
-
-
-// ============================================================
-// FUNCIÓN PARA EL MEJOR PICK (basado en EV)
-// ============================================================
 
 // ============================================================
 // COMPONENTE PRINCIPAL
