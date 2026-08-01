@@ -118,7 +118,7 @@ export function trapEngine(home: TeamInfo, away: TeamInfo, pred: ExtendedMatchPr
     }
 
     // Bajorendimiento ofensivo
-    if (homeM.offensiveEfficiency < 0.5) {
+    if (homeM.offensiveEfficiency < 0.65) {
         const reason = `Bajorendimiento ofensivo (${homeM.offensiveEfficiency.toFixed(2)})`;
         details.push({
             team: home.teamName,
@@ -128,7 +128,7 @@ export function trapEngine(home: TeamInfo, away: TeamInfo, pred: ExtendedMatchPr
         });
         trapScore += 1;
     }
-    if (awayM.offensiveEfficiency < 0.5) {
+    if (awayM.offensiveEfficiency < 0.65) {
         const reason = `Bajorendimiento ofensivo (${awayM.offensiveEfficiency.toFixed(2)})`;
         details.push({
             team: away.teamName,
