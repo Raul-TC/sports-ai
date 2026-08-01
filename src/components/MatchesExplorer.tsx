@@ -154,7 +154,7 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
                     loadMore();
                 }
             },
-            { root: null, rootMargin: "300px", threshold: 0 }
+            { root: null, rootMargin: "500px", threshold: 0 }
         );
 
         observer.observe(loader);
