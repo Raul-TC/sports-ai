@@ -15,7 +15,7 @@ import {
 import { EnrichedPrediction } from "@/utils/enrichPredictions";
 import Image from "next/image";
 import { scoreEngine } from "@/utils/scoringEngine";
-import { isPickCorrect } from "@/utils/pickValidation";
+// import { isPickCorrect } from "@/utils/pickValidation";
 import { gateEngine } from "@/utils/gateEngine";
 import { trapEngine } from "@/utils/trapEngine";
 import { recommendationEngine } from "@/utils/recomendationEngine";
@@ -27,18 +27,8 @@ interface MatchCardProps {
     isSelected: boolean;
     onToggle: (url: string) => void;
     activeTab: "today" | "future" | "past"
-    // excludedTeams: ExcludedTeam[];
-    // onExcludeTeam: (teamName: string, scoredGoals: number, isWin: boolean) => void;
-    // onRemoveExcludedTeam: (teamName: string) => void;
-    // results: MatchResult | undefined;
 }
 
-const getFavorite = (pred: any) => {
-    const { homeWin, draw, awayWin } = pred.moneyline;
-    if (homeWin.prob > draw.prob && homeWin.prob > awayWin.prob) return "home";
-    if (awayWin.prob > homeWin.prob && awayWin.prob > draw.prob) return "away";
-    return "draw";
-};
 export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: MatchCardProps) {
     const homeLambda = r.prediction.homeExpectedGoals || 0;
     const awayLambda = r.prediction.awayExpectedGoals || 0;
@@ -154,9 +144,6 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
     const homeGames = r.data && r.data[0].games.filter(el => el.competitionDisplayName === r.competitionName && (el.homeCompetitor.id === r.home.id || el.awayCompetitor.id === r.home.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
     const awayGames = r.data && r.data[1].games.filter(el => el.competitionDisplayName === r.competitionName && (el.homeCompetitor.id === r.away.id || el.awayCompetitor.id === r.away.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
 
-
-    // const homeMatches = homeGames.map(el => (`partido: ${el.homeCompetitor.name} vs ${el.awayCompetitor.name}  score: ${el.homeCompetitor.score} - ${el.awayCompetitor.score}`))
-    // console.log({ homeGames })
     return (
 
         <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-sm border border-gray-100 dark:border-neutral-800 overflow-hidden transition-all duration-200 hover:shadow-md">
@@ -172,50 +159,8 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                         <span className="hidden md:inline">·</span>
                         <span className="truncate">{r.competitionName}</span>
                     </div>
-                    {/* <div className="flex items-center gap-1">
-                                        {isSelected ? (
-                                            <ChevronUp className="w-5 h-5" />
-                                        ) : (
-                                            <ChevronDown className="w-5 h-5" />
-                                        )}
-                                    </div> */}
                 </div>
-                {/* Notas de equipos excluidos */}
-                {/* {(excludedTeams.some(t => t.name === r.home.teamName || t.name === r.away.teamName)) && (
-                                    <div className="mt-2 pt-2 border-t border-red-200 dark:border-red-800/30">
-                                        <div className="text-xs font-medium text-red-600 dark:text-red-400 flex items-center gap-1">
-                                            <span>⚠️</span> Alertas de equipos en racha negativa
-                                        </div>
-                                        <div className="flex flex-wrap gap-2 mt-1">
-                                            {excludedTeams
-                                                .filter(t => t.name === r.home.teamName || t.name === r.away.teamName)
-                                                .map((team) => (
-                                                    <div
-                                                        key={team.name}
-                                                        className="text-xs bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md px-2 py-1 flex items-center gap-1"
-                                                    >
-                                                        <span className="font-medium text-red-700 dark:text-red-300">{team.name}</span>
-                                                        <span className="text-red-500 dark:text-red-400">
-                                                            {team.losses > 0 ? `${team.losses} derrotas consecutivas` : 'Sin derrotas recientes'}
-                                                        </span>
-                                                        {team.goalsScored === 0 && (
-                                                            <span className="text-red-400 dark:text-red-500">(no ha anotado)</span>
-                                                        )}
-                                                        <button
-                                                            onClick={(e) => {
-                                                                e.stopPropagation();
-                                                                removeExcludedTeam(team.name);
-                                                            }}
-                                                            className="text-red-400 hover:text-red-600 dark:text-red-500 dark:hover:text-red-300 ml-1"
-                                                            title="Eliminar de la lista negra"
-                                                        >
-                                                            ✕
-                                                        </button>
-                                                    </div>
-                                                ))}
-                                        </div>
-                                    </div>
-                                )} */}
+
                 {/* Fila 2: Equipos y favorito + badge de trampa */}
                 <div className="flex flex-wrap md:flex-nowrap items-center  justify-center gap-2 mb-3 m-auto w-full">
                     <div className="flex items-center gap-2 font-medium text-gray-800 dark:text-gray-100 w-full flex-wrap md:flex-nowrap">
@@ -233,10 +178,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                             </span>
                                         )}
                                     </div>}
-
-
                             </div>
-
                             <p className="w-full text-sm text-gray-600 dark:text-gray-400">Ultimos juegos recientes</p>
                             <div className=" w-full h-auto my-2  flex flex-col items-center flex-wrap justify-center gap-4">
                                 {homeGames ? homeGames.map(el => (
