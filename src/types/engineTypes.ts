@@ -7,6 +7,45 @@ export interface GateResult {
     reason?: string;
 }
 
+// types/engineTypes.ts
+
+export interface ParlayPick {
+    matchUrl: string;
+    homeTeam: string;
+    awayTeam: string;
+    market: string;           // "Resultado", "Total de goles", "BTTS", etc.
+    selection: string;        // "Over 2.5", "Real Madrid", etc.
+    odd: number;              // cuota decimal
+    probability: number;      // probabilidad estimada (0-1)
+    score: number;            // score del pick (0-100)
+    confidence: 'alta' | 'media' | 'baja';
+    reason: string;           // por qué es bueno este pick
+}
+
+// types/engineTypes.ts
+export interface ParlayCandidate {
+    pick: ScoreResult;
+    matchUrl: string;
+    homeTeam: string;
+    awayTeam: string;
+}
+
+export interface Parlay {
+    id: string;
+    picks: ParlayPick[];
+    totalOdd: number;
+    totalEV: number;          // Expected Value combinado
+    estimatedWinRate: number; // probabilidad de que acierten todos (producto de probs)
+    riskLevel: 'low' | 'medium' | 'high';
+    reasoning: string;        // explicación de por qué esta combinación tiene sentido
+    score: number;            // puntuación global del parlay (0-100)
+}
+
+export interface ParlayEngineResult {
+    parlays: Parlay[];
+    topParlay: Parlay | null;
+    totalCombinations: number;
+}
 export interface ScoreResult {
     market: string;
     selection: string;

@@ -141,9 +141,10 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
     // const scoredPicks = scorePicks(r.home, r.away, r.prediction, r.volatility);
     // const bestPick = scoredPicks.length > 0 ? scoredPicks : null;
 
-    const homeGames = r.data && r.data[0].games.filter(el => (el.homeCompetitor.id === r.home.id || el.awayCompetitor.id === r.home.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
-    const awayGames = r.data && r.data[1].games.filter(el => (el.homeCompetitor.id === r.away.id || el.awayCompetitor.id === r.away.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
+    const homeGames = r.data && r.data[0].games.filter(el => el.competitionDisplayName !== 'Partido Amistoso' && (el.homeCompetitor.id === r.home.id || el.awayCompetitor.id === r.home.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
+    const awayGames = r.data && r.data[1].games.filter(el => el.competitionDisplayName !== 'Partido Amistoso' && (el.homeCompetitor.id === r.away.id || el.awayCompetitor.id === r.away.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
 
+    // console.log({ homeGames: r.data[0].games })
     return (
 
         <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-sm border border-gray-100 dark:border-neutral-800 overflow-hidden transition-all duration-200 hover:shadow-md">
