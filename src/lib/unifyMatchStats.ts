@@ -122,7 +122,7 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
     const statIds = options.statIds ?? DEFAULT_STAT_IDS;
     const statisticGroup = options.statisticGroup === undefined ? 2 : options.statisticGroup;
 
-    console.log({ raw })
+    // console.log({ raw })
     return raw
         .map((match): UnifiedMatch | null => {
             const requiredKeys: StatsFilterKey[] = ["todos", "ultimos5", "ultimos5LocalVisita"];
