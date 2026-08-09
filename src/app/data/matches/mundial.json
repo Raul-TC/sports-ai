@@ -216907,5 +216907,478 @@
         ]
       }
     }
+  },
+  {
+    "matchUrl": "https://www.365scores.com/es/football/match/eredivisie-57/heerenveen-twente-694-696-57#id=4734627",
+    "stats": {
+      "todos": {
+        "statistics": [
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 694,
+            "value": "1.77",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 694,
+            "value": "1.67",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 694,
+            "value": "1.63",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 694,
+            "value": "1.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 694,
+            "value": "14.77",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 694,
+            "value": "5.57",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 694,
+            "value": "5.33",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 696,
+            "value": "1.68",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 696,
+            "value": "1.06",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 696,
+            "value": "1.85",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 696,
+            "value": "1.04",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 696,
+            "value": "17.58",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 696,
+            "value": "6.45",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 696,
+            "value": "5.16",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          }
+        ],
+        "games": [
+          {
+            "id": 4734627,
+            "homeCompetitor": {
+              "id": 694,
+              "name": "Heerenveen"
+            },
+            "awayCompetitor": {
+              "id": 696,
+              "name": "Twente"
+            },
+            "startTime": "2026-08-09T08:45:00-06:00",
+            "statusGroup": 2,
+            "competitionDisplayName": "Eredivisie"
+          }
+        ],
+        "competitors": [
+          {
+            "id": 694,
+            "name": "Heerenveen"
+          },
+          {
+            "id": 696,
+            "name": "Twente"
+          }
+        ]
+      },
+      "ultimos5": {
+        "statistics": [
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 694,
+            "value": "2.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 694,
+            "value": "1.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 694,
+            "value": "1.79",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 694,
+            "value": "1.96",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 694,
+            "value": "12.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 694,
+            "value": "6.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 694,
+            "value": "5.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 696,
+            "value": "1.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 696,
+            "value": "1.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 696,
+            "value": "1.52",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 696,
+            "value": "1.31",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 696,
+            "value": "15.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 696,
+            "value": "6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 696,
+            "value": "4.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          }
+        ],
+        "games": [
+          {
+            "id": 4734627,
+            "homeCompetitor": {
+              "id": 694,
+              "name": "Heerenveen"
+            },
+            "awayCompetitor": {
+              "id": 696,
+              "name": "Twente"
+            },
+            "startTime": "2026-08-09T08:45:00-06:00",
+            "statusGroup": 2,
+            "competitionDisplayName": "Eredivisie"
+          }
+        ],
+        "competitors": [
+          {
+            "id": 694,
+            "name": "Heerenveen"
+          },
+          {
+            "id": 696,
+            "name": "Twente"
+          }
+        ]
+      },
+      "ultimos5LocalVisita": {
+        "statistics": [
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 694,
+            "value": "2.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 694,
+            "value": "1",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 694,
+            "value": "1.93",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 694,
+            "value": "1.18",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 694,
+            "value": "16.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 694,
+            "value": "7",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 694,
+            "value": "4.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 696,
+            "value": "2.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 696,
+            "value": "1.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 696,
+            "value": "1.86",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 696,
+            "value": "1.31",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 696,
+            "value": "14.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 696,
+            "value": "6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 696,
+            "value": "4.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          }
+        ],
+        "games": [
+          {
+            "id": 4734627,
+            "homeCompetitor": {
+              "id": 694,
+              "name": "Heerenveen"
+            },
+            "awayCompetitor": {
+              "id": 696,
+              "name": "Twente"
+            },
+            "startTime": "2026-08-09T08:45:00-06:00",
+            "statusGroup": 2,
+            "competitionDisplayName": "Eredivisie"
+          }
+        ],
+        "competitors": [
+          {
+            "id": 694,
+            "name": "Heerenveen"
+          },
+          {
+            "id": 696,
+            "name": "Twente"
+          }
+        ]
+      }
+    }
   }
 ]
