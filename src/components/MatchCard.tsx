@@ -34,6 +34,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
     const awayLambda = r.prediction.awayExpectedGoals || 0;
     const topScoresTwo = getTopScoreProbabilities(homeLambda, awayLambda, 10, 10);
 
+    // console.log({ r })
     // const trap = isMatchTrap(r);
     // const { warnings, excludedMarkets } = getWarningsAndExclusions(
     //     trap,
@@ -141,12 +142,12 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
     // const scoredPicks = scorePicks(r.home, r.away, r.prediction, r.volatility);
     // const bestPick = scoredPicks.length > 0 ? scoredPicks : null;
 
-    const homeGames = r.data && r.data[0].games.filter(el => el.competitionDisplayName !== 'Partido Amistoso' && (el.homeCompetitor.id === r.home.id || el.awayCompetitor.id === r.home.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
-    const homeGamesLocal = r.data && r.data[0].games.filter(el => el.competitionDisplayName !== 'Partido Amistoso' && (el.homeCompetitor.id === r.home.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
-    const awayGames = r.data && r.data[1].games.filter(el => el.competitionDisplayName !== 'Partido Amistoso' && (el.homeCompetitor.id === r.away.id || el.awayCompetitor.id === r.away.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
-    const awayGamesAway = r.data && r.data[1].games.filter(el => el.competitionDisplayName !== 'Partido Amistoso' && (el.awayCompetitor.id === r.away.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
+    const homeGames = r.data && r.data[0].games.filter(el => el.competitionDisplayName !== 'Partido Amistoso' && el.statusText === 'Finalizado' && (el.homeCompetitor.id === r.home.id || el.awayCompetitor.id === r.home.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
+    const homeGamesLocal = r.data && r.data[0].games.filter(el => el.competitionDisplayName !== 'Partido Amistoso' && el.statusText === 'Finalizado' && (el.homeCompetitor.id === r.home.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
+    const awayGames = r.data && r.data[1].games.filter(el => el.competitionDisplayName !== 'Partido Amistoso' && el.statusText === 'Finalizado' && (el.homeCompetitor.id === r.away.id || el.awayCompetitor.id === r.away.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
+    const awayGamesAway = r.data && r.data[1].games.filter(el => el.competitionDisplayName !== 'Partido Amistoso' && el.statusText === 'Finalizado' && (el.awayCompetitor.id === r.away.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
 
-    // console.log({ homeGames: r.data[0].games })
+    console.log({ awayGames })
     return (
 
         <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-sm border border-gray-100 dark:border-neutral-800 overflow-hidden transition-all duration-200 hover:shadow-md">
@@ -192,8 +193,10 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                     {
                                         homeGames ? homeGames.map(el => (
                                             <div key={el.id} className="text-gray-600 dark:text-gray-400 flex items-center gap-1 w-full justify-center">
-                                                <span className="text-[12px] m-2 text-gray-600 dark:text-gray-400">
+                                                <span className="text-[12px] m-2 text-gray-600 dark:text-gray-400 flex flex-col items-center justify-center">
                                                     {new Date(`${el.startTime}`).toLocaleDateString("es-MX")}
+                                                    <span className="text-[8px] text-wrap w-full">{el.competitionDisplayName}</span>
+
                                                 </span>
                                                 <img src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.homeCompetitor.id}`} alt={`${el.homeCompetitor.nameForURL} vs ${el.awayCompetitor.nameForURL}`} className="w-5 h-5 md:w-10 md:h-10 object-contain" />
                                                 <span className="text-gray-600 dark:text-gray-400">{el.homeCompetitor.score}</span>
@@ -213,8 +216,10 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                     {
                                         homeGamesLocal && homeGamesLocal.map(el => (
                                             <div key={el.id} className="text-gray-600 dark:text-gray-400 flex items-center gap-1 w-full justify-center">
-                                                <span className="text-[12px] m-2 text-gray-600 dark:text-gray-400">
+                                                <span className="text-[12px] m-2 text-gray-600 dark:text-gray-400 flex flex-col items-center justify-center">
                                                     {new Date(`${el.startTime}`).toLocaleDateString("es-MX")}
+                                                    <span className="text-[8px] text-wrap w-full">{el.competitionDisplayName}</span>
+
                                                 </span>
                                                 <img src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.homeCompetitor.id}`} alt={`${el.homeCompetitor.nameForURL} vs ${el.awayCompetitor.nameForURL}`} className="w-5 h-5 md:w-10 md:h-10 object-contain" />
                                                 <span className="text-gray-600 dark:text-gray-400">{el.homeCompetitor.score}</span>
@@ -253,8 +258,10 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
 
                                     {awayGames ? awayGames.map(el => (
                                         <div key={el.id} className="text-gray-600 dark:text-gray-400 flex items-center gap-1 w-full justify-center">
-                                            <span className="text-[12px] m-2 text-gray-600 dark:text-gray-400">
+                                            <span className="text-[12px] m-2 text-gray-600 dark:text-gray-400 flex flex-col items-center justify-center">
                                                 {new Date(`${el.startTime}`).toLocaleDateString("es-MX")}
+                                                <span className="text-[8px] text-wrap w-full">{el.competitionDisplayName}</span>
+
                                             </span>
                                             <img src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.homeCompetitor.id}`} alt={`${el.homeCompetitor.nameForURL} vs ${el.awayCompetitor.nameForURL}`} className="w-5 h-5 md:w-10 md:h-10 object-contain" />
                                             <span className="text-gray-600 dark:text-gray-400">{el.homeCompetitor.score}</span>
@@ -272,14 +279,15 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                     {activeTab === "today" && <p className="w-full text-sm text-center md:text-end">Ultimos juegos como visitante</p>}
                                     {awayGamesAway ? awayGamesAway.map(el => (
                                         <div key={el.id} className="text-gray-600 dark:text-gray-400 flex items-center gap-1 w-full justify-center">
-                                            <span className="text-[12px] m-2 text-gray-600 dark:text-gray-400">
+                                            <span className="text-[12px] m-2 text-gray-600 dark:text-gray-400 flex flex-col items-center justify-center">
                                                 {new Date(`${el.startTime}`).toLocaleDateString("es-MX")}
+                                                <span className="text-[8px] text-wrap w-full">{el.competitionDisplayName}</span>
+
                                             </span>
                                             <img src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.homeCompetitor.id}`} alt={`${el.homeCompetitor.nameForURL} vs ${el.awayCompetitor.nameForURL}`} className="w-5 h-5 md:w-10 md:h-10 object-contain" />
                                             <span className="text-gray-600 dark:text-gray-400">{el.homeCompetitor.score}</span>
                                             <span className="text-gray-600 dark:text-gray-400">vs</span>
                                             <span className="text-gray-600 dark:text-gray-400">{el.awayCompetitor.score}</span>
-
                                             <img src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.awayCompetitor.id}`} alt={`${el.homeCompetitor.nameForURL} vs ${el.awayCompetitor.nameForURL}`} className="w-5 h-5 md:w-10 md:h-10 object-contain" />
                                         </div>
                                     )) : (activeTab === "today" && <h2>Cargando Ultimos Partidos</h2>)
