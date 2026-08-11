@@ -73,6 +73,11 @@ export function TeamStatsBlock({ team, title }: TeamStatsBlockProps) {
 
     const primaryStats = [
         {
+            label: 'Goles por Partido'
+            , value: m.golesPerPartido.toFixed(1)
+            , description: 'Promedio de goles anotados por partido.'
+        },
+        {
             label: "Gol Esp",
             value: m.xG.toFixed(2),
             icon: Goal,

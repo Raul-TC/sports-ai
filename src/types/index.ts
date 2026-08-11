@@ -2,6 +2,7 @@ import { ExtendedMatchPrediction } from "@/lib/predictions";
 import { Welcome } from "@/utils/enrichPredictions";
 
 export interface TeamMetrics {
+    golesPerPartido: number;
     xG: number;
     xGA: number;
     expectedGoals: number;

@@ -38,6 +38,7 @@ export interface UnifiedMatch {
 }
 
 export interface TeamMetrics {
+    golesPerPartido: number;
     xG: number;
     xGA: number;
     expectedGoals: number;

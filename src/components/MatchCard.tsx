@@ -184,10 +184,10 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                     </div>}
                             </div>
                             {/* {activeTab === "today" && <p className="w-full text-sm text-center md:text-start">Forma Reciente</p>} */}
-                            <div className="flex gap-4 flex-col lg:flex-row">
+                            <div className="flex gap-4  lg:flex-row">
 
 
-                                <div className=" w-full h-auto my-2  flex flex-col  items-center flex-wrap justify-center gap-4">
+                                <div className=" w-full h-auto my-2  flex   items-center flex-wrap justify-center gap-4">
                                     {activeTab === "today" && <p className="w-full text-sm text-center md:text-end">Ultimos juegos </p>}
 
                                     {
@@ -210,7 +210,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
 
                                     }
                                 </div>
-                                <div className=" w-full h-auto my-2  flex flex-col  items-center flex-wrap justify-center gap-4">
+                                <div className=" w-full h-auto my-2  flex   items-center flex-wrap justify-center gap-4">
                                     {activeTab === "today" && <p className="w-full text-sm text-center md:text-end">Ultimos juegos como local</p>}
 
                                     {
@@ -251,7 +251,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
 
 
                             </div>
-                            <div className="flex gap-4 flex-col lg:flex-row">
+                            <div className="flex gap-4  lg:flex-row">
 
                                 <div className=" w-full h-auto my-2  flex flex-col  items-center flex-wrap justify-center gap-4">
                                     {activeTab === "today" && <p className="w-full text-sm text-center md:text-end">Ultimos juegos</p>}

@@ -16,6 +16,7 @@ import { ParlayCard } from "./ParlayCard";
 // ============================================================
 
 interface TeamMetrics {
+    golesPerPartido: number;
     xG: number;
     xGA: number;
     expectedGoals: number;

@@ -159,6 +159,8 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
             // console.log({ xGTotalLocal, xGATotalLocal })
             // console.log({ xGTotalesVisita, xGATotalVisita })
 
+            const golesLocal = weightedBlend(homeTodos.goalsFor, homeU5.goalsFor, homeU5LV.goalsFor, weights)
+            const golesVisita = weightedBlend(awayTodos.goalsFor, awayU5.goalsFor, awayU5LV.goalsFor, weights)
             const golesRecibidosLocal = weightedBlend(homeTodos.goalsAgainst, homeU5.goalsAgainst, homeU5LV.goalsAgainst, weights)
             const golesRecibidosVisita = weightedBlend(awayTodos.goalsAgainst, awayU5.goalsAgainst, awayU5LV.goalsAgainst, weights)
             // ---- Goles esperados (histórico de goles reales, blend ponderado) ----
@@ -433,10 +435,11 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
 
 
 
-            const buildTeamMetrics = (xG: number, xGA: number, expectedGoals: number, shotFactor: number, offensiveEfficiency: number, efficiency: number, precisionDrop: number, corners: number, shots: number, shotOT: number): TeamMetrics => ({
+            const buildTeamMetrics = (goles: number, xG: number, xGA: number, expectedGoals: number, shotFactor: number, offensiveEfficiency: number, efficiency: number, precisionDrop: number, corners: number, shots: number, shotOT: number): TeamMetrics => ({
+                golesPerPartido: +goles.toFixed(3),
                 xG: +xG.toFixed(3),
                 xGA: +xGA.toFixed(3),
-                expectedGoals: +expectedGoals.toFixed(3),
+                expectedGoals: + expectedGoals.toFixed(3),
                 shotFactor: +shotFactor.toFixed(3),
                 offensiveEfficiency: +offensiveEfficiency.toFixed(3),
                 efficiency: +efficiency.toFixed(3),
@@ -446,10 +449,10 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
                 shotsOT: +shotOT.toFixed(3)
 
             });
-
             const expectedGoals = Number((homeLambda + awayLambda).toFixed(3));
             const metrics: MatchMetrics = {
                 home: buildTeamMetrics(
+                    golesLocal,
                     xGTotalLocal,
                     xGATotalLocal,
                     homeLambda,
@@ -459,10 +462,11 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
                     precisionDropLocal,
                     expectedHomeCorners,
                     shotsHomePonderado,
-                    shotsOTHomePonderado
+                    shotsOTHomePonderado,
                 ),
 
                 away: buildTeamMetrics(
+                    golesVisita,
                     xGTotalesVisita,
                     xGATotalVisita,
                     awayLambda,
@@ -472,7 +476,7 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
                     precisionDropAway,
                     expectedAwayCorners,
                     shotsAwayPonderado,
-                    shotsOTAwayPonderado
+                    shotsOTAwayPonderado,
                 ),
 
                 match: {
@@ -482,6 +486,8 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
                     corners: +expectedCorners.toFixed(3)
                 },
             };
+            console.log({ homeTodos, homeU5, homeU5LV, match: match.matchUrl })
+
             return {
                 matchUrl: match.matchUrl,
                 competitionName: game.competitionDisplayName,
