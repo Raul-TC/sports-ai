@@ -214,7 +214,7 @@ export type ShortStatusText = "Final" | "En Tiempo Extra";
 
 export type StandingsName = "Posiciones";
 
-export type StatusText = "Finalizado" | "En Tiempo Extra";
+export type StatusText = "Finalizado" | "En Tiempo Extra" | "Por penaltis" | "En Juego" | "Programado" | "Suspendido" | "Cancelado";
 
 export interface Paging {
     previousPage: string;

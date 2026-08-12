@@ -84,7 +84,7 @@ export function TeamStatsBlock({ team, title }: TeamStatsBlockProps) {
             description: "Goles esperados según la calidad de las ocasiones generadas.",
         },
         {
-            label: "Gol Esp Con",
+            label: "Gol Esp recibidos",
             value: m.xGA.toFixed(2),
             icon: Target,
             description: "Goles esperados encajados según las ocasiones concedidas.",
