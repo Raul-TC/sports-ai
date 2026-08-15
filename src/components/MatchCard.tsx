@@ -34,24 +34,6 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
     const awayLambda = r.prediction.awayExpectedGoals || 0;
     const topScoresTwo = getTopScoreProbabilities(homeLambda, awayLambda, 10, 10);
 
-    // console.log({ r })
-    // const trap = isMatchTrap(r);
-    // const { warnings, excludedMarkets } = getWarningsAndExclusions(
-    //     trap,
-    //     r.home.teamName,
-    //     r.away.teamName
-    // );
-
-    // const formatTime = (iso: string) => {
-    //     const date = new Date(iso);
-    //     return date.toLocaleString("es-ES", {
-    //         day: "2-digit",
-    //         month: "short",
-    //         hour: "2-digit",
-    //         minute: "2-digit",
-    //     });
-    // };
-
     // Dentro del map
     const gate = useMemo(
         () => gateEngine(r.home, r.away, r.prediction),
@@ -113,40 +95,14 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
         });
     };
 
-    const getFavorite = () => {
-        const { homeWin, draw, awayWin } = r.prediction.moneyline;
-        if (homeWin.prob > draw.prob && homeWin.prob > awayWin.prob) return "home";
-        if (awayWin.prob > homeWin.prob && awayWin.prob > draw.prob) return "away";
-        return "draw";
-    };
-
-    const favorite = getFavorite();
-    const favTeam =
-        favorite === "home"
-            ? r.home.teamName
-            : favorite === "away"
-                ? r.away.teamName
-                : "Empate";
-
-    const trapLevelColor =
-        trap.level === "high"
-            ? "text-red-600 dark:text-red-400 border-red-300 dark:border-red-700 bg-red-50 dark:bg-red-900/20"
-            : trap.level === "medium"
-                ? "text-amber-600 dark:text-amber-400 border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-900/20"
-                : trap.level === "low"
-                    ? "text-yellow-600 dark:text-yellow-400 border-yellow-300 dark:border-yellow-700 bg-yellow-50 dark:bg-yellow-900/20"
-                    : "hidden";
-
-
     const { plays, altas, ratoneras, medias } = getBestPicks(r.prediction, r.home.teamName, r.away.teamName, trap.level);
-    // const scoredPicks = scorePicks(r.home, r.away, r.prediction, r.volatility);
-    // const bestPick = scoredPicks.length > 0 ? scoredPicks : null;
+
     const homeGames = r.data && r.data[0].games.filter(el => el.competitionDisplayName !== 'Partido Amistoso' && (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') && (el.homeCompetitor.id === r.home.id || el.awayCompetitor.id === r.home.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
     const homeGamesLocal = r.data && r.data[0].games.filter(el => el.competitionDisplayName !== 'Partido Amistoso' && (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') && (el.homeCompetitor.id === r.home.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
     const awayGames = r.data && r.data[1].games.filter(el => el.competitionDisplayName !== 'Partido Amistoso' && (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') && (el.homeCompetitor.id === r.away.id || el.awayCompetitor.id === r.away.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
     const awayGamesAway = r.data && r.data[1].games.filter(el => el.competitionDisplayName !== 'Partido Amistoso' && (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') && (el.awayCompetitor.id === r.away.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
 
-    console.log({ homeGames: r.data })
+    console.log({ r })
     return (
 
         <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-sm border border-gray-100 dark:border-neutral-800 overflow-hidden transition-all duration-200 hover:shadow-md">
@@ -186,8 +142,8 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                             <div className="flex gap-4  lg:flex-row">
 
 
-                                <div className=" w-full h-auto my-2  flex   items-center flex-wrap justify-center gap-4">
-                                    {activeTab === "today" || activeTab === "future" && <p className="w-full text-sm text-center md:text-end">Ultimos juegos </p>}
+                                <div className=" w-full h-auto my-2  flex items-center flex-wrap justify-center gap-4">
+                                    {((activeTab === "today" || activeTab === "future") && homeGames) && <p className="w-full text-sm text-center ">Ultimos juegos</p>}
 
                                     {
                                         homeGames ? homeGames.map(el => (
@@ -212,12 +168,21 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                                 {el.statusText === 'Por penaltis' && <p className="text-[10px] w-full text-gray-600 dark:text-gray-400">{el.winDescription}</p>}
 
                                             </div>))
-                                            : (activeTab === "today" || activeTab === "future" && <h2>Cargando Ultimos Partidos</h2>)
+                                            : ((activeTab === "today" || activeTab === "future") && <div>
+                                                <p className="w-full text-sm text-center text-gray-600 dark:text-gray-400 ">Cargando Ultimos Partidos</p>
+                                                <div role="status" className="mx-auto w-full flex items-center">
+                                                    <svg aria-hidden="true" className="inline w-8 h-8 text-neutral-tertiary animate-spin mx-auto" viewBox="0 0 100 101" fill="purple" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
+                                                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
+                                                    </svg>
+                                                    {/* <span className="sr-only">Loading...</span> */}
+                                                </div>
+                                            </div>)
 
                                     }
                                 </div>
-                                <div className=" w-full h-auto my-2  flex   items-center flex-wrap justify-center gap-4">
-                                    {activeTab === "today" || activeTab === "future" && <p className="w-full text-sm text-center md:text-end">Ultimos juegos como local</p>}
+                                {homeGamesLocal && <div className=" w-full h-auto my-2 flex items-center flex-wrap justify-center gap-4">
+                                    {((activeTab === "today" || activeTab === "future") && homeGames) && <p className="w-full text-sm text-center ">Ultimos juegos en local</p>}
 
                                     {
                                         homeGamesLocal && homeGamesLocal.map(el => (
@@ -244,7 +209,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                             </div>))
 
                                     }
-                                </div>
+                                </div>}
 
                             </div>
                         </div>
@@ -252,8 +217,6 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                         <div className={`flex items-center justify-center flex-col mx-auto md:m-0 md:w-1/2`}>
                             <div className="flex items-center gap-2 justify-center font-medium text-gray-800 dark:text-gray-100 mx-auto w-full">
                                 {r.result && <div className="flex flex-col items-center justify-center mx-auto">
-
-
                                     <span className="text-sm font-bold text-gray-600 dark:text-gray-400">
                                         {r.result.awayScore}
                                     </span>
@@ -267,8 +230,8 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                             <div className="flex gap-4  lg:flex-row">
 
                                 <div className=" w-full h-auto my-2  flex flex-col  items-center flex-wrap justify-center gap-4">
-                                    {activeTab === "today" || activeTab === "future" ? <p className="w-full text-sm text-center md:text-end">Ultimos juegos</p> : null}
 
+                                    {((activeTab === "today" || activeTab === "future") && awayGames) && <p className="w-full text-sm text-center ">Ultimos juegos</p>}
                                     {awayGames ? awayGames.map(el => (
                                         <div key={el.id} className="text-gray-600 dark:text-gray-400 flex flex-col items-center gap-1 w-full justify-center">
                                             <div className="flex flex-col items-center justify-center gap-1">
@@ -291,14 +254,23 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                             {el.statusText === 'Por penaltis' && <span className="text-[10px] text-gray-600 dark:text-gray-400">{el.winDescription}</span>}
 
                                         </div>
-                                    )) : (activeTab === "today" || activeTab === "future" && <h2>Cargando Ultimos Partidos</h2>)
-
+                                    )) : ((activeTab === "today" || activeTab === "future") && <div>
+                                        <p className="w-full text-sm text-center text-gray-600 dark:text-gray-400 ">Cargando Ultimos Partidos</p>
+                                        <div role="status" className="mx-auto w-full flex items-center">
+                                            <svg aria-hidden="true" className="inline w-8 h-8 text-neutral-tertiary animate-spin mx-auto" viewBox="0 0 100 101" fill="purple" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
+                                                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
+                                            </svg>
+                                            {/* <span className="sr-only">Loading...</span> */}
+                                        </div>
+                                    </div>
+                                    )
                                     }
                                 </div>
-                                <div className=" w-full h-auto my-2  flex flex-col  items-center flex-wrap justify-center gap-4">
+                                {awayGamesAway && <div className=" w-full h-auto my-2  flex flex-col  items-center flex-wrap justify-center gap-4">
 
-                                    {activeTab === "today" || activeTab === "future" && <p className="w-full text-sm text-center md:text-end">Ultimos juegos como visitante</p>}
-                                    {awayGamesAway ? awayGamesAway.map(el => (
+                                    {((activeTab === "today" || activeTab === "future") && awayGamesAway) && <p className="w-full text-sm text-center">Ultimos juegos como visitante</p>}
+                                    {awayGamesAway && awayGamesAway.map(el => (
                                         <div key={el.id} className="text-gray-600 dark:text-gray-400 flex flex-col items-center gap-1 w-full justify-center">
                                             <div className="w-full mx-auto">
 
@@ -318,10 +290,11 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                             </div>
                                             {el.statusText === 'Por penaltis' && <span className="text-[10px] text-gray-600 dark:text-gray-400">{el.winDescription}</span>}
                                         </div>
-                                    )) : (activeTab === "today" || activeTab === "future" && <h2>Cargando Ultimos Partidos</h2>)
+                                    ))
+
 
                                     }
-                                </div>
+                                </div>}
                             </div>
 
                             {/* {r.accuracy && (
@@ -338,8 +311,9 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
 
                 {/* Fila 3: Estadísticas completas */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
-                    <TeamStatsBlock team={r.home} title="Local" />
-                    <TeamStatsBlock team={r.away} title="Visitante" />
+                    <TeamStatsBlock team={r.home} goalLines={r.prediction.teamGoals.home} title={r.home.teamName} />
+                    <TeamStatsBlock team={r.away} goalLines={r.prediction.teamGoals.away} title={r.away.teamName} />
+
                 </div>
 
                 {/* Fila 4: Marcadores exactos */}
@@ -386,10 +360,13 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                     Confianza: {recommendation.pick.confidence}
                                 </span>
                                 <span className="bg-indigo-50 dark:bg-indigo-900/20 text-[10px]">
-                                    Probabilidad: {Number(recommendation.pick.score).toFixed(0)}%
+                                    Probabilidad: {((1 / recommendation.pick.odd) * 100).toFixed(1)}
                                 </span>
                                 <span className="bg-indigo-50 dark:bg-indigo-900/20 text-[10px]">
                                     Momio: {recommendation.pick.odd}
+                                </span>
+                                <span className="bg-indigo-50 dark:bg-indigo-900/20 text-[10px]">
+                                    Razon: {recommendation.pick.reason}
                                 </span>
                                 {/* Badge de acierto/fallo si es partido pasado y tenemos resultado */}
                                 {/* {activeTab === "past" && (r as any).result && (
@@ -416,7 +393,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                             key={i}
                                             className="text-[10px] bg-gray-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded-full"
                                         >
-                                            {alt.market}: {alt.selection} (prob: {Number(alt.score).toFixed(0)}%) (momio: {alt.odd})
+                                            {alt.market}: {alt.selection} (prob: {((1 / alt.odd) * 100).toFixed(1)}%) (momio: {alt.odd})
                                         </span>
 
                                     ))}
@@ -425,21 +402,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                         </div>
                     </div>
                 )}
-                {/* 
-                {trap.isTrap && (
-                    <span
-                        className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border ${trapLevelColor} cursor-help`}
-                        title={`Nivel de riesgo: ${trap.level.toUpperCase()}\n\n${trap.details
-                            .map((d) => `${d.team.toUpperCase()}: ${d.explanation || d.reason}`)
-                            .join("\n\n")}`}
-                    >
-                        <ShieldAlert className="w-3 h-3" />
-                        Trampa {trap.level}
-                    </span>
-                )} */}
 
-                {/* NUEVA SECCIÓN: Riesgo y Pick Recomendado */}
-                {/* NUEVA SECCIÓN: Riesgo y Pick Recomendado (siempre visible) */}
                 {/* Riesgo y Pick Recomendado + Jugadas */}
                 <div className="mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800 space-y-2">
                     <div className="flex items-start gap-2">

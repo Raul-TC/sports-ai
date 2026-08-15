@@ -5,6 +5,13 @@ import { Goal, Target, Crosshair, CornerDownRight, Activity, Gauge, BarChart } f
 interface TeamStatsBlockProps {
     team: TeamInfo;
     title: string;
+    goalLines: {
+        line: number
+        overOdd: number
+        overProb: number
+        underOdd: number
+        underProb: number
+    }[]
 }
 
 const getTrend = (value: number) => {
@@ -13,7 +20,7 @@ const getTrend = (value: number) => {
     return "neutral";
 };
 
-export function TeamStatsBlock({ team, title }: TeamStatsBlockProps) {
+export function TeamStatsBlock({ team, title, goalLines }: TeamStatsBlockProps) {
     const m = team.metrics;
     if (!m) return <div className="text-xs text-gray-400">Sin datos</div>;
 
@@ -121,6 +128,11 @@ export function TeamStatsBlock({ team, title }: TeamStatsBlockProps) {
                         : "El equipo marca lo esperado según sus ocasiones.",
         },
     ];
+    // const baseClass = secondary
+    //     ? "bg-gray-50/70 dark:bg-neutral-800/70 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-neutral-700"
+    //     : isTrap
+    //         ? "bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800"
+    //         : "bg-gray-50 dark:bg-neutral-800 text-gray-700 dark:text-gray-300 border-gray-100 dark:border-neutral-700";
 
     const secondaryStats = [
         {
@@ -191,6 +203,63 @@ export function TeamStatsBlock({ team, title }: TeamStatsBlockProps) {
                         indicator={stat.indicator}
                         indicatorColor={stat.indicatorColor}
                     />
+                ))}
+            </div>
+            <div className="flex flex-wrap gap-1">
+                <p className="w-full text-xs font-medium text-gray-500 dark:text-gray-400">Linea de goles</p>
+                <p className="w-full text-xs font-medium text-gray-500 dark:text-gray-400">Over</p>
+
+                {goalLines.map((stat, idx) => (
+                    <span key={idx}
+                        className={`relative inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs border  whitespace-nowrap transition-colors cursor-pointer text-gray-400`}
+                    // onClick={handleClick}
+                    // title={description}
+                    >
+                        {/* {Icon && <Icon className="w-3 h-3 text-gray-400" />} */}
+                        <Goal className="w-3 h-3 text-gray-400" />
+                        <span className="font-medium tabular-nums">{stat.line}</span>
+                        <span className="text-[10px] opacity-75">momio: {stat.overOdd}</span>
+                        <span className="text-[10px] opacity-75">{stat.overProb}%</span>
+                        {/* {trend && trendIcon} */}
+                        {/* {indicator && (
+                            <span className={`text-[10px] font-medium ${indicatorColor || "text-gray-500"}`}>
+                                {indicator}
+                            </span>
+                        )} */}
+                        {/* {description && <Info className="w-3 h-3 text-gray-400 opacity-50" />} */}
+
+                        {/* {showTooltip && description && (
+                            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 px-2 py-1 bg-gray-800 text-white text-xs rounded shadow-lg z-10 whitespace-normal max-w-[200px] text-center pointer-events-none">
+                                {description}
+                            </div>
+                        )} */}
+                    </span>
+                ))}
+                <p className="w-full text-xs font-medium text-gray-500 dark:text-gray-400">Under</p>
+                {goalLines.map((stat, idx) => (
+                    <span key={idx}
+                        className={`relative inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs border  whitespace-nowrap transition-colors cursor-pointer text-gray-400`}
+                    // onClick={handleClick}
+                    // title={description}
+                    >
+                        {<Goal className="w-3 h-3 text-gray-400" />}
+                        <span className="font-medium tabular-nums">{stat.line}</span>
+                        <span className="text-[10px] opacity-75">momio: {stat.underOdd}</span>
+                        <span className="text-[10px] opacity-75">{stat.underProb}%</span>
+                        {/* {trend && trendIcon} */}
+                        {/* {indicator && (
+                            <span className={`text-[10px] font-medium ${indicatorColor || "text-gray-500"}`}>
+                                {indicator}
+                            </span>
+                        )} */}
+                        {/* {description && <Info className="w-3 h-3 text-gray-400 opacity-50" />} */}
+
+                        {/* {showTooltip && description && (
+                            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 px-2 py-1 bg-gray-800 text-white text-xs rounded shadow-lg z-10 whitespace-normal max-w-[200px] text-center pointer-events-none">
+                                {description}
+                            </div>
+                        )} */}
+                    </span>
                 ))}
             </div>
         </div>
