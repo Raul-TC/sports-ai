@@ -82,7 +82,7 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
     }
 
     useEffect(() => {
-        if (activeTab !== "today") return;
+        if (activeTab !== "today" && activeTab !== "future") return;
 
         const pending = visiblePredictions.filter(
             match => !matchesWithData.some(m => m.matchUrl === match.matchUrl)
@@ -276,7 +276,7 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
             ) : (
                 <>
                     {/* Parlays Recomendados */}
-                    {parlayResult && (activeTab === "today" || activeTab === "future") && parlayResult.parlays.length > 0 && (
+                    {/* {parlayResult && (activeTab === "today" || activeTab === "future") && parlayResult.parlays.length > 0 && (
                         <div className="mt-4">
                             <div className="flex items-center justify-between">
                                 <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-100 flex items-center gap-2">
@@ -292,7 +292,7 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
                                 ))}
                             </div>
                         </div>
-                    )}
+                    )} */}
                     <p className="text-xs text-gray-400 dark:text-gray-500 mb-4">
                         Mostrando {visiblePredictions.length} de {filteredPredictions.length} partidos
                     </p>
