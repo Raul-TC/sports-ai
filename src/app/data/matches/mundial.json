@@ -288779,11 +288779,11 @@
             "id": 4750509,
             "homeCompetitor": {
               "id": 140,
-              "name": "Alavés"
+              "name": "Getafe"
             },
             "awayCompetitor": {
               "id": 168,
-              "name": "Getafe"
+              "name": "Alavés"
             },
             "startTime": "2026-08-15T11:30:00-06:00",
             "statusGroup": 2,
@@ -288793,11 +288793,11 @@
         "competitors": [
           {
             "id": 140,
-            "name": "Alavés"
+            "name": "Getafe"
           },
           {
             "id": 168,
-            "name": "Getafe"
+            "name": "Alavés"
           }
         ]
       },
@@ -288935,11 +288935,11 @@
             "id": 4750509,
             "homeCompetitor": {
               "id": 140,
-              "name": "Alavés"
+              "name": "Getafe"
             },
             "awayCompetitor": {
               "id": 168,
-              "name": "Getafe"
+              "name": "Alavés"
             },
             "startTime": "2026-08-15T11:30:00-06:00",
             "statusGroup": 2,
@@ -288949,11 +288949,11 @@
         "competitors": [
           {
             "id": 140,
-            "name": "Alavés"
+            "name": "Getafe"
           },
           {
             "id": 168,
-            "name": "Getafe"
+            "name": "Alavés"
           }
         ]
       },
@@ -289091,11 +289091,11 @@
             "id": 4750509,
             "homeCompetitor": {
               "id": 140,
-              "name": "Alavés"
+              "name": "Getafe"
             },
             "awayCompetitor": {
               "id": 168,
-              "name": "Getafe"
+              "name": "Alavés"
             },
             "startTime": "2026-08-15T11:30:00-06:00",
             "statusGroup": 2,
@@ -289105,11 +289105,11 @@
         "competitors": [
           {
             "id": 140,
-            "name": "Alavés"
+            "name": "Getafe"
           },
           {
             "id": 168,
-            "name": "Getafe"
+            "name": "Alavés"
           }
         ]
       }
@@ -289725,11 +289725,11 @@
             "id": 4734623,
             "homeCompetitor": {
               "id": 698,
-              "name": "AZ Alkmaar"
+              "name": "Utrecht"
             },
             "awayCompetitor": {
               "id": 699,
-              "name": "Utrecht"
+              "name": "AZ Alkmaar"
             },
             "startTime": "2026-08-15T10:45:00-06:00",
             "statusGroup": 2,
@@ -289739,11 +289739,11 @@
         "competitors": [
           {
             "id": 698,
-            "name": "AZ Alkmaar"
+            "name": "Utrecht"
           },
           {
             "id": 699,
-            "name": "Utrecht"
+            "name": "AZ Alkmaar"
           }
         ]
       },
@@ -289881,11 +289881,11 @@
             "id": 4734623,
             "homeCompetitor": {
               "id": 698,
-              "name": "AZ Alkmaar"
+              "name": "Utrecht"
             },
             "awayCompetitor": {
               "id": 699,
-              "name": "Utrecht"
+              "name": "AZ Alkmaar"
             },
             "startTime": "2026-08-15T10:45:00-06:00",
             "statusGroup": 2,
@@ -289895,11 +289895,11 @@
         "competitors": [
           {
             "id": 698,
-            "name": "AZ Alkmaar"
+            "name": "Utrecht"
           },
           {
             "id": 699,
-            "name": "Utrecht"
+            "name": "AZ Alkmaar"
           }
         ]
       },
@@ -290037,11 +290037,11 @@
             "id": 4734623,
             "homeCompetitor": {
               "id": 698,
-              "name": "AZ Alkmaar"
+              "name": "Utrecht"
             },
             "awayCompetitor": {
               "id": 699,
-              "name": "Utrecht"
+              "name": "AZ Alkmaar"
             },
             "startTime": "2026-08-15T10:45:00-06:00",
             "statusGroup": 2,
@@ -290051,11 +290051,11 @@
         "competitors": [
           {
             "id": 698,
-            "name": "AZ Alkmaar"
+            "name": "Utrecht"
           },
           {
             "id": 699,
-            "name": "Utrecht"
+            "name": "AZ Alkmaar"
           }
         ]
       }
@@ -290529,6 +290529,479 @@
           {
             "id": 904,
             "name": "Rio Ave"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "matchUrl": "https://www.365scores.com/es/football/match/laliga-11/rayo-vallecano-sevilla-135-174-11#id=4750522",
+    "stats": {
+      "todos": {
+        "statistics": [
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 135,
+            "value": "1.27",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 135,
+            "value": "1.59",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 135,
+            "value": "0.98",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 135,
+            "value": "1.45",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 135,
+            "value": "11.38",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 135,
+            "value": "3.51",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 135,
+            "value": "4.81",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 174,
+            "value": "1.03",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 174,
+            "value": "1.19",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 174,
+            "value": "1.28",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 174,
+            "value": "1.26",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 174,
+            "value": "13.61",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 174,
+            "value": "4.61",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 174,
+            "value": "5.81",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          }
+        ],
+        "games": [
+          {
+            "id": 4750522,
+            "homeCompetitor": {
+              "id": 135,
+              "name": "Sevilla"
+            },
+            "awayCompetitor": {
+              "id": 174,
+              "name": "Rayo Vallecano"
+            },
+            "startTime": "2026-08-15T13:30:00-06:00",
+            "statusGroup": 2,
+            "competitionDisplayName": "LaLiga"
+          }
+        ],
+        "competitors": [
+          {
+            "id": 135,
+            "name": "Rayo Vallecano"
+          },
+          {
+            "id": 174,
+            "name": "Sevilla"
+          }
+        ]
+      },
+      "ultimos5": {
+        "statistics": [
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 135,
+            "value": "1.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 135,
+            "value": "1.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 135,
+            "value": "0.89",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 135,
+            "value": "0.84",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 135,
+            "value": "13.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 135,
+            "value": "3.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 135,
+            "value": "4.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 174,
+            "value": "1.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 174,
+            "value": "1",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 174,
+            "value": "1.38",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 174,
+            "value": "1.33",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 174,
+            "value": "14.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 174,
+            "value": "5.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 174,
+            "value": "4.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          }
+        ],
+        "games": [
+          {
+            "id": 4750522,
+            "homeCompetitor": {
+              "id": 135,
+              "name": "Sevilla"
+            },
+            "awayCompetitor": {
+              "id": 174,
+              "name": "Rayo Vallecano"
+            },
+            "startTime": "2026-08-15T13:30:00-06:00",
+            "statusGroup": 2,
+            "competitionDisplayName": "LaLiga"
+          }
+        ],
+        "competitors": [
+          {
+            "id": 135,
+            "name": "Rayo Vallecano"
+          },
+          {
+            "id": 174,
+            "name": "Sevilla"
+          }
+        ]
+      },
+      "ultimos5LocalVisita": {
+        "statistics": [
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 135,
+            "value": "1.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 135,
+            "value": "1",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 135,
+            "value": "1.22",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 135,
+            "value": "0.69",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 135,
+            "value": "14.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 135,
+            "value": "3.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 135,
+            "value": "4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 174,
+            "value": "1.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 174,
+            "value": "1",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 174,
+            "value": "1.59",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 174,
+            "value": "1.27",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 174,
+            "value": "19.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 174,
+            "value": "5.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 174,
+            "value": "7",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          }
+        ],
+        "games": [
+          {
+            "id": 4750522,
+            "homeCompetitor": {
+              "id": 135,
+              "name": "Sevilla"
+            },
+            "awayCompetitor": {
+              "id": 174,
+              "name": "Rayo Vallecano"
+            },
+            "startTime": "2026-08-15T13:30:00-06:00",
+            "statusGroup": 2,
+            "competitionDisplayName": "LaLiga"
+          }
+        ],
+        "competitors": [
+          {
+            "id": 135,
+            "name": "Sevilla"
+          },
+          {
+            "id": 174,
+            "name": "Rayo Vallecano"
           }
         ]
       }
