@@ -63,7 +63,6 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
     const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
     const { activeTab, setActiveTab, filteredPredictions, todayCount, futureCount, pastCount } = useMatchFilters(predictions, results);
     const [matchesWithData, setMatchesWithData] = useState<any[]>([]);
-    const [parlayResult, setParlayResult] = useState<ParlayEngineResult | null>(null);
 
     const visiblePredictions = useMemo(() => {
         return filteredPredictions.slice(0, visibleCount);
@@ -77,7 +76,7 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
     // FETCH DE DATOS DE 365SCORES PARA ÚLTIMOS PARTIDOS
     // ============================================================
     async function fetchMatchData(id: number) {
-        const res = await fetch(`https://webws.365scores.com/web/games/results/?appTypeId=5&langId=14&timezoneName=America%2FMexico_City&competitors=${id}&showOdds=true&includeTopBettingOpportunity=1&topBookmaker=4`);
+        const res = await fetch(`https://webws.365scores.com/web/games/results/?appTypeId=5&langId=14&timezoneName=America%2FMexico_City&competitors=${id}`);
         return res.json();
     }
 
@@ -143,63 +142,9 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
     }, [activeTab, predictions]);
 
     // ============================================================
-    // PARLAY ENGINE: Generar parlays a partir de los picks
-    // ============================================================
-    useEffect(() => {
-        if (visiblePredictions.length === 0) {
-            setParlayResult(null);
-            return;
-        }
-
-        // 1. Recolectar picks de todos los partidos visibles
-        const candidates: ParlayCandidate[] = [];
-
-        for (const match of visiblePredictions) {
-            const picks = scoreEngine({
-                home: match.home,
-                away: match.away,
-                pred: match.prediction,
-                volatility: match.volatility,
-            });
-
-            // Tomar los 5 mejores picks por partido
-            const topPicks = picks.slice(0, 5);
-
-            for (const pick of topPicks) {
-                candidates.push({
-                    pick,
-                    matchUrl: match.matchUrl,
-                    homeTeam: match.home.teamName,
-                    awayTeam: match.away.teamName,
-                });
-            }
-        }
-
-        // console.log(`📊 Total picks recolectados para parlays: ${candidates.length}`);
-
-        if (candidates.length === 0) {
-            setParlayResult(null);
-            return;
-        }
-
-        // 2. Ejecutar el parlay engine con los candidatos
-        const result = parlayEngine(candidates, {
-            minPickScore: 60,        // Bajado de 70 para obtener más picks
-            maxPickOdd: 3.00,        // Subido de 2.50 para permitir más combinaciones
-            minTotalOdd: 2.00,
-            maxTotalOdd: 10.00,
-            topParlays: 10,
-            maxPicksPerParlay: 6,
-        });
-
-        // console.log(`🎯 Parlays generados: ${result.parlays.length}`);
-        setParlayResult(result);
-    }, [visiblePredictions]);
-
-    // ============================================================
     // RENDER
     // ============================================================
-    const matches = activeTab === 'today' || activeTab === 'future' && matchesWithData.length > 0 ? matchesWithData : visiblePredictions;
+    const matches = (activeTab === 'today' || activeTab === 'future') && matchesWithData.length > 0 ? matchesWithData : visiblePredictions;
 
     return (
         <div className="max-w-4xl mx-auto px-4 py-6 space-y-4">
@@ -245,25 +190,6 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
                 pastCount={pastCount}
             />
 
-            {/* Parlays Recomendados */}
-            {/* {parlayResult && parlayResult.parlays.length > 0 && (
-                <div className="mt-4">
-                    <div className="flex items-center justify-between">
-                        <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-100 flex items-center gap-2">
-                            🎯 Parlays Recomendados (Cuota 2.00 - 4.00)
-                        </h3>
-                        <span className="text-xs text-gray-400">
-                            {parlayResult.parlays.length} combinaciones disponibles
-                        </span>
-                    </div>
-                    <div className="mt-2 space-y-3 max-h-96 overflow-y-auto">
-                        {parlayResult.parlays.slice(0, 10).map((parlay) => (
-                            <ParlayCard key={parlay.id} parlay={parlay} />
-                        ))}
-                    </div>
-                </div>
-            )} */}
-
             {/* Lista de partidos */}
             {filteredPredictions.length === 0 ? (
                 <div className="text-center py-12 text-gray-400 dark:text-gray-500">
@@ -275,37 +201,24 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
                 </div>
             ) : (
                 <>
-                    {/* Parlays Recomendados */}
-                    {/* {parlayResult && (activeTab === "today" || activeTab === "future") && parlayResult.parlays.length > 0 && (
-                        <div className="mt-4">
-                            <div className="flex items-center justify-between">
-                                <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-100 flex items-center gap-2">
-                                    🎯 Parlays Recomendados (Cuota 2.00 - 4.00)
-                                </h3>
-                                <span className="text-xs text-gray-400">
-                                    {parlayResult.parlays.length} combinaciones disponibles
-                                </span>
-                            </div>
-                            <div className="mt-2 space-y-3 max-h-96 overflow-y-auto">
-                                {parlayResult.parlays.slice(0, 10).map((parlay) => (
-                                    <ParlayCard key={parlay.id} parlay={parlay} />
-                                ))}
-                            </div>
-                        </div>
-                    )} */}
                     <p className="text-xs text-gray-400 dark:text-gray-500 mb-4">
                         Mostrando {visiblePredictions.length} de {filteredPredictions.length} partidos
                     </p>
 
-                    {matches.map((r) => (
-                        <MatchCard
-                            key={r.matchUrl}
+                    {matches.map((r) => {
+                        // console.log("Renderizando MatchCard para:", r.matchUrl);
+                        return <MatchCard
+                            key={r.matchUrl
+                            }
                             prediction={r}
                             onToggle={toggleMatch}
                             isSelected={selectedMatchUrl === r.matchUrl}
                             activeTab={activeTab}
                         />
-                    ))}
+                    }
+
+
+                    )}
 
                     <div ref={loaderRef} className="py-4 flex justify-center items-center">
                         {hasMore ? (

@@ -11,6 +11,7 @@ export default async function HomePage() {
   // const rawMatches = await loadMatchesFromDisk();
   // const matches = computeAllMatches(data)
   const matches = unifyMatchStats(data as any)
+  const results = Array.isArray(dataResults) ? dataResults : [];
 
   // const matches = parseExternalStats(rawMatches);
 
@@ -40,7 +41,7 @@ export default async function HomePage() {
           <code>data/matches/</code> en la raíz del proyecto y recarga la página.
         </p>
       ) : (
-        <MatchesExplorer predictions={predictions} results={dataResults} />
+        <MatchesExplorer predictions={predictions} results={results} />
       )}
     </main>
   );
