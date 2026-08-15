@@ -141,7 +141,6 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
     const { plays, altas, ratoneras, medias } = getBestPicks(r.prediction, r.home.teamName, r.away.teamName, trap.level);
     // const scoredPicks = scorePicks(r.home, r.away, r.prediction, r.volatility);
     // const bestPick = scoredPicks.length > 0 ? scoredPicks : null;
-
     const homeGames = r.data && r.data[0].games.filter(el => el.competitionDisplayName !== 'Partido Amistoso' && (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') && (el.homeCompetitor.id === r.home.id || el.awayCompetitor.id === r.home.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
     const homeGamesLocal = r.data && r.data[0].games.filter(el => el.competitionDisplayName !== 'Partido Amistoso' && (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') && (el.homeCompetitor.id === r.home.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
     const awayGames = r.data && r.data[1].games.filter(el => el.competitionDisplayName !== 'Partido Amistoso' && (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') && (el.homeCompetitor.id === r.away.id || el.awayCompetitor.id === r.away.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
@@ -188,7 +187,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
 
 
                                 <div className=" w-full h-auto my-2  flex   items-center flex-wrap justify-center gap-4">
-                                    {activeTab === "today" && <p className="w-full text-sm text-center md:text-end">Ultimos juegos </p>}
+                                    {activeTab === "today" || activeTab === "future" && <p className="w-full text-sm text-center md:text-end">Ultimos juegos </p>}
 
                                     {
                                         homeGames ? homeGames.map(el => (
@@ -213,12 +212,12 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                                 {el.statusText === 'Por penaltis' && <p className="text-[10px] w-full text-gray-600 dark:text-gray-400">{el.winDescription}</p>}
 
                                             </div>))
-                                            : (activeTab === "today" && <h2>Cargando Ultimos Partidos</h2>)
+                                            : (activeTab === "today" || activeTab === "future" && <h2>Cargando Ultimos Partidos</h2>)
 
                                     }
                                 </div>
                                 <div className=" w-full h-auto my-2  flex   items-center flex-wrap justify-center gap-4">
-                                    {activeTab === "today" && <p className="w-full text-sm text-center md:text-end">Ultimos juegos como local</p>}
+                                    {activeTab === "today" || activeTab === "future" && <p className="w-full text-sm text-center md:text-end">Ultimos juegos como local</p>}
 
                                     {
                                         homeGamesLocal && homeGamesLocal.map(el => (
@@ -268,7 +267,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                             <div className="flex gap-4  lg:flex-row">
 
                                 <div className=" w-full h-auto my-2  flex flex-col  items-center flex-wrap justify-center gap-4">
-                                    {activeTab === "today" && <p className="w-full text-sm text-center md:text-end">Ultimos juegos</p>}
+                                    {activeTab === "today" || activeTab === "future" ? <p className="w-full text-sm text-center md:text-end">Ultimos juegos</p> : null}
 
                                     {awayGames ? awayGames.map(el => (
                                         <div key={el.id} className="text-gray-600 dark:text-gray-400 flex flex-col items-center gap-1 w-full justify-center">
@@ -292,13 +291,13 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                             {el.statusText === 'Por penaltis' && <span className="text-[10px] text-gray-600 dark:text-gray-400">{el.winDescription}</span>}
 
                                         </div>
-                                    )) : (activeTab === "today" && <h2>Cargando Ultimos Partidos</h2>)
+                                    )) : (activeTab === "today" || activeTab === "future" && <h2>Cargando Ultimos Partidos</h2>)
 
                                     }
                                 </div>
                                 <div className=" w-full h-auto my-2  flex flex-col  items-center flex-wrap justify-center gap-4">
 
-                                    {activeTab === "today" && <p className="w-full text-sm text-center md:text-end">Ultimos juegos como visitante</p>}
+                                    {activeTab === "today" || activeTab === "future" && <p className="w-full text-sm text-center md:text-end">Ultimos juegos como visitante</p>}
                                     {awayGamesAway ? awayGamesAway.map(el => (
                                         <div key={el.id} className="text-gray-600 dark:text-gray-400 flex flex-col items-center gap-1 w-full justify-center">
                                             <div className="w-full mx-auto">
@@ -319,7 +318,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                             </div>
                                             {el.statusText === 'Por penaltis' && <span className="text-[10px] text-gray-600 dark:text-gray-400">{el.winDescription}</span>}
                                         </div>
-                                    )) : (activeTab === "today" && <h2>Cargando Ultimos Partidos</h2>)
+                                    )) : (activeTab === "today" || activeTab === "future" && <h2>Cargando Ultimos Partidos</h2>)
 
                                     }
                                 </div>

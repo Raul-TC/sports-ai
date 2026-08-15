@@ -199,7 +199,7 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
     // ============================================================
     // RENDER
     // ============================================================
-    const matches = activeTab === 'today' && matchesWithData.length > 0 ? matchesWithData : visiblePredictions;
+    const matches = activeTab === 'today' || activeTab === 'future' && matchesWithData.length > 0 ? matchesWithData : visiblePredictions;
 
     return (
         <div className="max-w-4xl mx-auto px-4 py-6 space-y-4">
