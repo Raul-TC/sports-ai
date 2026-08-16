@@ -314538,12 +314538,12 @@
           {
             "id": 4730705,
             "homeCompetitor": {
-              "id": 480,
-              "name": "PSG"
-            },
-            "awayCompetitor": {
               "id": 481,
               "name": "Lens"
+            },
+            "awayCompetitor": {
+              "id": 480,
+              "name": "PSG"
             },
             "startTime": "2026-08-16T12:45:00-06:00",
             "statusGroup": 2,
@@ -314694,12 +314694,12 @@
           {
             "id": 4730705,
             "homeCompetitor": {
-              "id": 480,
-              "name": "PSG"
-            },
-            "awayCompetitor": {
               "id": 481,
               "name": "Lens"
+            },
+            "awayCompetitor": {
+              "id": 480,
+              "name": "PSG"
             },
             "startTime": "2026-08-16T12:45:00-06:00",
             "statusGroup": 2,
@@ -314850,12 +314850,12 @@
           {
             "id": 4730705,
             "homeCompetitor": {
-              "id": 480,
-              "name": "PSG"
-            },
-            "awayCompetitor": {
               "id": 481,
               "name": "Lens"
+            },
+            "awayCompetitor": {
+              "id": 480,
+              "name": "PSG"
             },
             "startTime": "2026-08-16T12:45:00-06:00",
             "statusGroup": 2,
