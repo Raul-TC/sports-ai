@@ -313455,5 +313455,1897 @@
         ]
       }
     }
+  },
+  {
+    "matchUrl": "https://www.365scores.com/es/football/match/eredivisie-57/feyenoord-go-ahead-eagles-691-714-57#id=4734621",
+    "stats": {
+      "todos": {
+        "statistics": [
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 691,
+            "value": "2.1",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 691,
+            "value": "1.38",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 691,
+            "value": "1.89",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 691,
+            "value": "1.09",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 691,
+            "value": "17",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 691,
+            "value": "6.34",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 691,
+            "value": "7.38",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 714,
+            "value": "1.61",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 714,
+            "value": "1.55",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 714,
+            "value": "1.15",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 714,
+            "value": "1.75",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 714,
+            "value": "11.39",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 714,
+            "value": "4.91",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 714,
+            "value": "5.39",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          }
+        ],
+        "games": [
+          {
+            "id": 4734621,
+            "homeCompetitor": {
+              "id": 691,
+              "name": "Feyenoord"
+            },
+            "awayCompetitor": {
+              "id": 714,
+              "name": "Go Ahead Eagles"
+            },
+            "startTime": "2026-08-16T06:30:00-06:00",
+            "statusGroup": 2,
+            "competitionDisplayName": "Eredivisie"
+          }
+        ],
+        "competitors": [
+          {
+            "id": 691,
+            "name": "Feyenoord"
+          },
+          {
+            "id": 714,
+            "name": "Go Ahead Eagles"
+          }
+        ]
+      },
+      "ultimos5": {
+        "statistics": [
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 691,
+            "value": "1.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 691,
+            "value": "1.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 691,
+            "value": "1.74",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 691,
+            "value": "0.94",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 691,
+            "value": "13.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 691,
+            "value": "5",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 691,
+            "value": "6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 714,
+            "value": "1.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 714,
+            "value": "1.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 714,
+            "value": "1.44",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 714,
+            "value": "1.91",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 714,
+            "value": "12.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 714,
+            "value": "5.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 714,
+            "value": "6.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          }
+        ],
+        "games": [
+          {
+            "id": 4734621,
+            "homeCompetitor": {
+              "id": 691,
+              "name": "Feyenoord"
+            },
+            "awayCompetitor": {
+              "id": 714,
+              "name": "Go Ahead Eagles"
+            },
+            "startTime": "2026-08-16T06:30:00-06:00",
+            "statusGroup": 2,
+            "competitionDisplayName": "Eredivisie"
+          }
+        ],
+        "competitors": [
+          {
+            "id": 691,
+            "name": "Feyenoord"
+          },
+          {
+            "id": 714,
+            "name": "Go Ahead Eagles"
+          }
+        ]
+      },
+      "ultimos5LocalVisita": {
+        "statistics": [
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 691,
+            "value": "0.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 691,
+            "value": "1.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 691,
+            "value": "1.06",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 691,
+            "value": "1.32",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 691,
+            "value": "11.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 691,
+            "value": "3.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 691,
+            "value": "5.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 714,
+            "value": "0.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 714,
+            "value": "1",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 714,
+            "value": "0.79",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 714,
+            "value": "2.1",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 714,
+            "value": "9.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 714,
+            "value": "2.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 714,
+            "value": "4.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          }
+        ],
+        "games": [
+          {
+            "id": 4734621,
+            "homeCompetitor": {
+              "id": 691,
+              "name": "Feyenoord"
+            },
+            "awayCompetitor": {
+              "id": 714,
+              "name": "Go Ahead Eagles"
+            },
+            "startTime": "2026-08-16T06:30:00-06:00",
+            "statusGroup": 2,
+            "competitionDisplayName": "Eredivisie"
+          }
+        ],
+        "competitors": [
+          {
+            "id": 691,
+            "name": "Feyenoord"
+          },
+          {
+            "id": 714,
+            "name": "Go Ahead Eagles"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "matchUrl": "https://www.365scores.com/es/football/match/laliga-11/espanyol-levante-136-150-11#id=4750513",
+    "stats": {
+      "todos": {
+        "statistics": [
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 136,
+            "value": "1.12",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 136,
+            "value": "1.48",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 136,
+            "value": "1.25",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 136,
+            "value": "1.39",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 136,
+            "value": "12.61",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 136,
+            "value": "4.06",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 136,
+            "value": "4.67",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 150,
+            "value": "1.16",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 150,
+            "value": "1.56",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 150,
+            "value": "1.22",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 150,
+            "value": "1.53",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 150,
+            "value": "11.53",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 150,
+            "value": "3.47",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 150,
+            "value": "3.84",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          }
+        ],
+        "games": [
+          {
+            "id": 4750513,
+            "homeCompetitor": {
+              "id": 136,
+              "name": "Espanyol"
+            },
+            "awayCompetitor": {
+              "id": 150,
+              "name": "Levante"
+            },
+            "startTime": "2026-08-16T11:00:00-06:00",
+            "statusGroup": 2,
+            "competitionDisplayName": "LaLiga"
+          }
+        ],
+        "competitors": [
+          {
+            "id": 136,
+            "name": "Espanyol"
+          },
+          {
+            "id": 150,
+            "name": "Levante"
+          }
+        ]
+      },
+      "ultimos5": {
+        "statistics": [
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 136,
+            "value": "0.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 136,
+            "value": "1.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 136,
+            "value": "1.13",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 136,
+            "value": "1.66",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 136,
+            "value": "11.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 136,
+            "value": "3",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 136,
+            "value": "5.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 150,
+            "value": "1.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 150,
+            "value": "1",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 150,
+            "value": "1.56",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 150,
+            "value": "1.26",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 150,
+            "value": "15.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 150,
+            "value": "4.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 150,
+            "value": "5",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          }
+        ],
+        "games": [
+          {
+            "id": 4750513,
+            "homeCompetitor": {
+              "id": 136,
+              "name": "Espanyol"
+            },
+            "awayCompetitor": {
+              "id": 150,
+              "name": "Levante"
+            },
+            "startTime": "2026-08-16T11:00:00-06:00",
+            "statusGroup": 2,
+            "competitionDisplayName": "LaLiga"
+          }
+        ],
+        "competitors": [
+          {
+            "id": 136,
+            "name": "Espanyol"
+          },
+          {
+            "id": 150,
+            "name": "Levante"
+          }
+        ]
+      },
+      "ultimos5LocalVisita": {
+        "statistics": [
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 136,
+            "value": "1",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 136,
+            "value": "1.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 136,
+            "value": "1.09",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 136,
+            "value": "1.39",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 136,
+            "value": "14.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 136,
+            "value": "4.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 136,
+            "value": "6.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 150,
+            "value": "0.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 150,
+            "value": "2.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 150,
+            "value": "0.68",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 150,
+            "value": "2.33",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 150,
+            "value": "9.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 150,
+            "value": "2.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 150,
+            "value": "4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          }
+        ],
+        "games": [
+          {
+            "id": 4750513,
+            "homeCompetitor": {
+              "id": 136,
+              "name": "Espanyol"
+            },
+            "awayCompetitor": {
+              "id": 150,
+              "name": "Levante"
+            },
+            "startTime": "2026-08-16T11:00:00-06:00",
+            "statusGroup": 2,
+            "competitionDisplayName": "LaLiga"
+          }
+        ],
+        "competitors": [
+          {
+            "id": 136,
+            "name": "Espanyol"
+          },
+          {
+            "id": 150,
+            "name": "Levante"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "matchUrl": "https://www.365scores.com/es/football/match/super-cup-40/lens-psg-480-481-40#id=4730705",
+    "stats": {
+      "todos": {
+        "statistics": [
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 480,
+            "value": "1.97",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 480,
+            "value": "1",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 480,
+            "value": "1.89",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 480,
+            "value": "1.26",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 480,
+            "value": "15.97",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 480,
+            "value": "5.45",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 480,
+            "value": "5.86",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 481,
+            "value": "2.27",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 481,
+            "value": "0.83",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 481,
+            "value": "1.97",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 481,
+            "value": "0.81",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 481,
+            "value": "17.7",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 481,
+            "value": "6.87",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 481,
+            "value": "6.03",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          }
+        ],
+        "games": [
+          {
+            "id": 4730705,
+            "homeCompetitor": {
+              "id": 480,
+              "name": "PSG"
+            },
+            "awayCompetitor": {
+              "id": 481,
+              "name": "Lens"
+            },
+            "startTime": "2026-08-16T12:45:00-06:00",
+            "statusGroup": 2,
+            "competitionDisplayName": "Super Cup"
+          }
+        ],
+        "competitors": [
+          {
+            "id": 480,
+            "name": "PSG"
+          },
+          {
+            "id": 481,
+            "name": "Lens"
+          }
+        ]
+      },
+      "ultimos5": {
+        "statistics": [
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 480,
+            "value": "2.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 480,
+            "value": "1.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 480,
+            "value": "2.39",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 480,
+            "value": "1.48",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 480,
+            "value": "12.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 480,
+            "value": "7.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 480,
+            "value": "7.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 481,
+            "value": "2.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 481,
+            "value": "0.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 481,
+            "value": "2.66",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 481,
+            "value": "0.45",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 481,
+            "value": "17.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 481,
+            "value": "7.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 481,
+            "value": "6.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          }
+        ],
+        "games": [
+          {
+            "id": 4730705,
+            "homeCompetitor": {
+              "id": 480,
+              "name": "PSG"
+            },
+            "awayCompetitor": {
+              "id": 481,
+              "name": "Lens"
+            },
+            "startTime": "2026-08-16T12:45:00-06:00",
+            "statusGroup": 2,
+            "competitionDisplayName": "Super Cup"
+          }
+        ],
+        "competitors": [
+          {
+            "id": 480,
+            "name": "PSG"
+          },
+          {
+            "id": 481,
+            "name": "Lens"
+          }
+        ]
+      },
+      "ultimos5LocalVisita": {
+        "statistics": [
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 480,
+            "value": "1.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 480,
+            "value": "1.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 480,
+            "value": "1.51",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 480,
+            "value": "1.46",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 480,
+            "value": "14.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 480,
+            "value": "4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 480,
+            "value": "5.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 481,
+            "value": "2.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 481,
+            "value": "1.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 481,
+            "value": "2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 481,
+            "value": "0.63",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 481,
+            "value": "17.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 481,
+            "value": "6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 481,
+            "value": "7.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          }
+        ],
+        "games": [
+          {
+            "id": 4730705,
+            "homeCompetitor": {
+              "id": 480,
+              "name": "PSG"
+            },
+            "awayCompetitor": {
+              "id": 481,
+              "name": "Lens"
+            },
+            "startTime": "2026-08-16T12:45:00-06:00",
+            "statusGroup": 2,
+            "competitionDisplayName": "Super Cup"
+          }
+        ],
+        "competitors": [
+          {
+            "id": 480,
+            "name": "PSG"
+          },
+          {
+            "id": 481,
+            "name": "Lens"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "matchUrl": "https://www.365scores.com/es/football/match/community-shield-10/arsenal-manchester-city-104-110-10#id=4733214",
+    "stats": {
+      "todos": {
+        "statistics": [
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 104,
+            "value": "1.88",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 104,
+            "value": "0.75",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 104,
+            "value": "1.66",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 104,
+            "value": "0.69",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 104,
+            "value": "14.5",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 104,
+            "value": "4.81",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 104,
+            "value": "5.91",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 110,
+            "value": "2.14",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 110,
+            "value": "0.91",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 110,
+            "value": "1.79",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 110,
+            "value": "1.08",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 110,
+            "value": "15.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 110,
+            "value": "5.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 110,
+            "value": "6.31",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          }
+        ],
+        "games": [
+          {
+            "id": 4733214,
+            "homeCompetitor": {
+              "id": 104,
+              "name": "Arsenal"
+            },
+            "awayCompetitor": {
+              "id": 110,
+              "name": "Manchester City"
+            },
+            "startTime": "2026-08-16T08:00:00-06:00",
+            "statusGroup": 2,
+            "competitionDisplayName": "Community Shield"
+          }
+        ],
+        "competitors": [
+          {
+            "id": 104,
+            "name": "Arsenal"
+          },
+          {
+            "id": 110,
+            "name": "Manchester City"
+          }
+        ]
+      },
+      "ultimos5": {
+        "statistics": [
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 104,
+            "value": "1.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 104,
+            "value": "1",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 104,
+            "value": "1.44",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 104,
+            "value": "1.1",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 104,
+            "value": "13.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 104,
+            "value": "4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 104,
+            "value": "6.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 110,
+            "value": "2.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 110,
+            "value": "0.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 110,
+            "value": "2.09",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 110,
+            "value": "1.15",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 110,
+            "value": "20.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 110,
+            "value": "6.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 110,
+            "value": "9.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          }
+        ],
+        "games": [
+          {
+            "id": 4733214,
+            "homeCompetitor": {
+              "id": 104,
+              "name": "Arsenal"
+            },
+            "awayCompetitor": {
+              "id": 110,
+              "name": "Manchester City"
+            },
+            "startTime": "2026-08-16T08:00:00-06:00",
+            "statusGroup": 2,
+            "competitionDisplayName": "Community Shield"
+          }
+        ],
+        "competitors": [
+          {
+            "id": 104,
+            "name": "Arsenal"
+          },
+          {
+            "id": 110,
+            "name": "Manchester City"
+          }
+        ]
+      },
+      "ultimos5LocalVisita": {
+        "statistics": [
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 104,
+            "value": "2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 104,
+            "value": "1.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 104,
+            "value": "1.53",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 104,
+            "value": "0.84",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 104,
+            "value": "16.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 104,
+            "value": "4.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 104,
+            "value": "7.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 110,
+            "value": "1.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 110,
+            "value": "0.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 110,
+            "value": "2.01",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 110,
+            "value": "1.3",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 110,
+            "value": "20.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 110,
+            "value": "6.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 110,
+            "value": "10",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          }
+        ],
+        "games": [
+          {
+            "id": 4733214,
+            "homeCompetitor": {
+              "id": 104,
+              "name": "Arsenal"
+            },
+            "awayCompetitor": {
+              "id": 110,
+              "name": "Manchester City"
+            },
+            "startTime": "2026-08-16T08:00:00-06:00",
+            "statusGroup": 2,
+            "competitionDisplayName": "Community Shield"
+          }
+        ],
+        "competitors": [
+          {
+            "id": 104,
+            "name": "Arsenal"
+          },
+          {
+            "id": 110,
+            "name": "Manchester City"
+          }
+        ]
+      }
+    }
   }
 ]
