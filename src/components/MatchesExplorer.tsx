@@ -17,6 +17,7 @@ import { trapEngine } from "@/utils/trapEngine";
 
 interface TeamMetrics {
     golesPerPartido: number;
+    golesRecibidos: number,
     xG: number;
     xGA: number;
     expectedGoals: number;
@@ -272,7 +273,7 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
     // RENDER
     // ============================================================
     return (
-        <div className="max-w-4xl mx-auto px-4 py-6 space-y-4">
+        <div className="w-full mx-auto px-4 py-6 space-y-4">
             {/* Barra superior */}
             <div className="flex items-center gap-2 flex-wrap">
                 <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 tracking-tight flex items-center gap-2">
