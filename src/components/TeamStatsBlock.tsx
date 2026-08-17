@@ -1,9 +1,12 @@
 import { TeamInfo, TeamMetrics } from "@/types";
 import { StatBadge } from "./StatBadge";
-import { Goal, Target, Crosshair, CornerDownRight, Activity, Gauge, BarChart } from "lucide-react";
+import { Goal, Target, Crosshair, CornerDownRight, Activity, Gauge, BarChart, Shield } from "lucide-react";
+import { MatchResult } from "@/utils/extractMatchResult";
 
 interface TeamStatsBlockProps {
     team: TeamInfo;
+    results?: MatchResult
+    opponent?: TeamInfo
     title: string;
     goalLines: {
         line: number
@@ -20,12 +23,60 @@ const getTrend = (value: number) => {
     return "neutral";
 };
 
-export function TeamStatsBlock({ team, title, goalLines }: TeamStatsBlockProps) {
+// Reglas de comparación: qué significa "mejor" para cada métrica
+const comparisonRule: Record<string, 'higher' | 'lower'> = {
+    'Goles por Partido': 'higher',
+    'Goles recibidos por Partido': 'lower',
+    'Gol Esp': 'higher',
+    'Gol Esp recibidos': 'lower',
+    'Tiros': 'higher',
+    'Tiro a Puerta': 'higher',
+    'Córners': 'higher',
+    'Eficiencia Of': 'higher',
+    'Eficiencia Def': 'lower',
+    'Goles Previstos': 'higher',
+    'Puntería': 'higher',
+    'Eficiencia Bruta': 'higher',
+    'Caída Precisión': 'higher',
+};
+
+
+export function TeamStatsBlock({ team, title, opponent, goalLines, results }: TeamStatsBlockProps) {
     const m = team.metrics;
     if (!m) return <div className="text-xs text-gray-400">Sin datos</div>;
 
     const effTrend = getTrend(m.offensiveEfficiency);
+    const opponentM = opponent?.metrics;
 
+    // Función para obtener el valor del rival según el label
+    const getOpponentValue = (label: string): number | null => {
+        if (!opponentM) return null;
+        switch (label) {
+            case 'Goles por Partido': return opponentM.golesPerPartido;
+            case 'Goles recibidos por Partido': return opponentM.golesRecibidos;
+            case 'Gol Esp': return opponentM.xG;
+            case 'Gol Esp recibidos': return opponentM.xGA;
+            case 'Tiros': return opponentM.shots;
+            case 'Tiro a Puerta': return opponentM.shotsOT;
+            case 'Córners': return opponentM.corners;
+            case 'Eficiencia Of': return opponentM.offensiveEfficiency;
+            case 'Eficiencia Def': return opponentM.xGA > 0 ? opponentM.golesRecibidos / opponentM.xGA : 1;
+            case 'Goles Previstos': return opponentM.expectedGoals;
+            case 'Puntería': return opponentM.shotFactor;
+            case 'Eficiencia Bruta': return opponentM.efficiency;
+            case 'Caída Precisión': return opponentM.precisionDrop;
+            default: return null;
+        }
+    };
+
+    // Función para determinar si el valor actual es mejor que el del rival
+    const isBetterThanOpponent = (label: string, currentValue: number): boolean => {
+        const oppValue = getOpponentValue(label);
+        if (oppValue === null) return false;
+        const rule = comparisonRule[label];
+        if (!rule) return false;
+        return rule === 'higher' ? currentValue > oppValue : currentValue < oppValue;
+    };
     let effIndicator = "";
     let effColor = "";
     if (m.offensiveEfficiency > 1.2) {
@@ -85,6 +136,11 @@ export function TeamStatsBlock({ team, title, goalLines }: TeamStatsBlockProps) 
             , description: 'Promedio de goles anotados por partido.'
         },
         {
+            label: 'Goles recibidos por Partido'
+            , value: m.golesRecibidos.toFixed(1)
+            , description: 'Promedio de goles recibidos por partido.'
+        },
+        {
             label: "Gol Esp",
             value: m.xG.toFixed(2),
             icon: Goal,
@@ -127,6 +183,20 @@ export function TeamStatsBlock({ team, title, goalLines }: TeamStatsBlockProps) 
                         ? "El equipo marca menos de lo esperado (probablemente está bajo-rendimiento)."
                         : "El equipo marca lo esperado según sus ocasiones.",
         },
+        {
+            label: "Eficiencia Def",
+            value: (m.golesRecibidos / (m.xGA || 0.1)).toFixed(2),
+            icon: Shield,
+            description:
+                (m.golesRecibidos / (m.xGA || 0.1)) > 1.2
+                    ? "Encaja más de lo esperado (defensa vulnerable)."
+                    : (m.golesRecibidos / (m.xGA || 0.1)) < 0.8
+                        ? "Encaja menos de lo esperado (defensa sólida)."
+                        : "Encaja lo esperado.",
+            trend: (m.golesRecibidos / (m.xGA || 0.1)) > 1.2 ? "down" : (m.golesRecibidos / (m.xGA || 0.1)) < 0.8 ? "up" : "neutral",
+            indicator: (m.golesRecibidos / (m.xGA || 0.1)) > 1.2 ? "❌ Débil" : (m.golesRecibidos / (m.xGA || 0.1)) < 0.8 ? "✅ Sólida" : "⚖️ Esperada",
+            indicatorColor: (m.golesRecibidos / (m.xGA || 0.1)) > 1.2 ? "text-red-500" : (m.golesRecibidos / (m.xGA || 0.1)) < 0.8 ? "text-green-600" : "text-gray-500",
+        }
     ];
     // const baseClass = secondary
     //     ? "bg-gray-50/70 dark:bg-neutral-800/70 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-neutral-700"
@@ -178,8 +248,10 @@ export function TeamStatsBlock({ team, title, goalLines }: TeamStatsBlockProps) 
                 {title}
             </div>
             <div className="flex flex-wrap gap-1">
-                {primaryStats.map((stat, idx) => (
-                    <StatBadge
+                {primaryStats.map((stat, idx) => {
+                    const isBetter = isBetterThanOpponent(stat.label, +stat.value);
+
+                    return <StatBadge
                         key={idx}
                         label={stat.label}
                         value={stat.value}
@@ -188,12 +260,17 @@ export function TeamStatsBlock({ team, title, goalLines }: TeamStatsBlockProps) 
                         description={stat.description}
                         indicator={stat.indicator}
                         indicatorColor={stat.indicatorColor}
+                        isBetter={isBetter}
+                        results={results}
+
                     />
-                ))}
+                })}
             </div>
             <div className="flex flex-wrap gap-1">
-                {secondaryStats.map((stat, idx) => (
-                    <StatBadge
+                {secondaryStats.map((stat, idx) => {
+                    const isBetter = isBetterThanOpponent(stat.label, +stat.value);
+
+                    return <StatBadge
                         key={idx}
                         label={stat.label}
                         value={stat.value}
@@ -202,8 +279,10 @@ export function TeamStatsBlock({ team, title, goalLines }: TeamStatsBlockProps) 
                         description={stat.description}
                         indicator={stat.indicator}
                         indicatorColor={stat.indicatorColor}
+                        isBetter={isBetter}
+                        results={results}
                     />
-                ))}
+                })}
             </div>
             <div className="flex flex-wrap gap-1">
                 <p className="w-full text-xs font-medium text-gray-500 dark:text-gray-400">Linea de goles</p>

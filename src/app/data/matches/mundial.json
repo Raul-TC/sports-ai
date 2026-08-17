@@ -315347,5 +315347,4711 @@
         ]
       }
     }
+  },
+  {
+    "matchUrl": "https://www.365scores.com/es/football/match/brasileirao-serie-a-113/internacional-remo-1219-7383-113#id=4632720",
+    "stats": {
+      "todos": {
+        "statistics": [
+          {
+            "id": 141,
+            "name": "Partidos ganados",
+            "competitorId": 1219,
+            "value": "5 (23%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1,
+            "bettingOpportunity": {
+              "gameId": 4632720,
+              "lineId": 0,
+              "text": "60% predice que Internacional ganará",
+              "textCTA": "Apuesta $400 y gana $604",
+              "optionNum": 0,
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "bookmakerId": 4
+            }
+          },
+          {
+            "id": 142,
+            "name": "Ambos equipos marcaron",
+            "competitorId": 1219,
+            "value": "12 (55%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 143,
+            "name": "Más de 2.5 goles",
+            "competitorId": 1219,
+            "value": "8 (36%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 144,
+            "name": "Marcó primero",
+            "competitorId": 1219,
+            "value": "9 (41%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 146,
+            "name": "Recibió gol primero",
+            "competitorId": 1219,
+            "value": "11 (50%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 148,
+            "name": "Empató o Ganó",
+            "competitorId": 1219,
+            "value": "13 (59%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 149,
+            "name": "Ganador del primer tiempo",
+            "competitorId": 1219,
+            "value": "6 (27%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 150,
+            "name": "Valla invicta",
+            "competitorId": 1219,
+            "value": "5 (23%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 1219,
+            "value": "1.05",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 1219,
+            "value": "1.23",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 1219,
+            "value": "1.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 1219,
+            "value": "1.13",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 1219,
+            "value": "14.95",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 1219,
+            "value": "4.59",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 1219,
+            "value": "6.55",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 174,
+            "name": "Tarjetas",
+            "competitorId": 1219,
+            "value": "2.23",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 175,
+            "name": "Penales convertidos/penales ejecutados",
+            "competitorId": 1219,
+            "value": "1/1",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 141,
+            "name": "Partidos ganados",
+            "competitorId": 7383,
+            "value": "5 (23%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1,
+            "bettingOpportunity": {
+              "gameId": 4632720,
+              "lineId": 0,
+              "text": "60% predice que Internacional ganará",
+              "textCTA": "Apuesta $400 y gana $604",
+              "optionNum": 0,
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "bookmakerId": 4
+            }
+          },
+          {
+            "id": 142,
+            "name": "Ambos equipos marcaron",
+            "competitorId": 7383,
+            "value": "12 (55%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 143,
+            "name": "Más de 2.5 goles",
+            "competitorId": 7383,
+            "value": "11 (50%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 144,
+            "name": "Marcó primero",
+            "competitorId": 7383,
+            "value": "7 (32%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 146,
+            "name": "Recibió gol primero",
+            "competitorId": 7383,
+            "value": "14 (64%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 148,
+            "name": "Empató o Ganó",
+            "competitorId": 7383,
+            "value": "12 (55%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 149,
+            "name": "Ganador del primer tiempo",
+            "competitorId": 7383,
+            "value": "2 (9%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 150,
+            "name": "Valla invicta",
+            "competitorId": 7383,
+            "value": "3 (14%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 7383,
+            "value": "1.18",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 7383,
+            "value": "1.64",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 7383,
+            "value": "0.94",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 7383,
+            "value": "1.33",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 7383,
+            "value": "11.86",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 7383,
+            "value": "3.91",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 7383,
+            "value": "4.41",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 174,
+            "name": "Tarjetas",
+            "competitorId": 7383,
+            "value": "2.05",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 175,
+            "name": "Penales convertidos/penales ejecutados",
+            "competitorId": 7383,
+            "value": "0/1",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          }
+        ],
+        "statisticsGroups": [
+          {
+            "id": 1,
+            "name": "Todas las competiciones"
+          },
+          {
+            "id": 2,
+            "name": "Estadísticas promedio"
+          }
+        ],
+        "statisticsFilters": [
+          {
+            "filterGroup": 1,
+            "name": "Todas las competiciones",
+            "selected": false,
+            "value": -1
+          },
+          {
+            "filterGroup": 1,
+            "name": "Brasileirão",
+            "selected": true,
+            "value": 113
+          },
+          {
+            "filterGroup": 1,
+            "name": "Copa de Brasil",
+            "selected": false,
+            "value": 115
+          },
+          {
+            "filterGroup": 2,
+            "name": "Todos",
+            "selected": true,
+            "value": 0
+          },
+          {
+            "filterGroup": 2,
+            "name": "Últimos 5",
+            "selected": false,
+            "value": 1
+          },
+          {
+            "filterGroup": 2,
+            "name": "Todos - Local/Visitante",
+            "selected": false,
+            "value": 2
+          },
+          {
+            "filterGroup": 2,
+            "name": "Útimos 5 - Local/Visitante",
+            "selected": false,
+            "value": 4
+          }
+        ],
+        "statisticGamesPlayed": {
+          "homeText": "Últimos 22 partidos",
+          "awayText": "Últimos 22 partidos"
+        },
+        "sports": [
+          {
+            "id": 1,
+            "name": "Fútbol",
+            "nameForURL": "football",
+            "drawSupport": true,
+            "imageVersion": 1
+          }
+        ],
+        "countries": [
+          {
+            "id": 21,
+            "name": "Brasil",
+            "nameForURL": "brazil",
+            "sportTypes": [
+              6,
+              1,
+              8,
+              2
+            ],
+            "imageVersion": 1,
+            "isInternational": false
+          }
+        ],
+        "competitions": [
+          {
+            "id": 113,
+            "countryId": 21,
+            "sportId": 1,
+            "name": "Brasileirão",
+            "longName": "Campeonato Brasileño de Serie A",
+            "hasStandings": true,
+            "hasLiveStandings": false,
+            "hasStandingsGroups": false,
+            "hasBrackets": false,
+            "hasStats": true,
+            "nameForURL": "brasileirao-serie-a",
+            "popularityRank": 52468641,
+            "imageVersion": 11,
+            "currentStageType": 1,
+            "color": "#01479A",
+            "competitorsType": 1,
+            "currentPhaseNum": -1,
+            "currentSeasonNum": 76,
+            "currentStageNum": 1,
+            "isInternational": false,
+            "hasHistory": true
+          }
+        ],
+        "competitors": [
+          {
+            "id": 1219,
+            "countryId": 21,
+            "sportId": 1,
+            "name": "Internacional",
+            "shortName": "Internacional",
+            "longName": "Internacional",
+            "nameForURL": "internacional",
+            "popularityRank": 7788355,
+            "imageVersion": 7,
+            "mainCompetitionId": 113,
+            "hasTransfers": false,
+            "competitorNum": 0,
+            "mainCompetitionName": "Brasileirão"
+          },
+          {
+            "id": 7383,
+            "countryId": 21,
+            "sportId": 1,
+            "name": "Remo",
+            "shortName": "Remo",
+            "longName": "Remo",
+            "nameForURL": "remo",
+            "popularityRank": 1214637,
+            "imageVersion": 3,
+            "mainCompetitionId": 113,
+            "hasTransfers": false,
+            "competitorNum": 0,
+            "mainCompetitionName": "Brasileirão"
+          }
+        ],
+        "games": [
+          {
+            "id": 4632720,
+            "sportId": 1,
+            "competitionId": 113,
+            "seasonNum": 76,
+            "stageNum": 1,
+            "roundNum": 23,
+            "roundName": "Fecha",
+            "competitionDisplayName": "Brasileirão",
+            "startTime": "2026-08-17T17:00:00-06:00",
+            "statusGroup": 2,
+            "statusText": "Prog.",
+            "shortStatusText": "Prog.",
+            "gameTimeAndStatusDisplayType": 0,
+            "homeCompetitor": {
+              "id": 1219,
+              "countryId": 21,
+              "sportId": 1,
+              "name": "Internacional",
+              "score": -1,
+              "isWinner": false,
+              "nameForURL": "internacional",
+              "type": 1,
+              "popularityRank": 7788,
+              "imageVersion": 7,
+              "color": "#E00618",
+              "awayColor": "#FFFFFF",
+              "hasSquad": true,
+              "hasTransfers": false,
+              "competitorNum": 1,
+              "hideOnSearch": false,
+              "hideOnCatalog": false
+            },
+            "awayCompetitor": {
+              "id": 7383,
+              "countryId": 21,
+              "sportId": 1,
+              "name": "Remo",
+              "score": -1,
+              "isWinner": false,
+              "nameForURL": "remo",
+              "type": 1,
+              "popularityRank": 1214,
+              "imageVersion": 3,
+              "color": "#000000",
+              "awayColor": "#FFFFFF",
+              "hasSquad": true,
+              "hasTransfers": false,
+              "competitorNum": 2,
+              "hideOnSearch": false,
+              "hideOnCatalog": false
+            },
+            "winner": -1,
+            "scores": [
+              -1,
+              -1
+            ],
+            "homeAwayTeamOrder": 1,
+            "hasPointByPoint": false,
+            "hasVideo": false
+          }
+        ],
+        "bookmakers": [
+          {
+            "id": 4,
+            "name": "BWIN",
+            "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+            "nameForURL": "bwin",
+            "actionButton": {
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "label": "Apuesta ahora"
+            },
+            "color": "#000000",
+            "imageVersion": 1,
+            "offerText": "100% Bono de Bienvenida",
+            "offerUrl": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+            "promotionText": "Ven a vivir la emoción"
+          }
+        ]
+      },
+      "ultimos5": {
+        "statistics": [
+          {
+            "id": 141,
+            "name": "Partidos ganados",
+            "competitorId": 1219,
+            "value": "0 (0%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1,
+            "bettingOpportunity": {
+              "gameId": 4632720,
+              "lineId": 0,
+              "text": "60% predice que Internacional ganará",
+              "textCTA": "Apuesta $400 y gana $604",
+              "optionNum": 0,
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "bookmakerId": 4
+            }
+          },
+          {
+            "id": 142,
+            "name": "Ambos equipos marcaron",
+            "competitorId": 1219,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 143,
+            "name": "Más de 2.5 goles",
+            "competitorId": 1219,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 144,
+            "name": "Marcó primero",
+            "competitorId": 1219,
+            "value": "1 (20%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 146,
+            "name": "Recibió gol primero",
+            "competitorId": 1219,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 148,
+            "name": "Empató o Ganó",
+            "competitorId": 1219,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 149,
+            "name": "Ganador del primer tiempo",
+            "competitorId": 1219,
+            "value": "1 (20%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 150,
+            "name": "Valla invicta",
+            "competitorId": 1219,
+            "value": "1 (20%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 1219,
+            "value": "0.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 1219,
+            "value": "1.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 1219,
+            "value": "1.08",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 1219,
+            "value": "1.81",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 1219,
+            "value": "13.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 1219,
+            "value": "3",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 1219,
+            "value": "3.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 174,
+            "name": "Tarjetas",
+            "competitorId": 1219,
+            "value": "2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 175,
+            "name": "Penales convertidos/penales ejecutados",
+            "competitorId": 1219,
+            "value": "0/0",
+            "valuePercentage": 0,
+            "statisticGroup": 2
+          },
+          {
+            "id": 141,
+            "name": "Partidos ganados",
+            "competitorId": 7383,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1,
+            "bettingOpportunity": {
+              "gameId": 4632720,
+              "lineId": 0,
+              "text": "60% predice que Internacional ganará",
+              "textCTA": "Apuesta $400 y gana $604",
+              "optionNum": 0,
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "bookmakerId": 4
+            }
+          },
+          {
+            "id": 142,
+            "name": "Ambos equipos marcaron",
+            "competitorId": 7383,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 143,
+            "name": "Más de 2.5 goles",
+            "competitorId": 7383,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 144,
+            "name": "Marcó primero",
+            "competitorId": 7383,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 146,
+            "name": "Recibió gol primero",
+            "competitorId": 7383,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 148,
+            "name": "Empató o Ganó",
+            "competitorId": 7383,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 149,
+            "name": "Ganador del primer tiempo",
+            "competitorId": 7383,
+            "value": "1 (20%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 150,
+            "name": "Valla invicta",
+            "competitorId": 7383,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 7383,
+            "value": "1.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 7383,
+            "value": "1.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 7383,
+            "value": "0.63",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 7383,
+            "value": "1.27",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 7383,
+            "value": "10.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 7383,
+            "value": "3.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 7383,
+            "value": "4.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 174,
+            "name": "Tarjetas",
+            "competitorId": 7383,
+            "value": "1.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 175,
+            "name": "Penales convertidos/penales ejecutados",
+            "competitorId": 7383,
+            "value": "0/0",
+            "valuePercentage": 0,
+            "statisticGroup": 2
+          }
+        ],
+        "statisticsGroups": [
+          {
+            "id": 1,
+            "name": "Todas las competiciones"
+          },
+          {
+            "id": 2,
+            "name": "Estadísticas promedio"
+          }
+        ],
+        "statisticsFilters": [
+          {
+            "filterGroup": 1,
+            "name": "Todas las competiciones",
+            "selected": false,
+            "value": -1
+          },
+          {
+            "filterGroup": 1,
+            "name": "Brasileirão",
+            "selected": true,
+            "value": 113
+          },
+          {
+            "filterGroup": 1,
+            "name": "Copa de Brasil",
+            "selected": false,
+            "value": 115
+          },
+          {
+            "filterGroup": 2,
+            "name": "Todos",
+            "selected": false,
+            "value": 0
+          },
+          {
+            "filterGroup": 2,
+            "name": "Últimos 5",
+            "selected": true,
+            "value": 1
+          },
+          {
+            "filterGroup": 2,
+            "name": "Todos - Local/Visitante",
+            "selected": false,
+            "value": 2
+          },
+          {
+            "filterGroup": 2,
+            "name": "Útimos 5 - Local/Visitante",
+            "selected": false,
+            "value": 4
+          }
+        ],
+        "statisticGamesPlayed": {
+          "homeText": "Últimos 5 partidos",
+          "awayText": "Últimos 5 partidos"
+        },
+        "sports": [
+          {
+            "id": 1,
+            "name": "Fútbol",
+            "nameForURL": "football",
+            "drawSupport": true,
+            "imageVersion": 1
+          }
+        ],
+        "countries": [
+          {
+            "id": 21,
+            "name": "Brasil",
+            "nameForURL": "brazil",
+            "sportTypes": [
+              1,
+              2,
+              6,
+              8
+            ],
+            "imageVersion": 1,
+            "isInternational": false
+          }
+        ],
+        "competitions": [
+          {
+            "id": 113,
+            "countryId": 21,
+            "sportId": 1,
+            "name": "Brasileirão",
+            "longName": "Campeonato Brasileño de Serie A",
+            "hasStandings": true,
+            "hasLiveStandings": false,
+            "hasStandingsGroups": false,
+            "hasBrackets": false,
+            "hasStats": true,
+            "nameForURL": "brasileirao-serie-a",
+            "popularityRank": 52468641,
+            "imageVersion": 11,
+            "currentStageType": 1,
+            "color": "#01479A",
+            "competitorsType": 1,
+            "currentPhaseNum": -1,
+            "currentSeasonNum": 76,
+            "currentStageNum": 1,
+            "isInternational": false,
+            "hasHistory": true
+          }
+        ],
+        "competitors": [
+          {
+            "id": 1219,
+            "countryId": 21,
+            "sportId": 1,
+            "name": "Internacional",
+            "shortName": "Internacional",
+            "longName": "Internacional",
+            "nameForURL": "internacional",
+            "popularityRank": 7788355,
+            "imageVersion": 7,
+            "mainCompetitionId": 113,
+            "hasTransfers": false,
+            "competitorNum": 0,
+            "mainCompetitionName": "Brasileirão"
+          },
+          {
+            "id": 7383,
+            "countryId": 21,
+            "sportId": 1,
+            "name": "Remo",
+            "shortName": "Remo",
+            "longName": "Remo",
+            "nameForURL": "remo",
+            "popularityRank": 1214637,
+            "imageVersion": 3,
+            "mainCompetitionId": 113,
+            "hasTransfers": false,
+            "competitorNum": 0,
+            "mainCompetitionName": "Brasileirão"
+          }
+        ],
+        "games": [
+          {
+            "id": 4632720,
+            "sportId": 1,
+            "competitionId": 113,
+            "seasonNum": 76,
+            "stageNum": 1,
+            "roundNum": 23,
+            "roundName": "Fecha",
+            "competitionDisplayName": "Brasileirão",
+            "startTime": "2026-08-17T17:00:00-06:00",
+            "statusGroup": 2,
+            "statusText": "Prog.",
+            "shortStatusText": "Prog.",
+            "gameTimeAndStatusDisplayType": 0,
+            "homeCompetitor": {
+              "id": 1219,
+              "countryId": 21,
+              "sportId": 1,
+              "name": "Internacional",
+              "score": -1,
+              "isWinner": false,
+              "nameForURL": "internacional",
+              "type": 1,
+              "popularityRank": 7788,
+              "imageVersion": 7,
+              "color": "#E00618",
+              "awayColor": "#FFFFFF",
+              "hasSquad": true,
+              "hasTransfers": false,
+              "competitorNum": 1,
+              "hideOnSearch": false,
+              "hideOnCatalog": false
+            },
+            "awayCompetitor": {
+              "id": 7383,
+              "countryId": 21,
+              "sportId": 1,
+              "name": "Remo",
+              "score": -1,
+              "isWinner": false,
+              "nameForURL": "remo",
+              "type": 1,
+              "popularityRank": 1214,
+              "imageVersion": 3,
+              "color": "#000000",
+              "awayColor": "#FFFFFF",
+              "hasSquad": true,
+              "hasTransfers": false,
+              "competitorNum": 2,
+              "hideOnSearch": false,
+              "hideOnCatalog": false
+            },
+            "winner": -1,
+            "scores": [
+              -1,
+              -1
+            ],
+            "homeAwayTeamOrder": 1,
+            "hasPointByPoint": false,
+            "hasVideo": false
+          }
+        ],
+        "bookmakers": [
+          {
+            "id": 4,
+            "name": "BWIN",
+            "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+            "nameForURL": "bwin",
+            "actionButton": {
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "label": "Apuesta ahora"
+            },
+            "color": "#000000",
+            "imageVersion": 1,
+            "offerText": "100% Bono de Bienvenida",
+            "offerUrl": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+            "promotionText": "Ven a vivir la emoción"
+          }
+        ]
+      },
+      "ultimos5LocalVisita": {
+        "statistics": [
+          {
+            "id": 141,
+            "name": "Partidos ganados",
+            "competitorId": 1219,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1,
+            "bettingOpportunity": {
+              "gameId": 4632720,
+              "lineId": 0,
+              "text": "60% predice que Internacional ganará",
+              "textCTA": "Apuesta $400 y gana $604",
+              "optionNum": 0,
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "bookmakerId": 4
+            }
+          },
+          {
+            "id": 142,
+            "name": "Ambos equipos marcaron",
+            "competitorId": 1219,
+            "value": "4 (80%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 143,
+            "name": "Más de 2.5 goles",
+            "competitorId": 1219,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 144,
+            "name": "Marcó primero",
+            "competitorId": 1219,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 146,
+            "name": "Recibió gol primero",
+            "competitorId": 1219,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 148,
+            "name": "Empató o Ganó",
+            "competitorId": 1219,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 149,
+            "name": "Ganador del primer tiempo",
+            "competitorId": 1219,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 150,
+            "name": "Valla invicta",
+            "competitorId": 1219,
+            "value": "1 (20%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 1219,
+            "value": "1.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 1219,
+            "value": "1.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 1219,
+            "value": "1.45",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 1219,
+            "value": "1.24",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 1219,
+            "value": "18.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 1219,
+            "value": "6.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 1219,
+            "value": "4.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 174,
+            "name": "Tarjetas",
+            "competitorId": 1219,
+            "value": "1.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 175,
+            "name": "Penales convertidos/penales ejecutados",
+            "competitorId": 1219,
+            "value": "0/0",
+            "valuePercentage": 0,
+            "statisticGroup": 2
+          },
+          {
+            "id": 141,
+            "name": "Partidos ganados",
+            "competitorId": 7383,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1,
+            "bettingOpportunity": {
+              "gameId": 4632720,
+              "lineId": 0,
+              "text": "60% predice que Internacional ganará",
+              "textCTA": "Apuesta $400 y gana $604",
+              "optionNum": 0,
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "bookmakerId": 4
+            }
+          },
+          {
+            "id": 142,
+            "name": "Ambos equipos marcaron",
+            "competitorId": 7383,
+            "value": "4 (80%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 143,
+            "name": "Más de 2.5 goles",
+            "competitorId": 7383,
+            "value": "5 (100%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 144,
+            "name": "Marcó primero",
+            "competitorId": 7383,
+            "value": "1 (20%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 146,
+            "name": "Recibió gol primero",
+            "competitorId": 7383,
+            "value": "4 (80%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 148,
+            "name": "Empató o Ganó",
+            "competitorId": 7383,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 149,
+            "name": "Ganador del primer tiempo",
+            "competitorId": 7383,
+            "value": "0 (0%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 150,
+            "name": "Valla invicta",
+            "competitorId": 7383,
+            "value": "0 (0%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 7383,
+            "value": "1.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 7383,
+            "value": "2.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 7383,
+            "value": "0.91",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 7383,
+            "value": "1.49",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 7383,
+            "value": "10.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 7383,
+            "value": "3.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 7383,
+            "value": "4.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 174,
+            "name": "Tarjetas",
+            "competitorId": 7383,
+            "value": "1.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 175,
+            "name": "Penales convertidos/penales ejecutados",
+            "competitorId": 7383,
+            "value": "0/0",
+            "valuePercentage": 0,
+            "statisticGroup": 2
+          }
+        ],
+        "statisticsGroups": [
+          {
+            "id": 1,
+            "name": "Todas las competiciones"
+          },
+          {
+            "id": 2,
+            "name": "Estadísticas promedio"
+          }
+        ],
+        "statisticsFilters": [
+          {
+            "filterGroup": 1,
+            "name": "Todas las competiciones",
+            "selected": false,
+            "value": -1
+          },
+          {
+            "filterGroup": 1,
+            "name": "Brasileirão",
+            "selected": true,
+            "value": 113
+          },
+          {
+            "filterGroup": 1,
+            "name": "Copa de Brasil",
+            "selected": false,
+            "value": 115
+          },
+          {
+            "filterGroup": 2,
+            "name": "Todos",
+            "selected": false,
+            "value": 0
+          },
+          {
+            "filterGroup": 2,
+            "name": "Últimos 5",
+            "selected": false,
+            "value": 1
+          },
+          {
+            "filterGroup": 2,
+            "name": "Todos - Local/Visitante",
+            "selected": false,
+            "value": 2
+          },
+          {
+            "filterGroup": 2,
+            "name": "Útimos 5 - Local/Visitante",
+            "selected": true,
+            "value": 4
+          }
+        ],
+        "statisticGamesPlayed": {
+          "homeText": "Últimos 5 partidos",
+          "awayText": "Últimos 5 partidos"
+        },
+        "sports": [
+          {
+            "id": 1,
+            "name": "Fútbol",
+            "nameForURL": "football",
+            "drawSupport": true,
+            "imageVersion": 1
+          }
+        ],
+        "countries": [
+          {
+            "id": 21,
+            "name": "Brasil",
+            "nameForURL": "brazil",
+            "sportTypes": [
+              1,
+              2,
+              6,
+              8
+            ],
+            "imageVersion": 1,
+            "isInternational": false
+          }
+        ],
+        "competitions": [
+          {
+            "id": 113,
+            "countryId": 21,
+            "sportId": 1,
+            "name": "Brasileirão",
+            "longName": "Campeonato Brasileño de Serie A",
+            "hasStandings": true,
+            "hasLiveStandings": false,
+            "hasStandingsGroups": false,
+            "hasBrackets": false,
+            "hasStats": true,
+            "nameForURL": "brasileirao-serie-a",
+            "popularityRank": 52468641,
+            "imageVersion": 11,
+            "currentStageType": 1,
+            "color": "#01479A",
+            "competitorsType": 1,
+            "currentPhaseNum": -1,
+            "currentSeasonNum": 76,
+            "currentStageNum": 1,
+            "isInternational": false,
+            "hasHistory": true
+          }
+        ],
+        "competitors": [
+          {
+            "id": 1219,
+            "countryId": 21,
+            "sportId": 1,
+            "name": "Internacional",
+            "shortName": "Internacional",
+            "longName": "Internacional",
+            "nameForURL": "internacional",
+            "popularityRank": 7788355,
+            "imageVersion": 7,
+            "mainCompetitionId": 113,
+            "hasTransfers": false,
+            "competitorNum": 0,
+            "mainCompetitionName": "Brasileirão"
+          },
+          {
+            "id": 7383,
+            "countryId": 21,
+            "sportId": 1,
+            "name": "Remo",
+            "shortName": "Remo",
+            "longName": "Remo",
+            "nameForURL": "remo",
+            "popularityRank": 1214637,
+            "imageVersion": 3,
+            "mainCompetitionId": 113,
+            "hasTransfers": false,
+            "competitorNum": 0,
+            "mainCompetitionName": "Brasileirão"
+          }
+        ],
+        "games": [
+          {
+            "id": 4632720,
+            "sportId": 1,
+            "competitionId": 113,
+            "seasonNum": 76,
+            "stageNum": 1,
+            "roundNum": 23,
+            "roundName": "Fecha",
+            "competitionDisplayName": "Brasileirão",
+            "startTime": "2026-08-17T17:00:00-06:00",
+            "statusGroup": 2,
+            "statusText": "Prog.",
+            "shortStatusText": "Prog.",
+            "gameTimeAndStatusDisplayType": 0,
+            "homeCompetitor": {
+              "id": 1219,
+              "countryId": 21,
+              "sportId": 1,
+              "name": "Internacional",
+              "score": -1,
+              "isWinner": false,
+              "nameForURL": "internacional",
+              "type": 1,
+              "popularityRank": 7788,
+              "imageVersion": 7,
+              "color": "#E00618",
+              "awayColor": "#FFFFFF",
+              "hasSquad": true,
+              "hasTransfers": false,
+              "competitorNum": 1,
+              "hideOnSearch": false,
+              "hideOnCatalog": false
+            },
+            "awayCompetitor": {
+              "id": 7383,
+              "countryId": 21,
+              "sportId": 1,
+              "name": "Remo",
+              "score": -1,
+              "isWinner": false,
+              "nameForURL": "remo",
+              "type": 1,
+              "popularityRank": 1214,
+              "imageVersion": 3,
+              "color": "#000000",
+              "awayColor": "#FFFFFF",
+              "hasSquad": true,
+              "hasTransfers": false,
+              "competitorNum": 2,
+              "hideOnSearch": false,
+              "hideOnCatalog": false
+            },
+            "winner": -1,
+            "scores": [
+              -1,
+              -1
+            ],
+            "homeAwayTeamOrder": 1,
+            "hasPointByPoint": false,
+            "hasVideo": false
+          }
+        ],
+        "bookmakers": [
+          {
+            "id": 4,
+            "name": "BWIN",
+            "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+            "nameForURL": "bwin",
+            "actionButton": {
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "label": "Apuesta ahora"
+            },
+            "color": "#000000",
+            "imageVersion": 1,
+            "offerText": "100% Bono de Bienvenida",
+            "offerUrl": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+            "promotionText": "Ven a vivir la emoción"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "matchUrl": "https://www.365scores.com/es/football/match/liga-mx-141/leon-necaxa-1263-9339-141#id=4735729",
+    "stats": {
+      "todos": {
+        "statistics": [
+          {
+            "id": 141,
+            "name": "Partidos ganados",
+            "competitorId": 1263,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1,
+            "bettingOpportunity": {
+              "gameId": 4735729,
+              "lineId": 0,
+              "text": "47% predice que León ganará",
+              "textCTA": "Apuesta $400 y gana $1040",
+              "optionNum": 0,
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "bookmakerId": 4
+            }
+          },
+          {
+            "id": 142,
+            "name": "Ambos equipos marcaron",
+            "competitorId": 1263,
+            "value": "4 (80%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 143,
+            "name": "Más de 2.5 goles",
+            "competitorId": 1263,
+            "value": "4 (80%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 144,
+            "name": "Marcó primero",
+            "competitorId": 1263,
+            "value": "1 (20%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 146,
+            "name": "Recibió gol primero",
+            "competitorId": 1263,
+            "value": "4 (80%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 148,
+            "name": "Empató o Ganó",
+            "competitorId": 1263,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 149,
+            "name": "Ganador del primer tiempo",
+            "competitorId": 1263,
+            "value": "0 (0%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 150,
+            "name": "Valla invicta",
+            "competitorId": 1263,
+            "value": "0 (0%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 1263,
+            "value": "1.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 1263,
+            "value": "1.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 1263,
+            "value": "2.25",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 1263,
+            "value": "1.02",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 1263,
+            "value": "12.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 1263,
+            "value": "5.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 1263,
+            "value": "5",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 174,
+            "name": "Tarjetas",
+            "competitorId": 1263,
+            "value": "3",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 175,
+            "name": "Penales convertidos/penales ejecutados",
+            "competitorId": 1263,
+            "value": "1/1",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 141,
+            "name": "Partidos ganados",
+            "competitorId": 9339,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1,
+            "bettingOpportunity": {
+              "gameId": 4735729,
+              "lineId": 0,
+              "text": "47% predice que León ganará",
+              "textCTA": "Apuesta $400 y gana $1040",
+              "optionNum": 0,
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "bookmakerId": 4
+            }
+          },
+          {
+            "id": 142,
+            "name": "Ambos equipos marcaron",
+            "competitorId": 9339,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 143,
+            "name": "Más de 2.5 goles",
+            "competitorId": 9339,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 144,
+            "name": "Marcó primero",
+            "competitorId": 9339,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 146,
+            "name": "Recibió gol primero",
+            "competitorId": 9339,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 148,
+            "name": "Empató o Ganó",
+            "competitorId": 9339,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 149,
+            "name": "Ganador del primer tiempo",
+            "competitorId": 9339,
+            "value": "1 (20%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 150,
+            "name": "Valla invicta",
+            "competitorId": 9339,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 9339,
+            "value": "1.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 9339,
+            "value": "1.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 9339,
+            "value": "1",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 9339,
+            "value": "1.45",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 9339,
+            "value": "12.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 9339,
+            "value": "5",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 9339,
+            "value": "5.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 174,
+            "name": "Tarjetas",
+            "competitorId": 9339,
+            "value": "2.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 175,
+            "name": "Penales convertidos/penales ejecutados",
+            "competitorId": 9339,
+            "value": "0/0",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          }
+        ],
+        "statisticsGroups": [
+          {
+            "id": 1,
+            "name": "Todas las competiciones"
+          },
+          {
+            "id": 2,
+            "name": "Estadísticas promedio"
+          }
+        ],
+        "statisticsFilters": [
+          {
+            "filterGroup": 1,
+            "name": "Todas las competiciones",
+            "selected": true,
+            "value": -1
+          },
+          {
+            "filterGroup": 1,
+            "name": "Liga MX",
+            "selected": false,
+            "value": 141
+          },
+          {
+            "filterGroup": 1,
+            "name": "Leagues Cup",
+            "selected": false,
+            "value": 7242
+          },
+          {
+            "filterGroup": 2,
+            "name": "Todos",
+            "selected": true,
+            "value": 0
+          },
+          {
+            "filterGroup": 2,
+            "name": "Últimos 5",
+            "selected": false,
+            "value": 1
+          }
+        ],
+        "statisticGamesPlayed": {
+          "homeText": "Últimos 5 partidos",
+          "awayText": "Últimos 5 partidos"
+        },
+        "sports": [
+          {
+            "id": 1,
+            "name": "Fútbol",
+            "nameForURL": "football",
+            "drawSupport": true,
+            "imageVersion": 1
+          }
+        ],
+        "countries": [
+          {
+            "id": 31,
+            "name": "México",
+            "nameForURL": "mexico",
+            "sportTypes": [
+              1,
+              2,
+              7,
+              8
+            ],
+            "imageVersion": 1,
+            "isInternational": false
+          }
+        ],
+        "competitions": [
+          {
+            "id": 141,
+            "countryId": 31,
+            "sportId": 1,
+            "name": "Liga MX",
+            "hasStandings": true,
+            "hasLiveStandings": false,
+            "hasStandingsGroups": false,
+            "hasBrackets": false,
+            "hasStats": true,
+            "nameForURL": "liga-mx",
+            "popularityRank": 9815945,
+            "imageVersion": 2,
+            "currentStageType": 1,
+            "color": "#ED1C24",
+            "competitorsType": 1,
+            "currentPhaseNum": 1,
+            "currentPhaseName": "Apertura",
+            "currentSeasonNum": 152,
+            "currentStageNum": 2,
+            "isInternational": false,
+            "hasHistory": true
+          }
+        ],
+        "competitors": [
+          {
+            "id": 1263,
+            "countryId": 31,
+            "sportId": 1,
+            "name": "Necaxa",
+            "shortName": "Necaxa",
+            "longName": "Necaxa",
+            "nameForURL": "necaxa",
+            "popularityRank": 712875,
+            "imageVersion": 4,
+            "mainCompetitionId": 141,
+            "hasTransfers": false,
+            "competitorNum": 0,
+            "mainCompetitionName": "Liga MX"
+          },
+          {
+            "id": 9339,
+            "countryId": 31,
+            "sportId": 1,
+            "name": "León",
+            "shortName": "León",
+            "longName": "León",
+            "nameForURL": "leon",
+            "popularityRank": 2401605,
+            "imageVersion": 4,
+            "mainCompetitionId": 141,
+            "hasTransfers": false,
+            "competitorNum": 0,
+            "mainCompetitionName": "Liga MX"
+          }
+        ],
+        "games": [
+          {
+            "id": 4735729,
+            "sportId": 1,
+            "competitionId": 141,
+            "seasonNum": 152,
+            "stageNum": 2,
+            "roundNum": 4,
+            "roundName": "Fecha",
+            "competitionDisplayName": "Liga MX - Apertura",
+            "startTime": "2026-08-17T19:00:00-06:00",
+            "statusGroup": 2,
+            "statusText": "Prog.",
+            "shortStatusText": "Prog.",
+            "gameTimeAndStatusDisplayType": 0,
+            "homeCompetitor": {
+              "id": 1263,
+              "countryId": 31,
+              "sportId": 1,
+              "name": "Necaxa",
+              "score": -1,
+              "isWinner": false,
+              "nameForURL": "necaxa",
+              "type": 1,
+              "popularityRank": 712,
+              "imageVersion": 4,
+              "color": "#FFFFFF",
+              "awayColor": "#EA272D",
+              "hasSquad": true,
+              "hasTransfers": false,
+              "competitorNum": 1,
+              "hideOnSearch": false,
+              "hideOnCatalog": false
+            },
+            "awayCompetitor": {
+              "id": 9339,
+              "countryId": 31,
+              "sportId": 1,
+              "name": "León",
+              "score": -1,
+              "isWinner": false,
+              "nameForURL": "leon",
+              "type": 1,
+              "popularityRank": 2401,
+              "imageVersion": 4,
+              "color": "#126446",
+              "awayColor": "#FFFFFF",
+              "hasSquad": true,
+              "hasTransfers": false,
+              "competitorNum": 2,
+              "hideOnSearch": false,
+              "hideOnCatalog": false
+            },
+            "winner": -1,
+            "scores": [
+              -1,
+              -1
+            ],
+            "homeAwayTeamOrder": 1,
+            "hasPointByPoint": false,
+            "hasVideo": false
+          }
+        ],
+        "bookmakers": [
+          {
+            "id": 4,
+            "name": "BWIN",
+            "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+            "nameForURL": "bwin",
+            "actionButton": {
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "label": "Apuesta ahora"
+            },
+            "color": "#000000",
+            "imageVersion": 1,
+            "offerText": "100% Bono de Bienvenida",
+            "offerUrl": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+            "promotionText": "Ven a vivir la emoción"
+          }
+        ]
+      },
+      "ultimos5": {
+        "statistics": [
+          {
+            "id": 141,
+            "name": "Partidos ganados",
+            "competitorId": 1263,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1,
+            "bettingOpportunity": {
+              "gameId": 4735729,
+              "lineId": 0,
+              "text": "47% predice que León ganará",
+              "textCTA": "Apuesta $400 y gana $1040",
+              "optionNum": 0,
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "bookmakerId": 4
+            }
+          },
+          {
+            "id": 142,
+            "name": "Ambos equipos marcaron",
+            "competitorId": 1263,
+            "value": "4 (80%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 143,
+            "name": "Más de 2.5 goles",
+            "competitorId": 1263,
+            "value": "4 (80%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 144,
+            "name": "Marcó primero",
+            "competitorId": 1263,
+            "value": "1 (20%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 146,
+            "name": "Recibió gol primero",
+            "competitorId": 1263,
+            "value": "4 (80%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 148,
+            "name": "Empató o Ganó",
+            "competitorId": 1263,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 149,
+            "name": "Ganador del primer tiempo",
+            "competitorId": 1263,
+            "value": "0 (0%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 150,
+            "name": "Valla invicta",
+            "competitorId": 1263,
+            "value": "0 (0%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 1263,
+            "value": "1.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 1263,
+            "value": "1.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 1263,
+            "value": "2.25",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 1263,
+            "value": "1.02",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 1263,
+            "value": "12.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 1263,
+            "value": "5.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 1263,
+            "value": "5",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 174,
+            "name": "Tarjetas",
+            "competitorId": 1263,
+            "value": "3",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 175,
+            "name": "Penales convertidos/penales ejecutados",
+            "competitorId": 1263,
+            "value": "1/1",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 141,
+            "name": "Partidos ganados",
+            "competitorId": 9339,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1,
+            "bettingOpportunity": {
+              "gameId": 4735729,
+              "lineId": 0,
+              "text": "47% predice que León ganará",
+              "textCTA": "Apuesta $400 y gana $1040",
+              "optionNum": 0,
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "bookmakerId": 4
+            }
+          },
+          {
+            "id": 142,
+            "name": "Ambos equipos marcaron",
+            "competitorId": 9339,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 143,
+            "name": "Más de 2.5 goles",
+            "competitorId": 9339,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 144,
+            "name": "Marcó primero",
+            "competitorId": 9339,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 146,
+            "name": "Recibió gol primero",
+            "competitorId": 9339,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 148,
+            "name": "Empató o Ganó",
+            "competitorId": 9339,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 149,
+            "name": "Ganador del primer tiempo",
+            "competitorId": 9339,
+            "value": "1 (20%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 150,
+            "name": "Valla invicta",
+            "competitorId": 9339,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 9339,
+            "value": "1.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 9339,
+            "value": "1.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 9339,
+            "value": "1",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 9339,
+            "value": "1.45",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 9339,
+            "value": "12.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 9339,
+            "value": "5",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 9339,
+            "value": "5.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 174,
+            "name": "Tarjetas",
+            "competitorId": 9339,
+            "value": "2.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 175,
+            "name": "Penales convertidos/penales ejecutados",
+            "competitorId": 9339,
+            "value": "0/0",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          }
+        ],
+        "statisticsGroups": [
+          {
+            "id": 1,
+            "name": "Todas las competiciones"
+          },
+          {
+            "id": 2,
+            "name": "Estadísticas promedio"
+          }
+        ],
+        "statisticsFilters": [
+          {
+            "filterGroup": 1,
+            "name": "Todas las competiciones",
+            "selected": true,
+            "value": -1
+          },
+          {
+            "filterGroup": 1,
+            "name": "Liga MX",
+            "selected": false,
+            "value": 141
+          },
+          {
+            "filterGroup": 1,
+            "name": "Leagues Cup",
+            "selected": false,
+            "value": 7242
+          },
+          {
+            "filterGroup": 2,
+            "name": "Todos",
+            "selected": true,
+            "value": 0
+          },
+          {
+            "filterGroup": 2,
+            "name": "Últimos 5",
+            "selected": false,
+            "value": 1
+          }
+        ],
+        "statisticGamesPlayed": {
+          "homeText": "Últimos 5 partidos",
+          "awayText": "Últimos 5 partidos"
+        },
+        "sports": [
+          {
+            "id": 1,
+            "name": "Fútbol",
+            "nameForURL": "football",
+            "drawSupport": true,
+            "imageVersion": 1
+          }
+        ],
+        "countries": [
+          {
+            "id": 31,
+            "name": "México",
+            "nameForURL": "mexico",
+            "sportTypes": [
+              1,
+              2,
+              7,
+              8
+            ],
+            "imageVersion": 1,
+            "isInternational": false
+          }
+        ],
+        "competitions": [
+          {
+            "id": 141,
+            "countryId": 31,
+            "sportId": 1,
+            "name": "Liga MX",
+            "hasStandings": true,
+            "hasLiveStandings": false,
+            "hasStandingsGroups": false,
+            "hasBrackets": false,
+            "hasStats": true,
+            "nameForURL": "liga-mx",
+            "popularityRank": 9815945,
+            "imageVersion": 2,
+            "currentStageType": 1,
+            "color": "#ED1C24",
+            "competitorsType": 1,
+            "currentPhaseNum": 1,
+            "currentPhaseName": "Apertura",
+            "currentSeasonNum": 152,
+            "currentStageNum": 2,
+            "isInternational": false,
+            "hasHistory": true
+          }
+        ],
+        "competitors": [
+          {
+            "id": 1263,
+            "countryId": 31,
+            "sportId": 1,
+            "name": "Necaxa",
+            "shortName": "Necaxa",
+            "longName": "Necaxa",
+            "nameForURL": "necaxa",
+            "popularityRank": 712875,
+            "imageVersion": 4,
+            "mainCompetitionId": 141,
+            "hasTransfers": false,
+            "competitorNum": 0,
+            "mainCompetitionName": "Liga MX"
+          },
+          {
+            "id": 9339,
+            "countryId": 31,
+            "sportId": 1,
+            "name": "León",
+            "shortName": "León",
+            "longName": "León",
+            "nameForURL": "leon",
+            "popularityRank": 2401605,
+            "imageVersion": 4,
+            "mainCompetitionId": 141,
+            "hasTransfers": false,
+            "competitorNum": 0,
+            "mainCompetitionName": "Liga MX"
+          }
+        ],
+        "games": [
+          {
+            "id": 4735729,
+            "sportId": 1,
+            "competitionId": 141,
+            "seasonNum": 152,
+            "stageNum": 2,
+            "roundNum": 4,
+            "roundName": "Fecha",
+            "competitionDisplayName": "Liga MX - Apertura",
+            "startTime": "2026-08-17T19:00:00-06:00",
+            "statusGroup": 2,
+            "statusText": "Prog.",
+            "shortStatusText": "Prog.",
+            "gameTimeAndStatusDisplayType": 0,
+            "homeCompetitor": {
+              "id": 1263,
+              "countryId": 31,
+              "sportId": 1,
+              "name": "Necaxa",
+              "score": -1,
+              "isWinner": false,
+              "nameForURL": "necaxa",
+              "type": 1,
+              "popularityRank": 712,
+              "imageVersion": 4,
+              "color": "#FFFFFF",
+              "awayColor": "#EA272D",
+              "hasSquad": true,
+              "hasTransfers": false,
+              "competitorNum": 1,
+              "hideOnSearch": false,
+              "hideOnCatalog": false
+            },
+            "awayCompetitor": {
+              "id": 9339,
+              "countryId": 31,
+              "sportId": 1,
+              "name": "León",
+              "score": -1,
+              "isWinner": false,
+              "nameForURL": "leon",
+              "type": 1,
+              "popularityRank": 2401,
+              "imageVersion": 4,
+              "color": "#126446",
+              "awayColor": "#FFFFFF",
+              "hasSquad": true,
+              "hasTransfers": false,
+              "competitorNum": 2,
+              "hideOnSearch": false,
+              "hideOnCatalog": false
+            },
+            "winner": -1,
+            "scores": [
+              -1,
+              -1
+            ],
+            "homeAwayTeamOrder": 1,
+            "hasPointByPoint": false,
+            "hasVideo": false
+          }
+        ],
+        "bookmakers": [
+          {
+            "id": 4,
+            "name": "BWIN",
+            "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+            "nameForURL": "bwin",
+            "actionButton": {
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "label": "Apuesta ahora"
+            },
+            "color": "#000000",
+            "imageVersion": 1,
+            "offerText": "100% Bono de Bienvenida",
+            "offerUrl": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+            "promotionText": "Ven a vivir la emoción"
+          }
+        ]
+      },
+      "ultimos5LocalVisita": {
+        "statistics": [
+          {
+            "id": 141,
+            "name": "Partidos ganados",
+            "competitorId": 1263,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1,
+            "bettingOpportunity": {
+              "gameId": 4735729,
+              "lineId": 0,
+              "text": "47% predice que León ganará",
+              "textCTA": "Apuesta $400 y gana $1040",
+              "optionNum": 0,
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "bookmakerId": 4
+            }
+          },
+          {
+            "id": 142,
+            "name": "Ambos equipos marcaron",
+            "competitorId": 1263,
+            "value": "4 (80%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 143,
+            "name": "Más de 2.5 goles",
+            "competitorId": 1263,
+            "value": "4 (80%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 144,
+            "name": "Marcó primero",
+            "competitorId": 1263,
+            "value": "1 (20%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 146,
+            "name": "Recibió gol primero",
+            "competitorId": 1263,
+            "value": "4 (80%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 148,
+            "name": "Empató o Ganó",
+            "competitorId": 1263,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 149,
+            "name": "Ganador del primer tiempo",
+            "competitorId": 1263,
+            "value": "0 (0%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 150,
+            "name": "Valla invicta",
+            "competitorId": 1263,
+            "value": "0 (0%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 1263,
+            "value": "1.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 1263,
+            "value": "1.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 1263,
+            "value": "2.25",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 1263,
+            "value": "1.02",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 1263,
+            "value": "12.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 1263,
+            "value": "5.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 1263,
+            "value": "5",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 174,
+            "name": "Tarjetas",
+            "competitorId": 1263,
+            "value": "3",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 175,
+            "name": "Penales convertidos/penales ejecutados",
+            "competitorId": 1263,
+            "value": "1/1",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 141,
+            "name": "Partidos ganados",
+            "competitorId": 9339,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1,
+            "bettingOpportunity": {
+              "gameId": 4735729,
+              "lineId": 0,
+              "text": "47% predice que León ganará",
+              "textCTA": "Apuesta $400 y gana $1040",
+              "optionNum": 0,
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "bookmakerId": 4
+            }
+          },
+          {
+            "id": 142,
+            "name": "Ambos equipos marcaron",
+            "competitorId": 9339,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 143,
+            "name": "Más de 2.5 goles",
+            "competitorId": 9339,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 144,
+            "name": "Marcó primero",
+            "competitorId": 9339,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 146,
+            "name": "Recibió gol primero",
+            "competitorId": 9339,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 148,
+            "name": "Empató o Ganó",
+            "competitorId": 9339,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 149,
+            "name": "Ganador del primer tiempo",
+            "competitorId": 9339,
+            "value": "1 (20%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 150,
+            "name": "Valla invicta",
+            "competitorId": 9339,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 9339,
+            "value": "1.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 9339,
+            "value": "1.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 9339,
+            "value": "1",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 9339,
+            "value": "1.45",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 9339,
+            "value": "12.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 9339,
+            "value": "5",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 9339,
+            "value": "5.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 174,
+            "name": "Tarjetas",
+            "competitorId": 9339,
+            "value": "2.6",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 175,
+            "name": "Penales convertidos/penales ejecutados",
+            "competitorId": 9339,
+            "value": "0/0",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          }
+        ],
+        "statisticsGroups": [
+          {
+            "id": 1,
+            "name": "Todas las competiciones"
+          },
+          {
+            "id": 2,
+            "name": "Estadísticas promedio"
+          }
+        ],
+        "statisticsFilters": [
+          {
+            "filterGroup": 1,
+            "name": "Todas las competiciones",
+            "selected": true,
+            "value": -1
+          },
+          {
+            "filterGroup": 1,
+            "name": "Liga MX",
+            "selected": false,
+            "value": 141
+          },
+          {
+            "filterGroup": 1,
+            "name": "Leagues Cup",
+            "selected": false,
+            "value": 7242
+          },
+          {
+            "filterGroup": 2,
+            "name": "Todos",
+            "selected": true,
+            "value": 0
+          },
+          {
+            "filterGroup": 2,
+            "name": "Últimos 5",
+            "selected": false,
+            "value": 1
+          }
+        ],
+        "statisticGamesPlayed": {
+          "homeText": "Últimos 5 partidos",
+          "awayText": "Últimos 5 partidos"
+        },
+        "sports": [
+          {
+            "id": 1,
+            "name": "Fútbol",
+            "nameForURL": "football",
+            "drawSupport": true,
+            "imageVersion": 1
+          }
+        ],
+        "countries": [
+          {
+            "id": 31,
+            "name": "México",
+            "nameForURL": "mexico",
+            "sportTypes": [
+              1,
+              2,
+              7,
+              8
+            ],
+            "imageVersion": 1,
+            "isInternational": false
+          }
+        ],
+        "competitions": [
+          {
+            "id": 141,
+            "countryId": 31,
+            "sportId": 1,
+            "name": "Liga MX",
+            "hasStandings": true,
+            "hasLiveStandings": false,
+            "hasStandingsGroups": false,
+            "hasBrackets": false,
+            "hasStats": true,
+            "nameForURL": "liga-mx",
+            "popularityRank": 9815945,
+            "imageVersion": 2,
+            "currentStageType": 1,
+            "color": "#ED1C24",
+            "competitorsType": 1,
+            "currentPhaseNum": 1,
+            "currentPhaseName": "Apertura",
+            "currentSeasonNum": 152,
+            "currentStageNum": 2,
+            "isInternational": false,
+            "hasHistory": true
+          }
+        ],
+        "competitors": [
+          {
+            "id": 1263,
+            "countryId": 31,
+            "sportId": 1,
+            "name": "Necaxa",
+            "shortName": "Necaxa",
+            "longName": "Necaxa",
+            "nameForURL": "necaxa",
+            "popularityRank": 712875,
+            "imageVersion": 4,
+            "mainCompetitionId": 141,
+            "hasTransfers": false,
+            "competitorNum": 0,
+            "mainCompetitionName": "Liga MX"
+          },
+          {
+            "id": 9339,
+            "countryId": 31,
+            "sportId": 1,
+            "name": "León",
+            "shortName": "León",
+            "longName": "León",
+            "nameForURL": "leon",
+            "popularityRank": 2401605,
+            "imageVersion": 4,
+            "mainCompetitionId": 141,
+            "hasTransfers": false,
+            "competitorNum": 0,
+            "mainCompetitionName": "Liga MX"
+          }
+        ],
+        "games": [
+          {
+            "id": 4735729,
+            "sportId": 1,
+            "competitionId": 141,
+            "seasonNum": 152,
+            "stageNum": 2,
+            "roundNum": 4,
+            "roundName": "Fecha",
+            "competitionDisplayName": "Liga MX - Apertura",
+            "startTime": "2026-08-17T19:00:00-06:00",
+            "statusGroup": 2,
+            "statusText": "Prog.",
+            "shortStatusText": "Prog.",
+            "gameTimeAndStatusDisplayType": 0,
+            "homeCompetitor": {
+              "id": 1263,
+              "countryId": 31,
+              "sportId": 1,
+              "name": "Necaxa",
+              "score": -1,
+              "isWinner": false,
+              "nameForURL": "necaxa",
+              "type": 1,
+              "popularityRank": 712,
+              "imageVersion": 4,
+              "color": "#FFFFFF",
+              "awayColor": "#EA272D",
+              "hasSquad": true,
+              "hasTransfers": false,
+              "competitorNum": 1,
+              "hideOnSearch": false,
+              "hideOnCatalog": false
+            },
+            "awayCompetitor": {
+              "id": 9339,
+              "countryId": 31,
+              "sportId": 1,
+              "name": "León",
+              "score": -1,
+              "isWinner": false,
+              "nameForURL": "leon",
+              "type": 1,
+              "popularityRank": 2401,
+              "imageVersion": 4,
+              "color": "#126446",
+              "awayColor": "#FFFFFF",
+              "hasSquad": true,
+              "hasTransfers": false,
+              "competitorNum": 2,
+              "hideOnSearch": false,
+              "hideOnCatalog": false
+            },
+            "winner": -1,
+            "scores": [
+              -1,
+              -1
+            ],
+            "homeAwayTeamOrder": 1,
+            "hasPointByPoint": false,
+            "hasVideo": false
+          }
+        ],
+        "bookmakers": [
+          {
+            "id": 4,
+            "name": "BWIN",
+            "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+            "nameForURL": "bwin",
+            "actionButton": {
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "label": "Apuesta ahora"
+            },
+            "color": "#000000",
+            "imageVersion": 1,
+            "offerText": "100% Bono de Bienvenida",
+            "offerUrl": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+            "promotionText": "Ven a vivir la emoción"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "matchUrl": "https://www.365scores.com/es/football/match/liga-mx-141/pachuca-puebla-1250-1252-141#id=4735728",
+    "stats": {
+      "todos": {
+        "statistics": [
+          {
+            "id": 141,
+            "name": "Partidos ganados",
+            "competitorId": 1250,
+            "value": "2 (33%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1,
+            "bettingOpportunity": {
+              "gameId": 4735728,
+              "lineId": 0,
+              "text": "70% predice que Pachuca ganará",
+              "textCTA": "Apuesta $400 y gana $603",
+              "optionNum": 0,
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "bookmakerId": 4
+            }
+          },
+          {
+            "id": 142,
+            "name": "Ambos equipos marcaron",
+            "competitorId": 1250,
+            "value": "3 (50%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 143,
+            "name": "Más de 2.5 goles",
+            "competitorId": 1250,
+            "value": "4 (67%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 144,
+            "name": "Marcó primero",
+            "competitorId": 1250,
+            "value": "4 (67%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 146,
+            "name": "Recibió gol primero",
+            "competitorId": 1250,
+            "value": "2 (33%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 148,
+            "name": "Empató o Ganó",
+            "competitorId": 1250,
+            "value": "2 (33%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 149,
+            "name": "Ganador del primer tiempo",
+            "competitorId": 1250,
+            "value": "2 (33%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 150,
+            "name": "Valla invicta",
+            "competitorId": 1250,
+            "value": "2 (33%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 1250,
+            "value": "1.17",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 1250,
+            "value": "1.33",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 1250,
+            "value": "0.91",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 1250,
+            "value": "1.11",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 1250,
+            "value": "16",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 1250,
+            "value": "5.83",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 1250,
+            "value": "5",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 174,
+            "name": "Tarjetas",
+            "competitorId": 1250,
+            "value": "3",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 175,
+            "name": "Penales convertidos/penales ejecutados",
+            "competitorId": 1250,
+            "value": "0/0",
+            "valuePercentage": 0,
+            "statisticGroup": 2
+          },
+          {
+            "id": 141,
+            "name": "Partidos ganados",
+            "competitorId": 1252,
+            "value": "1 (20%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1,
+            "bettingOpportunity": {
+              "gameId": 4735728,
+              "lineId": 0,
+              "text": "70% predice que Pachuca ganará",
+              "textCTA": "Apuesta $400 y gana $603",
+              "optionNum": 0,
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "bookmakerId": 4
+            }
+          },
+          {
+            "id": 142,
+            "name": "Ambos equipos marcaron",
+            "competitorId": 1252,
+            "value": "4 (80%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 143,
+            "name": "Más de 2.5 goles",
+            "competitorId": 1252,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 144,
+            "name": "Marcó primero",
+            "competitorId": 1252,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 146,
+            "name": "Recibió gol primero",
+            "competitorId": 1252,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 148,
+            "name": "Empató o Ganó",
+            "competitorId": 1252,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 149,
+            "name": "Ganador del primer tiempo",
+            "competitorId": 1252,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 150,
+            "name": "Valla invicta",
+            "competitorId": 1252,
+            "value": "1 (20%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 1252,
+            "value": "1.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 1252,
+            "value": "2.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 1252,
+            "value": "0.87",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 1252,
+            "value": "1.34",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 1252,
+            "value": "10.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 1252,
+            "value": "4.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 1252,
+            "value": "4.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 174,
+            "name": "Tarjetas",
+            "competitorId": 1252,
+            "value": "1.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 175,
+            "name": "Penales convertidos/penales ejecutados",
+            "competitorId": 1252,
+            "value": "0/0",
+            "valuePercentage": 0,
+            "statisticGroup": 2
+          }
+        ],
+        "statisticsGroups": [
+          {
+            "id": 1,
+            "name": "Todas las competiciones"
+          },
+          {
+            "id": 2,
+            "name": "Estadísticas promedio"
+          }
+        ],
+        "statisticsFilters": [
+          {
+            "filterGroup": 1,
+            "name": "Todas las competiciones",
+            "selected": true,
+            "value": -1
+          },
+          {
+            "filterGroup": 1,
+            "name": "Liga MX",
+            "selected": false,
+            "value": 141
+          },
+          {
+            "filterGroup": 1,
+            "name": "Leagues Cup",
+            "selected": false,
+            "value": 7242
+          },
+          {
+            "filterGroup": 2,
+            "name": "Todos",
+            "selected": true,
+            "value": 0
+          },
+          {
+            "filterGroup": 2,
+            "name": "Últimos 5",
+            "selected": false,
+            "value": 1
+          }
+        ],
+        "statisticGamesPlayed": {
+          "homeText": "Últimos 6 partidos",
+          "awayText": "Últimos 5 partidos"
+        },
+        "sports": [
+          {
+            "id": 1,
+            "name": "Fútbol",
+            "nameForURL": "football",
+            "drawSupport": true,
+            "imageVersion": 1
+          }
+        ],
+        "countries": [
+          {
+            "id": 31,
+            "name": "México",
+            "nameForURL": "mexico",
+            "sportTypes": [
+              7,
+              1,
+              8,
+              2
+            ],
+            "imageVersion": 1,
+            "isInternational": false
+          }
+        ],
+        "competitions": [
+          {
+            "id": 141,
+            "countryId": 31,
+            "sportId": 1,
+            "name": "Liga MX",
+            "hasStandings": true,
+            "hasLiveStandings": false,
+            "hasStandingsGroups": false,
+            "hasBrackets": false,
+            "hasStats": true,
+            "nameForURL": "liga-mx",
+            "popularityRank": 9815945,
+            "imageVersion": 2,
+            "currentStageType": 1,
+            "color": "#ED1C24",
+            "competitorsType": 1,
+            "currentPhaseNum": 1,
+            "currentPhaseName": "Apertura",
+            "currentSeasonNum": 152,
+            "currentStageNum": 2,
+            "isInternational": false,
+            "hasHistory": true
+          }
+        ],
+        "competitors": [
+          {
+            "id": 1250,
+            "countryId": 31,
+            "sportId": 1,
+            "name": "Pachuca",
+            "shortName": "Pachuca",
+            "longName": "Pachuca",
+            "nameForURL": "pachuca",
+            "popularityRank": 1641912,
+            "imageVersion": 5,
+            "mainCompetitionId": 141,
+            "hasTransfers": false,
+            "competitorNum": 0,
+            "mainCompetitionName": "Liga MX"
+          },
+          {
+            "id": 1252,
+            "countryId": 31,
+            "sportId": 1,
+            "name": "Puebla",
+            "shortName": "Puebla",
+            "longName": "Puebla",
+            "nameForURL": "puebla",
+            "popularityRank": 1043196,
+            "imageVersion": 1,
+            "mainCompetitionId": 141,
+            "hasTransfers": false,
+            "competitorNum": 0,
+            "mainCompetitionName": "Liga MX"
+          }
+        ],
+        "games": [
+          {
+            "id": 4735728,
+            "sportId": 1,
+            "competitionId": 141,
+            "seasonNum": 152,
+            "stageNum": 2,
+            "roundNum": 4,
+            "roundName": "Fecha",
+            "competitionDisplayName": "Liga MX - Apertura",
+            "startTime": "2026-08-17T21:06:00-06:00",
+            "statusGroup": 2,
+            "statusText": "Prog.",
+            "shortStatusText": "Prog.",
+            "gameTimeAndStatusDisplayType": 0,
+            "homeCompetitor": {
+              "id": 1250,
+              "countryId": 31,
+              "sportId": 1,
+              "name": "Pachuca",
+              "score": -1,
+              "isWinner": false,
+              "nameForURL": "pachuca",
+              "type": 1,
+              "popularityRank": 1641,
+              "imageVersion": 5,
+              "color": "#FFFFFF",
+              "awayColor": "#28344F",
+              "hasSquad": true,
+              "hasTransfers": false,
+              "competitorNum": 1,
+              "hideOnSearch": false,
+              "hideOnCatalog": false
+            },
+            "awayCompetitor": {
+              "id": 1252,
+              "countryId": 31,
+              "sportId": 1,
+              "name": "Puebla",
+              "score": -1,
+              "isWinner": false,
+              "nameForURL": "puebla",
+              "type": 1,
+              "popularityRank": 1043,
+              "imageVersion": 1,
+              "color": "#FFFFFF",
+              "awayColor": "#141213",
+              "hasSquad": true,
+              "hasTransfers": false,
+              "competitorNum": 2,
+              "hideOnSearch": false,
+              "hideOnCatalog": false
+            },
+            "winner": -1,
+            "scores": [
+              -1,
+              -1
+            ],
+            "homeAwayTeamOrder": 1,
+            "hasPointByPoint": false,
+            "hasVideo": false
+          }
+        ],
+        "bookmakers": [
+          {
+            "id": 4,
+            "name": "BWIN",
+            "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+            "nameForURL": "bwin",
+            "actionButton": {
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "label": "Apuesta ahora"
+            },
+            "color": "#000000",
+            "imageVersion": 1,
+            "offerText": "100% Bono de Bienvenida",
+            "offerUrl": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+            "promotionText": "Ven a vivir la emoción"
+          }
+        ]
+      },
+      "ultimos5": {
+        "statistics": [
+          {
+            "id": 141,
+            "name": "Partidos ganados",
+            "competitorId": 1250,
+            "value": "2 (33%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1,
+            "bettingOpportunity": {
+              "gameId": 4735728,
+              "lineId": 0,
+              "text": "70% predice que Pachuca ganará",
+              "textCTA": "Apuesta $400 y gana $603",
+              "optionNum": 0,
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "bookmakerId": 4
+            }
+          },
+          {
+            "id": 142,
+            "name": "Ambos equipos marcaron",
+            "competitorId": 1250,
+            "value": "3 (50%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 143,
+            "name": "Más de 2.5 goles",
+            "competitorId": 1250,
+            "value": "4 (67%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 144,
+            "name": "Marcó primero",
+            "competitorId": 1250,
+            "value": "4 (67%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 146,
+            "name": "Recibió gol primero",
+            "competitorId": 1250,
+            "value": "2 (33%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 148,
+            "name": "Empató o Ganó",
+            "competitorId": 1250,
+            "value": "2 (33%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 149,
+            "name": "Ganador del primer tiempo",
+            "competitorId": 1250,
+            "value": "2 (33%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 150,
+            "name": "Valla invicta",
+            "competitorId": 1250,
+            "value": "2 (33%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 1250,
+            "value": "1.17",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 1250,
+            "value": "1.33",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 1250,
+            "value": "0.91",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 1250,
+            "value": "1.11",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 1250,
+            "value": "16",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 1250,
+            "value": "5.83",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 1250,
+            "value": "5",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 174,
+            "name": "Tarjetas",
+            "competitorId": 1250,
+            "value": "3",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 175,
+            "name": "Penales convertidos/penales ejecutados",
+            "competitorId": 1250,
+            "value": "0/0",
+            "valuePercentage": 0,
+            "statisticGroup": 2
+          },
+          {
+            "id": 141,
+            "name": "Partidos ganados",
+            "competitorId": 1252,
+            "value": "1 (20%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1,
+            "bettingOpportunity": {
+              "gameId": 4735728,
+              "lineId": 0,
+              "text": "70% predice que Pachuca ganará",
+              "textCTA": "Apuesta $400 y gana $603",
+              "optionNum": 0,
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "bookmakerId": 4
+            }
+          },
+          {
+            "id": 142,
+            "name": "Ambos equipos marcaron",
+            "competitorId": 1252,
+            "value": "4 (80%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 143,
+            "name": "Más de 2.5 goles",
+            "competitorId": 1252,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 144,
+            "name": "Marcó primero",
+            "competitorId": 1252,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 146,
+            "name": "Recibió gol primero",
+            "competitorId": 1252,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 148,
+            "name": "Empató o Ganó",
+            "competitorId": 1252,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 149,
+            "name": "Ganador del primer tiempo",
+            "competitorId": 1252,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 150,
+            "name": "Valla invicta",
+            "competitorId": 1252,
+            "value": "1 (20%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 1252,
+            "value": "1.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 1252,
+            "value": "2.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 1252,
+            "value": "0.87",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 1252,
+            "value": "1.34",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 1252,
+            "value": "10.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 1252,
+            "value": "4.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 1252,
+            "value": "4.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 174,
+            "name": "Tarjetas",
+            "competitorId": 1252,
+            "value": "1.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 175,
+            "name": "Penales convertidos/penales ejecutados",
+            "competitorId": 1252,
+            "value": "0/0",
+            "valuePercentage": 0,
+            "statisticGroup": 2
+          }
+        ],
+        "statisticsGroups": [
+          {
+            "id": 1,
+            "name": "Todas las competiciones"
+          },
+          {
+            "id": 2,
+            "name": "Estadísticas promedio"
+          }
+        ],
+        "statisticsFilters": [
+          {
+            "filterGroup": 1,
+            "name": "Todas las competiciones",
+            "selected": true,
+            "value": -1
+          },
+          {
+            "filterGroup": 1,
+            "name": "Liga MX",
+            "selected": false,
+            "value": 141
+          },
+          {
+            "filterGroup": 1,
+            "name": "Leagues Cup",
+            "selected": false,
+            "value": 7242
+          },
+          {
+            "filterGroup": 2,
+            "name": "Todos",
+            "selected": true,
+            "value": 0
+          },
+          {
+            "filterGroup": 2,
+            "name": "Últimos 5",
+            "selected": false,
+            "value": 1
+          }
+        ],
+        "statisticGamesPlayed": {
+          "homeText": "Últimos 6 partidos",
+          "awayText": "Últimos 5 partidos"
+        },
+        "sports": [
+          {
+            "id": 1,
+            "name": "Fútbol",
+            "nameForURL": "football",
+            "drawSupport": true,
+            "imageVersion": 1
+          }
+        ],
+        "countries": [
+          {
+            "id": 31,
+            "name": "México",
+            "nameForURL": "mexico",
+            "sportTypes": [
+              7,
+              1,
+              8,
+              2
+            ],
+            "imageVersion": 1,
+            "isInternational": false
+          }
+        ],
+        "competitions": [
+          {
+            "id": 141,
+            "countryId": 31,
+            "sportId": 1,
+            "name": "Liga MX",
+            "hasStandings": true,
+            "hasLiveStandings": false,
+            "hasStandingsGroups": false,
+            "hasBrackets": false,
+            "hasStats": true,
+            "nameForURL": "liga-mx",
+            "popularityRank": 9815945,
+            "imageVersion": 2,
+            "currentStageType": 1,
+            "color": "#ED1C24",
+            "competitorsType": 1,
+            "currentPhaseNum": 1,
+            "currentPhaseName": "Apertura",
+            "currentSeasonNum": 152,
+            "currentStageNum": 2,
+            "isInternational": false,
+            "hasHistory": true
+          }
+        ],
+        "competitors": [
+          {
+            "id": 1250,
+            "countryId": 31,
+            "sportId": 1,
+            "name": "Pachuca",
+            "shortName": "Pachuca",
+            "longName": "Pachuca",
+            "nameForURL": "pachuca",
+            "popularityRank": 1641912,
+            "imageVersion": 5,
+            "mainCompetitionId": 141,
+            "hasTransfers": false,
+            "competitorNum": 0,
+            "mainCompetitionName": "Liga MX"
+          },
+          {
+            "id": 1252,
+            "countryId": 31,
+            "sportId": 1,
+            "name": "Puebla",
+            "shortName": "Puebla",
+            "longName": "Puebla",
+            "nameForURL": "puebla",
+            "popularityRank": 1043196,
+            "imageVersion": 1,
+            "mainCompetitionId": 141,
+            "hasTransfers": false,
+            "competitorNum": 0,
+            "mainCompetitionName": "Liga MX"
+          }
+        ],
+        "games": [
+          {
+            "id": 4735728,
+            "sportId": 1,
+            "competitionId": 141,
+            "seasonNum": 152,
+            "stageNum": 2,
+            "roundNum": 4,
+            "roundName": "Fecha",
+            "competitionDisplayName": "Liga MX - Apertura",
+            "startTime": "2026-08-17T21:06:00-06:00",
+            "statusGroup": 2,
+            "statusText": "Prog.",
+            "shortStatusText": "Prog.",
+            "gameTimeAndStatusDisplayType": 0,
+            "homeCompetitor": {
+              "id": 1250,
+              "countryId": 31,
+              "sportId": 1,
+              "name": "Pachuca",
+              "score": -1,
+              "isWinner": false,
+              "nameForURL": "pachuca",
+              "type": 1,
+              "popularityRank": 1641,
+              "imageVersion": 5,
+              "color": "#FFFFFF",
+              "awayColor": "#28344F",
+              "hasSquad": true,
+              "hasTransfers": false,
+              "competitorNum": 1,
+              "hideOnSearch": false,
+              "hideOnCatalog": false
+            },
+            "awayCompetitor": {
+              "id": 1252,
+              "countryId": 31,
+              "sportId": 1,
+              "name": "Puebla",
+              "score": -1,
+              "isWinner": false,
+              "nameForURL": "puebla",
+              "type": 1,
+              "popularityRank": 1043,
+              "imageVersion": 1,
+              "color": "#FFFFFF",
+              "awayColor": "#141213",
+              "hasSquad": true,
+              "hasTransfers": false,
+              "competitorNum": 2,
+              "hideOnSearch": false,
+              "hideOnCatalog": false
+            },
+            "winner": -1,
+            "scores": [
+              -1,
+              -1
+            ],
+            "homeAwayTeamOrder": 1,
+            "hasPointByPoint": false,
+            "hasVideo": false
+          }
+        ],
+        "bookmakers": [
+          {
+            "id": 4,
+            "name": "BWIN",
+            "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+            "nameForURL": "bwin",
+            "actionButton": {
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "label": "Apuesta ahora"
+            },
+            "color": "#000000",
+            "imageVersion": 1,
+            "offerText": "100% Bono de Bienvenida",
+            "offerUrl": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+            "promotionText": "Ven a vivir la emoción"
+          }
+        ]
+      },
+      "ultimos5LocalVisita": {
+        "statistics": [
+          {
+            "id": 141,
+            "name": "Partidos ganados",
+            "competitorId": 1250,
+            "value": "2 (33%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1,
+            "bettingOpportunity": {
+              "gameId": 4735728,
+              "lineId": 0,
+              "text": "70% predice que Pachuca ganará",
+              "textCTA": "Apuesta $400 y gana $603",
+              "optionNum": 0,
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "bookmakerId": 4
+            }
+          },
+          {
+            "id": 142,
+            "name": "Ambos equipos marcaron",
+            "competitorId": 1250,
+            "value": "3 (50%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 143,
+            "name": "Más de 2.5 goles",
+            "competitorId": 1250,
+            "value": "4 (67%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 144,
+            "name": "Marcó primero",
+            "competitorId": 1250,
+            "value": "4 (67%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 146,
+            "name": "Recibió gol primero",
+            "competitorId": 1250,
+            "value": "2 (33%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 148,
+            "name": "Empató o Ganó",
+            "competitorId": 1250,
+            "value": "2 (33%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 149,
+            "name": "Ganador del primer tiempo",
+            "competitorId": 1250,
+            "value": "2 (33%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 150,
+            "name": "Valla invicta",
+            "competitorId": 1250,
+            "value": "2 (33%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 1250,
+            "value": "1.17",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 1250,
+            "value": "1.33",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 1250,
+            "value": "0.91",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 1250,
+            "value": "1.11",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 1250,
+            "value": "16",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 1250,
+            "value": "5.83",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 1250,
+            "value": "5",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 174,
+            "name": "Tarjetas",
+            "competitorId": 1250,
+            "value": "3",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 175,
+            "name": "Penales convertidos/penales ejecutados",
+            "competitorId": 1250,
+            "value": "0/0",
+            "valuePercentage": 0,
+            "statisticGroup": 2
+          },
+          {
+            "id": 141,
+            "name": "Partidos ganados",
+            "competitorId": 1252,
+            "value": "1 (20%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1,
+            "bettingOpportunity": {
+              "gameId": 4735728,
+              "lineId": 0,
+              "text": "70% predice que Pachuca ganará",
+              "textCTA": "Apuesta $400 y gana $603",
+              "optionNum": 0,
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "bookmakerId": 4
+            }
+          },
+          {
+            "id": 142,
+            "name": "Ambos equipos marcaron",
+            "competitorId": 1252,
+            "value": "4 (80%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 143,
+            "name": "Más de 2.5 goles",
+            "competitorId": 1252,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 144,
+            "name": "Marcó primero",
+            "competitorId": 1252,
+            "value": "3 (60%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 146,
+            "name": "Recibió gol primero",
+            "competitorId": 1252,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 148,
+            "name": "Empató o Ganó",
+            "competitorId": 1252,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 149,
+            "name": "Ganador del primer tiempo",
+            "competitorId": 1252,
+            "value": "2 (40%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 150,
+            "name": "Valla invicta",
+            "competitorId": 1252,
+            "value": "1 (20%)",
+            "valuePercentage": 0,
+            "statisticGroup": 1
+          },
+          {
+            "id": 153,
+            "name": "Goles convertidos",
+            "competitorId": 1252,
+            "value": "1.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 156,
+            "name": "Goles recibidos",
+            "competitorId": 1252,
+            "value": "2.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 159,
+            "name": "Goles esperados",
+            "competitorId": 1252,
+            "value": "0.87",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 162,
+            "name": "Goles esperados recibidos",
+            "competitorId": 1252,
+            "value": "1.34",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 165,
+            "name": "Remates",
+            "competitorId": 1252,
+            "value": "10.8",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 168,
+            "name": "Remates al arco",
+            "competitorId": 1252,
+            "value": "4.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 171,
+            "name": "Corners",
+            "competitorId": 1252,
+            "value": "4.2",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 1
+          },
+          {
+            "id": 174,
+            "name": "Tarjetas",
+            "competitorId": 1252,
+            "value": "1.4",
+            "valuePercentage": 0,
+            "statisticGroup": 2,
+            "markedTeam": 2
+          },
+          {
+            "id": 175,
+            "name": "Penales convertidos/penales ejecutados",
+            "competitorId": 1252,
+            "value": "0/0",
+            "valuePercentage": 0,
+            "statisticGroup": 2
+          }
+        ],
+        "statisticsGroups": [
+          {
+            "id": 1,
+            "name": "Todas las competiciones"
+          },
+          {
+            "id": 2,
+            "name": "Estadísticas promedio"
+          }
+        ],
+        "statisticsFilters": [
+          {
+            "filterGroup": 1,
+            "name": "Todas las competiciones",
+            "selected": true,
+            "value": -1
+          },
+          {
+            "filterGroup": 1,
+            "name": "Liga MX",
+            "selected": false,
+            "value": 141
+          },
+          {
+            "filterGroup": 1,
+            "name": "Leagues Cup",
+            "selected": false,
+            "value": 7242
+          },
+          {
+            "filterGroup": 2,
+            "name": "Todos",
+            "selected": true,
+            "value": 0
+          },
+          {
+            "filterGroup": 2,
+            "name": "Últimos 5",
+            "selected": false,
+            "value": 1
+          }
+        ],
+        "statisticGamesPlayed": {
+          "homeText": "Últimos 6 partidos",
+          "awayText": "Últimos 5 partidos"
+        },
+        "sports": [
+          {
+            "id": 1,
+            "name": "Fútbol",
+            "nameForURL": "football",
+            "drawSupport": true,
+            "imageVersion": 1
+          }
+        ],
+        "countries": [
+          {
+            "id": 31,
+            "name": "México",
+            "nameForURL": "mexico",
+            "sportTypes": [
+              7,
+              1,
+              8,
+              2
+            ],
+            "imageVersion": 1,
+            "isInternational": false
+          }
+        ],
+        "competitions": [
+          {
+            "id": 141,
+            "countryId": 31,
+            "sportId": 1,
+            "name": "Liga MX",
+            "hasStandings": true,
+            "hasLiveStandings": false,
+            "hasStandingsGroups": false,
+            "hasBrackets": false,
+            "hasStats": true,
+            "nameForURL": "liga-mx",
+            "popularityRank": 9815945,
+            "imageVersion": 2,
+            "currentStageType": 1,
+            "color": "#ED1C24",
+            "competitorsType": 1,
+            "currentPhaseNum": 1,
+            "currentPhaseName": "Apertura",
+            "currentSeasonNum": 152,
+            "currentStageNum": 2,
+            "isInternational": false,
+            "hasHistory": true
+          }
+        ],
+        "competitors": [
+          {
+            "id": 1250,
+            "countryId": 31,
+            "sportId": 1,
+            "name": "Pachuca",
+            "shortName": "Pachuca",
+            "longName": "Pachuca",
+            "nameForURL": "pachuca",
+            "popularityRank": 1641912,
+            "imageVersion": 5,
+            "mainCompetitionId": 141,
+            "hasTransfers": false,
+            "competitorNum": 0,
+            "mainCompetitionName": "Liga MX"
+          },
+          {
+            "id": 1252,
+            "countryId": 31,
+            "sportId": 1,
+            "name": "Puebla",
+            "shortName": "Puebla",
+            "longName": "Puebla",
+            "nameForURL": "puebla",
+            "popularityRank": 1043196,
+            "imageVersion": 1,
+            "mainCompetitionId": 141,
+            "hasTransfers": false,
+            "competitorNum": 0,
+            "mainCompetitionName": "Liga MX"
+          }
+        ],
+        "games": [
+          {
+            "id": 4735728,
+            "sportId": 1,
+            "competitionId": 141,
+            "seasonNum": 152,
+            "stageNum": 2,
+            "roundNum": 4,
+            "roundName": "Fecha",
+            "competitionDisplayName": "Liga MX - Apertura",
+            "startTime": "2026-08-17T21:06:00-06:00",
+            "statusGroup": 2,
+            "statusText": "Prog.",
+            "shortStatusText": "Prog.",
+            "gameTimeAndStatusDisplayType": 0,
+            "homeCompetitor": {
+              "id": 1250,
+              "countryId": 31,
+              "sportId": 1,
+              "name": "Pachuca",
+              "score": -1,
+              "isWinner": false,
+              "nameForURL": "pachuca",
+              "type": 1,
+              "popularityRank": 1641,
+              "imageVersion": 5,
+              "color": "#FFFFFF",
+              "awayColor": "#28344F",
+              "hasSquad": true,
+              "hasTransfers": false,
+              "competitorNum": 1,
+              "hideOnSearch": false,
+              "hideOnCatalog": false
+            },
+            "awayCompetitor": {
+              "id": 1252,
+              "countryId": 31,
+              "sportId": 1,
+              "name": "Puebla",
+              "score": -1,
+              "isWinner": false,
+              "nameForURL": "puebla",
+              "type": 1,
+              "popularityRank": 1043,
+              "imageVersion": 1,
+              "color": "#FFFFFF",
+              "awayColor": "#141213",
+              "hasSquad": true,
+              "hasTransfers": false,
+              "competitorNum": 2,
+              "hideOnSearch": false,
+              "hideOnCatalog": false
+            },
+            "winner": -1,
+            "scores": [
+              -1,
+              -1
+            ],
+            "homeAwayTeamOrder": 1,
+            "hasPointByPoint": false,
+            "hasVideo": false
+          }
+        ],
+        "bookmakers": [
+          {
+            "id": 4,
+            "name": "BWIN",
+            "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+            "nameForURL": "bwin",
+            "actionButton": {
+              "link": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+              "label": "Apuesta ahora"
+            },
+            "color": "#000000",
+            "imageVersion": 1,
+            "offerText": "100% Bono de Bienvenida",
+            "offerUrl": "https://mediaserver.entainpartners.com/renderBanner.do?zoneId=2126275&tdpeh=Format-Odds_User-WebOrg_device-$DeviceHashedId_session-$SessionHashedId__$GUID&btag=301645",
+            "promotionText": "Ven a vivir la emoción"
+          }
+        ]
+      }
+    }
   }
 ]

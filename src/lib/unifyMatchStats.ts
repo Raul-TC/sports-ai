@@ -52,6 +52,7 @@ function getTeamBlockStats(
     statIds: StatIdMap,
     statisticGroup: number | null
 ): TeamBlockStats {
+    console.log({ statisticGroup })
     return {
         goalsFor: extractStatValue(block.statistics, statIds.goalsFor, teamId, statisticGroup),
         goalsAgainst: extractStatValue(block.statistics, statIds.goalsAgainst, teamId, statisticGroup),
@@ -129,9 +130,9 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
             const missing = requiredKeys.filter((key) => !match.stats[key]?.games?.length);
 
             if (missing.length > 0) {
-                console.warn(
-                    `⚠️ ${match.matchUrl} — faltan bloques [${missing.join(", ")}]. Se omite este partido.`
-                );
+                // console.warn(
+                //     `⚠️ ${match.matchUrl} — faltan bloques [${missing.join(", ")}]. Se omite este partido.`
+                // );
                 return null;
             }
 
@@ -435,8 +436,9 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
 
 
 
-            const buildTeamMetrics = (goles: number, xG: number, xGA: number, expectedGoals: number, shotFactor: number, offensiveEfficiency: number, efficiency: number, precisionDrop: number, corners: number, shots: number, shotOT: number): TeamMetrics => ({
+            const buildTeamMetrics = (goles: number, golesRecibidos: number, xG: number, xGA: number, expectedGoals: number, shotFactor: number, offensiveEfficiency: number, efficiency: number, precisionDrop: number, corners: number, shots: number, shotOT: number): TeamMetrics => ({
                 golesPerPartido: +goles.toFixed(3),
+                golesRecibidos: +golesRecibidos.toFixed(3),
                 xG: +xG.toFixed(3),
                 xGA: +xGA.toFixed(3),
                 expectedGoals: + expectedGoals.toFixed(3),
@@ -453,6 +455,7 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
             const metrics: MatchMetrics = {
                 home: buildTeamMetrics(
                     golesLocal,
+                    golesRecibidosLocal,
                     xGTotalLocal,
                     xGATotalLocal,
                     homeLambda,
@@ -467,6 +470,7 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
 
                 away: buildTeamMetrics(
                     golesVisita,
+                    golesRecibidosVisita,
                     xGTotalesVisita,
                     xGATotalVisita,
                     awayLambda,

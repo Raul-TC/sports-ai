@@ -15,7 +15,7 @@ import {
 import { EnrichedPrediction } from "@/utils/enrichPredictions";
 import Image from "next/image";
 import { scoreEngine } from "@/utils/scoringEngine";
-// import { isPickCorrect } from "@/utils/pickValidation";
+import { isPickCorrect } from "@/utils/pickValidation";
 import { gateEngine } from "@/utils/gateEngine";
 import { trapEngine } from "@/utils/trapEngine";
 import { recommendationEngine } from "@/utils/recomendationEngine";
@@ -32,7 +32,7 @@ interface MatchCardProps {
 export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: MatchCardProps) {
     const homeLambda = r.prediction.homeExpectedGoals || 0;
     const awayLambda = r.prediction.awayExpectedGoals || 0;
-    const topScoresTwo = getTopScoreProbabilities(homeLambda, awayLambda, 10, 10);
+    const topScoresTwo = getTopScoreProbabilities(homeLambda, awayLambda, 10, 16);
 
     // Dentro del map
     const gate = useMemo(
@@ -101,6 +101,46 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
     const homeGamesLocal = r.data && r.data[0].games.filter(el => el.competitionDisplayName !== 'Partido Amistoso' && (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') && (el.homeCompetitor.id === r.home.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
     const awayGames = r.data && r.data[1].games.filter(el => el.competitionDisplayName !== 'Partido Amistoso' && (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') && (el.homeCompetitor.id === r.away.id || el.awayCompetitor.id === r.away.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
     const awayGamesAway = r.data && r.data[1].games.filter(el => el.competitionDisplayName !== 'Partido Amistoso' && (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') && (el.awayCompetitor.id === r.away.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
+    const results = r.result
+
+    const getFinalPick = () => {
+        const homeGoals = r.result?.homeScore ?? 0;
+        const awayGoals = r.result?.awayScore ?? 0;
+        const homeCorners = r.result?.homeCorners ?? 0;
+        const awayCorners = r.result?.awayCorners ?? 0;
+        const totalGoals = homeGoals + awayGoals;
+        const totalCorners = homeCorners + awayCorners;
+
+        const market = recommendation?.pick.market;
+        const selection = recommendation?.pick.selection;
+
+        // Determinar el texto base según el mercado
+        let marketName = '';
+        let realValue = 0;
+        let unit = 'gol';
+
+        let resultText = '';
+        // const market = recommendation?.pick.market;
+        if (market?.startsWith('Total de goles')) {
+            marketName = 'totales';
+            realValue = totalGoals;
+        } else if (market?.startsWith('Goles del local')) {
+            marketName = `de ${r.home.teamName}`;
+            realValue = homeGoals;
+        } else if (market?.startsWith('Goles del visitante')) {
+            marketName = `de ${r.away.teamName}`;
+            realValue = awayGoals;
+        } else if (market === 'Córners') {
+            // marketName = 'Córners';
+            realValue = totalCorners;
+            unit = 'Córners';
+        }
+        const plural = (realValue === 1 && unit === 'gol') ? '' : 'es';
+        const valueText = unit === 'gol' ? `${realValue} ${unit}${plural}` : `${realValue} ${unit}`;
+
+        return `${valueText} ${marketName}`;
+
+    }
 
     return (
 
@@ -310,8 +350,8 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
 
                 {/* Fila 3: Estadísticas completas */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
-                    <TeamStatsBlock team={r.home} goalLines={r.prediction.teamGoals.home} title={r.home.teamName} />
-                    <TeamStatsBlock team={r.away} goalLines={r.prediction.teamGoals.away} title={r.away.teamName} />
+                    <TeamStatsBlock team={r.home} goalLines={r.prediction.teamGoals.home} title={r.home.teamName} opponent={r.away} results={r.result} />
+                    <TeamStatsBlock team={r.away} goalLines={r.prediction.teamGoals.away} title={r.away.teamName} opponent={r.home} results={r.result} />
 
                 </div>
 
@@ -329,13 +369,14 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                     <div className="flex flex-wrap gap-1">
                         {topScoresTwo.map((score, idx) => (
                             <StatBadge
+                                scoreResult={`${results?.homeScore}-${results?.awayScore}`}
                                 key={idx}
                                 label={`${(score.prob * 100).toFixed(1)}%`}
                                 value={`${score.home}-${score.away}`}
                                 icon={Goal}
                                 secondary
                                 description={`Probabilidad de que el marcador sea ${score.home}-${score.away}`}
-                                className="bg-indigo-50/70 dark:bg-indigo-900/20 border-indigo-100 dark:border-indigo-800"
+                            // className="bg-indigo-50/70 dark:bg-indigo-900/20 border-indigo-100 dark:border-indigo-800"
                             />
                         ))}
                         {topScoresTwo.length === 0 && (
@@ -367,35 +408,42 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                 <span className="bg-indigo-50 dark:bg-indigo-900/20 text-[10px]">
                                     Razon: {recommendation.pick.reason}
                                 </span>
-                                {/* Badge de acierto/fallo si es partido pasado y tenemos resultado */}
-                                {/* {activeTab === "past" && (r as any).result && (
-                                    <span
-                                        className={`ml-1 px-1.5 py-0.5 rounded text-[10px] font-medium ${isPickCorrect(recommendation.pick, (r as any).result)
-                                            ? "bg-green-100 text-green-700"
-                                            : "bg-red-100 text-red-700"
-                                            }`}
-                                    >
-                                        {isPickCorrect(recommendation.pick, (r as any).result)
-                                            ? "✅ Acertado"
-                                            : "❌ Fallado"}
-                                    </span>
-                                )} */}
+                                {(activeTab === 'past' && r.result) && (() => {
+                                    const resultText = getFinalPick()
+                                    const correct = isPickCorrect(recommendation.pick, r.result, r.home.teamName, r.away.teamName);
+
+                                    return (
+                                        <span className={`ml-1 px-1.5 py-0.5 rounded text-[10px] font-medium ${correct ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                                            {correct ? `✅ Acertado: ${resultText}` : '❌ Fallado'}
+                                        </span>
+                                    );
+                                })()
+
+                                }
                             </div>
-                            {/* <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                                {recommendation.reasoning}
-                            </div> */}
+
                             {recommendation.alternatives.length > 0 && (
                                 <div className="mt-1 flex flex-wrap gap-1">
                                     <span className="text-[10px] text-gray-500">Alternativas:</span>
-                                    {recommendation.alternatives.map((alt, i) => (
-                                        <span
-                                            key={i}
-                                            className="text-[10px] bg-gray-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded-full"
-                                        >
-                                            {alt.market}: {alt.selection} (prob: {((1 / alt.odd) * 100).toFixed(1)}%) (momio: {alt.odd})
-                                        </span>
+                                    {recommendation.alternatives.map((alt, i) => {
+                                        const altCorrect = r.result ? isPickCorrect(alt, r.result, r.home.teamName, r.away.teamName) : null;
 
-                                    ))}
+                                        return (<span
+                                            key={i}
+                                            className={`text-[10px] px-1.5 py-0.5 rounded-full ${altCorrect === null
+                                                ? 'bg-gray-100 dark:bg-neutral-800'
+                                                : altCorrect
+                                                    ? 'bg-green-100 text-green-700'
+                                                    : 'bg-red-100 text-red-700'
+                                                }`}>
+                                            {alt.market}: {alt.selection} (prob: {((1 / alt.odd) * 100).toFixed(1)}%) (momio: {alt.odd})
+                                            {r.result && (
+                                                <span className="ml-1">{altCorrect ? '✅' : '❌'}</span>
+                                            )}
+                                        </span>)
+
+                                    }
+                                    )}
                                 </div>
                             )}
                         </div>
