@@ -237616,6 +237616,464 @@
           "isTop": true
         },
         {
+          "id": 24,
+          "name": "Grandes chances",
+          "competitorId": 1209,
+          "value": "5",
+          "valuePercentage": 1,
+          "order": 4,
+          "markedTeam": 1,
+          "isTop": true
+        },
+        {
+          "id": 8,
+          "name": "Saques de Esquina",
+          "competitorId": 1209,
+          "value": "8",
+          "valuePercentage": 0.57,
+          "order": 5,
+          "markedTeam": 1,
+          "isTop": true
+        },
+        {
+          "id": 9,
+          "name": "Fueras de Juego",
+          "competitorId": 1209,
+          "value": "0",
+          "valuePercentage": 0,
+          "order": 6,
+          "markedTeam": 1,
+          "isTop": true
+        },
+        {
+          "id": 19,
+          "name": "Pases completados",
+          "competitorId": 1209,
+          "categoryId": 47,
+          "categoryName": "Pases",
+          "value": "434",
+          "valuePercentage": 0.51,
+          "categoryOrder": 2,
+          "order": 7,
+          "markedTeam": 1,
+          "isTop": true
+        },
+        {
+          "id": 2,
+          "name": "Tarjetas Rojas",
+          "competitorId": 1209,
+          "categoryId": 50,
+          "categoryName": "Disciplinarias",
+          "value": "0",
+          "valuePercentage": 0,
+          "categoryOrder": 5,
+          "order": 8,
+          "isTop": true
+        },
+        {
+          "id": 5,
+          "name": "Remates Fuera",
+          "competitorId": 1209,
+          "categoryId": 46,
+          "categoryName": "Remates",
+          "value": "6",
+          "valuePercentage": 0.6,
+          "categoryOrder": 1,
+          "order": 10,
+          "markedTeam": 1
+        },
+        {
+          "id": 6,
+          "name": "Remates bloqueados",
+          "competitorId": 1209,
+          "categoryId": 46,
+          "categoryName": "Remates",
+          "value": "4",
+          "valuePercentage": 0.5,
+          "categoryOrder": 1,
+          "order": 11
+        },
+        {
+          "id": 25,
+          "name": "Pelotas al poste",
+          "competitorId": 1209,
+          "categoryId": 46,
+          "categoryName": "Remates",
+          "value": "1",
+          "valuePercentage": 1,
+          "categoryOrder": 1,
+          "order": 12,
+          "markedTeam": 1
+        },
+        {
+          "id": 79,
+          "name": "Goles esperados de remates al arco",
+          "competitorId": 1209,
+          "categoryId": 46,
+          "categoryName": "Remates",
+          "value": "2.49",
+          "valuePercentage": 0.98,
+          "categoryOrder": 1,
+          "order": 13,
+          "markedTeam": 1
+        },
+        {
+          "id": 13,
+          "name": "Saques de falta",
+          "competitorId": 1209,
+          "value": "11",
+          "valuePercentage": 0.44,
+          "order": 14
+        },
+        {
+          "id": 146,
+          "name": "Remates dentro del área",
+          "competitorId": 1209,
+          "categoryId": 46,
+          "categoryName": "Remates",
+          "value": "15",
+          "valuePercentage": 0.71,
+          "categoryOrder": 1,
+          "order": 14,
+          "markedTeam": 1
+        },
+        {
+          "id": 21,
+          "name": "Total de pases",
+          "competitorId": 1209,
+          "value": "478",
+          "valuePercentage": 0.51,
+          "order": 15
+        },
+        {
+          "id": 147,
+          "name": "Remates fuera del área",
+          "competitorId": 1209,
+          "categoryId": 46,
+          "categoryName": "Remates",
+          "value": "0",
+          "valuePercentage": 0,
+          "categoryOrder": 1,
+          "order": 15,
+          "markedTeam": 2
+        },
+        {
+          "id": 36,
+          "name": "Grandes chances perdidas",
+          "competitorId": 1209,
+          "categoryId": 46,
+          "categoryName": "Remates",
+          "value": "2",
+          "valuePercentage": 1,
+          "categoryOrder": 1,
+          "order": 16,
+          "markedTeam": 2
+        },
+        {
+          "id": 78,
+          "name": "Asistencias esperadas",
+          "competitorId": 1209,
+          "categoryId": 47,
+          "categoryName": "Pases",
+          "value": "1.49",
+          "valuePercentage": 0.84,
+          "categoryOrder": 2,
+          "order": 30,
+          "markedTeam": 1
+        },
+        {
+          "id": 52,
+          "name": "Centros",
+          "competitorId": 1209,
+          "categoryId": 47,
+          "categoryName": "Pases",
+          "value": "9/31 (29%)",
+          "valuePercentage": 0.63,
+          "categoryOrder": 2,
+          "order": 31,
+          "markedTeam": 1
+        },
+        {
+          "id": 148,
+          "name": "Pases en el propio campo",
+          "competitorId": 1209,
+          "categoryId": 47,
+          "categoryName": "Pases",
+          "value": "216",
+          "valuePercentage": 0.43,
+          "categoryOrder": 2,
+          "order": 33,
+          "markedTeam": 2
+        },
+        {
+          "id": 149,
+          "name": "Pases en el campo contrario",
+          "competitorId": 1209,
+          "categoryId": 47,
+          "categoryName": "Pases",
+          "value": "293",
+          "valuePercentage": 0.6,
+          "categoryOrder": 2,
+          "order": 34,
+          "markedTeam": 1
+        },
+        {
+          "id": 53,
+          "name": "Pases largos completados",
+          "competitorId": 1209,
+          "categoryId": 47,
+          "categoryName": "Pases",
+          "value": "29/45 (64%)",
+          "valuePercentage": 0.62,
+          "categoryOrder": 2,
+          "order": 35,
+          "markedTeam": 1
+        },
+        {
+          "id": 15,
+          "name": "Saques de banda",
+          "competitorId": 1209,
+          "categoryId": 47,
+          "categoryName": "Pases",
+          "value": "22",
+          "valuePercentage": 0.59,
+          "categoryOrder": 2,
+          "order": 37,
+          "markedTeam": 1
+        },
+        {
+          "id": 46,
+          "name": "Pases claves",
+          "competitorId": 1209,
+          "categoryId": 47,
+          "categoryName": "Pases",
+          "value": "11",
+          "valuePercentage": 0.79,
+          "categoryOrder": 2,
+          "order": 38,
+          "markedTeam": 1
+        },
+        {
+          "id": 80,
+          "name": "Pases en el último tercio",
+          "competitorId": 1209,
+          "categoryId": 47,
+          "categoryName": "Pases",
+          "value": "101",
+          "valuePercentage": 0.71,
+          "categoryOrder": 2,
+          "order": 39,
+          "markedTeam": 1
+        },
+        {
+          "id": 81,
+          "name": "Pases hacia atrás",
+          "competitorId": 1209,
+          "categoryId": 47,
+          "categoryName": "Pases",
+          "value": "95",
+          "valuePercentage": 0.58,
+          "categoryOrder": 2,
+          "order": 40,
+          "markedTeam": 1
+        },
+        {
+          "id": 14,
+          "name": "Saques de puerta",
+          "competitorId": 1209,
+          "categoryId": 47,
+          "categoryName": "Pases",
+          "value": "5",
+          "valuePercentage": 0.5,
+          "categoryOrder": 2,
+          "order": 41
+        },
+        {
+          "id": 41,
+          "name": "Intercepciones",
+          "competitorId": 1209,
+          "categoryId": 48,
+          "categoryName": "Defensivas",
+          "value": "8",
+          "valuePercentage": 0.5,
+          "categoryOrder": 3,
+          "order": 41
+        },
+        {
+          "id": 77,
+          "name": "Goles esperados recibidos",
+          "competitorId": 1209,
+          "categoryId": 48,
+          "categoryName": "Defensivas",
+          "value": "0.47",
+          "valuePercentage": 0.15,
+          "categoryOrder": 3,
+          "order": 50,
+          "markedTeam": 1
+        },
+        {
+          "id": 23,
+          "name": "Salvadas de Portero",
+          "competitorId": 1209,
+          "categoryId": 48,
+          "categoryName": "Defensivas",
+          "value": "1",
+          "valuePercentage": 0.33,
+          "categoryOrder": 3,
+          "order": 51,
+          "markedTeam": 2
+        },
+        {
+          "id": 51,
+          "name": "Barridas ganadas",
+          "competitorId": 1209,
+          "categoryId": 48,
+          "categoryName": "Defensivas",
+          "value": "7/14 (50%)",
+          "valuePercentage": 0.53,
+          "categoryOrder": 3,
+          "order": 52,
+          "markedTeam": 1
+        },
+        {
+          "id": 40,
+          "name": "Despejes",
+          "competitorId": 1209,
+          "categoryId": 48,
+          "categoryName": "Defensivas",
+          "value": "17",
+          "valuePercentage": 0.39,
+          "categoryOrder": 3,
+          "order": 55,
+          "markedTeam": 2
+        },
+        {
+          "id": 150,
+          "name": "Duelos ganados",
+          "competitorId": 1209,
+          "categoryId": 49,
+          "categoryName": "Duelos",
+          "value": "36",
+          "valuePercentage": 0.51,
+          "categoryOrder": 4,
+          "order": 70,
+          "markedTeam": 1
+        },
+        {
+          "id": 56,
+          "name": "Duelos aéreos (ganados)",
+          "competitorId": 1209,
+          "categoryId": 49,
+          "categoryName": "Duelos",
+          "value": "10/17 (59%)",
+          "valuePercentage": 0.59,
+          "categoryOrder": 4,
+          "order": 71,
+          "markedTeam": 1
+        },
+        {
+          "id": 55,
+          "name": "Duelos en el suelo (ganados)",
+          "competitorId": 1209,
+          "categoryId": 49,
+          "categoryName": "Duelos",
+          "value": "26/54 (48%)",
+          "valuePercentage": 0.48,
+          "categoryOrder": 4,
+          "order": 72,
+          "markedTeam": 2
+        },
+        {
+          "id": 37,
+          "name": "Faltas recibidas",
+          "competitorId": 1209,
+          "categoryId": 49,
+          "categoryName": "Duelos",
+          "value": "11",
+          "valuePercentage": 0.44,
+          "categoryOrder": 4,
+          "order": 74,
+          "markedTeam": 2
+        },
+        {
+          "id": 54,
+          "name": "Regates",
+          "competitorId": 1209,
+          "categoryId": 49,
+          "categoryName": "Duelos",
+          "value": "1/6 (17%)",
+          "valuePercentage": 0.39,
+          "categoryOrder": 4,
+          "order": 75,
+          "markedTeam": 2
+        },
+        {
+          "id": 60,
+          "name": "Regateado",
+          "competitorId": 1209,
+          "categoryId": 49,
+          "categoryName": "Duelos",
+          "value": "5",
+          "valuePercentage": 0.38,
+          "categoryOrder": 4,
+          "order": 75,
+          "markedTeam": 1
+        },
+        {
+          "id": 84,
+          "name": "Posesiones ganadas en el último tercio",
+          "competitorId": 1209,
+          "categoryId": 49,
+          "categoryName": "Duelos",
+          "value": "2",
+          "valuePercentage": 0.4,
+          "categoryOrder": 4,
+          "order": 76,
+          "markedTeam": 2
+        },
+        {
+          "id": 73,
+          "name": "Posesiones perdidas",
+          "competitorId": 1209,
+          "categoryId": 49,
+          "categoryName": "Duelos",
+          "value": "94",
+          "valuePercentage": 0.5,
+          "categoryOrder": 4,
+          "order": 77
+        },
+        {
+          "id": 12,
+          "name": "Faltas",
+          "competitorId": 1209,
+          "categoryId": 50,
+          "categoryName": "Disciplinarias",
+          "value": "14",
+          "valuePercentage": 0.56,
+          "categoryOrder": 5,
+          "order": 90,
+          "markedTeam": 2
+        },
+        {
+          "id": 1,
+          "name": "Tarjetas Amarillas",
+          "competitorId": 1209,
+          "categoryId": 50,
+          "categoryName": "Disciplinarias",
+          "value": "3",
+          "valuePercentage": 0.5,
+          "categoryOrder": 5,
+          "order": 91
+        },
+        {
+          "id": 29,
+          "name": "Sustituciones",
+          "competitorId": 1209,
+          "value": "5",
+          "valuePercentage": 0.5,
+          "order": 98
+        },
+        {
           "id": 10,
           "name": "Posesión",
           "competitorId": 1218,
@@ -237668,6 +238126,464 @@
           "order": 3,
           "markedTeam": 1,
           "isTop": true
+        },
+        {
+          "id": 24,
+          "name": "Grandes chances",
+          "competitorId": 1218,
+          "value": "0",
+          "valuePercentage": 0,
+          "order": 4,
+          "markedTeam": 1,
+          "isTop": true
+        },
+        {
+          "id": 8,
+          "name": "Saques de Esquina",
+          "competitorId": 1218,
+          "value": "6",
+          "valuePercentage": 0.43,
+          "order": 5,
+          "markedTeam": 1,
+          "isTop": true
+        },
+        {
+          "id": 9,
+          "name": "Fueras de Juego",
+          "competitorId": 1218,
+          "value": "2",
+          "valuePercentage": 1,
+          "order": 6,
+          "markedTeam": 1,
+          "isTop": true
+        },
+        {
+          "id": 19,
+          "name": "Pases completados",
+          "competitorId": 1218,
+          "categoryId": 47,
+          "categoryName": "Pases",
+          "value": "419",
+          "valuePercentage": 0.49,
+          "categoryOrder": 2,
+          "order": 7,
+          "markedTeam": 1,
+          "isTop": true
+        },
+        {
+          "id": 2,
+          "name": "Tarjetas Rojas",
+          "competitorId": 1218,
+          "categoryId": 50,
+          "categoryName": "Disciplinarias",
+          "value": "0",
+          "valuePercentage": 0,
+          "categoryOrder": 5,
+          "order": 8,
+          "isTop": true
+        },
+        {
+          "id": 5,
+          "name": "Remates Fuera",
+          "competitorId": 1218,
+          "categoryId": 46,
+          "categoryName": "Remates",
+          "value": "4",
+          "valuePercentage": 0.4,
+          "categoryOrder": 1,
+          "order": 10,
+          "markedTeam": 1
+        },
+        {
+          "id": 6,
+          "name": "Remates bloqueados",
+          "competitorId": 1218,
+          "categoryId": 46,
+          "categoryName": "Remates",
+          "value": "4",
+          "valuePercentage": 0.5,
+          "categoryOrder": 1,
+          "order": 11
+        },
+        {
+          "id": 25,
+          "name": "Pelotas al poste",
+          "competitorId": 1218,
+          "categoryId": 46,
+          "categoryName": "Remates",
+          "value": "0",
+          "valuePercentage": 0,
+          "categoryOrder": 1,
+          "order": 12,
+          "markedTeam": 1
+        },
+        {
+          "id": 79,
+          "name": "Goles esperados de remates al arco",
+          "competitorId": 1218,
+          "categoryId": 46,
+          "categoryName": "Remates",
+          "value": "0.06",
+          "valuePercentage": 0.02,
+          "categoryOrder": 1,
+          "order": 13,
+          "markedTeam": 1
+        },
+        {
+          "id": 13,
+          "name": "Saques de falta",
+          "competitorId": 1218,
+          "value": "14",
+          "valuePercentage": 0.56,
+          "order": 14
+        },
+        {
+          "id": 146,
+          "name": "Remates dentro del área",
+          "competitorId": 1218,
+          "categoryId": 46,
+          "categoryName": "Remates",
+          "value": "6",
+          "valuePercentage": 0.29,
+          "categoryOrder": 1,
+          "order": 14,
+          "markedTeam": 1
+        },
+        {
+          "id": 21,
+          "name": "Total de pases",
+          "competitorId": 1218,
+          "value": "464",
+          "valuePercentage": 0.49,
+          "order": 15
+        },
+        {
+          "id": 147,
+          "name": "Remates fuera del área",
+          "competitorId": 1218,
+          "categoryId": 46,
+          "categoryName": "Remates",
+          "value": "3",
+          "valuePercentage": 1,
+          "categoryOrder": 1,
+          "order": 15,
+          "markedTeam": 2
+        },
+        {
+          "id": 36,
+          "name": "Grandes chances perdidas",
+          "competitorId": 1218,
+          "categoryId": 46,
+          "categoryName": "Remates",
+          "value": "0",
+          "valuePercentage": 0,
+          "categoryOrder": 1,
+          "order": 16,
+          "markedTeam": 2
+        },
+        {
+          "id": 78,
+          "name": "Asistencias esperadas",
+          "competitorId": 1218,
+          "categoryId": 47,
+          "categoryName": "Pases",
+          "value": "0.28",
+          "valuePercentage": 0.16,
+          "categoryOrder": 2,
+          "order": 30,
+          "markedTeam": 1
+        },
+        {
+          "id": 52,
+          "name": "Centros",
+          "competitorId": 1218,
+          "categoryId": 47,
+          "categoryName": "Pases",
+          "value": "3/18 (17%)",
+          "valuePercentage": 0.37,
+          "categoryOrder": 2,
+          "order": 31,
+          "markedTeam": 1
+        },
+        {
+          "id": 148,
+          "name": "Pases en el propio campo",
+          "competitorId": 1218,
+          "categoryId": 47,
+          "categoryName": "Pases",
+          "value": "290",
+          "valuePercentage": 0.57,
+          "categoryOrder": 2,
+          "order": 33,
+          "markedTeam": 2
+        },
+        {
+          "id": 149,
+          "name": "Pases en el campo contrario",
+          "competitorId": 1218,
+          "categoryId": 47,
+          "categoryName": "Pases",
+          "value": "192",
+          "valuePercentage": 0.4,
+          "categoryOrder": 2,
+          "order": 34,
+          "markedTeam": 1
+        },
+        {
+          "id": 53,
+          "name": "Pases largos completados",
+          "competitorId": 1218,
+          "categoryId": 47,
+          "categoryName": "Pases",
+          "value": "15/38 (39%)",
+          "valuePercentage": 0.38,
+          "categoryOrder": 2,
+          "order": 35,
+          "markedTeam": 1
+        },
+        {
+          "id": 15,
+          "name": "Saques de banda",
+          "competitorId": 1218,
+          "categoryId": 47,
+          "categoryName": "Pases",
+          "value": "15",
+          "valuePercentage": 0.41,
+          "categoryOrder": 2,
+          "order": 37,
+          "markedTeam": 1
+        },
+        {
+          "id": 46,
+          "name": "Pases claves",
+          "competitorId": 1218,
+          "categoryId": 47,
+          "categoryName": "Pases",
+          "value": "3",
+          "valuePercentage": 0.21,
+          "categoryOrder": 2,
+          "order": 38,
+          "markedTeam": 1
+        },
+        {
+          "id": 80,
+          "name": "Pases en el último tercio",
+          "competitorId": 1218,
+          "categoryId": 47,
+          "categoryName": "Pases",
+          "value": "41",
+          "valuePercentage": 0.29,
+          "categoryOrder": 2,
+          "order": 39,
+          "markedTeam": 1
+        },
+        {
+          "id": 81,
+          "name": "Pases hacia atrás",
+          "competitorId": 1218,
+          "categoryId": 47,
+          "categoryName": "Pases",
+          "value": "69",
+          "valuePercentage": 0.42,
+          "categoryOrder": 2,
+          "order": 40,
+          "markedTeam": 1
+        },
+        {
+          "id": 14,
+          "name": "Saques de puerta",
+          "competitorId": 1218,
+          "categoryId": 47,
+          "categoryName": "Pases",
+          "value": "5",
+          "valuePercentage": 0.5,
+          "categoryOrder": 2,
+          "order": 41
+        },
+        {
+          "id": 41,
+          "name": "Intercepciones",
+          "competitorId": 1218,
+          "categoryId": 48,
+          "categoryName": "Defensivas",
+          "value": "8",
+          "valuePercentage": 0.5,
+          "categoryOrder": 3,
+          "order": 41
+        },
+        {
+          "id": 77,
+          "name": "Goles esperados recibidos",
+          "competitorId": 1218,
+          "categoryId": 48,
+          "categoryName": "Defensivas",
+          "value": "2.73",
+          "valuePercentage": 0.85,
+          "categoryOrder": 3,
+          "order": 50,
+          "markedTeam": 1
+        },
+        {
+          "id": 23,
+          "name": "Salvadas de Portero",
+          "competitorId": 1218,
+          "categoryId": 48,
+          "categoryName": "Defensivas",
+          "value": "2",
+          "valuePercentage": 0.67,
+          "categoryOrder": 3,
+          "order": 51,
+          "markedTeam": 2
+        },
+        {
+          "id": 51,
+          "name": "Barridas ganadas",
+          "competitorId": 1218,
+          "categoryId": 48,
+          "categoryName": "Defensivas",
+          "value": "5/11 (45%)",
+          "valuePercentage": 0.47,
+          "categoryOrder": 3,
+          "order": 52,
+          "markedTeam": 1
+        },
+        {
+          "id": 40,
+          "name": "Despejes",
+          "competitorId": 1218,
+          "categoryId": 48,
+          "categoryName": "Defensivas",
+          "value": "27",
+          "valuePercentage": 0.61,
+          "categoryOrder": 3,
+          "order": 55,
+          "markedTeam": 2
+        },
+        {
+          "id": 150,
+          "name": "Duelos ganados",
+          "competitorId": 1218,
+          "categoryId": 49,
+          "categoryName": "Duelos",
+          "value": "35",
+          "valuePercentage": 0.49,
+          "categoryOrder": 4,
+          "order": 70,
+          "markedTeam": 1
+        },
+        {
+          "id": 56,
+          "name": "Duelos aéreos (ganados)",
+          "competitorId": 1218,
+          "categoryId": 49,
+          "categoryName": "Duelos",
+          "value": "7/17 (41%)",
+          "valuePercentage": 0.41,
+          "categoryOrder": 4,
+          "order": 71,
+          "markedTeam": 1
+        },
+        {
+          "id": 55,
+          "name": "Duelos en el suelo (ganados)",
+          "competitorId": 1218,
+          "categoryId": 49,
+          "categoryName": "Duelos",
+          "value": "28/54 (52%)",
+          "valuePercentage": 0.52,
+          "categoryOrder": 4,
+          "order": 72,
+          "markedTeam": 2
+        },
+        {
+          "id": 37,
+          "name": "Faltas recibidas",
+          "competitorId": 1218,
+          "categoryId": 49,
+          "categoryName": "Duelos",
+          "value": "14",
+          "valuePercentage": 0.56,
+          "categoryOrder": 4,
+          "order": 74,
+          "markedTeam": 2
+        },
+        {
+          "id": 54,
+          "name": "Regates",
+          "competitorId": 1218,
+          "categoryId": 49,
+          "categoryName": "Duelos",
+          "value": "3/11 (27%)",
+          "valuePercentage": 0.61,
+          "categoryOrder": 4,
+          "order": 75,
+          "markedTeam": 2
+        },
+        {
+          "id": 60,
+          "name": "Regateado",
+          "competitorId": 1218,
+          "categoryId": 49,
+          "categoryName": "Duelos",
+          "value": "8",
+          "valuePercentage": 0.62,
+          "categoryOrder": 4,
+          "order": 75,
+          "markedTeam": 1
+        },
+        {
+          "id": 84,
+          "name": "Posesiones ganadas en el último tercio",
+          "competitorId": 1218,
+          "categoryId": 49,
+          "categoryName": "Duelos",
+          "value": "3",
+          "valuePercentage": 0.6,
+          "categoryOrder": 4,
+          "order": 76,
+          "markedTeam": 2
+        },
+        {
+          "id": 73,
+          "name": "Posesiones perdidas",
+          "competitorId": 1218,
+          "categoryId": 49,
+          "categoryName": "Duelos",
+          "value": "94",
+          "valuePercentage": 0.5,
+          "categoryOrder": 4,
+          "order": 77
+        },
+        {
+          "id": 12,
+          "name": "Faltas",
+          "competitorId": 1218,
+          "categoryId": 50,
+          "categoryName": "Disciplinarias",
+          "value": "11",
+          "valuePercentage": 0.44,
+          "categoryOrder": 5,
+          "order": 90,
+          "markedTeam": 2
+        },
+        {
+          "id": 1,
+          "name": "Tarjetas Amarillas",
+          "competitorId": 1218,
+          "categoryId": 50,
+          "categoryName": "Disciplinarias",
+          "value": "3",
+          "valuePercentage": 0.5,
+          "categoryOrder": 5,
+          "order": 91
+        },
+        {
+          "id": 29,
+          "name": "Sustituciones",
+          "competitorId": 1218,
+          "value": "5",
+          "valuePercentage": 0.5,
+          "order": 98
         }
       ],
       "actualGameStatistics": {
@@ -237682,9 +238598,161 @@
             "name": "Tiempo total 97:05",
             "progress": 1.08
           }
+        },
+        "general": [
+          {
+            "name": "Cantidad de veces detenido",
+            "value": "93"
+          },
+          {
+            "name": "Más tiempo en juego",
+            "value": "03:14"
+          }
+        ],
+        "addedTime": {
+          "title": "Tiempo agregado",
+          "stats": [
+            {
+              "name": "Anunciado",
+              "value": "07:00"
+            },
+            {
+              "name": "Tiempo neto",
+              "value": "07:05"
+            },
+            {
+              "name": "Jugado",
+              "value": "03:16"
+            }
+          ]
+        },
+        "wastedTime": {
+          "title": "Tiempo perdido",
+          "stats": [
+            {
+              "id": 101,
+              "name": "Saque de puerta",
+              "competitorId": 1209,
+              "isMajor": false,
+              "value": "01:30",
+              "valuePercentage": 0.42,
+              "isPrimary": false,
+              "isTop": false
+            },
+            {
+              "id": 115,
+              "name": "Tiros libres",
+              "competitorId": 1209,
+              "isMajor": false,
+              "value": "06:12",
+              "valuePercentage": 0.39,
+              "isPrimary": false,
+              "isTop": false
+            },
+            {
+              "id": 89,
+              "name": "Laterales",
+              "competitorId": 1209,
+              "isMajor": false,
+              "value": "04:41",
+              "valuePercentage": 0.52,
+              "isPrimary": false,
+              "isTop": false
+            },
+            {
+              "id": 104,
+              "name": "Corners",
+              "competitorId": 1209,
+              "isMajor": false,
+              "value": "04:31",
+              "valuePercentage": 0.64,
+              "isPrimary": false,
+              "isTop": false
+            },
+            {
+              "id": 117,
+              "name": "Otros",
+              "competitorId": 1209,
+              "isMajor": false,
+              "value": "00:00",
+              "valuePercentage": 0,
+              "isPrimary": false,
+              "isTop": false
+            },
+            {
+              "id": 118,
+              "name": "Total",
+              "competitorId": 1209,
+              "isMajor": false,
+              "value": "16:54",
+              "valuePercentage": 0.43,
+              "isPrimary": false,
+              "isTop": false
+            },
+            {
+              "id": 101,
+              "name": "Saque de puerta",
+              "competitorId": 1218,
+              "isMajor": false,
+              "value": "02:06",
+              "valuePercentage": 0.58,
+              "isPrimary": false,
+              "isTop": false
+            },
+            {
+              "id": 115,
+              "name": "Tiros libres",
+              "competitorId": 1218,
+              "isMajor": false,
+              "value": "09:49",
+              "valuePercentage": 0.61,
+              "isPrimary": false,
+              "isTop": false
+            },
+            {
+              "id": 89,
+              "name": "Laterales",
+              "competitorId": 1218,
+              "isMajor": false,
+              "value": "04:16",
+              "valuePercentage": 0.48,
+              "isPrimary": false,
+              "isTop": false
+            },
+            {
+              "id": 104,
+              "name": "Corners",
+              "competitorId": 1218,
+              "isMajor": false,
+              "value": "02:30",
+              "valuePercentage": 0.36,
+              "isPrimary": false,
+              "isTop": false
+            },
+            {
+              "id": 117,
+              "name": "Otros",
+              "competitorId": 1218,
+              "isMajor": false,
+              "value": "03:40",
+              "valuePercentage": 1,
+              "isPrimary": false,
+              "isTop": false
+            },
+            {
+              "id": 118,
+              "name": "Total",
+              "competitorId": 1218,
+              "isMajor": false,
+              "value": "22:21",
+              "valuePercentage": 0.57,
+              "isPrimary": false,
+              "isTop": false
+            }
+          ]
         }
       },
-      "lastUpdateId": 5726803000,
+      "lastUpdateId": 5727013252,
       "requestedUpdateId": -1,
       "ttl": 10,
       "sports": [
@@ -237702,10 +238770,10 @@
           "name": "Brasil",
           "nameForURL": "brazil",
           "sportTypes": [
-            6,
             1,
-            8,
-            2
+            2,
+            6,
+            8
           ],
           "imageVersion": 1,
           "isInternational": false
@@ -237862,7 +238930,6 @@
           "hasRecentMatches": false,
           "winner": 0,
           "homeAwayTeamOrder": 0,
-          "hasNews": true,
           "hasPointByPoint": false,
           "hasVideo": false
         }
