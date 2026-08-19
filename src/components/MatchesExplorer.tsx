@@ -10,6 +10,7 @@ import { TabNavigation } from "@/components/TabNavigation";
 import { FilterModal, FilterOptions } from "@/components/FilterModal";
 import { scoreEngine } from "@/utils/scoringEngine";
 import { trapEngine } from "@/utils/trapEngine";
+import type { PredictionResult as SharedPredictionResult } from "@/types/index";
 
 // ============================================================
 // INTERFACES
@@ -37,18 +38,8 @@ interface TeamInfo {
     metrics?: TeamMetrics;
 }
 
-interface PredictionResult {
-    matchUrl: string;
-    competitionName: string;
-    startTime: string;
-    home: TeamInfo;
-    away: TeamInfo;
-    prediction: ExtendedMatchPrediction;
-    volatility?: number;
-}
-
 interface MatchesExplorerProps {
-    predictions: PredictionResult[];
+    predictions: SharedPredictionResult[];
     results: any[];
 }
 
@@ -84,10 +75,10 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
     // ============================================================
     // FETCH DE DATOS DE 365SCORES
     // ============================================================
-    async function fetchMatchData(id: number) {
-        const res = await fetch(`https://webws.365scores.com/web/games/results/?appTypeId=5&langId=14&timezoneName=America%2FMexico_City&competitors=${id}`);
-        return res.json();
-    }
+    // async function fetchMatchData(id: number) {
+    //     const res = await fetch(`https://webws.365scores.com/web/games/results/?appTypeId=5&langId=14&timezoneName=America%2FMexico_City&competitors=${id}`);
+    //     return res.json();
+    // }
 
     // ============================================================
     // VISIBLES
@@ -180,31 +171,31 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
     // ============================================================
     // CARGA DE DATOS DE PARTIDOS (últimos partidos)
     // ============================================================
-    useEffect(() => {
-        if (activeTab !== "today" && activeTab !== "future") return;
+    // useEffect(() => {
+    //     if (activeTab !== "today" && activeTab !== "future") return;
 
-        const pending = visiblePredictions.filter(
-            match => !matchesWithData.some(m => m.matchUrl === match.matchUrl)
-        );
+    //     const pending = visiblePredictions.filter(
+    //         match => !matchesWithData.some(m => m.matchUrl === match.matchUrl)
+    //     );
 
-        if (pending.length === 0) return;
+    //     if (pending.length === 0) return;
 
-        const loadData = async () => {
-            const data = await Promise.all(
-                pending.map(async (match) => {
-                    const result = await fetchMatchData(match.home.teamId);
-                    const result2 = await fetchMatchData(match.away.teamId);
-                    return {
-                        ...match,
-                        data: [result, result2],
-                    };
-                })
-            );
-            setMatchesWithData(prev => [...prev, ...data]);
-        };
+    //     const loadData = async () => {
+    //         const data = await Promise.all(
+    //             pending.map(async (match) => {
+    //                 const result = await fetchMatchData(match.home.teamId);
+    //                 const result2 = await fetchMatchData(match.away.teamId);
+    //                 return {
+    //                     ...match,
+    //                     data: [result, result2],
+    //                 };
+    //             })
+    //         );
+    //         setMatchesWithData(prev => [...prev, ...data]);
+    //     };
 
-        loadData();
-    }, [activeTab, visiblePredictions, matchesWithData]);
+    //     loadData();
+    // }, [activeTab, visiblePredictions, matchesWithData]);
 
     // ============================================================
     // LAZY LOADING

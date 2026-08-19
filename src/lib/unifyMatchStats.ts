@@ -140,9 +140,10 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
             const ultimos5Block = match.stats.ultimos5!;
             const u5lvBlock = match.stats.ultimos5LocalVisita!;
 
-            const game = ultimos5Block.games[0];
-            const homeId = game.homeCompetitor.id;
-            const awayId = game.awayCompetitor.id;
+            // const game = ultimos5Block.games[0];
+            const homeId = match.informacionEquipos.home.homeId;
+            const awayId = match.informacionEquipos.away.awayId;
+            // const awayId = game.awayCompetitor.id;
 
             // Extraer stats crudas de cada bloque, para ambos equipos
             const homeTodos = getTeamBlockStats(todosBlock, homeId, statIds, statisticGroup);
@@ -494,11 +495,23 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
 
             return {
                 matchUrl: match.matchUrl,
-                competitionName: game.competitionDisplayName,
-                startTime: game.startTime,
-                home: { teamId: homeId, teamName: game.homeCompetitor.name, metrics: metrics.home, id: game.homeCompetitor.id },
-                away: { teamId: awayId, teamName: game.awayCompetitor.name, metrics: metrics.away, id: game.awayCompetitor.id },
+                competitionName: match.informacionEquipos.competitionDisplayName,
+                startTime: match.h2h.game.startTime,
+                home: { teamId: homeId, teamName: match.informacionEquipos.home.teamName, metrics: metrics.home, id: match.informacionEquipos.home.homeId },
+                away: { teamId: awayId, teamName: match.informacionEquipos.away.teamName, metrics: metrics.away, id: match.informacionEquipos.away.awayId },
                 matchMetrics: metrics.match,
+                recentMatches: match.recentMatches,
+                estadio: match.informacionEquipos.estadio,
+                tvNetworks: match.informacionEquipos.tv,
+                // injuries?: {
+                //     home: { teamId: homeId; teamName: game.homeCompetitor.name; position: match.injuries?.home.position; reason: match.injuries?.home.reason; expectedReturn?: match.injuries?.home.expectedReturn; gamesPlayed?: number }[];
+                //     away: { ... }[];
+                // };
+                // venue?: { id: number; name: string; capacity: number };
+                // tvNetworks?: { id: number; name: string; countryId: number }[];
+                // recentMatches?: { home: any; away: any };
+                // h2hSummary?: { total: number; homeWins: number; awayWins: number; draws: number; avgGoals: number };
+
             } satisfies UnifiedMatch;
         })
         .filter((m): m is UnifiedMatch => m !== null);

@@ -31,7 +31,17 @@ export interface PredictionResult {
     away: TeamInfo;
     prediction: ExtendedMatchPrediction;
     volatility?: number;
-    data?: Welcome[]
+    data?: Welcome[],
+    injuries?: {
+        home: { id: number; name: string; position: string; reason: string; expectedReturn?: string; gamesPlayed?: number }[];
+        away: { id: number; name: string; position: string; reason: string; expectedReturn?: string; gamesPlayed?: number }[];
+    };
+    estadio: { id: number; name: string; capacity: number };
+    tv: { id: number; name: string; countryId: number }[];
+    recentMatches: { home: any; away: any };
+    h2hSummary: {
+        total: number; homeWins: number; awayWins: number; draws: number; avgGoals: number
+    }
 }
 
 export interface ExcludedTeam {

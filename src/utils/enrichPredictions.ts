@@ -73,6 +73,7 @@ export function enrichPredictions(predictions: PredictionResult[], resultsData: 
                 awayXGError,
                 overallAccuracy,
             },
+
         };
     });
 }

@@ -34,6 +34,14 @@ export interface UnifiedMatch {
     away: UnifiedTeamInfo;
 
     matchMetrics: MatchSummaryMetrics;
+    injuries?: {
+        home: { id: number; name: string; position: string; reason: string; expectedReturn?: string; gamesPlayed?: number }[];
+        away: { id: number; name: string; position: string; reason: string; expectedReturn?: string; gamesPlayed?: number }[];
+    };
+    estadio: { id: number; name: string; capacity: number };
+    tvNetworks?: { id: number; name: string }[];
+    recentMatches?: { home: any; away: any };
+    h2hSummary?: { total: number; homeWins: number; awayWins: number; draws: number; avgGoals: number };
     // prediction: PredictionOptions
 }
 

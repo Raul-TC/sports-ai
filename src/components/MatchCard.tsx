@@ -9,18 +9,18 @@ import {
     Info,
     AlertCircle,
     Sparkles,
-    ShieldAlert,
+    MapPin,
+    Tv,
 } from "lucide-react";
 
 import { EnrichedPrediction } from "@/utils/enrichPredictions";
-import Image from "next/image";
 import { scoreEngine } from "@/utils/scoringEngine";
 import { isPickCorrect } from "@/utils/pickValidation";
 import { gateEngine } from "@/utils/gateEngine";
 import { trapEngine } from "@/utils/trapEngine";
 import { recommendationEngine } from "@/utils/recomendationEngine";
-import { useMemo } from "react";
 import { getBestPicks } from "@/utils/picks";
+import { JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useMemo } from "react";
 
 interface MatchCardProps {
     prediction: EnrichedPrediction;
@@ -97,10 +97,10 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
 
     const { plays, altas, ratoneras, medias } = getBestPicks(r.prediction, r.home.teamName, r.away.teamName, trap.level);
 
-    const homeGames = r.data && r.data[0].games.filter(el => el.competitionDisplayName !== 'Partido Amistoso' && (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') && (el.homeCompetitor.id === r.home.id || el.awayCompetitor.id === r.home.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
-    const homeGamesLocal = r.data && r.data[0].games.filter(el => el.competitionDisplayName !== 'Partido Amistoso' && (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') && (el.homeCompetitor.id === r.home.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
-    const awayGames = r.data && r.data[1].games.filter(el => el.competitionDisplayName !== 'Partido Amistoso' && (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') && (el.homeCompetitor.id === r.away.id || el.awayCompetitor.id === r.away.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
-    const awayGamesAway = r.data && r.data[1].games.filter(el => el.competitionDisplayName !== 'Partido Amistoso' && (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') && (el.awayCompetitor.id === r.away.id)).slice(0, 5).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
+    const homeGames = r.recentMatches?.home.filter((el: { competitionDisplayName: string; statusText: string; homeCompetitor: { id: number; }; awayCompetitor: { id: number; }; }) => el.competitionDisplayName !== 'Partido Amistoso' && (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') && (el.homeCompetitor.id === r.home.id || el.awayCompetitor.id === r.home.id)).slice(0, 5).sort((a: { startTime: string | number | Date; }, b: { startTime: string | number | Date; }) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
+    const homeGamesLocal = r.recentMatches?.home.filter((el: { competitionDisplayName: string; statusText: string; homeCompetitor: { id: number; }; }) => el.competitionDisplayName !== 'Partido Amistoso' && (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') && (el.homeCompetitor.id === r.home.id)).slice(0, 5).sort((a: { startTime: string | number | Date; }, b: { startTime: string | number | Date; }) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
+    const awayGames = r.recentMatches?.away.filter((el: { competitionDisplayName: string; statusText: string; homeCompetitor: { id: number; }; awayCompetitor: { id: number; }; }) => el.competitionDisplayName !== 'Partido Amistoso' && (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') && (el.homeCompetitor.id === r.away.id || el.awayCompetitor.id === r.away.id)).slice(0, 5).sort((a: { startTime: string | number | Date; }, b: { startTime: string | number | Date; }) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
+    const awayGamesAway = r.recentMatches?.away.filter((el: { competitionDisplayName: string; statusText: string; awayCompetitor: { id: number; }; }) => el.competitionDisplayName !== 'Partido Amistoso' && (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') && (el.awayCompetitor.id === r.away.id)).slice(0, 5).sort((a: { startTime: string | number | Date; }, b: { startTime: string | number | Date; }) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
     const results = r.result
 
     const getFinalPick = () => {
@@ -135,6 +135,11 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
             realValue = totalCorners;
             unit = 'Córners';
         }
+        // 🆕 Doble oportunidad
+        else if (market === 'Doble oportunidad') {
+            // Mostrar el resultado real del partido
+            return `Resultado: ${homeGoals}-${awayGoals}`;
+        }
         const plural = (realValue === 1 && unit === 'gol') ? '' : 'es';
         const valueText = unit === 'gol' ? `${realValue} ${unit}${plural}` : `${realValue} ${unit}`;
 
@@ -156,7 +161,21 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                         <span>{formatTime(r.startTime)}</span>
                         <span className="hidden md:inline">·</span>
                         <span className="truncate">{r.competitionName}</span>
+                        <span className="hidden md:inline">·</span>
+                        {r.estadio && (
+                            <span className="flex items-center gap-1">
+                                <MapPin className="w-3 h-3" /> {r.estadio.name}
+                            </span>
+                        )}
+                        <span className="hidden md:inline">·</span>
+                        {r.tv && r.tv.length > 0 && (
+                            <span className="flex items-center gap-1">
+                                <Tv className="w-3 h-3" /> {r.tv.map(tv => tv.name).join(', ')}
+                            </span>
+                        )}
                     </div>
+                    {/* <div className="text-xs text-gray-400 mt-1 flex flex-wrap gap-2">
+                    </div> */}
                 </div>
 
                 {/* Fila 2: Equipos y favorito + badge de trampa */}
@@ -185,7 +204,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                     {((activeTab === "today" || activeTab === "future") && homeGames) && <p className="w-full text-sm text-center ">Ultimos juegos</p>}
 
                                     {
-                                        homeGames ? homeGames.map(el => (
+                                        homeGames ? homeGames.map((el: { id: Key | null | undefined; startTime: any; competitionDisplayName: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; homeCompetitor: { id: any; nameForURL: any; score: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }; awayCompetitor: { nameForURL: any; score: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; id: any; }; statusText: string; winDescription: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }) => (
                                             <div key={el.id} className="text-gray-600 dark:text-gray-400 flex flex-col items-center gap-1 w-full justify-center">
                                                 <div className="flex flex-col items-center justify-center gap-1">
 
@@ -224,7 +243,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                     {((activeTab === "today" || activeTab === "future") && homeGames) && <p className="w-full text-sm text-center ">Ultimos juegos en local</p>}
 
                                     {
-                                        homeGamesLocal && homeGamesLocal.map(el => (
+                                        homeGamesLocal && homeGamesLocal.map((el: { id: Key | null | undefined; startTime: any; competitionDisplayName: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; homeCompetitor: { id: any; nameForURL: any; score: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }; awayCompetitor: { nameForURL: any; score: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; id: any; }; statusText: string; winDescription: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }) => (
                                             <div key={el.id} className="text-gray-600 dark:text-gray-400 flex flex-col items-center gap-1 w-full justify-center">
                                                 <div>
 
@@ -271,7 +290,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                 <div className=" w-full h-auto my-2  flex flex-col  items-center flex-wrap justify-center gap-4">
 
                                     {((activeTab === "today" || activeTab === "future") && awayGames) && <p className="w-full text-sm text-center ">Ultimos juegos</p>}
-                                    {awayGames ? awayGames.map(el => (
+                                    {awayGames ? awayGames.map((el: { id: Key | null | undefined; startTime: any; competitionDisplayName: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; homeCompetitor: { id: any; nameForURL: any; score: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }; awayCompetitor: { nameForURL: any; score: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; id: any; }; statusText: string; winDescription: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }) => (
                                         <div key={el.id} className="text-gray-600 dark:text-gray-400 flex flex-col items-center gap-1 w-full justify-center">
                                             <div className="flex flex-col items-center justify-center gap-1">
 
@@ -309,7 +328,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                 {awayGamesAway && <div className=" w-full h-auto my-2  flex flex-col  items-center flex-wrap justify-center gap-4">
 
                                     {((activeTab === "today" || activeTab === "future") && awayGamesAway) && <p className="w-full text-sm text-center">Ultimos juegos como visitante</p>}
-                                    {awayGamesAway && awayGamesAway.map(el => (
+                                    {awayGamesAway && awayGamesAway.map((el: { id: Key | null | undefined; startTime: any; competitionDisplayName: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; homeCompetitor: { id: any; nameForURL: any; score: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }; awayCompetitor: { nameForURL: any; score: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; id: any; }; statusText: string; winDescription: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }) => (
                                         <div key={el.id} className="text-gray-600 dark:text-gray-400 flex flex-col items-center gap-1 w-full justify-center">
                                             <div className="w-full mx-auto">
 

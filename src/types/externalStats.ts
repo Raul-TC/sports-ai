@@ -70,9 +70,74 @@ export interface RawStatsBlock {
     statistics: RawStatEntry[];
     games: RawGame[];
 }
-export type StatsFilterKey = "todos" | "ultimos5" | "ultimos5LocalVisita"; export interface RawMatchData {
+export type StatsFilterKey = "todos" | "ultimos5" | "ultimos5LocalVisita";
+
+
+export interface RawMatchData {
     matchUrl: string;
     stats: Partial<Record<StatsFilterKey, RawStatsBlock>>;
+    // ... campos existentes  
+    informacionEquipos: {
+        id: number,
+        competitionDisplayName: string,
+        home: {
+            homeId: number,
+            teamName: string,
+            nameForURL: string,
+            alineaciones: any[]
+        },
+        away: {
+            awayId: number,
+            teamName: string,
+            nameForURL: string,
+            alineaciones: any[]
+        },
+        estadio: {
+            id: number,
+            name: string,
+            capacity: number,
+        },
+        arbitro: {
+            id: number,
+            name: string,
+            nameForURL: string
+        },
+        tv: {
+            id: number,
+            name: string
+        }[],
+        playerStats: any[]
+    },
+    h2h: {
+        game: {
+            competitionDisplayName: string,
+            startTime: string,
+            homeCompetitor: any[],
+            awayCompetitor: any,
+            h2hGames: any[]
+        },
+
+    },
+    recentMatches: {
+        home: {
+            id: string,
+            competitionId: string,
+            competitionDisplayName: string,
+            startTime: string,
+            statusText: string,
+            homeCompetitor: any[],
+            awayCompetitor: any[],
+        }
+        away: {
+            id: string,
+            competitionId: string,
+            competitionDisplayName: string,
+            startTime: string,
+            statusText: string,
+            homeCompetitor: any[],
+            awayCompetitor: any[],
+        }
+    }
 }
 
 export interface ParseOptions {

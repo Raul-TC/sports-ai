@@ -714,5 +714,8 @@ export function calculateAllPredictions(matches: UnifiedMatch[], options: Predic
         away: match.away,
         prediction: calculateExtendedPrediction(match.home.metrics, match.away.metrics, options, match.matchMetrics.volatility),
         volatility: match.matchMetrics.volatility,
+        recentMatches: match.recentMatches,
+        estadio: match.estadio,
+        tv: match.tvNetworks
     }));
 }
