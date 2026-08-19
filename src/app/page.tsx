@@ -3,18 +3,12 @@ import MatchesExplorer from "@/components/MatchesExplorer";
 import data from '@/app/data/matches/results_complete.json'
 import dataResults from '@/app/data/matches/results.json'
 import { unifyMatchStats } from "@/lib/unifyMatchStats";
-import GamesToday from "@/components/GamesToday";
-// Fuerza lectura fresca del filesystem en cada request — así si
-// agregas/editas un .json en data/matches/, se refleja sin rebuild.
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  // const rawMatches = await loadMatchesFromDisk();
-  // const matches = computeAllMatches(data)
   const matches = unifyMatchStats(data as any)
   const results = Array.isArray(dataResults) ? dataResults : [];
 
-  // const matches = parseExternalStats(rawMatches);
 
   const predictions = calculateAllPredictions(matches, {
     goalLines: [1.5, 2.5, 3.5, 4.5],
@@ -22,8 +16,6 @@ export default async function HomePage() {
     maxGoals: 10
   });
 
-  // console.log({ data })
-  // console.log({ pred: predictions.slice(0, 20) })
   return (
     <main className="max-w-7xl mx-auto px-6 py-12">
       <header className="flex items-center justify-between mb-10">
