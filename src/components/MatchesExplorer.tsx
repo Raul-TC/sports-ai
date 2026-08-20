@@ -59,6 +59,17 @@ const defaultFilters: FilterOptions = {
     minOdd: 1.0,
     maxOdd: 10.0,
 };
+const LEAGUES = {
+    "LigaMX": { id: 141, name: "Liga MX", flag: "🇲🇽" },
+    "Brasileirão": { id: 113, name: "Brasileirão", flag: "🇧🇷" },
+    "MLS": { id: 104, name: "MLS", flag: "🇺🇸" },
+    "Argentina": { id: 72, name: "Liga Profesional", flag: "🇦🇷" },
+    "LaLiga": { id: 11, name: "LaLiga", flag: "🇪🇸" },
+    "Premier League": { id: 168, name: "Premier League", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿" },
+    "UEFA Champions League": { id: 332, name: "UEFA Champions League", flag: "🏆" },
+    "Conmebol Libertadores": { id: 102, name: "Conmebol Libertadores", flag: "🏆" },
+    "Conmebol Sudamericana": { id: 389, name: "Conmebol Sudamericana", flag: "🏆" },
+};
 
 export default function MatchesExplorer({ predictions, results }: MatchesExplorerProps) {
     const [showHelp, setShowHelp] = useState(false);

@@ -29,10 +29,8 @@ export interface UnifiedMatch {
     matchUrl: string;
     competitionName: string;
     startTime: string;
-
     home: UnifiedTeamInfo;
     away: UnifiedTeamInfo;
-
     matchMetrics: MatchSummaryMetrics;
     injuries?: {
         home: { id: number; name: string; position: string; reason: string; expectedReturn?: string; gamesPlayed?: number }[];
@@ -42,7 +40,8 @@ export interface UnifiedMatch {
     tvNetworks?: { id: number; name: string }[];
     recentMatches?: { home: any; away: any };
     h2hSummary?: { total: number; homeWins: number; awayWins: number; draws: number; avgGoals: number };
-    // prediction: PredictionOptions
+    arbitro: { id: number, name: string }
+    h2h: any[]
 }
 
 export interface TeamMetrics {

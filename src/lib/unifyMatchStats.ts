@@ -52,7 +52,6 @@ function getTeamBlockStats(
     statIds: StatIdMap,
     statisticGroup: number | null
 ): TeamBlockStats {
-    console.log({ statisticGroup })
     return {
         goalsFor: extractStatValue(block.statistics, statIds.goalsFor, teamId, statisticGroup),
         goalsAgainst: extractStatValue(block.statistics, statIds.goalsAgainst, teamId, statisticGroup),
@@ -503,6 +502,8 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
                 recentMatches: match.recentMatches,
                 estadio: match.informacionEquipos.estadio,
                 tvNetworks: match.informacionEquipos.tv,
+                arbitro: match.informacionEquipos.arbitro,
+                h2h: match.h2h.game.h2hGames
                 // injuries?: {
                 //     home: { teamId: homeId; teamName: game.homeCompetitor.name; position: match.injuries?.home.position; reason: match.injuries?.home.reason; expectedReturn?: match.injuries?.home.expectedReturn; gamesPlayed?: number }[];
                 //     away: { ... }[];

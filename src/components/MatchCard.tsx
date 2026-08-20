@@ -1,3 +1,5 @@
+"use client";
+
 import { getTopScoreProbabilities } from "@/utils/poisson";
 import { TeamStatsBlock } from "./TeamStatsBlock";
 import { StatBadge } from "./StatBadge";
@@ -11,6 +13,11 @@ import {
     Sparkles,
     MapPin,
     Tv,
+    UserRound,
+    Calendar,
+    Trophy,
+    ChevronRight,
+    History,
 } from "lucide-react";
 
 import { EnrichedPrediction } from "@/utils/enrichPredictions";
@@ -20,21 +27,21 @@ import { gateEngine } from "@/utils/gateEngine";
 import { trapEngine } from "@/utils/trapEngine";
 import { recommendationEngine } from "@/utils/recomendationEngine";
 import { getBestPicks } from "@/utils/picks";
-import { JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useMemo } from "react";
+import { useMemo, useState } from "react";
 
 interface MatchCardProps {
     prediction: EnrichedPrediction;
     isSelected: boolean;
     onToggle: (url: string) => void;
-    activeTab: "today" | "future" | "past"
+    activeTab: "today" | "future" | "past";
 }
 
 export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: MatchCardProps) {
+    // Cálculos existentes...
     const homeLambda = r.prediction.homeExpectedGoals || 0;
     const awayLambda = r.prediction.awayExpectedGoals || 0;
     const topScoresTwo = getTopScoreProbabilities(homeLambda, awayLambda, 10, 16);
 
-    // Dentro del map
     const gate = useMemo(
         () => gateEngine(r.home, r.away, r.prediction),
         [r.home, r.away, r.prediction]
@@ -64,27 +71,13 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
         [r.home, r.away, r.prediction, r.volatility]
     );
 
-
     const recommendation = useMemo(
         () => recommendationEngine(scoredPicks, trap, 5),
         [scoredPicks, trap]
     );
 
-    const topScores = useMemo(
-        () =>
-            getTopScoreProbabilities(
-                r.prediction.homeExpectedGoals || 0,
-                r.prediction.awayExpectedGoals || 0,
-                10,
-                10
-            ),
-        [r.prediction]
-    );
+    const { plays, altas, ratoneras, medias } = getBestPicks(r.prediction, r.home.teamName, r.away.teamName, trap.level);
 
-    // console.log({ recommendation })
-
-
-    // ---- 6. Funciones auxiliares ----
     const formatTime = (iso: string) => {
         const date = new Date(iso);
         return date.toLocaleString("es-ES", {
@@ -95,13 +88,44 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
         });
     };
 
-    const { plays, altas, ratoneras, medias } = getBestPicks(r.prediction, r.home.teamName, r.away.teamName, trap.level);
+    // ============================================================
+    // FUNCIONES AUXILIARES PARA MOSTRAR DATOS
+    // ============================================================
 
-    const homeGames = r.recentMatches?.home.filter((el: { competitionDisplayName: string; statusText: string; homeCompetitor: { id: number; }; awayCompetitor: { id: number; }; }) => el.competitionDisplayName !== 'Partido Amistoso' && (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') && (el.homeCompetitor.id === r.home.id || el.awayCompetitor.id === r.home.id)).slice(0, 5).sort((a: { startTime: string | number | Date; }, b: { startTime: string | number | Date; }) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
-    const homeGamesLocal = r.recentMatches?.home.filter((el: { competitionDisplayName: string; statusText: string; homeCompetitor: { id: number; }; }) => el.competitionDisplayName !== 'Partido Amistoso' && (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') && (el.homeCompetitor.id === r.home.id)).slice(0, 5).sort((a: { startTime: string | number | Date; }, b: { startTime: string | number | Date; }) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
-    const awayGames = r.recentMatches?.away.filter((el: { competitionDisplayName: string; statusText: string; homeCompetitor: { id: number; }; awayCompetitor: { id: number; }; }) => el.competitionDisplayName !== 'Partido Amistoso' && (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') && (el.homeCompetitor.id === r.away.id || el.awayCompetitor.id === r.away.id)).slice(0, 5).sort((a: { startTime: string | number | Date; }, b: { startTime: string | number | Date; }) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
-    const awayGamesAway = r.recentMatches?.away.filter((el: { competitionDisplayName: string; statusText: string; awayCompetitor: { id: number; }; }) => el.competitionDisplayName !== 'Partido Amistoso' && (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') && (el.awayCompetitor.id === r.away.id)).slice(0, 5).sort((a: { startTime: string | number | Date; }, b: { startTime: string | number | Date; }) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
-    const results = r.result
+    // Filtrar últimos partidos
+    const homeGames = r.recentMatches?.home
+        ?.filter((el: { competitionDisplayName: string; statusText: string; homeCompetitor: { id: number; }; awayCompetitor: { id: number; }; }) => el.competitionDisplayName !== 'Partido Amistoso' &&
+            (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') &&
+            (el.homeCompetitor.id === r.home.id || el.awayCompetitor.id === r.home.id))
+        .slice(0, 5)
+        .sort((a: { startTime: string | number | Date; }, b: { startTime: string | number | Date; }) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime()) || [];
+
+    const homeGamesLocal = r.recentMatches?.home
+        ?.filter((el: { competitionDisplayName: string; statusText: string; homeCompetitor: { id: number; }; }) => el.competitionDisplayName !== 'Partido Amistoso' &&
+            (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') &&
+            (el.homeCompetitor.id === r.home.id))
+        .slice(0, 5)
+        .sort((a: { startTime: string | number | Date; }, b: { startTime: string | number | Date; }) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime()) || [];
+
+    const awayGames = r.recentMatches?.away
+        ?.filter((el: { competitionDisplayName: string; statusText: string; homeCompetitor: { id: number; }; awayCompetitor: { id: number; }; }) => el.competitionDisplayName !== 'Partido Amistoso' &&
+            (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') &&
+            (el.homeCompetitor.id === r.away.id || el.awayCompetitor.id === r.away.id))
+        .slice(0, 5)
+        .sort((a: { startTime: string | number | Date; }, b: { startTime: string | number | Date; }) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime()) || [];
+
+    const awayGamesAway = r.recentMatches?.away
+        ?.filter((el: { competitionDisplayName: string; statusText: string; awayCompetitor: { id: number; }; }) => el.competitionDisplayName !== 'Partido Amistoso' &&
+            (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') &&
+            (el.awayCompetitor.id === r.away.id))
+        .slice(0, 5)
+        .sort((a: { startTime: string | number | Date; }, b: { startTime: string | number | Date; }) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime()) || [];
+
+    const results = r.result;
+
+    // ============================================================
+    // FUNCIÓN PARA EL PICK ACIERTO
+    // ============================================================
 
     const getFinalPick = () => {
         const homeGoals = r.result?.homeScore ?? 0;
@@ -112,15 +136,11 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
         const totalCorners = homeCorners + awayCorners;
 
         const market = recommendation?.pick.market;
-        const selection = recommendation?.pick.selection;
 
-        // Determinar el texto base según el mercado
         let marketName = '';
         let realValue = 0;
         let unit = 'gol';
 
-        let resultText = '';
-        // const market = recommendation?.pick.market;
         if (market?.startsWith('Total de goles')) {
             marketName = 'totales';
             realValue = totalGoals;
@@ -131,250 +151,266 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
             marketName = `de ${r.away.teamName}`;
             realValue = awayGoals;
         } else if (market === 'Córners') {
-            // marketName = 'Córners';
             realValue = totalCorners;
             unit = 'Córners';
-        }
-        // 🆕 Doble oportunidad
-        else if (market === 'Doble oportunidad') {
-            // Mostrar el resultado real del partido
+        } else if (market === 'Doble oportunidad') {
             return `Resultado: ${homeGoals}-${awayGoals}`;
         }
+
         const plural = (realValue === 1 && unit === 'gol') ? '' : 'es';
         const valueText = unit === 'gol' ? `${realValue} ${unit}${plural}` : `${realValue} ${unit}`;
-
         return `${valueText} ${marketName}`;
+    };
 
-    }
+    // ============================================================
+    // RENDER DEL H2H
+    // ============================================================
+
+    const renderH2H = () => {
+        if (!r.h2h || r.h2h.length === 0) return null;
+
+        // Calcular resumen
+        let homeWins = 0, awayWins = 0, draws = 0;
+        let totalGoals = 0;
+        for (const h of r.h2h) {
+            if (h.winner === 1) homeWins++;
+            else if (h.winner === 2) awayWins++;
+            else if (h.winner === -1) draws++;
+            totalGoals += h.homeCompetitor.score + h.awayCompetitor.score;
+        }
+
+        return (
+            <div className="mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
+                <div className="flex items-center gap-2 mb-2">
+                    <History className="w-4 h-4 text-gray-400" />
+                    <span className="text-xs font-medium text-gray-600 dark:text-gray-400">
+                        Historial H2H
+                    </span>
+                    <span className="text-xs text-gray-400">
+                        ({homeWins}V - {draws}E - {awayWins}D · {r.h2h.length} partidos)
+                    </span>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                    {r.h2h.slice(0, 6).map((el) => (
+                        <div
+                            key={el.id}
+                            className="flex items-center gap-1.5 text-xs bg-gray-50 dark:bg-neutral-800 px-2 py-1 rounded-lg border border-gray-200 dark:border-neutral-700"
+                        >
+                            {/* Escudo local */}
+                            <img
+                                src={`https://imagecache.365scores.com/image/upload/f_png,w_20,h_20,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.homeCompetitor.id}`}
+                                alt={el.homeCompetitor.name}
+                                className="w-4 h-4 object-contain"
+                            />
+                            <span className="font-medium text-gray-700 dark:text-gray-300">
+                                {el.homeCompetitor.score}
+                            </span>
+                            <span className="text-gray-400">vs</span>
+                            <span className="font-medium text-gray-700 dark:text-gray-300">
+                                {el.awayCompetitor.score}
+                            </span>
+                            <img
+                                src={`https://imagecache.365scores.com/image/upload/f_png,w_20,h_20,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.awayCompetitor.id}`}
+                                alt={el.awayCompetitor.name}
+                                className="w-4 h-4 object-contain"
+                            />
+                            <span className="text-gray-400 text-[9px] ml-0.5">
+                                {new Date(el.startTime).toLocaleDateString("es-MX")}
+                            </span>
+                        </div>
+                    ))}
+                    {r.h2h.length > 6 && (
+                        <span className="text-xs text-gray-400">+{r.h2h.length - 6} más</span>
+                    )}
+                </div>
+            </div>
+        );
+    };
+
+    // ============================================================
+    // RENDER DE ÚLTIMOS PARTIDOS
+    // ============================================================
+
+    const renderRecentGames = (games: any[], title: string) => {
+        if (games.length === 0) return null;
+        return (
+            <div className="flex flex-col gap-1">
+                <span className="text-[10px] text-gray-400 font-medium">{title}</span>
+                <div className="flex flex-wrap gap-1">
+                    {games.map((el) => (
+                        <div
+                            key={el.id}
+                            className="flex items-center gap-0.5 text-[10px] bg-gray-50 dark:bg-neutral-800 px-1.5 py-0.5 rounded border border-gray-200 dark:border-neutral-700"
+                        >
+                            <img
+                                src={`https://imagecache.365scores.com/image/upload/f_png,w_20,h_20,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.homeCompetitor.id}`}
+                                className="w-4 h-4 object-contain"
+                                alt=""
+                            />
+                            <span className="text-gray-600 dark:text-gray-400">{el.homeCompetitor.score}</span>
+                            <span className="text-gray-400">vs</span>
+                            <span className="text-gray-600 dark:text-gray-400">{el.awayCompetitor.score}</span>
+                            <img
+                                src={`https://imagecache.365scores.com/image/upload/f_png,w_20,h_20,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.awayCompetitor.id}`}
+                                className="w-4 h-4 object-contain"
+                                alt=""
+                            />
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+    };
+
+    // ============================================================
+    // RENDER PRINCIPAL
+    // ============================================================
 
     return (
-
         <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-sm border border-gray-100 dark:border-neutral-800 overflow-hidden transition-all duration-200 hover:shadow-md">
-            <div
-                className="p-4 cursor-pointer"
-                onClick={() => onToggle(r.matchUrl)}
-            >
-                {/* Fila 1: Competición y hora */}
-                <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 mb-2">
-                    <div className="flex items-center gap-2">
-                        <Clock className="w-4 h-4" />
-                        <span>{formatTime(r.startTime)}</span>
-                        <span className="hidden md:inline">·</span>
-                        <span className="truncate">{r.competitionName}</span>
-                        <span className="hidden md:inline">·</span>
-                        {r.estadio && (
-                            <span className="flex items-center gap-1">
+            <div className="p-4 cursor-pointer" onClick={() => onToggle(r.matchUrl)}>
+                {/* ============================================================ */}
+                {/* CABECERA: Competición, hora, estadio, TV, árbitro */}
+                {/* ============================================================ */}
+                <div className="flex flex-wrap items-center gap-1 text-xs text-gray-500 dark:text-gray-400 mb-2">
+                    <Clock className="w-3 h-3" />
+                    <span>{formatTime(r.startTime)}</span>
+                    <span className="hidden sm:inline">·</span>
+                    <span className="truncate max-w-[120px] sm:max-w-none">{r.competitionName}</span>
+                    {r.estadio && (
+                        <>
+                            <span className="hidden sm:inline">·</span>
+                            <span className="flex items-center gap-0.5">
                                 <MapPin className="w-3 h-3" /> {r.estadio.name}
                             </span>
-                        )}
-                        <span className="hidden md:inline">·</span>
-                        {r.tv && r.tv.length > 0 && (
-                            <span className="flex items-center gap-1">
+                        </>
+                    )}
+                    {r.tv && r.tv.length > 0 && (
+                        <>
+                            <span className="hidden sm:inline">·</span>
+                            <span className="flex items-center gap-0.5">
                                 <Tv className="w-3 h-3" /> {r.tv.map(tv => tv.name).join(', ')}
                             </span>
+                        </>
+                    )}
+                    {r.arbitro && r.arbitro.length > 0 && (
+                        <>
+                            <span className="hidden sm:inline">·</span>
+                            <span className="flex items-center gap-0.5">
+                                <UserRound className="w-3 h-3" /> {r.arbitro.map(a => a.name).join(', ')}
+                            </span>
+                        </>
+                    )}
+                </div>
+
+                {/* ============================================================ */}
+                {/* EQUIPOS Y FAVORITO */}
+                {/* ============================================================ */}
+                <div className="flex items-center justify-between gap-2 mb-2">
+                    <div className="flex items-center gap-2">
+                        <img
+                            src={`https://imagecache.365scores.com/image/upload/f_png,w_32,h_32,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.home.id}`}
+                            alt={r.home.teamName}
+                            className="w-8 h-8 md:w-10 md:h-10 object-contain"
+                        />
+                        <span className="font-medium text-gray-800 dark:text-gray-100 text-sm md:text-base">
+                            {r.home.teamName}
+                        </span>
+                        {r.result && (
+                            <span className="text-sm font-bold text-gray-600 dark:text-gray-400">
+                                {r.result.homeScore}
+                            </span>
                         )}
                     </div>
-                    {/* <div className="text-xs text-gray-400 mt-1 flex flex-wrap gap-2">
-                    </div> */}
+
+                    <div className="flex items-center gap-2">
+                        {r.result && (
+                            <span className="text-sm font-bold text-gray-600 dark:text-gray-400">
+                                {r.result.awayScore}
+                            </span>
+                        )}
+                        <span className="font-medium text-gray-800 dark:text-gray-100 text-sm md:text-base">
+                            {r.away.teamName}
+                        </span>
+                        <img
+                            src={`https://imagecache.365scores.com/image/upload/f_png,w_32,h_32,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.away.id}`}
+                            alt={r.away.teamName}
+                            className="w-8 h-8 md:w-10 md:h-10 object-contain"
+                        />
+                    </div>
                 </div>
 
-                {/* Fila 2: Equipos y favorito + badge de trampa */}
-                <div className="flex flex-wrap md:flex-nowrap items-center  justify-center gap-2 mb-3 m-auto w-full">
-                    <div className="flex items-center gap-2 font-medium text-gray-800 dark:text-gray-100 w-full flex-wrap md:flex-nowrap">
-                        <div className={`flex flex-col items-center justify-center mx-auto md:m-0 md:w-1/2`}>
+                {/* Badges de favorito y trampa */}
+                <div className="flex flex-wrap items-center gap-1 mb-2">
+                    {/* Favorito */}
+                    <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[10px] font-medium bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-800">
+                        <Trophy className="w-3 h-3" />
+                        {(() => {
+                            const { homeWin, draw, awayWin } = r.prediction.moneyline;
+                            if (homeWin.prob > draw.prob && homeWin.prob > awayWin.prob) return r.home.teamName;
+                            if (awayWin.prob > homeWin.prob && awayWin.prob > draw.prob) return r.away.teamName;
+                            return "Empate";
+                        })()}
+                    </span>
+                    {trap.isTrap && (
+                        <span
+                            className={`inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[10px] font-medium border cursor-help ${trap.level === "high"
+                                ? "text-red-600 dark:text-red-400 border-red-300 dark:border-red-700 bg-red-50 dark:bg-red-900/20"
+                                : trap.level === "medium"
+                                    ? "text-amber-600 dark:text-amber-400 border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-900/20"
+                                    : "text-yellow-600 dark:text-yellow-400 border-yellow-300 dark:border-yellow-700 bg-yellow-50 dark:bg-yellow-900/20"
+                                }`}
+                            title={`Nivel de riesgo: ${trap.level.toUpperCase()}\n${trap.details.map(d => `${d.team}: ${d.reason}`).join("\n")}`}
+                        >
+                            ⚠️ Trampa
+                        </span>
+                    )}
+                </div>
 
-                            <div className="flex items-center justify-center gap-2 font-medium w-full text-gray-800 dark:text-gray-100 mx-auto">
-                                <img src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.home.id}`} alt={r.home.teamName} className="w-8 h-8 md:w-16 md:h-16 object-contain" />
-                                <span>{r.home.teamName}</span>
-                                {r.result &&
-                                    <div className="flex flex-col w-full items-center">
+                {/* ============================================================ */}
+                {/* H2H (HISTORIAL) */}
+                {/* ============================================================ */}
+                {renderH2H()}
 
-                                        {r.result && (
-                                            <span className="text-sm font-bold text-gray-600 dark:text-gray-400">
-                                                {r.result.homeScore}
-                                            </span>
-                                        )}
-                                    </div>}
-                            </div>
-                            {/* {activeTab === "today" && <p className="w-full text-sm text-center md:text-start">Forma Reciente</p>} */}
-                            <div className="flex gap-4  lg:flex-row">
-
-
-                                <div className=" w-full h-auto my-2  flex items-center flex-wrap justify-center gap-4">
-                                    {((activeTab === "today" || activeTab === "future") && homeGames) && <p className="w-full text-sm text-center ">Ultimos juegos</p>}
-
-                                    {
-                                        homeGames ? homeGames.map((el: { id: Key | null | undefined; startTime: any; competitionDisplayName: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; homeCompetitor: { id: any; nameForURL: any; score: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }; awayCompetitor: { nameForURL: any; score: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; id: any; }; statusText: string; winDescription: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }) => (
-                                            <div key={el.id} className="text-gray-600 dark:text-gray-400 flex flex-col items-center gap-1 w-full justify-center">
-                                                <div className="flex flex-col items-center justify-center gap-1">
-
-                                                    <span className="text-[12px] text-gray-600 dark:text-gray-400 flex flex-col items-center justify-center">
-                                                        {new Date(`${el.startTime}`).toLocaleDateString("es-MX")}
-                                                        <span className="text-[8px] text-wrap w-full text-center">{el.competitionDisplayName}</span>
-
-                                                    </span>
-                                                    <div className="flex items-center gap-1 mx-auto"    >
-
-                                                        <img src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.homeCompetitor.id}`} alt={`${el.homeCompetitor.nameForURL} vs ${el.awayCompetitor.nameForURL}`} className="w-5 h-5 md:w-10 md:h-10 object-contain" />
-                                                        <span className="text-gray-600 dark:text-gray-400">{el.homeCompetitor.score}</span>
-                                                        <span className="text-gray-600 dark:text-gray-400">vs</span>
-                                                        <span className="text-gray-600 dark:text-gray-400">{el.awayCompetitor.score}</span>
-
-                                                        <img src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.awayCompetitor.id}`} alt={`${el.homeCompetitor.nameForURL} vs ${el.awayCompetitor.nameForURL}`} className="w-5 h-5 md:w-10 md:h-10 object-contain" />
-                                                    </div>
-                                                </div>
-                                                {el.statusText === 'Por penaltis' && <p className="text-[10px] w-full text-gray-600 dark:text-gray-400">{el.winDescription}</p>}
-
-                                            </div>))
-                                            : ((activeTab === "today" || activeTab === "future") && <div>
-                                                <p className="w-full text-sm text-center text-gray-600 dark:text-gray-400 ">Cargando Ultimos Partidos</p>
-                                                <div role="status" className="mx-auto w-full flex items-center">
-                                                    <svg aria-hidden="true" className="inline w-8 h-8 text-neutral-tertiary animate-spin mx-auto" viewBox="0 0 100 101" fill="purple" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
-                                                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
-                                                    </svg>
-                                                    {/* <span className="sr-only">Loading...</span> */}
-                                                </div>
-                                            </div>)
-
-                                    }
-                                </div>
-                                {homeGamesLocal && <div className=" w-full h-auto my-2 flex items-center flex-wrap justify-center gap-4">
-                                    {((activeTab === "today" || activeTab === "future") && homeGames) && <p className="w-full text-sm text-center ">Ultimos juegos en local</p>}
-
-                                    {
-                                        homeGamesLocal && homeGamesLocal.map((el: { id: Key | null | undefined; startTime: any; competitionDisplayName: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; homeCompetitor: { id: any; nameForURL: any; score: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }; awayCompetitor: { nameForURL: any; score: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; id: any; }; statusText: string; winDescription: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }) => (
-                                            <div key={el.id} className="text-gray-600 dark:text-gray-400 flex flex-col items-center gap-1 w-full justify-center">
-                                                <div>
-
-                                                    <span className="text-[12px] text-gray-600 dark:text-gray-400 flex flex-col items-center justify-center">
-                                                        {new Date(`${el.startTime}`).toLocaleDateString("es-MX")}
-                                                        <span className="text-[8px] text-wrap w-full text-center">{el.competitionDisplayName}</span>
-
-                                                    </span>
-                                                    <div className="flex items-center justify-center gap-1 mx-auto">
-
-                                                        <img src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.homeCompetitor.id}`} alt={`${el.homeCompetitor.nameForURL} vs ${el.awayCompetitor.nameForURL}`} className="w-5 h-5 md:w-10 md:h-10 object-contain" />
-                                                        <span className="text-gray-600 dark:text-gray-400">{el.homeCompetitor.score}</span>
-                                                        <span className="text-gray-600 dark:text-gray-400">vs</span>
-                                                        <span className="text-gray-600 dark:text-gray-400">{el.awayCompetitor.score}</span>
-
-                                                        <img src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.awayCompetitor.id}`} alt={`${el.homeCompetitor.nameForURL} vs ${el.awayCompetitor.nameForURL}`} className="w-5 h-5 md:w-10 md:h-10 object-contain" />
-                                                    </div>
-                                                </div>
-                                                {el.statusText === 'Por penaltis' && <span className="text-[10px] text-gray-600 dark:text-gray-400">{el.winDescription}</span>}
-
-                                            </div>))
-
-                                    }
-                                </div>}
-
-                            </div>
+                {/* ============================================================ */}
+                {/* ÚLTIMOS PARTIDOS */}
+                {/* ============================================================ */}
+                <div className="mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div className="space-y-1">
+                            {renderRecentGames(homeGames, `Últimos ${homeGames.length} de ${r.home.teamName}`)}
+                            {renderRecentGames(homeGamesLocal, `En casa`)}
                         </div>
-                        <span className="text-gray-400 text-sm w-full md:w-auto text-center">vs</span>
-                        <div className={`flex items-center justify-center flex-col mx-auto md:m-0 md:w-1/2`}>
-                            <div className="flex items-center gap-2 justify-center font-medium text-gray-800 dark:text-gray-100 mx-auto w-full">
-                                {r.result && <div className="flex flex-col items-center justify-center mx-auto">
-                                    <span className="text-sm font-bold text-gray-600 dark:text-gray-400">
-                                        {r.result.awayScore}
-                                    </span>
-
-                                </div>}
-                                <span>{r.away.teamName}</span>
-                                <img src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.away.id}`} alt={r.away.teamName} className="w-8 h-8 md:w-16 md:h-16 object-contain" />
-
-
-                            </div>
-                            <div className="flex gap-4  lg:flex-row">
-
-                                <div className=" w-full h-auto my-2  flex flex-col  items-center flex-wrap justify-center gap-4">
-
-                                    {((activeTab === "today" || activeTab === "future") && awayGames) && <p className="w-full text-sm text-center ">Ultimos juegos</p>}
-                                    {awayGames ? awayGames.map((el: { id: Key | null | undefined; startTime: any; competitionDisplayName: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; homeCompetitor: { id: any; nameForURL: any; score: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }; awayCompetitor: { nameForURL: any; score: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; id: any; }; statusText: string; winDescription: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }) => (
-                                        <div key={el.id} className="text-gray-600 dark:text-gray-400 flex flex-col items-center gap-1 w-full justify-center">
-                                            <div className="flex flex-col items-center justify-center gap-1">
-
-                                                <span className="text-[12px] text-gray-600 dark:text-gray-400 flex flex-col items-center justify-center">
-                                                    {new Date(`${el.startTime}`).toLocaleDateString("es-MX")}
-                                                    <span className="text-[8px] text-wrap w-full text-center">{el.competitionDisplayName}</span>
-
-                                                </span>
-                                                <div className="flex items-center justify-center gap-1 mx-auto">
-
-                                                    <img src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.homeCompetitor.id}`} alt={`${el.homeCompetitor.nameForURL} vs ${el.awayCompetitor.nameForURL}`} className="w-5 h-5 md:w-10 md:h-10 object-contain" />
-                                                    <span className="text-gray-600 dark:text-gray-400">{el.homeCompetitor.score}</span>
-                                                    <span className="text-gray-600 dark:text-gray-400">vs</span>
-                                                    <span className="text-gray-600 dark:text-gray-400">{el.awayCompetitor.score}</span>
-
-                                                    <img src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.awayCompetitor.id}`} alt={`${el.homeCompetitor.nameForURL} vs ${el.awayCompetitor.nameForURL}`} className="w-5 h-5 md:w-10 md:h-10 object-contain" />
-                                                </div>
-                                            </div>
-                                            {el.statusText === 'Por penaltis' && <span className="text-[10px] text-gray-600 dark:text-gray-400">{el.winDescription}</span>}
-
-                                        </div>
-                                    )) : ((activeTab === "today" || activeTab === "future") && <div>
-                                        <p className="w-full text-sm text-center text-gray-600 dark:text-gray-400 ">Cargando Ultimos Partidos</p>
-                                        <div role="status" className="mx-auto w-full flex items-center">
-                                            <svg aria-hidden="true" className="inline w-8 h-8 text-neutral-tertiary animate-spin mx-auto" viewBox="0 0 100 101" fill="purple" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
-                                                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
-                                            </svg>
-                                            {/* <span className="sr-only">Loading...</span> */}
-                                        </div>
-                                    </div>
-                                    )
-                                    }
-                                </div>
-                                {awayGamesAway && <div className=" w-full h-auto my-2  flex flex-col  items-center flex-wrap justify-center gap-4">
-
-                                    {((activeTab === "today" || activeTab === "future") && awayGamesAway) && <p className="w-full text-sm text-center">Ultimos juegos como visitante</p>}
-                                    {awayGamesAway && awayGamesAway.map((el: { id: Key | null | undefined; startTime: any; competitionDisplayName: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; homeCompetitor: { id: any; nameForURL: any; score: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }; awayCompetitor: { nameForURL: any; score: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; id: any; }; statusText: string; winDescription: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }) => (
-                                        <div key={el.id} className="text-gray-600 dark:text-gray-400 flex flex-col items-center gap-1 w-full justify-center">
-                                            <div className="w-full mx-auto">
-
-                                                <span className="text-[12px] text-gray-600 dark:text-gray-400 flex flex-col items-center justify-center">
-                                                    {new Date(`${el.startTime}`).toLocaleDateString("es-MX")}
-                                                    <span className="text-[8px] text-wrap w-full text-center">{el.competitionDisplayName}</span>
-
-                                                </span>
-                                                <div className="flex items-center justify-center gap-1 mx-auto"    >
-
-                                                    <img src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.homeCompetitor.id}`} alt={`${el.homeCompetitor.nameForURL} vs ${el.awayCompetitor.nameForURL}`} className="w-5 h-5 md:w-10 md:h-10 object-contain" />
-                                                    <span className="text-gray-600 dark:text-gray-400">{el.homeCompetitor.score}</span>
-                                                    <span className="text-gray-600 dark:text-gray-400">vs</span>
-                                                    <span className="text-gray-600 dark:text-gray-400">{el.awayCompetitor.score}</span>
-                                                    <img src={`https://imagecache.365scores.com/image/upload/f_png,w_64,h_64,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.awayCompetitor.id}`} alt={`${el.homeCompetitor.nameForURL} vs ${el.awayCompetitor.nameForURL}`} className="w-5 h-5 md:w-10 md:h-10 object-contain" />
-                                                </div>
-                                            </div>
-                                            {el.statusText === 'Por penaltis' && <span className="text-[10px] text-gray-600 dark:text-gray-400">{el.winDescription}</span>}
-                                        </div>
-                                    ))
-
-
-                                    }
-                                </div>}
-                            </div>
-
-                            {/* {r.accuracy && (
-                            <span className={`ml-2 px-2 py-0.5 rounded-full text-xs font-medium ${r.accuracy.overallAccuracy > 70 ? 'bg-green-100 text-green-700' :
-                                r.accuracy.overallAccuracy > 40 ? 'bg-yellow-100 text-yellow-700' :
-                                'bg-red-100 text-red-700'
-                            }`}>
-                                {r.accuracy.overallAccuracy.toFixed(0)}% acierto
-                            </span>
-                        )} */}
+                        <div className="space-y-1">
+                            {renderRecentGames(awayGames, `Últimos ${awayGames.length} de ${r.away.teamName}`)}
+                            {renderRecentGames(awayGamesAway, `Como visitante`)}
                         </div>
                     </div>
                 </div>
 
-                {/* Fila 3: Estadísticas completas */}
+                {/* ============================================================ */}
+                {/* ESTADÍSTICAS */}
+                {/* ============================================================ */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
-                    <TeamStatsBlock team={r.home} goalLines={r.prediction.teamGoals.home} title={r.home.teamName} opponent={r.away} results={r.result} />
-                    <TeamStatsBlock team={r.away} goalLines={r.prediction.teamGoals.away} title={r.away.teamName} opponent={r.home} results={r.result} />
-
+                    <TeamStatsBlock
+                        team={r.home}
+                        goalLines={r.prediction.teamGoals.home}
+                        title={r.home.teamName}
+                        opponent={r.away}
+                        results={r.result}
+                    />
+                    <TeamStatsBlock
+                        team={r.away}
+                        goalLines={r.prediction.teamGoals.away}
+                        title={r.away.teamName}
+                        opponent={r.home}
+                        results={r.result}
+                    />
                 </div>
 
-                {/* Fila 4: Marcadores exactos */}
+                {/* ============================================================ */}
+                {/* MARCADORES EXACTOS */}
+                {/* ============================================================ */}
                 <div className="mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
                     <div className="flex items-center gap-2 mb-1">
                         <span className="text-xs font-medium text-gray-500 dark:text-gray-400 flex items-center gap-1">
@@ -388,23 +424,24 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                     <div className="flex flex-wrap gap-1">
                         {topScoresTwo.map((score, idx) => (
                             <StatBadge
-                                scoreResult={`${results?.homeScore}-${results?.awayScore}`}
                                 key={idx}
                                 label={`${(score.prob * 100).toFixed(1)}%`}
                                 value={`${score.home}-${score.away}`}
                                 icon={Goal}
                                 secondary
                                 description={`Probabilidad de que el marcador sea ${score.home}-${score.away}`}
-                            // className="bg-indigo-50/70 dark:bg-indigo-900/20 border-indigo-100 dark:border-indigo-800"
+                                scoreResult={results ? `${results.homeScore}-${results.awayScore}` : undefined}
                             />
                         ))}
                         {topScoresTwo.length === 0 && (
                             <span className="text-xs text-gray-400">No hay datos suficientes</span>
                         )}
                     </div>
-
                 </div>
-                {/* ---- RECOMENDACIÓN DEL MOTOR ---- */}
+
+                {/* ============================================================ */}
+                {/* PICK RECOMENDADO */}
+                {/* ============================================================ */}
                 {recommendation && (
                     <div className="mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
                         <div className="p-2 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg border border-indigo-200 dark:border-indigo-800">
@@ -412,65 +449,63 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                 <Sparkles className="w-3 h-3" />
                                 Pick recomendado
                             </div>
-                            <div className="flex flex-wrap items-center gap-2 text-xs mt-1">
+                            <div className="flex flex-wrap items-center gap-1 text-xs mt-1">
                                 <span className="font-medium">{recommendation.pick.market}</span>
                                 <span className="font-bold">{recommendation.pick.selection}</span>
-                                <span className="bg-indigo-50 dark:bg-indigo-900/20">
-                                    Confianza: {recommendation.pick.confidence}
+                                <span className="bg-indigo-50 dark:bg-indigo-900/20 px-1.5 py-0.5 rounded-full">
+                                    {recommendation.pick.confidence}
                                 </span>
-                                <span className="bg-indigo-50 dark:bg-indigo-900/20 text-[10px]">
-                                    Probabilidad: {((1 / recommendation.pick.odd) * 100).toFixed(1)}
+                                <span className="bg-indigo-50 dark:bg-indigo-900/20 px-1.5 py-0.5 rounded-full text-[10px]">
+                                    Prob: {((1 / recommendation.pick.odd) * 100).toFixed(1)}%
                                 </span>
-                                <span className="bg-indigo-50 dark:bg-indigo-900/20 text-[10px]">
+                                <span className="bg-indigo-50 dark:bg-indigo-900/20 px-1.5 py-0.5 rounded-full text-[10px]">
                                     Momio: {recommendation.pick.odd}
                                 </span>
-                                <span className="bg-indigo-50 dark:bg-indigo-900/20 text-[10px]">
-                                    Razon: {recommendation.pick.reason}
-                                </span>
+                                <span className="text-gray-400 text-[10px]">{recommendation.pick.reason}</span>
                                 {(activeTab === 'past' && r.result) && (() => {
-                                    const resultText = getFinalPick()
+                                    const resultText = getFinalPick();
                                     const correct = isPickCorrect(recommendation.pick, r.result, r.home.teamName, r.away.teamName);
-
                                     return (
-                                        <span className={`ml-1 px-1.5 py-0.5 rounded text-[10px] font-medium ${correct ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                                        <span className={`ml-1 px-1.5 py-0.5 rounded-full text-[10px] font-medium ${correct ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
                                             {correct ? `✅ Acertado: ${resultText}` : '❌ Fallado'}
                                         </span>
                                     );
-                                })()
-
-                                }
+                                })()}
                             </div>
 
+                            {/* Alternativas */}
                             {recommendation.alternatives.length > 0 && (
                                 <div className="mt-1 flex flex-wrap gap-1">
                                     <span className="text-[10px] text-gray-500">Alternativas:</span>
                                     {recommendation.alternatives.map((alt, i) => {
                                         const altCorrect = r.result ? isPickCorrect(alt, r.result, r.home.teamName, r.away.teamName) : null;
-
-                                        return (<span
-                                            key={i}
-                                            className={`text-[10px] px-1.5 py-0.5 rounded-full ${altCorrect === null
-                                                ? 'bg-gray-100 dark:bg-neutral-800'
-                                                : altCorrect
-                                                    ? 'bg-green-100 text-green-700'
-                                                    : 'bg-red-100 text-red-700'
-                                                }`}>
-                                            {alt.market}: {alt.selection} (prob: {((1 / alt.odd) * 100).toFixed(1)}%) (momio: {alt.odd})
-                                            {r.result && (
-                                                <span className="ml-1">{altCorrect ? '✅' : '❌'}</span>
-                                            )}
-                                        </span>)
-
-                                    }
-                                    )}
+                                        return (
+                                            <span
+                                                key={i}
+                                                className={`text-[10px] px-1.5 py-0.5 rounded-full ${altCorrect === null
+                                                    ? 'bg-gray-100 dark:bg-neutral-800'
+                                                    : altCorrect
+                                                        ? 'bg-green-100 text-green-700'
+                                                        : 'bg-red-100 text-red-700'
+                                                    }`}
+                                            >
+                                                {alt.market}: {alt.selection} (prob: {((1 / alt.odd) * 100).toFixed(1)}%) (momio: {alt.odd})
+                                                {r.result && (
+                                                    <span className="ml-1">{altCorrect ? '✅' : '❌'}</span>
+                                                )}
+                                            </span>
+                                        );
+                                    })}
                                 </div>
                             )}
                         </div>
                     </div>
                 )}
 
-                {/* Riesgo y Pick Recomendado + Jugadas */}
-                <div className="mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800 space-y-2">
+                {/* ============================================================ */}
+                {/* RIESGO Y ADVERTENCIAS */}
+                {/* ============================================================ */}
+                <div className="mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
                     <div className="flex items-start gap-2">
                         <AlertCircle className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" />
                         <div className="flex-1 space-y-1">
@@ -513,144 +548,82 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                     ))}
                                 </div>
                             )}
-                            {/* {warnings.length > 0 && (
-                                <div className="mt-1 space-y-0.5">
-                                    {warnings.map((warning, idx) => (
-                                        <div key={idx} className="text-xs text-amber-600 dark:text-amber-400 flex items-start gap-1">
-                                            <span>{warning}</span>
-                                        </div>
-                                    ))}
-                                    {excludedMarkets.length > 0 && (
-                                        <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-                                            🚫 Mercados excluidos: {excludedMarkets.join(", ")}
-                                        </div>
-                                    )}
-                                </div>
-                            )} */}
-                            {/* Pick recomendado (el de mayor EV) */}
-                            {/* {bestPick && (
-                                                bestPick.map((pick, idx) => (
-                                                    <div key={idx} className="flex flex-wrap items-center gap-2 text-xs bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800 rounded-lg px-3 py-1.5">
-                                                        <Sparkles className="w-3 h-3 text-indigo-500" />
-                                                        <span className="font-medium text-indigo-700 dark:text-indigo-300">{pick.market}</span>
-                                                        <span className="font-bold text-gray-800 dark:text-gray-100">{pick.selection}</span>
-                                                        <span className="text-gray-500 dark:text-gray-400">
-                                                            {pick.confidence === 'alta' && '🔵 Alta confianza'}
-                                                            {pick.confidence === 'media' && '🟡 Media confianza'}
-                                                            {pick.confidence === 'baja' && '🔴 Baja confianza'}
-                                                        </span>
-                                                        <span className="text-gray-400 text-[10px]">{pick.reason}</span>
-
-                                                        {pick.warning && (
-                                                            <span className="text-[10px] bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 px-1.5 py-0.5 rounded">
-                                                                {pick.warning}
-                                                            </span>
-                                                        )}
-                                                    </div>))
-                                            )} */}
-
-                            {/* Cuotas ratoneras */}
-                            {ratoneras.length > 0 && (
-                                <div className="mt-1">
-                                    <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">🔹 Ratoneras (≤1.30)</span>
-                                    <div className="flex flex-wrap gap-1 mt-0.5">
-                                        {ratoneras.map((pick, idx) => (
-                                            <div
-                                                key={idx}
-                                                className="flex items-center gap-1 text-xs bg-gray-100 dark:bg-neutral-800 border border-gray-300 dark:border-neutral-600 rounded-full px-2 py-0.5"
-                                            >
-                                                <span className="text-gray-600 dark:text-gray-300">{pick.market}</span>
-                                                <span className="font-bold text-gray-800 dark:text-gray-100">{pick.selection}</span>
-                                                <span className="text-gray-400">Cuota {pick.odd}</span>
-                                                {/* <span className="text-green-600 font-medium">EV {(pick.ev * 100).toFixed(1)}%</span> */}
-                                            </div>
-                                        ))}
-                                        {/* {ratoneras.length > 5 && (
-                                                            <span className="text-xs text-gray-400">+{ratoneras.length - 5} más</span>
-                                                        )} */}
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* Cuotas medias */}
-                            {medias.length > 0 && (
-                                <div className="mt-1">
-                                    <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">🔸 Medias (1.30 - 1.8)</span>
-                                    <div className="flex flex-wrap gap-1 mt-0.5">
-                                        {medias.map((pick, idx) => (
-                                            <div
-                                                key={idx}
-                                                className="flex items-center gap-1 text-xs bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-full px-2 py-0.5"
-                                            >
-                                                <span className="text-gray-600 dark:text-gray-300">{pick.market}</span>
-                                                <span className="font-bold text-gray-800 dark:text-gray-100">{pick.selection}</span>
-                                                <span className="text-gray-400">Cuota {pick.odd}</span>
-                                                {/* <span className="text-green-600 font-medium">EV {(pick.ev * 100).toFixed(1)}%</span> */}
-                                            </div>
-                                        ))}
-                                        {/* {medias.length > 5 && (
-                                                            <span className="text-xs text-gray-400">+{medias.length - 5} más</span>
-                                                        )} */}
-                                    </div>
-                                </div>
-                            )}
-
-                            {altas.length > 0 && (
-                                <div className="mt-1">
-                                    <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">🔶 Altas (1.8 - 2.5)</span>
-                                    <div className="flex flex-wrap gap-1 mt-0.5">
-                                        {altas.map((pick, idx) => (
-                                            <div
-                                                key={idx}
-                                                className="flex items-center gap-1 text-xs bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-full px-2 py-0.5"
-                                            >
-                                                <span className="text-gray-600 dark:text-gray-300">{pick.market}</span>
-                                                <span className="font-bold text-gray-800 dark:text-gray-100">{pick.selection}</span>
-                                                <span className="text-gray-400">Cuota {pick.odd}</span>
-                                                {/* <span className="text-green-600 font-medium">EV {(pick.ev * 100).toFixed(1)}%</span> */}
-                                            </div>
-                                        ))}
-                                        {/* {altas.length > 5 && (
-                                                            <span className="text-xs text-gray-400">+{altas.length - 5} más</span>
-                                                        )} */}
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* Jugadas (si no hay ratoneras/medias y hay plays) */}
-                            {ratoneras.length === 0 && medias.length === 0 && plays.length > 0 && altas.length === 0 && (
-                                <div className="mt-1">
-                                    <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">Jugadas alternativas</span>
-                                    <div className="flex flex-wrap gap-1 mt-0.5">
-                                        {plays.map((play, idx) => (
-                                            <div
-                                                key={idx}
-                                                className="flex items-center gap-1 text-xs bg-gray-50 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-full px-2 py-0.5"
-                                            >
-                                                <span className="text-gray-600 dark:text-gray-300">{play.market}</span>
-                                                <span className="font-bold text-gray-800 dark:text-gray-100">{play.selection}</span>
-                                                <span className="text-gray-400">Cuota {play.odd}</span>
-                                                <span className="text-green-600 font-medium">EV {(play.ev * 100).toFixed(1)}%</span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-
-                            {/*  {!bestPick && ratoneras.length === 0 && medias.length === 0 && plays.length === 0 && (
-                                                <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                                                    No hay picks con cuota razonable y valor positivo.
-                                                </div>
-                                            )}*/}
                         </div>
                     </div>
                 </div>
+
+                {/* ============================================================ */}
+                {/* JUGADAS (ratoneras, medias, altas) */}
+                {/* ============================================================ */}
+                <div className="mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800 space-y-2">
+                    {ratoneras.length > 0 && (
+                        <div>
+                            <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">🔹 Ratoneras (≤1.30)</span>
+                            <div className="flex flex-wrap gap-1 mt-0.5">
+                                {ratoneras.slice(0, 5).map((pick, idx) => (
+                                    <div key={idx} className="flex items-center gap-1 text-xs bg-gray-100 dark:bg-neutral-800 border border-gray-300 dark:border-neutral-600 rounded-full px-2 py-0.5">
+                                        <span className="text-gray-600 dark:text-gray-300">{pick.market}</span>
+                                        <span className="font-bold text-gray-800 dark:text-gray-100">{pick.selection}</span>
+                                        <span className="text-gray-400">Cuota {pick.odd}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {medias.length > 0 && (
+                        <div>
+                            <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">🔸 Medias (1.30 - 1.8)</span>
+                            <div className="flex flex-wrap gap-1 mt-0.5">
+                                {medias.slice(0, 5).map((pick, idx) => (
+                                    <div key={idx} className="flex items-center gap-1 text-xs bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-full px-2 py-0.5">
+                                        <span className="text-gray-600 dark:text-gray-300">{pick.market}</span>
+                                        <span className="font-bold text-gray-800 dark:text-gray-100">{pick.selection}</span>
+                                        <span className="text-gray-400">Cuota {pick.odd}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {altas.length > 0 && (
+                        <div>
+                            <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">🔶 Altas (1.8 - 2.5)</span>
+                            <div className="flex flex-wrap gap-1 mt-0.5">
+                                {altas.slice(0, 5).map((pick, idx) => (
+                                    <div key={idx} className="flex items-center gap-1 text-xs bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-full px-2 py-0.5">
+                                        <span className="text-gray-600 dark:text-gray-300">{pick.market}</span>
+                                        <span className="font-bold text-gray-800 dark:text-gray-100">{pick.selection}</span>
+                                        <span className="text-gray-400">Cuota {pick.odd}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {ratoneras.length === 0 && medias.length === 0 && altas.length === 0 && plays.length > 0 && (
+                        <div>
+                            <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">Jugadas alternativas</span>
+                            <div className="flex flex-wrap gap-1 mt-0.5">
+                                {plays.map((play, idx) => (
+                                    <div key={idx} className="flex items-center gap-1 text-xs bg-gray-50 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-full px-2 py-0.5">
+                                        <span className="text-gray-600 dark:text-gray-300">{play.market}</span>
+                                        <span className="font-bold text-gray-800 dark:text-gray-100">{play.selection}</span>
+                                        <span className="text-gray-400">Cuota {play.odd}</span>
+                                        <span className="text-green-600 font-medium">EV {(play.ev * 100).toFixed(1)}%</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                </div>
             </div>
 
-            {/* Panel de odds expandible */}
+            {/* ============================================================ */}
+            {/* PANEL DE ODDS EXPANDIBLE */}
+            {/* ============================================================ */}
             <div
-                className={`overflow-hidden transition-all duration-300 ease-in-out ${isSelected ? "lg:max-h-200  opacity-100" : "max-h-0 opacity-0"
-                    }`}
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${isSelected ? "opacity-100" : "max-h-0 opacity-0"}`}
             >
                 <div className="border-t border-gray-100 dark:border-neutral-800 p-4 bg-gray-50/50 dark:bg-neutral-800/50">
                     <OddsPanel
@@ -659,28 +632,6 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                         awayTeam={r.away.teamName}
                         results={r.result}
                     />
-                    {/* Si el partido tiene resultado y precisión */}
-                    {/* {r.result && r.accuracy && (
-                                        <div className="mt-2 pt-2 border-t border-gray-200 dark:border-neutral-700">
-                                            <div className="flex flex-wrap items-center gap-2 text-xs">
-                                                <span className="font-medium text-gray-600 dark:text-gray-400">Resultado real:</span>
-                                                <span className="font-bold">
-                                                    {r.result.homeScore} - {r.result.awayScore}
-                                                </span>
-                                                <span className={`px-2 py-0.5 rounded-full text-white ${r.accuracy.overallAccuracy > 70 ? 'bg-green-500' :
-                                                    r.accuracy.overallAccuracy > 40 ? 'bg-yellow-500' : 'bg-red-500'
-                                                    }`}>
-                                                    {r.accuracy.overallAccuracy.toFixed(0)}% acierto
-                                                </span>
-                                            </div>
-                                            <div className="flex flex-wrap gap-2 mt-1 text-[10px] text-gray-500 dark:text-gray-400">
-                                                <span>Ganador: {r.accuracy.winnerCorrect ? '✅' : '❌'}</span>
-                                                <span>Over/Under: {r.accuracy.overUnderCorrect ? '✅' : '❌'}</span>
-                                                <span>BTTS: {r.accuracy.bttsCorrect ? '✅' : '❌'}</span>
-                                                <span>Error córners: ±{r.accuracy.cornersError.toFixed(1)}</span>
-                                            </div>
-                                        </div>
-                                    )} */}
                 </div>
             </div>
         </div >

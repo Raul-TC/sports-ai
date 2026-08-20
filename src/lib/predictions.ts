@@ -706,16 +706,21 @@ export function calculateExtendedPrediction(home: TeamMetrics, away: TeamMetrics
 // type TeamMetrics = ExternalTeamStat["metrics"];
 
 export function calculateAllPredictions(matches: UnifiedMatch[], options: PredictionOptions = {}) {
-    return matches.sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime()).map((match) => ({
-        matchUrl: match.matchUrl,
-        competitionName: match.competitionName,
-        startTime: match.startTime,
-        home: match.home,
-        away: match.away,
-        prediction: calculateExtendedPrediction(match.home.metrics, match.away.metrics, options, match.matchMetrics.volatility),
-        volatility: match.matchMetrics.volatility,
-        recentMatches: match.recentMatches,
-        estadio: match.estadio,
-        tv: match.tvNetworks
-    }));
+    return matches.sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime()).map((match) => {
+        console.log({ matches })
+        return {
+            matchUrl: match.matchUrl,
+            competitionName: match.competitionName,
+            startTime: match.startTime,
+            home: match.home,
+            away: match.away,
+            prediction: calculateExtendedPrediction(match.home.metrics, match.away.metrics, options, match.matchMetrics.volatility),
+            volatility: match.matchMetrics.volatility,
+            recentMatches: match.recentMatches,
+            estadio: match.estadio,
+            tv: match.tvNetworks,
+            arbitro: match.arbitro,
+            h2h: match.h2h
+        }
+    });
 }

@@ -39,9 +39,8 @@ export interface PredictionResult {
     estadio: { id: number; name: string; capacity: number };
     tv: { id: number; name: string; countryId: number }[];
     recentMatches: { home: any; away: any };
-    h2hSummary: {
-        total: number; homeWins: number; awayWins: number; draws: number; avgGoals: number
-    }
+    h2h: any[]
+    arbitro: { id: number, name: string }[]
 }
 
 export interface ExcludedTeam {
