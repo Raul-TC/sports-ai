@@ -165,7 +165,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
     // ============================================================
     // RENDER DEL H2H
     // ============================================================
-
+    console.log({ r })
     const renderH2H = () => {
         if (!r.h2h || r.h2h.length === 0) return null;
 
@@ -230,6 +230,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
     // ============================================================
     // RENDER DE ÚLTIMOS PARTIDOS
     // ============================================================
+    // Renderizar con iconos y nombres
 
     const renderRecentGames = (games: any[], title: string) => {
         if (games.length === 0) return null;
@@ -366,7 +367,27 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                         </span>
                     )}
                 </div>
+                {/* Lesiones y amonestados */}
+                {/* // Obtén los jugadores ausentes (suponiendo que los tienes en r.injuries) */}
 
+
+                {/* // Renderizar con iconos y nombres */}
+                {r.injuries?.home && r.injuries.home.length > 0 && (
+                    <div className="mt-1 flex flex-wrap gap-1">
+                        {r.injuries.home.map((p) => (
+                            <div
+                                key={p.id}
+                                className="flex items-center gap-1 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-full px-2 py-0.5 text-[10px]"
+                                title={`${p.reason}${p.expectedReturn ? ` · Regreso: ${p.expectedReturn}` : ''}`}
+                            >
+                                <span className="text-red-600 dark:text-red-400 font-medium">{p.name}</span>
+                                <span className="text-gray-400">
+                                    {p.status === 'suspension' ? '🚫' : p.status === 'doubtful' ? '⚠️' : '🩹'}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                )}
                 {/* ============================================================ */}
                 {/* H2H (HISTORIAL) */}
                 {/* ============================================================ */}

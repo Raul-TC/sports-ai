@@ -7,6 +7,7 @@
 // } from "@/lib/parseExternalStats";
 import { DEFAULT_STAT_IDS, RawMatchData, RawStatEntry, RawStatsBlock, StatIdMap, StatsFilterKey } from "@/types/externalStats";
 import { MatchMetrics, TeamMetrics, UnifiedMatch } from "@/types/unifiedStats";
+import { extractMissingPlayers } from "@/utils/playerStatus";
 
 export interface BlockWeights {
     todos: number;
@@ -491,23 +492,31 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
                 },
             };
             // console.log({ homeTodos, homeU5, homeU5LV, match: match.matchUrl })
+            const homeMembers = match.informacionEquipos.home.alineaciones.lineups.members
+            const awayMembers = match.informacionEquipos.away.alineaciones.lineups.members
+            const members = match.informacionEquipos?.members || []
+            console.log({ match })
+            const homeInjuries = extractMissingPlayers(homeMembers, members);
+            const awayInjuries = extractMissingPlayers(awayMembers, members);
+
+            console.log({ members, homeInjuries, awayInjuries })
 
             return {
                 matchUrl: match.matchUrl,
                 competitionName: match.informacionEquipos.competitionDisplayName,
                 startTime: match.h2h.game.startTime,
-                home: { teamId: homeId, teamName: match.informacionEquipos.home.teamName, metrics: metrics.home, id: match.informacionEquipos.home.homeId },
-                away: { teamId: awayId, teamName: match.informacionEquipos.away.teamName, metrics: metrics.away, id: match.informacionEquipos.away.awayId },
+                home: { teamId: homeId, teamName: match.informacionEquipos.home.teamName, metrics: metrics.home, id: match.informacionEquipos.home.homeId, injuries: match.informacionEquipos.home.alineaciones },
+                away: { teamId: awayId, teamName: match.informacionEquipos.away.teamName, metrics: metrics.away, id: match.informacionEquipos.away.awayId, injuries: match.informacionEquipos.away.alineaciones },
                 matchMetrics: metrics.match,
                 recentMatches: match.recentMatches,
                 estadio: match.informacionEquipos.estadio,
                 tvNetworks: match.informacionEquipos.tv,
                 arbitro: match.informacionEquipos.arbitro,
-                h2h: match.h2h.game.h2hGames
-                // injuries?: {
-                //     home: { teamId: homeId; teamName: game.homeCompetitor.name; position: match.injuries?.home.position; reason: match.injuries?.home.reason; expectedReturn?: match.injuries?.home.expectedReturn; gamesPlayed?: number }[];
-                //     away: { ... }[];
-                // };
+                h2h: match.h2h.game.h2hGames,
+                injuries: {
+                    home: homeInjuries,
+                    away: awayInjuries
+                }
                 // venue?: { id: number; name: string; capacity: number };
                 // tvNetworks?: { id: number; name: string; countryId: number }[];
                 // recentMatches?: { home: any; away: any };

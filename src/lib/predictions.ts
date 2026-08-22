@@ -720,7 +720,9 @@ export function calculateAllPredictions(matches: UnifiedMatch[], options: Predic
             estadio: match.estadio,
             tv: match.tvNetworks,
             arbitro: match.arbitro,
-            h2h: match.h2h
+            h2h: match.h2h,
+            injuries: match.injuries
+            // injuries: match.home.injuries
         }
     });
 }
