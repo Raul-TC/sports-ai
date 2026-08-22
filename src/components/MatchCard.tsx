@@ -168,7 +168,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
     // ============================================================
     // RENDER DEL H2H
     // ============================================================
-    console.log({ r })
+    // console.log({ r })
     const renderH2H = () => {
         if (!r.h2h || r.h2h.length === 0) return null;
 
@@ -271,7 +271,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
     // ============================================================
 
     return (
-        <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-sm border border-gray-100 dark:border-neutral-800 overflow-hidden transition-all duration-200 hover:shadow-md">
+        <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-sm border border-gray-100 dark:border-neutral-800 overflow-hidden transition-all duration-200 hover:shadow-md my-4">
             <div className="p-4 cursor-pointer" onClick={() => onToggle(r.matchUrl)}>
                 {/* ============================================================ */}
                 {/* CABECERA: Competición, hora, estadio, TV, árbitro */}
