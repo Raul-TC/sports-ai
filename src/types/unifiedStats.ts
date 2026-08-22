@@ -1,4 +1,5 @@
 import { PredictionOptions } from "@/lib/predictions";
+import { PlayerStatus } from "@/utils/playerStatus";
 
 export interface UnifiedTeamInfo {
     teamId: number;
@@ -42,7 +43,10 @@ export interface UnifiedMatch {
     h2hSummary?: { total: number; homeWins: number; awayWins: number; draws: number; avgGoals: number };
     arbitro: { id: number, name: string }
     h2h: any[],
-    injuries: any[]
+    injuries: {
+        home: any,
+        away: any
+    }
 }
 
 export interface TeamMetrics {

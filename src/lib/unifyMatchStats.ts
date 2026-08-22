@@ -494,7 +494,7 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
             // console.log({ homeTodos, homeU5, homeU5LV, match: match.matchUrl })
             const homeMembers = match.informacionEquipos.home.alineaciones.lineups.members
             const awayMembers = match.informacionEquipos.away.alineaciones.lineups.members
-            const members = match.informacionEquipos?.members || []
+            const members = match.informacionEquipos.members || []
             console.log({ match })
             const homeInjuries = extractMissingPlayers(homeMembers, members);
             const awayInjuries = extractMissingPlayers(awayMembers, members);

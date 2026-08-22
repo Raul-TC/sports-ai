@@ -84,13 +84,13 @@ export interface RawMatchData {
             homeId: number,
             teamName: string,
             nameForURL: string,
-            alineaciones: any[]
+            alineaciones: any
         },
         away: {
             awayId: number,
             teamName: string,
             nameForURL: string,
-            alineaciones: any[]
+            alineaciones: any
         },
         estadio: {
             id: number,
@@ -106,7 +106,8 @@ export interface RawMatchData {
             id: number,
             name: string
         }[],
-        playerStats: any[]
+        playerStats: any[],
+        members: []
     },
     h2h: {
         game: {
