@@ -140,10 +140,11 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
             const ultimos5Block = match.stats.ultimos5!;
             const u5lvBlock = match.stats.ultimos5LocalVisita!;
 
-            // const game = ultimos5Block.games[0];
-            const homeId = match.informacionEquipos.home.homeId;
-            const awayId = match.informacionEquipos.away.awayId;
-            // const awayId = game.awayCompetitor.id;
+            const game = ultimos5Block.games[0];
+            // const homeId = match.informacionEquipos?.home.homeId;
+            // const awayId = match.informacionEquipos?.away.awayId;
+            const homeId = game.homeCompetitor.id;
+            const awayId = game.awayCompetitor.id;
 
             // Extraer stats crudas de cada bloque, para ambos equipos
             const homeTodos = getTeamBlockStats(todosBlock, homeId, statIds, statisticGroup);
@@ -492,9 +493,9 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
                 },
             };
             // console.log({ homeTodos, homeU5, homeU5LV, match: match.matchUrl })
-            const homeMembers = match.informacionEquipos.home.alineaciones.lineups.members
-            const awayMembers = match.informacionEquipos.away.alineaciones.lineups.members
-            const members = match.informacionEquipos.members || []
+            const homeMembers = match.informacionEquipos?.home.alineaciones.lineups.members
+            const awayMembers = match.informacionEquipos?.away.alineaciones.lineups.members
+            const members = match.informacionEquipos?.members || []
             console.log({ match })
             const homeInjuries = extractMissingPlayers(homeMembers, members);
             const awayInjuries = extractMissingPlayers(awayMembers, members);
@@ -503,16 +504,16 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
 
             return {
                 matchUrl: match.matchUrl,
-                competitionName: match.informacionEquipos.competitionDisplayName,
-                startTime: match.h2h.game.startTime,
-                home: { teamId: homeId, teamName: match.informacionEquipos.home.teamName, metrics: metrics.home, id: match.informacionEquipos.home.homeId, injuries: match.informacionEquipos.home.alineaciones },
-                away: { teamId: awayId, teamName: match.informacionEquipos.away.teamName, metrics: metrics.away, id: match.informacionEquipos.away.awayId, injuries: match.informacionEquipos.away.alineaciones },
+                competitionName: game.competitionDisplayName,
+                startTime: game.startTime,
+                home: { teamId: homeId, teamName: match.informacionEquipos?.home.teamName, metrics: metrics.home, id: match.informacionEquipos?.home.homeId, injuries: match.informacionEquipos?.home.alineaciones },
+                away: { teamId: awayId, teamName: match.informacionEquipos?.away.teamName, metrics: metrics.away, id: match.informacionEquipos?.away.awayId, injuries: match.informacionEquipos?.away.alineaciones },
                 matchMetrics: metrics.match,
                 recentMatches: match.recentMatches,
-                estadio: match.informacionEquipos.estadio,
-                tvNetworks: match.informacionEquipos.tv,
-                arbitro: match.informacionEquipos.arbitro,
-                h2h: match.h2h.game.h2hGames,
+                estadio: match.informacionEquipos?.estadio,
+                tvNetworks: match.informacionEquipos?.tv,
+                arbitro: match.informacionEquipos?.arbitro,
+                h2h: match.h2h?.game.h2hGames,
                 injuries: {
                     home: homeInjuries,
                     away: awayInjuries

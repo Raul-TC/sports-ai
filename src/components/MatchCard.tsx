@@ -18,6 +18,8 @@ import {
     Trophy,
     ChevronRight,
     History,
+    HeartPulse,
+    Square,
 } from "lucide-react";
 
 import { EnrichedPrediction } from "@/utils/enrichPredictions";
@@ -372,22 +374,56 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
 
 
                 {/* // Renderizar con iconos y nombres */}
-                {r.injuries?.home && r.injuries.home.length > 0 && (
-                    <div className="mt-1 flex flex-wrap gap-1">
-                        {r.injuries.home.map((p) => (
-                            <div
-                                key={p.id}
-                                className="flex items-center gap-1 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-full px-2 py-0.5 text-[10px]"
-                                title={`${p.reason}${p.expectedReturn ? ` · Regreso: ${p.expectedReturn}` : ''}`}
-                            >
-                                <span className="text-red-600 dark:text-red-400 font-medium">{p.name}</span>
-                                <span className="text-gray-400">
-                                    {p.status === 'suspension' ? '🚫' : p.status === 'doubtful' ? '⚠️' : '🩹'}
-                                </span>
-                            </div>
-                        ))}
-                    </div>
-                )}
+                <h3 className="mx-auto text-gray-600 dark:text-gray-400 w-full text-center">Jugadores No Disponibles</h3>
+                <div className="flex items-center justify-center gap-4">
+
+                    {r.injuries?.home && r.injuries.home.length > 0 && (
+                        <div className="mt-1 flex flex-wrap gap-1 self-start mx-auto w-full">
+                            {r.injuries.home.map((p) => (
+                                <div
+                                    key={p.id}
+                                    className="flex items-center gap-1 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-full px-2 py-0.5 text-[10px]"
+                                    title={`${p.reason === 'Tarjeta amarilla' ? 'Acumulacion de tarjetas' : p.reason}${p.expectedReturn ? ` · Regreso: ${p.expectedReturn}` : ''}`}
+                                >
+                                    <span className="text-red-600 dark:text-red-400 font-medium">{p.name}</span>
+                                    {p.status === 'suspension' && (
+                                        <Square className="w-3 h-3 fill-red-500 text-red-500" />
+                                    )}
+                                    {p.status === 'injury' && (
+                                        // <HeartPulse className="w-3 h-3 text-red-500" />
+                                        '🩹'
+                                    )}
+                                    {p.status === 'doubtful' && (
+                                        <AlertCircle className="w-3 h-3 text-yellow-500" />
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                    {r.injuries?.away && r.injuries.away.length > 0 && (
+                        <div className="mt-1 flex flex-wrap gap-1 w-full self-end mx-auto">
+                            {r.injuries.away.map((p) => (
+                                <div
+                                    key={p.id}
+                                    className="flex items-center gap-1 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-full px-2 py-0.5 text-[10px]"
+                                    title={`${p.reason === 'Tarjeta amarilla' ? 'Acumulacion de tarjetas' : p.reason}${p.expectedReturn ? ` · Regreso: ${p.expectedReturn}` : ''}`}
+                                >
+                                    <span className="text-red-600 dark:text-red-400 font-medium">{p.name}</span>
+                                    {p.status === 'suspension' && (
+                                        <Square className="w-3 h-3 fill-red-500 text-wh-" />
+                                    )}
+                                    {p.status === 'injury' && (
+                                        // <HeartPulse className="w-3 h-3 text-red-500" />
+                                        '🩹'
+                                    )}
+                                    {p.status === 'doubtful' && (
+                                        <AlertCircle className="w-3 h-3 text-yellow-500" />
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
                 {/* ============================================================ */}
                 {/* H2H (HISTORIAL) */}
                 {/* ============================================================ */}
