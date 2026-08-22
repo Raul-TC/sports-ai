@@ -281,7 +281,7 @@ export default function OddsPanel({ prediction, homeTeam, awayTeam, results, com
             </MarketSection>
 
             {/* ===== VALOR ESPERADO (EV) ===== */}
-            <div className="border-t border-neutral-100 dark:border-neutral-800 pt-3 mt-2">
+            {/* <div className="border-t border-neutral-100 dark:border-neutral-800 pt-3 mt-2">
                 <div className="text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 mb-2">
                     Valor esperado (EV) de los mercados principales
                 </div>
@@ -309,7 +309,7 @@ export default function OddsPanel({ prediction, homeTeam, awayTeam, results, com
                 <p className="text-[10px] text-neutral-400 dark:text-neutral-500 mt-1">
                     EV positivo (%) indica valor potencial. Ten en cuenta que las cuotas incluyen margen de la casa.
                 </p>
-            </div>
+            </div> */}
 
             {/* ===== NOTA LEGAL ===== */}
             <p className="text-[11px] text-neutral-400 dark:text-neutral-500 leading-relaxed border-t border-neutral-100 dark:border-neutral-800 pt-3 mt-2">
