@@ -43,6 +43,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
     const homeLambda = r.prediction.homeExpectedGoals || 0;
     const awayLambda = r.prediction.awayExpectedGoals || 0;
     const topScoresTwo = getTopScoreProbabilities(homeLambda, awayLambda, 10, 16);
+    const [showTooltip, setShowTooltip] = useState(false);
 
     const gate = useMemo(
         () => gateEngine(r.home, r.away, r.prediction),
@@ -383,7 +384,9 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                 <div
                                     key={p.id}
                                     className="flex items-center gap-1 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-full px-2 py-0.5 text-[10px]"
-                                    title={`${p.reason === 'Tarjeta amarilla' ? 'Acumulacion de tarjetas' : p.reason}${p.expectedReturn ? ` · Regreso: ${p.expectedReturn}` : ''}`}
+                                    // title={`${p.reason === 'Tarjeta amarilla' ? 'Acumulacion de tarjetas' : p.reason}${p.expectedReturn ? ` · Regreso: ${p.expectedReturn}` : ''}`}
+                                    onMouseEnter={() => setShowTooltip(true)}
+                                    onMouseLeave={() => setShowTooltip(false)}
                                 >
                                     <span className="text-red-600 dark:text-red-400 font-medium">{p.name}</span>
                                     {p.status === 'suspension' && (
@@ -396,6 +399,11 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                     {p.status === 'doubtful' && (
                                         <AlertCircle className="w-3 h-3 text-yellow-500" />
                                     )}
+                                    {showTooltip && (
+                                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 px-2 py-1 bg-gray-800 text-white text-xs rounded shadow-lg z-10 whitespace-nowrap">
+                                            {p.reason}{p.expectedReturn ? ` · Regreso: ${p.expectedReturn}` : ''}
+                                        </div>
+                                    )}
                                 </div>
                             ))}
                         </div>
@@ -406,7 +414,9 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                 <div
                                     key={p.id}
                                     className="flex items-center gap-1 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-full px-2 py-0.5 text-[10px]"
-                                    title={`${p.reason === 'Tarjeta amarilla' ? 'Acumulacion de tarjetas' : p.reason}${p.expectedReturn ? ` · Regreso: ${p.expectedReturn}` : ''}`}
+                                    // title={`${p.reason === 'Tarjeta amarilla' ? 'Acumulacion de tarjetas' : p.reason}${p.expectedReturn ? ` · Regreso: ${p.expectedReturn}` : ''}`}
+                                    onMouseEnter={() => setShowTooltip(true)}
+                                    onMouseLeave={() => setShowTooltip(false)}
                                 >
                                     <span className="text-red-600 dark:text-red-400 font-medium">{p.name}</span>
                                     {p.status === 'suspension' && (
