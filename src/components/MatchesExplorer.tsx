@@ -78,7 +78,6 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
     const [matchesWithData, setMatchesWithData] = useState<any[]>([]);
     const [filterModalOpen, setFilterModalOpen] = useState(false);
     const [filters, setFilters] = useState<FilterOptions>(defaultFilters);
-    console.log({ results })
     const toggleMatch = (url: string) => {
         setSelectedMatchUrl(selectedMatchUrl === url ? null : url);
     };
@@ -274,7 +273,7 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
     // RENDER
     // ============================================================
     return (
-        <div className="w-full mx-auto px-4 ">
+        <div className="w-full mx-auto px-4 my-4">
             {/* Barra superior */}
             <div className="flex items-center gap-2 flex-wrap">
                 <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 tracking-tight flex items-center gap-2">
