@@ -39,7 +39,6 @@ interface MatchCardProps {
 }
 
 export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: MatchCardProps) {
-    // Cálculos existentes...
     const homeLambda = r.prediction.homeExpectedGoals || 0;
     const awayLambda = r.prediction.awayExpectedGoals || 0;
     const topScoresTwo = getTopScoreProbabilities(homeLambda, awayLambda, 10, 16);
@@ -183,7 +182,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
         }
 
         return (
-            <div className="mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
+            <div className="my-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
                 <div className="flex items-center gap-2 mb-2">
                     <History className="w-4 h-4 text-gray-400" />
                     <span className="text-xs font-medium text-gray-600 dark:text-gray-400">
@@ -193,7 +192,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                         ({homeWins}V - {draws}E - {awayWins}D · {r.h2h.length} partidos)
                     </span>
                 </div>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 items-center">
                     {r.h2h.slice(0, 6).map((el) => (
                         <div
                             key={el.id}
@@ -238,9 +237,9 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
     const renderRecentGames = (games: any[], title: string) => {
         if (games.length === 0) return null;
         return (
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-1 mb-2">
                 <span className="text-[10px] text-gray-400 font-medium">{title}</span>
-                <div className="flex flex-wrap gap-1">
+                <div className="flex flex-wrap gap-1  mx-auto">
                     {games.map((el) => (
                         <div
                             key={el.id}
@@ -280,7 +279,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                     <Clock className="w-3 h-3" />
                     <span>{formatTime(r.startTime)}</span>
                     <span className="hidden sm:inline">·</span>
-                    <span className="truncate max-w-[120px] sm:max-w-none">{r.competitionName}</span>
+                    <span className="truncate max-w-30 sm:max-w-none">{r.competitionName}</span>
                     {r.estadio && (
                         <>
                             <span className="hidden sm:inline">·</span>
@@ -310,8 +309,8 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                 {/* ============================================================ */}
                 {/* EQUIPOS Y FAVORITO */}
                 {/* ============================================================ */}
-                <div className="flex items-center justify-between gap-2 mb-2">
-                    <div className="flex items-center gap-2">
+                <div className="flex items-center justify-center mx-auto w-full my-2">
+                    <div className="flex items-center justify-center gap-2 w-1/2 mx-auto">
                         <img
                             src={`https://imagecache.365scores.com/image/upload/f_png,w_32,h_32,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.home.id}`}
                             alt={r.home.teamName}
@@ -327,7 +326,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                         )}
                     </div>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-center gap-2 w-1/2 mx-auto">
                         {r.result && (
                             <span className="text-sm font-bold text-gray-600 dark:text-gray-400">
                                 {r.result.awayScore}
@@ -345,9 +344,9 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                 </div>
 
                 {/* Badges de favorito y trampa */}
-                <div className="flex flex-wrap items-center gap-1 mb-2">
-                    {/* Favorito */}
-                    <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[10px] font-medium bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-800">
+                {/* <div className="flex flex-wrap items-center gap-1 mb-2"> */}
+                {/* Favorito */}
+                {/* <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[10px] font-medium bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-800">
                         <Trophy className="w-3 h-3" />
                         {(() => {
                             const { homeWin, draw, awayWin } = r.prediction.moneyline;
@@ -355,8 +354,8 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                             if (awayWin.prob > homeWin.prob && awayWin.prob > draw.prob) return r.away.teamName;
                             return "Empate";
                         })()}
-                    </span>
-                    {trap.isTrap && (
+                    </span> */}
+                {/* {trap.isTrap && (
                         <span
                             className={`inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[10px] font-medium border cursor-help ${trap.level === "high"
                                 ? "text-red-600 dark:text-red-400 border-red-300 dark:border-red-700 bg-red-50 dark:bg-red-900/20"
@@ -368,14 +367,14 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                         >
                             ⚠️ Trampa
                         </span>
-                    )}
-                </div>
+                    )} */}
+                {/* </div> */}
                 {/* Lesiones y amonestados */}
                 {/* // Obtén los jugadores ausentes (suponiendo que los tienes en r.injuries) */}
 
 
                 {/* // Renderizar con iconos y nombres */}
-                <h3 className="mx-auto text-gray-600 dark:text-gray-400 w-full text-center">Jugadores No Disponibles</h3>
+                <h3 className="mx-auto text-gray-500 dark:text-gray-400 w-full text-center my-2">⚠️ Jugadores No Disponibles ⚠️</h3>
                 <div className="flex items-center justify-center gap-4">
 
                     {r.injuries?.home && r.injuries.home.length > 0 && (
@@ -383,12 +382,21 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                             {r.injuries.home.map((p) => (
                                 <div
                                     key={p.id}
-                                    className="flex items-center gap-1 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-full px-2 py-0.5 text-[10px]"
+                                    className="flex flex-col items-center gap-1 px-2 py-0.5 text-[10px]  mx-auto"
                                     // title={`${p.reason === 'Tarjeta amarilla' ? 'Acumulacion de tarjetas' : p.reason}${p.expectedReturn ? ` · Regreso: ${p.expectedReturn}` : ''}`}
                                     onMouseEnter={() => setShowTooltip(true)}
                                     onMouseLeave={() => setShowTooltip(false)}
                                 >
-                                    <span className="text-red-600 dark:text-red-400 font-medium">{p.name}</span>
+                                    {/* <span className="text-red-600 dark:text-red-400 font-medium">{p.name}</span> */}
+                                    <img src={`https://imagecache.365scores.com/image/upload/f_png,w_62,h_62,c_limit,q_auto:eco,dpr_2,d_Athletes:default.png,r_max,c_thumb,g_face,z_0.65/v21/Athletes/${p.athleteId}`} alt={p.name} className="w-8 md:w-12" />
+                                    <div className="flex flex-col items-center">
+
+                                        <span className=" font-medium">{p.name}</span>
+                                        <span className=" font-medium">Regreso: {p.expectedReturn}</span>
+                                        <span className=" font-medium">{p.appearances}</span>
+                                        <span className=" font-medium">{p.goals}</span>
+                                        <span className=" font-medium">{p.assists}</span>
+                                    </div>
                                     {p.status === 'suspension' && (
                                         <Square className="w-3 h-3 fill-red-500 text-red-500" />
                                     )}
@@ -409,16 +417,25 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                         </div>
                     )}
                     {r.injuries?.away && r.injuries.away.length > 0 && (
-                        <div className="mt-1 flex flex-wrap gap-1 w-full self-end mx-auto">
+                        <div className="mt-1 flex flex-wrap gap-1 w-full self-start mx-auto">
                             {r.injuries.away.map((p) => (
                                 <div
                                     key={p.id}
-                                    className="flex items-center gap-1 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-full px-2 py-0.5 text-[10px]"
+                                    className="flex flex-col items-center gap-1 px-2 py-0.5 text-[10px] mx-auto"
                                     // title={`${p.reason === 'Tarjeta amarilla' ? 'Acumulacion de tarjetas' : p.reason}${p.expectedReturn ? ` · Regreso: ${p.expectedReturn}` : ''}`}
                                     onMouseEnter={() => setShowTooltip(true)}
                                     onMouseLeave={() => setShowTooltip(false)}
                                 >
-                                    <span className="text-red-600 dark:text-red-400 font-medium">{p.name}</span>
+
+                                    <img src={`https://imagecache.365scores.com/image/upload/f_png,w_62,h_62,c_limit,q_auto:eco,dpr_2,d_Athletes:default.png,r_max,c_thumb,g_face,z_0.65/v21/Athletes/${p.athleteId}`} alt={p.name} className="w-8 md:w-12" />
+                                    <div className="flex flex-col items-center">
+
+                                        <span className=" font-medium">{p.name}</span>
+                                        <span className=" font-medium">Regreso: {p.expectedReturn}</span>
+                                        <span className=" font-medium">{p.appearances}</span>
+                                        <span className=" font-medium">{p.goals}</span>
+                                        <span className=" font-medium">{p.assists}</span>
+                                    </div>
                                     {p.status === 'suspension' && (
                                         <Square className="w-3 h-3 fill-red-500 text-wh-" />
                                     )}
