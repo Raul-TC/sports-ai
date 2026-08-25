@@ -9,6 +9,9 @@ export interface PlayerStatus {
     ranking: number;
     importance: 'high' | 'medium' | 'low';
     imageVersion?: number;
+    appearances?: string;
+    goals?: string;
+    assists?: string;
     athleteId?: number;
 }
 
@@ -24,14 +27,21 @@ export function extractMissingPlayers(
     for (const m of allMembers) {
         membersMap.set(m.id, m);
     }
+    // console.log(competitor)
 
     for (const member of lineupsMembers) {
         if (member.status !== 3 && member.status !== 5) continue;
-
         const position = member.position?.name || 'Desconocida';
         const ranking = member.ranking || 0;
+        const appearances = member.seasonStats
+            ?.find((s: any) => s.type === 5)
+            ?.text;
 
-        // Buscar el miembro completo en la lista de members del juego
+        const goals = member.seasonStats?.find((s: any) => s.type === 1)?.text;
+
+        const assists = member.seasonStats
+            ?.find((s: any) => s.type === 2)
+            ?.text;
         const fullMember = membersMap.get(member.id);
         const name = fullMember?.name || member.name || `Jugador ${member.id}`;
         const athleteId = fullMember?.athleteId || member.athleteId;
@@ -59,10 +69,14 @@ export function extractMissingPlayers(
             reason = member.suspension.name || 'Sanción';
         }
 
+
         missing.push({
             id: member.id,
             name,
             position,
+            appearances,
+            goals,
+            assists,
             status,
             reason,
             expectedReturn,
