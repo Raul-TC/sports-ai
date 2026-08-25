@@ -707,7 +707,7 @@ export function calculateExtendedPrediction(home: TeamMetrics, away: TeamMetrics
 
 export function calculateAllPredictions(matches: UnifiedMatch[], options: PredictionOptions = {}) {
     return matches.sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime()).map((match) => {
-        console.log({ matches })
+        // console.log({ matches })
         return {
             matchUrl: match.matchUrl,
             competitionName: match.competitionName,

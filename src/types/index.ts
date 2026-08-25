@@ -33,8 +33,8 @@ export interface PredictionResult {
     volatility?: number;
     data?: Welcome[],
     injuries?: {
-        home: { id: number; name: string; position: string; reason: string; expectedReturn?: string; gamesPlayed?: number, status: string }[];
-        away: { id: number; name: string; position: string; reason: string; expectedReturn?: string; gamesPlayed?: number, status: string }[];
+        home: { id: number; name: string; position: string; reason: string; expectedReturn?: string; gamesPlayed?: number, status: string, appearances?: string, goals?: string, assists?: string, athleteId: string }[];
+        away: { id: number; name: string; position: string; reason: string; expectedReturn?: string; gamesPlayed?: number, status: string, appearances?: string, goals?: string, assists?: string, athleteId: string }[];
     };
     estadio: { id: number; name: string; capacity: number };
     tv: { id: number; name: string; countryId: number }[];
