@@ -374,11 +374,11 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
 
 
                 {/* // Renderizar con iconos y nombres */}
-                <h3 className="mx-auto text-gray-500 dark:text-gray-400 w-full text-center my-2">⚠️ Jugadores No Disponibles ⚠️</h3>
+                {(r.injuries?.home || r.injuries?.home) && (r.injuries.home.length > 0 || r.injuries?.away.length > 0) && <h3 className="mx-auto text-gray-500 dark:text-gray-400 w-full text-center my-2">⚠️ Jugadores No Disponibles ⚠️</h3>}
                 <div className="flex items-center justify-center gap-4">
 
-                    {r.injuries?.home && r.injuries.home.length > 0 && (
-                        <div className="mt-1 flex flex-wrap gap-1 self-start mx-auto w-full">
+                    {(r.injuries?.home || r.injuries?.home) && (r.injuries.home.length > 0 || r.injuries?.away.length > 0) && (
+                        <div className="mt-1 flex flex-wrap gap-1 self-start mx-auto w-1/2">
                             {r.injuries.home.map((p) => (
                                 <div
                                     key={p.id}
@@ -416,12 +416,13 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                             ))}
                         </div>
                     )}
-                    {r.injuries?.away && r.injuries.away.length > 0 && (
-                        <div className="mt-1 flex flex-wrap gap-1 w-full self-start mx-auto">
+                    <hr className="h-full w-4" />
+                    {(r.injuries?.home || r.injuries?.home) && (r.injuries.home.length > 0 || r.injuries?.away.length > 0) && (
+                        <div className="mt-1 flex flex-wrap gap-1 w-1/2 self-start mx-auto">
                             {r.injuries.away.map((p) => (
                                 <div
                                     key={p.id}
-                                    className="flex flex-col items-center gap-1 px-2 py-0.5 text-[10px] mx-auto"
+                                    className="flex flex-col items-center gap-1 px-2 py-0.5 text-[10px] mx-auto "
                                     // title={`${p.reason === 'Tarjeta amarilla' ? 'Acumulacion de tarjetas' : p.reason}${p.expectedReturn ? ` · Regreso: ${p.expectedReturn}` : ''}`}
                                     onMouseEnter={() => setShowTooltip(true)}
                                     onMouseLeave={() => setShowTooltip(false)}
