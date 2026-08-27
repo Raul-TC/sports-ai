@@ -53,6 +53,7 @@ function getTeamBlockStats(
     statIds: StatIdMap,
     statisticGroup: number | null
 ): TeamBlockStats {
+    // console.log({ stat: block.statistics })
     return {
         goalsFor: extractStatValue(block.statistics, statIds.goalsFor, teamId, statisticGroup),
         goalsAgainst: extractStatValue(block.statistics, statIds.goalsAgainst, teamId, statisticGroup),
@@ -123,12 +124,11 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
     const statIds = options.statIds ?? DEFAULT_STAT_IDS;
     const statisticGroup = options.statisticGroup === undefined ? 2 : options.statisticGroup;
 
-    // console.log({ raw })
+    // console.log({ statIds })
     return raw
         .map((match): UnifiedMatch | null => {
             const requiredKeys: StatsFilterKey[] = ["todos", "ultimos5", "ultimos5LocalVisita"];
             const missing = requiredKeys.filter((key) => !match.stats[key]?.games?.length);
-
             if (missing.length > 0) {
                 // console.warn(
                 //     `⚠️ ${match.matchUrl} — faltan bloques [${missing.join(", ")}]. Se omite este partido.`
@@ -140,12 +140,12 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
             const ultimos5Block = match.stats.ultimos5!;
             const u5lvBlock = match.stats.ultimos5LocalVisita!;
 
+            // console.log({ todosBlock, ultimos5Block, u5lvBlock })
             const game = ultimos5Block.games[0];
             // const homeId = match.informacionEquipos?.home.homeId;
             // const awayId = match.informacionEquipos?.away.awayId;
             const homeId = game.homeCompetitor.id;
             const awayId = game.awayCompetitor.id;
-
             // Extraer stats crudas de cada bloque, para ambos equipos
             const homeTodos = getTeamBlockStats(todosBlock, homeId, statIds, statisticGroup);
             const homeU5 = getTeamBlockStats(ultimos5Block, homeId, statIds, statisticGroup);
@@ -159,8 +159,7 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
             const xGATotalLocal = weightedBlend(homeTodos.xGAgainst, homeU5.xGAgainst, homeU5LV.xGAgainst, weights);
             const xGTotalesVisita = weightedBlend(awayTodos.xGFor, awayU5.xGFor, awayU5LV.xGFor, weights);
             const xGATotalVisita = weightedBlend(awayTodos.xGAgainst, awayU5.xGAgainst, awayU5LV.xGAgainst, weights);
-            // console.log({ xGTotalLocal, xGATotalLocal })
-            // console.log({ xGTotalesVisita, xGATotalVisita })
+
 
             const golesLocal = weightedBlend(homeTodos.goalsFor, homeU5.goalsFor, homeU5LV.goalsFor, weights)
             const golesVisita = weightedBlend(awayTodos.goalsFor, awayU5.goalsFor, awayU5LV.goalsFor, weights)
@@ -192,7 +191,6 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
 
 
 
-            // console.log({ shotFactorLocal, shotFactorAway })
             // ---- xG ajustado por volumen de tiro ----
             const xGLocalMatch = homeLambdaClassicNormal * (0.8 + shotFactorLocal);
             const xGAwayMatch = awayLambdaClassic * (0.8 + shotFactorAway);
@@ -493,14 +491,14 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
                 },
             };
             // console.log({ homeTodos, homeU5, homeU5LV, match: match.matchUrl })
-            const homeMembers = match.informacionEquipos?.home.alineaciones.lineups.members
-            const awayMembers = match.informacionEquipos?.away.alineaciones.lineups.members
+            const homeMembers = match.informacionEquipos?.home.alineaciones?.lineups?.members || []
+            const awayMembers = match.informacionEquipos?.away.alineaciones?.lineups?.members || []
             const members = match.informacionEquipos?.members || []
             // console.log({ match })
             const homeInjuries = extractMissingPlayers(homeMembers, members);
             const awayInjuries = extractMissingPlayers(awayMembers, members);
 
-            console.log({ members, homeInjuries, awayInjuries })
+            // console.log({ members, homeInjuries, awayInjuries })
 
             return {
                 matchUrl: match.matchUrl,
