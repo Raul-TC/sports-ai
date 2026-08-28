@@ -44,6 +44,12 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
     const topScoresTwo = getTopScoreProbabilities(homeLambda, awayLambda, 10, 16);
     const [showTooltip, setShowTooltip] = useState(false);
 
+
+    // const handleClick = (e: React.MouseEvent) => {
+    //     e.stopPropagation();
+    //     if (onClick) onClick(e);
+    //     if (description) setShowTooltip((prev) => !prev);
+    // };
     const gate = useMemo(
         () => gateEngine(r.home, r.away, r.prediction),
         [r.home, r.away, r.prediction]
@@ -405,16 +411,22 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                 <div
                                     key={p.id}
                                     className="flex flex-col items-center gap-1 px-2 py-0.5 text-[10px]  mx-auto"
-                                    // title={`${p.reason === 'Tarjeta amarilla' ? 'Acumulacion de tarjetas' : p.reason}${p.expectedReturn ? ` · Regreso: ${p.expectedReturn}` : ''}`}
-                                    onMouseEnter={() => setShowTooltip(true)}
-                                    onMouseLeave={() => setShowTooltip(false)}
+                                // title={`${p.reason === 'Tarjeta amarilla' ? 'Acumulacion de tarjetas' : p.reason}${p.expectedReturn ? ` · Regreso: ${p.expectedReturn}` : ''}`}
+                                // onMouseEnter={() => setShowTooltip(true)}
+                                // onMouseLeave={() => setShowTooltip(false)}
                                 >
+                                    {showTooltip && p.reason && (
+                                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 px-2 py-1 bg-gray-800 text-white text-xs rounded shadow-lg z-10 whitespace-normal max-w-50 text-center pointer-events-none">
+                                            {`${p.reason === 'Tarjeta amarilla' ? 'Acumulacion de tarjetas' : p.reason}${p.expectedReturn ? ` · Regreso: ${p.expectedReturn}` : ''}`}
+                                        </div>
+                                    )}
                                     {/* <span className="text-red-600 dark:text-red-400 font-medium">{p.name}</span> */}
                                     <img src={`https://imagecache.365scores.com/image/upload/f_png,w_62,h_62,c_limit,q_auto:eco,dpr_2,d_Athletes:default.png,r_max,c_thumb,g_face,z_0.65/v21/Athletes/${p.athleteId}`} alt={p.name} className="w-8 md:w-12" />
                                     <div className="flex flex-col items-center">
 
                                         <span className=" font-medium">{p.name}</span>
-                                        <span className=" font-medium">Regreso: {p.expectedReturn}</span>
+                                        {p.expectedReturn && <span className=" font-medium">Regreso: {p.expectedReturn}</span>}
+                                        <span className=" font-medium">{p.position}</span>
                                         <span className=" font-medium">{p.appearances}</span>
                                         <span className=" font-medium">{p.goals}</span>
                                         <span className=" font-medium">{p.assists}</span>
@@ -445,22 +457,28 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                 <div
                                     key={p.id}
                                     className="flex flex-col items-center gap-1 px-2 py-0.5 text-[10px] mx-auto "
-                                    // title={`${p.reason === 'Tarjeta amarilla' ? 'Acumulacion de tarjetas' : p.reason}${p.expectedReturn ? ` · Regreso: ${p.expectedReturn}` : ''}`}
-                                    onMouseEnter={() => setShowTooltip(true)}
-                                    onMouseLeave={() => setShowTooltip(false)}
+                                // title={`${p.reason === 'Tarjeta amarilla' ? 'Acumulacion de tarjetas' : p.reason}${p.expectedReturn ? ` · Regreso: ${p.expectedReturn}` : ''}`}
+                                // onMouseEnter={() => setShowTooltip(true)}
+                                // onMouseLeave={() => setShowTooltip(false)}
                                 >
-
+                                    {showTooltip && p.reason && (
+                                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 px-2 py-1 bg-gray-800 text-white text-xs rounded shadow-lg z-10 whitespace-normal max-w-50 text-center pointer-events-none">
+                                            {`${p.reason === 'Tarjeta amarilla' ? 'Acumulacion de tarjetas' : p.reason}${p.expectedReturn ? ` · Regreso: ${p.expectedReturn}` : ''}`}
+                                        </div>
+                                    )}
                                     <img src={`https://imagecache.365scores.com/image/upload/f_png,w_62,h_62,c_limit,q_auto:eco,dpr_2,d_Athletes:default.png,r_max,c_thumb,g_face,z_0.65/v21/Athletes/${p.athleteId}`} alt={p.name} className="w-8 md:w-12" />
                                     <div className="flex flex-col items-center">
 
                                         <span className=" font-medium">{p.name}</span>
-                                        <span className=" font-medium">Regreso: {p.expectedReturn}</span>
+                                        {p.expectedReturn && <span className=" font-medium">Regreso: {p.expectedReturn}</span>}
                                         <span className=" font-medium">{p.appearances}</span>
+                                        <span className=" font-medium">{p.position}</span>
+
                                         <span className=" font-medium">{p.goals}</span>
                                         <span className=" font-medium">{p.assists}</span>
                                     </div>
                                     {p.status === 'suspension' && (
-                                        <Square className="w-3 h-3 fill-red-500 text-wh-" />
+                                        <Square className="w-3 h-3 fill-red-500 text-red-500" />
                                     )}
                                     {p.status === 'injury' && (
                                         // <HeartPulse className="w-3 h-3 text-red-500" />
