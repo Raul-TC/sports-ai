@@ -1,6 +1,7 @@
 // types/engineTypes.ts
-import { TeamInfo } from "@/types";
+// import { TeamInfo } from "@/types";
 import { ExtendedMatchPrediction } from "@/lib/predictions";
+import { UnifiedTeamInfo } from "./unifiedStats";
 
 export interface GateResult {
     valid: boolean;
@@ -88,8 +89,8 @@ export interface Recommendation {
 }
 
 export interface ScoreEngineContext {
-    home: TeamInfo;
-    away: TeamInfo;
+    home: UnifiedTeamInfo;
+    away: UnifiedTeamInfo;
     pred: ExtendedMatchPrediction;
     volatility?: number;
     historicalMapping?: Map<number, number>; // para calibración
