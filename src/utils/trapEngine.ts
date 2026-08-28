@@ -1,7 +1,7 @@
 // lib/engines/trapEngine.ts
 import { TrapResult, TrapDetail } from '@/types/engineTypes';
-import { TeamInfo } from '@/types';
 import { ExtendedMatchPrediction } from '@/lib/predictions';
+import { UnifiedTeamInfo } from '@/types/unifiedStats';
 // Diccionario de explicaciones según el tipo de señal
 const EXPLANATIONS: Record<string, (value: string, team?: string) => string> = {
     'Sobrerendimiento ofensivo': (value, team) => {
@@ -55,7 +55,7 @@ function getExplanation(detail: { team: string; reason: string; value?: string }
     return detail.reason;
 }
 
-export function trapEngine(home: TeamInfo, away: TeamInfo, pred: ExtendedMatchPrediction, volatility?: number): TrapResult {
+export function trapEngine(home: UnifiedTeamInfo, away: UnifiedTeamInfo, pred: ExtendedMatchPrediction, volatility?: number): TrapResult {
     const homeM = home.metrics;
     const awayM = away.metrics;
     if (!homeM || !awayM) {

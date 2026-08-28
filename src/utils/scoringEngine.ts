@@ -431,12 +431,12 @@
 
 // utils/scoringEngine.ts
 import { ScoreResult } from '@/types/engineTypes';
-import { TeamInfo } from '@/types';
 import { ExtendedMatchPrediction } from '@/lib/predictions';
 import { calculateDefensiveEfficiency, getConfidenceLevel, normalize } from './engines';
+import { UnifiedTeamInfo } from '@/types/unifiedStats';
 export interface ScoreEngineContext {
-    home: TeamInfo;
-    away: TeamInfo;
+    home: UnifiedTeamInfo;
+    away: UnifiedTeamInfo;
     pred: ExtendedMatchPrediction;
     volatility?: number;
 }

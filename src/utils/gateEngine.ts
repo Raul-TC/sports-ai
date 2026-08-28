@@ -960,16 +960,16 @@
 
 //     return pass();
 // }
-import { TeamInfo } from '@/types';
 import { ExtendedMatchPrediction } from '@/lib/predictions';
+import { UnifiedTeamInfo } from '@/types/unifiedStats';
 export interface GateResult {
     valid: boolean;
     reason?: string;
 }
 
 export function gateEngine(
-    home: TeamInfo,
-    away: TeamInfo,
+    home: UnifiedTeamInfo,
+    away: UnifiedTeamInfo,
     pred: ExtendedMatchPrediction
 ): GateResult {
     if (!home.metrics || !away.metrics) {
