@@ -1,12 +1,13 @@
-import { TeamInfo, TeamMetrics } from "@/types";
+// import { TeamInfo } from "@/types";
 import { StatBadge } from "./StatBadge";
 import { Goal, Target, Crosshair, CornerDownRight, Activity, Gauge, BarChart, Shield } from "lucide-react";
 import { MatchResult } from "@/utils/extractMatchResult";
+import { UnifiedTeamInfo } from "@/types/unifiedStats";
 
 interface TeamStatsBlockProps {
-    team: TeamInfo;
+    team: UnifiedTeamInfo;
     results?: MatchResult
-    opponent?: TeamInfo
+    opponent?: UnifiedTeamInfo
     title: string;
     goalLines: {
         line: number
@@ -38,6 +39,7 @@ const comparisonRule: Record<string, 'higher' | 'lower'> = {
     'Puntería': 'higher',
     'Eficiencia Bruta': 'higher',
     'Caída Precisión': 'higher',
+    'Fuera de Lugar': 'higher'
 };
 
 
@@ -65,6 +67,8 @@ export function TeamStatsBlock({ team, title, opponent, goalLines, results }: Te
             case 'Puntería': return opponentM.shotFactor;
             case 'Eficiencia Bruta': return opponentM.efficiency;
             case 'Caída Precisión': return opponentM.precisionDrop;
+            case 'Fuera de Lugar': return opponentM.offsides;
+            case 'Tarjetas Amarillas': return opponentM.tarjetasAmarillas;
             default: return null;
         }
     };
@@ -196,13 +200,45 @@ export function TeamStatsBlock({ team, title, opponent, goalLines, results }: Te
             trend: (m.golesRecibidos / (m.xGA || 0.1)) > 1.2 ? "down" : (m.golesRecibidos / (m.xGA || 0.1)) < 0.8 ? "up" : "neutral",
             indicator: (m.golesRecibidos / (m.xGA || 0.1)) > 1.2 ? "❌ Débil" : (m.golesRecibidos / (m.xGA || 0.1)) < 0.8 ? "✅ Sólida" : "⚖️ Esperada",
             indicatorColor: (m.golesRecibidos / (m.xGA || 0.1)) > 1.2 ? "text-red-500" : (m.golesRecibidos / (m.xGA || 0.1)) < 0.8 ? "text-green-600" : "text-gray-500",
-        }
+        },
+        {
+            label: "Faltas Realizadas",
+            value: m.foulsCommitted.toFixed(1),
+            icon: CornerDownRight,
+            description: "Faltas Realizadas",
+        },
+        {
+            label: "Faltas Recibidas",
+            value: m.foulsReceived.toFixed(1),
+            icon: CornerDownRight,
+            description: "Faltas Recibidas",
+        },
+        {
+            label: "Tarjetas Amarillas",
+            value: m.tarjetasAmarillas.toFixed(1),
+            icon: CornerDownRight,
+            description: "Tarjetas por partido",
+        },
+        {
+            label: "Fuera de Lugar",
+            value: m.offsides.toFixed(1),
+            icon: CornerDownRight,
+            description: "Fuera de Lugar",
+        },
+        {
+            label: "Paradas del Portero",
+            value: m.saves.toFixed(1),
+            icon: CornerDownRight,
+            description: "Paradas del Portero",
+        },
+        {
+            label: "Ratio Faltas",
+            value: m.ratioFaltas.toFixed(1),
+            icon: CornerDownRight,
+            description: "Ratio Faltas",
+        },
+
     ];
-    // const baseClass = secondary
-    //     ? "bg-gray-50/70 dark:bg-neutral-800/70 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-neutral-700"
-    //     : isTrap
-    //         ? "bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800"
-    //         : "bg-gray-50 dark:bg-neutral-800 text-gray-700 dark:text-gray-300 border-gray-100 dark:border-neutral-700";
 
     const secondaryStats = [
         {

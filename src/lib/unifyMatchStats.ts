@@ -29,6 +29,17 @@ interface TeamBlockStats {
     shots: number;
     shotsOnTarget: number;
     corners: number
+    foulsCommitted: number;
+    foulsReceived: number;
+    offsides: number;
+    interceptions: number;
+    clearances: number;
+    saves: number;
+    duelsWon: number;
+    duelsAerialWon: number;
+    duelsGroundWon: number;
+    dribbles: number;
+    tarjetasAmarillas: number
 }
 
 function extractStatValue(
@@ -61,7 +72,18 @@ function getTeamBlockStats(
         xGAgainst: extractStatValue(block.statistics, statIds.xGAgainst, teamId, statisticGroup),
         shots: extractStatValue(block.statistics, statIds.shots, teamId, statisticGroup),
         shotsOnTarget: extractStatValue(block.statistics, statIds.shotsOnTarget, teamId, statisticGroup),
-        corners: extractStatValue(block.statistics, statIds.corners, teamId, statisticGroup)
+        corners: extractStatValue(block.statistics, statIds.corners, teamId, statisticGroup),
+        foulsCommitted: extractStatValue(block.statistics, statIds.foulsCommitted, teamId, statisticGroup),
+        foulsReceived: extractStatValue(block.statistics, statIds.foulsReceived, teamId, statisticGroup),
+        offsides: extractStatValue(block.statistics, statIds.offsides, teamId, statisticGroup),
+        interceptions: extractStatValue(block.statistics, statIds.interceptions, teamId, statisticGroup),
+        clearances: extractStatValue(block.statistics, statIds.clearances, teamId, statisticGroup),
+        saves: extractStatValue(block.statistics, statIds.saves, teamId, statisticGroup),
+        duelsWon: extractStatValue(block.statistics, statIds.duelsWon, teamId, statisticGroup),
+        duelsAerialWon: extractStatValue(block.statistics, statIds.duelsAerialWon, teamId, statisticGroup),
+        duelsGroundWon: extractStatValue(block.statistics, statIds.duelsGroundWon, teamId, statisticGroup),
+        dribbles: extractStatValue(block.statistics, statIds.dribbles, teamId, statisticGroup),
+        tarjetasAmarillas: extractStatValue(block.statistics, statIds.tarjetasAmarillas, teamId, statisticGroup)
     };
 }
 
@@ -165,6 +187,16 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
             const golesVisita = weightedBlend(awayTodos.goalsFor, awayU5.goalsFor, awayU5LV.goalsFor, weights)
             const golesRecibidosLocal = weightedBlend(homeTodos.goalsAgainst, homeU5.goalsAgainst, homeU5LV.goalsAgainst, weights)
             const golesRecibidosVisita = weightedBlend(awayTodos.goalsAgainst, awayU5.goalsAgainst, awayU5LV.goalsAgainst, weights)
+            const foulsCommittedLocal = weightedBlend(homeTodos.foulsCommitted, homeU5.foulsCommitted, homeU5LV.foulsCommitted, weights)
+            const foulsCommittedAway = weightedBlend(awayTodos.foulsCommitted, awayU5.foulsCommitted, awayU5LV.foulsCommitted, weights)
+            const foulsRecivedLocal = weightedBlend(homeTodos.foulsReceived, homeU5.foulsReceived, homeU5LV.foulsReceived, weights)
+            const foulsRecivedAway = weightedBlend(awayTodos.foulsReceived, awayU5.foulsReceived, awayU5LV.foulsReceived, weights)
+            const offsidedLocal = weightedBlend(homeTodos.offsides, homeU5.offsides, homeU5LV.offsides, weights)
+            const offsidedAway = weightedBlend(awayTodos.offsides, awayU5.offsides, awayU5LV.offsides, weights)
+            const savesGoalkeeperLocal = weightedBlend(homeTodos.saves, homeU5.saves, homeU5LV.saves, weights)
+            const savesGoalkeeperAway = weightedBlend(awayTodos.saves, awayU5.saves, awayU5LV.saves, weights)
+            const tarjetasAmarillasLocal = weightedBlend(homeTodos.tarjetasAmarillas, homeU5.tarjetasAmarillas, homeU5LV.tarjetasAmarillas, weights)
+            const tarjetasAmarillasAway = weightedBlend(awayTodos.tarjetasAmarillas, awayU5.tarjetasAmarillas, awayU5LV.tarjetasAmarillas, weights)
             // ---- Goles esperados (histórico de goles reales, blend ponderado) ----
             // const golesEsperadosLocal = weightedBlend(homeTodos.goalsFor, homeU5.goalsFor, homeU5LV.goalsFor, weights);
             // const golesEsperadosVisita = weightedBlend(awayTodos.goalsFor, awayU5.goalsFor, awayU5LV.goalsFor, weights);
@@ -423,6 +455,8 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
                 awayLambda
             );
 
+            const ratioFaltasLocal = safeDiv(foulsCommittedLocal, foulsRecivedLocal)
+            const ratioFaltasAway = safeDiv(foulsCommittedAway, foulsRecivedAway)
 
             const dominance = homeLambda - awayLambda;
 
@@ -436,7 +470,7 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
 
 
 
-            const buildTeamMetrics = (goles: number, golesRecibidos: number, xG: number, xGA: number, expectedGoals: number, shotFactor: number, offensiveEfficiency: number, efficiency: number, precisionDrop: number, corners: number, shots: number, shotOT: number): TeamMetrics => ({
+            const buildTeamMetrics = (goles: number, golesRecibidos: number, xG: number, xGA: number, expectedGoals: number, shotFactor: number, offensiveEfficiency: number, efficiency: number, precisionDrop: number, corners: number, shots: number, shotOT: number, foulsCommitted: number, foulsReceived: number, offsides: number, saves: number, ratioFaltas: number, tarjetasAmarillas: number): TeamMetrics => ({
                 golesPerPartido: +goles.toFixed(3),
                 golesRecibidos: +golesRecibidos.toFixed(3),
                 xG: +xG.toFixed(3),
@@ -448,7 +482,13 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
                 precisionDrop: +precisionDrop.toFixed(3),
                 corners: +corners.toFixed(3),
                 shots: +shots.toFixed(3),
-                shotsOT: +shotOT.toFixed(3)
+                shotsOT: +shotOT.toFixed(3),
+                foulsCommitted: +foulsCommitted.toFixed(3),
+                foulsReceived: +foulsReceived.toFixed(3),
+                offsides: +offsides.toFixed(3),
+                saves: +saves.toFixed(3),
+                ratioFaltas: +ratioFaltas.toFixed(3),
+                tarjetasAmarillas: +tarjetasAmarillas.toFixed(3)
 
             });
             const expectedGoals = Number((homeLambda + awayLambda).toFixed(3));
@@ -466,6 +506,12 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
                     expectedHomeCorners,
                     shotsHomePonderado,
                     shotsOTHomePonderado,
+                    foulsCommittedLocal,
+                    foulsRecivedLocal,
+                    offsidedLocal,
+                    savesGoalkeeperLocal,
+                    ratioFaltasLocal,
+                    tarjetasAmarillasLocal
                 ),
 
                 away: buildTeamMetrics(
@@ -481,6 +527,12 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
                     expectedAwayCorners,
                     shotsAwayPonderado,
                     shotsOTAwayPonderado,
+                    foulsCommittedAway,
+                    foulsRecivedAway,
+                    offsidedAway,
+                    savesGoalkeeperAway,
+                    ratioFaltasAway,
+                    tarjetasAmarillasAway
                 ),
 
                 match: {
@@ -499,13 +551,13 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
             const awayInjuries = extractMissingPlayers(awayMembers, members);
 
             // console.log({ members, homeInjuries, awayInjuries })
-
+            console.log({ match })
             return {
                 matchUrl: match.matchUrl,
                 competitionName: game.competitionDisplayName,
                 startTime: game.startTime,
-                home: { teamId: homeId, teamName: match.informacionEquipos?.home.teamName, metrics: metrics.home, id: match.informacionEquipos?.home.homeId, injuries: match.informacionEquipos?.home.alineaciones },
-                away: { teamId: awayId, teamName: match.informacionEquipos?.away.teamName, metrics: metrics.away, id: match.informacionEquipos?.away.awayId, injuries: match.informacionEquipos?.away.alineaciones },
+                home: { teamId: homeId, colors: { localColor: match.informacionEquipos?.home.homeCompetitor.color, awayColor: match.informacionEquipos?.home.homeCompetitor.awayColor }, teamName: match.informacionEquipos?.home.teamName, metrics: metrics.home, id: match.informacionEquipos?.home.homeId, injuries: match.informacionEquipos?.home.alineaciones },
+                away: { teamId: awayId, colors: { localColor: match.informacionEquipos?.away.awayCompetitor.color, awayColor: match.informacionEquipos?.away.awayCompetitor.awayColor }, teamName: match.informacionEquipos?.away.teamName, metrics: metrics.away, id: match.informacionEquipos?.away.awayId, injuries: match.informacionEquipos?.away.alineaciones },
                 matchMetrics: metrics.match,
                 recentMatches: match.recentMatches,
                 estadio: match.informacionEquipos?.estadio,

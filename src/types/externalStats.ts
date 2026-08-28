@@ -37,9 +37,21 @@ export interface StatIdMap {
     goalsAgainst: number;
     xGFor: number;
     xGAgainst: number;
-    corners: number;
     shots: number;
     shotsOnTarget: number;
+    corners: number;
+    // nuevos:
+    foulsCommitted: number;
+    foulsReceived: number;
+    offsides: number;
+    interceptions: number;
+    clearances: number;
+    saves: number;
+    duelsWon: number;
+    duelsAerialWon: number;
+    duelsGroundWon: number;
+    dribbles: number;
+    tarjetasAmarillas: number,
 }
 
 export const DEFAULT_STAT_IDS: StatIdMap = {
@@ -50,6 +62,17 @@ export const DEFAULT_STAT_IDS: StatIdMap = {
     corners: 171,
     shots: 165,
     shotsOnTarget: 168,
+    foulsCommitted: 12,
+    foulsReceived: 37,
+    offsides: 9,
+    interceptions: 41,
+    clearances: 40,
+    saves: 23,
+    duelsWon: 150,
+    duelsAerialWon: 56,
+    duelsGroundWon: 55,
+    dribbles: 54,
+    tarjetasAmarillas: 1
 };
 
 export interface RawGame {
@@ -82,12 +105,24 @@ export interface RawMatchData {
         competitionDisplayName: string,
         home: {
             homeId: number,
+            homeCompetitor: {
+                // colors: {
+                color: string,
+                awayColor: string
+                // },
+            }
             teamName: string,
             nameForURL: string,
             alineaciones: any
         },
         away: {
             awayId: number,
+            awayCompetitor: {
+                // colors: {
+                color: string,
+                awayColor: string
+                // },
+            }
             teamName: string,
             nameForURL: string,
             alineaciones: any

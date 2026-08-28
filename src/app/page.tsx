@@ -1,7 +1,7 @@
 import { calculateAllPredictions } from "@/lib/predictions";
 import MatchesExplorer from "@/components/MatchesExplorer";
 // import data from '@/app/data/matches/results_complete.json'
-import data from '@/app/data/matches/results_complete.json'
+import data from '@/app/data/matches/results_completev2.json'
 import dataResults from '@/app/data/matches/results.json'
 import { unifyMatchStats } from "@/lib/unifyMatchStats";
 export const dynamic = "force-dynamic";
@@ -18,7 +18,6 @@ export default async function HomePage() {
     maxGoals: 10
   });
 
-  // console.log({ matches })
   return (
     <main className="max-w-7xl mx-auto px-6 py-12">
 

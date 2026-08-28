@@ -4,6 +4,10 @@ import { PlayerStatus } from "@/utils/playerStatus";
 export interface UnifiedTeamInfo {
     teamId: number;
     id: number;
+    colors: {
+        localColor: string,
+        awayColor: string
+    },
     teamName: string;
     metrics: TeamMetrics;
     injuries?: {
@@ -61,5 +65,11 @@ export interface TeamMetrics {
     precisionDrop: number;
     corners: number
     shots: number,
-    shotsOT: number
+    shotsOT: number,
+    foulsCommitted: number;
+    foulsReceived: number;
+    offsides: number;
+    saves: number;
+    ratioFaltas: number,
+    tarjetasAmarillas: number,
 }

@@ -310,36 +310,58 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                 {/* EQUIPOS Y FAVORITO */}
                 {/* ============================================================ */}
                 <div className="flex items-center justify-center mx-auto w-full my-2">
-                    <div className="flex items-center justify-center gap-2 w-1/2 mx-auto">
-                        <img
-                            src={`https://imagecache.365scores.com/image/upload/f_png,w_32,h_32,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.home.id}`}
-                            alt={r.home.teamName}
-                            className="w-8 h-8 md:w-10 md:h-10 object-contain"
+                    <div className="relative w-1/2 mx-auto">
+                        {/* Fondo con desenfoque y color de equipo (fondo semi-transparente) */}
+                        <div
+                            className="absolute inset-0  backdrop-blur-sm"
+                            style={{
+                                backgroundColor: r.home.colors.localColor + '85', // 50% de opacidad, o usa rgba
+                            }}
                         />
-                        <span className="font-medium text-gray-800 dark:text-gray-100 text-sm md:text-base">
-                            {r.home.teamName}
-                        </span>
-                        {r.result && (
-                            <span className="text-sm font-bold text-gray-600 dark:text-gray-400">
-                                {r.result.homeScore}
+                        {/* Contenido superpuesto (sin desenfoque) */}
+                        <div className="relative flex items-center justify-center gap-2 py-2 z-10">
+                            <img
+                                src={`https://imagecache.365scores.com/image/upload/f_png,w_32,h_32,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.home.id}`}
+                                alt={r.home.teamName}
+                                className="w-8 h-8 md:w-10 md:h-10 object-contain"
+                            />
+                            <span className="font-medium text-gray-800 dark:text-gray-100 text-sm md:text-base">
+                                {r.home.teamName}
                             </span>
-                        )}
+                            {r.result && (
+                                <span className="text-sm font-bold text-gray-600 dark:text-gray-400">
+                                    {r.result.homeScore}
+                                </span>
+                            )}
+                        </div>
                     </div>
 
-                    <div className="flex items-center justify-center gap-2 w-1/2 mx-auto">
-                        {r.result && (
-                            <span className="text-sm font-bold text-gray-600 dark:text-gray-400">
-                                {r.result.awayScore}
-                            </span>
-                        )}
-                        <span className="font-medium text-gray-800 dark:text-gray-100 text-sm md:text-base">
-                            {r.away.teamName}
-                        </span>
-                        <img
-                            src={`https://imagecache.365scores.com/image/upload/f_png,w_32,h_32,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.away.id}`}
-                            alt={r.away.teamName}
-                            className="w-8 h-8 md:w-10 md:h-10 object-contain"
+                    <div className="relative w-1/2 mx-auto">
+                        {/* Fondo con desenfoque y color de equipo (fondo semi-transparente) */}
+                        <div
+                            className="absolute inset-0  backdrop-blur-sm"
+                            style={{
+                                backgroundColor: r.away.colors.localColor + '85',
+                                color: r.away.colors.awayColor
+                                // 50% de opacidad, o usa rgba
+                            }}
                         />
+                        {/* Contenido superpuesto (sin desenfoque) */}
+                        <div className="relative flex items-center justify-center gap-2 py-2 z-10">
+                            <img
+                                src={`https://imagecache.365scores.com/image/upload/f_png,w_32,h_32,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.away.id}`}
+                                alt={r.away.teamName}
+                                className="w-8 h-8 md:w-10 md:h-10 object-contain"
+                            />
+                            <span className="font-medium text-gray-800 dark:text-gray-100 text-sm md:text-base">
+                                {r.away.teamName}
+                            </span>
+                            {r.result && (
+                                <span className="text-sm font-bold text-gray-600 dark:text-gray-400">
+                                    {r.result.awayScore}
+                                </span>
+                            )}
+                        </div>
                     </div>
                 </div>
 

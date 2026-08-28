@@ -1,34 +1,35 @@
 import { ExtendedMatchPrediction } from "@/lib/predictions";
 import { Welcome } from "@/utils/enrichPredictions";
+import { TeamMetrics, UnifiedTeamInfo } from "./unifiedStats";
 
-export interface TeamMetrics {
-    golesPerPartido: number;
-    golesRecibidos: number,
-    xG: number;
-    xGA: number;
-    expectedGoals: number;
-    shotFactor: number;
-    offensiveEfficiency: number;
-    efficiency: number;
-    precisionDrop: number;
-    corners: number;
-    shots: number;
-    shotsOT: number;
-}
+// export interface TeamMetrics {
+//     golesPerPartido: number;
+//     golesRecibidos: number,
+//     xG: number;
+//     xGA: number;
+//     expectedGoals: number;
+//     shotFactor: number;
+//     offensiveEfficiency: number;
+//     efficiency: number;
+//     precisionDrop: number;
+//     corners: number;
+//     shots: number;
+//     shotsOT: number;
+// }
 
-export interface TeamInfo {
-    id: number;
-    teamId: number;
-    teamName: string;
-    metrics?: TeamMetrics;
-}
+// export interface TeamInfo {
+//     id: number;
+//     teamId: number;
+//     teamName: string;
+//     metrics?: TeamMetrics;
+// }
 
 export interface PredictionResult {
     matchUrl: string;
     competitionName: string;
     startTime: string;
-    home: TeamInfo;
-    away: TeamInfo;
+    home: UnifiedTeamInfo;
+    away: UnifiedTeamInfo;
     prediction: ExtendedMatchPrediction;
     volatility?: number;
     data?: Welcome[],
