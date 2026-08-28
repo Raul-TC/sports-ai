@@ -1,6 +1,7 @@
 import { ExtendedMatchPrediction } from "@/lib/predictions";
-import { Pick, TeamInfo, TrapResult, WarningsAndExclusions } from "@/types";
+import { Pick, TrapResult, WarningsAndExclusions } from "@/types";
 import { getOddsCategory } from "./odds";
+import { UnifiedTeamInfo } from "@/types/unifiedStats";
 
 export function getBestPicks(
     pred: ExtendedMatchPrediction,
@@ -246,8 +247,8 @@ interface BestPickResult {
 }
 
 export function getBestPickFromData(
-    home: TeamInfo,
-    away: TeamInfo,
+    home: UnifiedTeamInfo,
+    away: UnifiedTeamInfo,
     pred: ExtendedMatchPrediction,
     volatility?: number
 ): BestPickResult | null {
