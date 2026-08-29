@@ -188,7 +188,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
         }
 
         return (
-            <div className="my-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
+            <div className="my-3 pt-2 border-t border-gray-100 dark:border-neutral-800 px-4">
                 <div className="flex items-center gap-2 mb-2">
                     <History className="w-4 h-4 text-gray-400" />
                     <span className="text-xs font-medium text-gray-600 dark:text-gray-400">
@@ -243,7 +243,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
     const renderRecentGames = (games: any[], title: string) => {
         if (games.length === 0) return null;
         return (
-            <div className="flex flex-col gap-1 mb-2">
+            <div className="flex flex-col gap-1 mb-2 px-4">
                 <span className="text-[10px] text-gray-400 font-medium">{title}</span>
                 <div className="flex flex-wrap gap-1  mx-auto">
                     {games.map((el) => (
@@ -277,15 +277,96 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
 
     return (
         <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-sm border border-gray-100 dark:border-neutral-800 overflow-hidden transition-all duration-200 hover:shadow-md my-4">
-            <div className="p-4 cursor-pointer" onClick={() => onToggle(r.matchUrl)}>
+            <div className="relative overflow-hidden rounded-2xl">
+                <div className="absolute inset-0 bg-linear-to-r from-blue-600/20 via-transparent to-green-600/20" />
+
+                <div className="relative p-6">
+
+                    <div className="flex items-center justify-between">
+
+                        <div className="flex flex-col items-center gap-2">
+                            <img
+                                src={`https://imagecache.365scores.com/image/upload/f_png,w_32,h_32,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.home.id}`}
+                                className="w-16 h-16 object-contain"
+                            />
+
+                            <span className="font-bold text-lg">
+                                {r.home.teamName}
+                            </span>
+
+                            <span className="text-green-400 font-semibold">
+                                {r.prediction.moneyline.homeWin.prob}%
+                            </span>
+                        </div>
+
+                        <div className="text-center">
+                            <div className="text-sm text-zinc-400">
+                                {formatTime(r.startTime)}
+                            </div>
+
+                            <div className="text-3xl font-bold">
+                                VS
+                            </div>
+
+                            <div className="text-xs text-zinc-500">
+                                {r.competitionName}
+                                {r.estadio && (
+                                    <>
+                                        {/* <span className="hidden sm:inline">·</span> */}
+                                        <span className="flex items-center justify-center gap-0.5">
+                                            <MapPin className="w-3 h-3" /> {r.estadio.name}
+                                        </span>
+                                    </>
+                                )}
+                                {r.tv && r.tv.length > 0 && (
+                                    <>
+                                        {/* <span className="hidden sm:inline">·</span> */}
+                                        <span className="flex items-center gap-0.5">
+                                            <Tv className="w-3 h-3" /> {r.tv.map(tv => tv.name).join(', ')}
+                                        </span>
+                                    </>
+                                )}
+                                {r.arbitro && r.arbitro.length > 0 && (
+                                    <>
+                                        {/* <span className="hidden sm:inline">·</span> */}
+                                        <span className="flex items-center gap-0.5 justify-center">
+                                            <UserRound className="w-3 h-3" /> {r.arbitro.map(a => a.name).join(', ')}
+                                        </span>
+                                    </>
+                                )}
+                            </div>
+                        </div>
+
+                        <div className="flex flex-col items-center gap-2">
+                            <img
+                                src={`https://imagecache.365scores.com/image/upload/f_png,w_32,h_32,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.away.id}`}
+                                className="w-16 h-16 object-contain"
+                            />
+
+                            <span className="font-bold text-lg">
+                                {r.away.teamName}
+                            </span>
+
+                            <span className="text-green-400 font-semibold">
+                                {r.prediction.moneyline.awayWin.prob}%
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div className="py-4 cursor-pointer" onClick={() => onToggle(r.matchUrl)}>
                 {/* ============================================================ */}
                 {/* CABECERA: Competición, hora, estadio, TV, árbitro */}
                 {/* ============================================================ */}
-                <div className="flex flex-wrap items-center gap-1 text-xs text-gray-500 dark:text-gray-400 mb-2">
-                    <Clock className="w-3 h-3" />
+                <div className="flex px-4 flex-wrap items-center gap-1 text-xs text-gray-500 dark:text-gray-400 mb-2">
+                    {/* <Clock className="w-3 h-3" />
                     <span>{formatTime(r.startTime)}</span>
                     <span className="hidden sm:inline">·</span>
-                    <span className="truncate max-w-30 sm:max-w-none">{r.competitionName}</span>
+                    <span className="truncate max-w-30 sm:max-w-none">{r.competitionName}</span> */}
                     {r.estadio && (
                         <>
                             <span className="hidden sm:inline">·</span>
@@ -316,15 +397,13 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                 {/* EQUIPOS Y FAVORITO */}
                 {/* ============================================================ */}
                 <div className="flex items-center justify-center mx-auto w-full my-2">
-                    <div className="relative w-1/2 mx-auto">
-                        {/* Fondo con desenfoque y color de equipo (fondo semi-transparente) */}
+                    {/* <div className="relative w-1/2 mx-auto">
                         <div
                             className="absolute inset-0  backdrop-blur-sm"
                             style={{
                                 backgroundColor: r.home.colors.localColor + '85', // 50% de opacidad, o usa rgba
                             }}
                         />
-                        {/* Contenido superpuesto (sin desenfoque) */}
                         <div className="relative flex items-center justify-center gap-2 py-2 z-10">
                             <img
                                 src={`https://imagecache.365scores.com/image/upload/f_png,w_32,h_32,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.home.id}`}
@@ -340,20 +419,19 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                 </span>
                             )}
                         </div>
-                    </div>
+                    </div> */}
 
-                    <div className="relative w-1/2 mx-auto">
-                        {/* Fondo con desenfoque y color de equipo (fondo semi-transparente) */}
-                        <div
+                    {/* <div className="relative w-1/2 mx-auto"> */}
+                    {/* Fondo con desenfoque y color de equipo (fondo semi-transparente) */}
+                    {/* <div
                             className="absolute inset-0  backdrop-blur-sm"
                             style={{
                                 backgroundColor: r.away.colors.localColor + '85',
                                 color: r.away.colors.awayColor
                                 // 50% de opacidad, o usa rgba
                             }}
-                        />
-                        {/* Contenido superpuesto (sin desenfoque) */}
-                        <div className="relative flex items-center justify-center gap-2 py-2 z-10">
+                        /> */}
+                    {/* <div className="relative flex items-center justify-center gap-2 py-2 z-10">
                             <img
                                 src={`https://imagecache.365scores.com/image/upload/f_png,w_32,h_32,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.away.id}`}
                                 alt={r.away.teamName}
@@ -367,8 +445,8 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                     {r.result.awayScore}
                                 </span>
                             )}
-                        </div>
-                    </div>
+                        </div> */}
+                    {/* </div> */}
                 </div>
 
                 {/* Badges de favorito y trampa */}
@@ -402,8 +480,8 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
 
 
                 {/* // Renderizar con iconos y nombres */}
-                {(r.injuries?.home || r.injuries?.home) && (r.injuries.home.length > 0 || r.injuries?.away.length > 0) && <h3 className="mx-auto text-gray-500 dark:text-gray-400 w-full text-center my-2">⚠️ Jugadores No Disponibles ⚠️</h3>}
-                <div className="flex items-center justify-center gap-4">
+                {(r.injuries?.home || r.injuries?.home) && (r.injuries.home.length > 0 || r.injuries?.away.length > 0) && <h3 className="mx-auto text-gray-500 dark:text-gray-400 w-full text-center my-2 font-bold">⚠️ Bajas del Partido ⚠️</h3>}
+                <div className="flex items-center justify-center gap-4 px-4">
 
                     {(r.injuries?.home || r.injuries?.home) && (r.injuries.home.length > 0 || r.injuries?.away.length > 0) && (
                         <div className="mt-1 flex flex-wrap gap-1 self-start mx-auto w-1/2">
@@ -500,7 +578,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                 {/* ============================================================ */}
                 {/* ÚLTIMOS PARTIDOS */}
                 {/* ============================================================ */}
-                <div className="mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
+                <div className="mt-3 px-4 pt-2 border-t border-gray-100 dark:border-neutral-800">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div className="space-y-1">
                             {renderRecentGames(homeGames, `Últimos ${homeGames.length} de ${r.home.teamName}`)}
@@ -516,7 +594,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                 {/* ============================================================ */}
                 {/* ESTADÍSTICAS */}
                 {/* ============================================================ */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
+                <div className="grid px-4 grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
                     <TeamStatsBlock
                         team={r.home}
                         goalLines={r.prediction.teamGoals.home}
@@ -536,7 +614,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                 {/* ============================================================ */}
                 {/* MARCADORES EXACTOS */}
                 {/* ============================================================ */}
-                <div className="mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
+                <div className="mt-3 pt-2 px-4 border-t border-gray-100 dark:border-neutral-800">
                     <div className="flex items-center gap-2 mb-1">
                         <span className="text-xs font-medium text-gray-500 dark:text-gray-400 flex items-center gap-1">
                             <Circle className="w-3 h-3" />
@@ -568,7 +646,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                 {/* PICK RECOMENDADO */}
                 {/* ============================================================ */}
                 {recommendation && (
-                    <div className="mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
+                    <div className="mt-3 pt-2 px-4 border-t border-gray-100 dark:border-neutral-800">
                         <div className="p-2 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg border border-indigo-200 dark:border-indigo-800">
                             <div className="text-xs font-semibold text-indigo-700 dark:text-indigo-300 flex items-center gap-1">
                                 <Sparkles className="w-3 h-3" />
@@ -630,7 +708,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                 {/* ============================================================ */}
                 {/* RIESGO Y ADVERTENCIAS */}
                 {/* ============================================================ */}
-                <div className="mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
+                <div className="mt-3 pt-2 px-4 border-t border-gray-100 dark:border-neutral-800">
                     <div className="flex items-start gap-2">
                         <AlertCircle className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" />
                         <div className="flex-1 space-y-1">
@@ -680,7 +758,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                 {/* ============================================================ */}
                 {/* JUGADAS (ratoneras, medias, altas) */}
                 {/* ============================================================ */}
-                <div className="mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800 space-y-2">
+                <div className="mt-3 pt-2 px-4 border-t border-gray-100 dark:border-neutral-800 space-y-2">
                     {ratoneras.length > 0 && (
                         <div>
                             <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">🔹 Ratoneras (≤1.30)</span>
