@@ -43,7 +43,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
     const awayLambda = r.prediction.awayExpectedGoals || 0;
     const topScoresTwo = getTopScoreProbabilities(homeLambda, awayLambda, 10, 16);
     const [showTooltip, setShowTooltip] = useState(false);
-
+    const [showInjuries, setShowInjuries] = useState(false);
 
     // const handleClick = (e: React.MouseEvent) => {
     //     e.stopPropagation();
@@ -278,7 +278,15 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
     return (
         <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-sm border border-gray-100 dark:border-neutral-800 overflow-hidden transition-all duration-200 hover:shadow-md my-4">
             <div className="relative overflow-hidden rounded-2xl">
-                <div className="absolute inset-0 bg-linear-to-r from-blue-600/20 via-transparent to-green-600/20" />
+                <div className="absolute inset-0" style={{
+                    background: `linear-gradient(
+      135deg,
+      ${r.home.colors.localColor}25 0%,
+      #0f172a 50%,
+      ${r.away.colors.localColor}25 100%
+    )`
+                }} />
+                {/* <div className="absolute inset-0 bg-linear-to-r from-blue-600/20 via-transparent to-green-600/20" /> */}
 
                 <div className="relative p-6">
 
@@ -294,9 +302,9 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                 {r.home.teamName}
                             </span>
 
-                            <span className="text-green-400 font-semibold">
+                            {/* <span className="text-green-400 font-semibold">
                                 {r.prediction.moneyline.homeWin.prob}%
-                            </span>
+                            </span> */}
                         </div>
 
                         <div className="text-center">
@@ -347,9 +355,9 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                 {r.away.teamName}
                             </span>
 
-                            <span className="text-green-400 font-semibold">
+                            {/* <span className="text-green-400 font-semibold">
                                 {r.prediction.moneyline.awayWin.prob}%
-                            </span>
+                            </span> */}
                         </div>
 
                     </div>
@@ -400,7 +408,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
 
 
                 {/* // Renderizar con iconos y nombres */}
-                {(r.injuries?.home || r.injuries?.home) && (r.injuries.home.length > 0 || r.injuries?.away.length > 0) && <h3 className="mx-auto text-gray-500 dark:text-gray-400 w-full text-center my-2 font-bold">⚠️ Bajas del Partido ⚠️</h3>}
+                {/* {(r.injuries?.home || r.injuries?.home) && (r.injuries.home.length > 0 || r.injuries?.away.length > 0) && <h3 className="mx-auto text-gray-500 dark:text-gray-400 w-full text-center my-2 font-bold">⚠️ Bajas del Partido ⚠️</h3>}
                 <div className="flex items-center justify-center gap-4 px-4">
 
                     {(r.injuries?.home || r.injuries?.home) && (r.injuries.home.length > 0 || r.injuries?.away.length > 0) && (
@@ -408,17 +416,12 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                             {r.injuries.home.map((p) => (
                                 <div
                                     key={p.id}
-                                    className="flex flex-col items-center gap-1 px-2 py-0.5 text-[10px]  mx-auto"
-                                // title={`${p.reason === 'Tarjeta amarilla' ? 'Acumulacion de tarjetas' : p.reason}${p.expectedReturn ? ` · Regreso: ${p.expectedReturn}` : ''}`}
-                                // onMouseEnter={() => setShowTooltip(true)}
-                                // onMouseLeave={() => setShowTooltip(false)}
-                                >
+                                    className="flex flex-col items-center gap-1 px-2 py-0.5 text-[10px]  mx-auto">
                                     {showTooltip && p.reason && (
                                         <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 px-2 py-1 bg-gray-800 text-white text-xs rounded shadow-lg z-10 whitespace-normal max-w-50 text-center pointer-events-none">
                                             {`${p.reason === 'Tarjeta amarilla' ? 'Acumulacion de tarjetas' : p.reason}${p.expectedReturn ? ` · Regreso: ${p.expectedReturn}` : ''}`}
                                         </div>
                                     )}
-                                    {/* <span className="text-red-600 dark:text-red-400 font-medium">{p.name}</span> */}
                                     <img src={`https://imagecache.365scores.com/image/upload/f_png,w_62,h_62,c_limit,q_auto:eco,dpr_2,d_Athletes:default.png,r_max,c_thumb,g_face,z_0.65/v21/Athletes/${p.athleteId}`} alt={p.name} className="w-8 md:w-12" />
                                     <div className="flex flex-col items-center">
 
@@ -433,7 +436,6 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                         <Square className="w-3 h-3 fill-red-500 text-red-500" />
                                     )}
                                     {p.status === 'injury' && (
-                                        // <HeartPulse className="w-3 h-3 text-red-500" />
                                         '🩹'
                                     )}
                                     {p.status === 'doubtful' && (
@@ -454,11 +456,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                             {r.injuries.away.map((p) => (
                                 <div
                                     key={p.id}
-                                    className="flex flex-col items-center gap-1 px-2 py-0.5 text-[10px] mx-auto "
-                                // title={`${p.reason === 'Tarjeta amarilla' ? 'Acumulacion de tarjetas' : p.reason}${p.expectedReturn ? ` · Regreso: ${p.expectedReturn}` : ''}`}
-                                // onMouseEnter={() => setShowTooltip(true)}
-                                // onMouseLeave={() => setShowTooltip(false)}
-                                >
+                                    className="flex flex-col items-center gap-1 px-2 py-0.5 text-[10px] mx-auto">
                                     {showTooltip && p.reason && (
                                         <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 px-2 py-1 bg-gray-800 text-white text-xs rounded shadow-lg z-10 whitespace-normal max-w-50 text-center pointer-events-none">
                                             {`${p.reason === 'Tarjeta amarilla' ? 'Acumulacion de tarjetas' : p.reason}${p.expectedReturn ? ` · Regreso: ${p.expectedReturn}` : ''}`}
@@ -479,7 +477,6 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                         <Square className="w-3 h-3 fill-red-500 text-red-500" />
                                     )}
                                     {p.status === 'injury' && (
-                                        // <HeartPulse className="w-3 h-3 text-red-500" />
                                         '🩹'
                                     )}
                                     {p.status === 'doubtful' && (
@@ -489,7 +486,110 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                             ))}
                         </div>
                     )}
-                </div>
+                </div> */}
+
+                {/* ============================================================ */}
+                {/* BAJAS DEL PARTIDO (COLLAPSIBLE) */}
+                {/* ============================================================ */}
+                {(r.injuries?.home || r.injuries?.home) && (r.injuries?.home?.length > 0 || r.injuries?.away?.length > 0) && (
+                    <div className="mt-2 px-4 border-t border-gray-100 dark:border-neutral-800 pt-2">
+                        <button
+                            onClick={() => setShowInjuries(!showInjuries)}
+                            className="flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors w-full group"
+                        >
+                            <span className="text-xs font-medium flex items-center gap-1">
+                                <AlertCircle className="w-3.5 h-3.5 text-amber-500" />
+                                Bajas del Partido
+                            </span>
+                            <ChevronRight
+                                className={`w-4 h-4 transition-transform duration-200 ${showInjuries ? 'rotate-90' : ''}`}
+                            />
+                            <span className="text-xs text-gray-400 ml-auto">
+                                {r.injuries.home.length + r.injuries.away.length} jugadores
+                            </span>
+                        </button>
+
+                        <div
+                            className={`overflow-hidden transition-all duration-300 ease-in-out ${showInjuries ? 'max-h-[2000px] opacity-100 mt-2' : 'max-h-0 opacity-0'
+                                }`}
+                        >
+                            <div className="flex flex-col sm:flex-row items-start justify-center gap-4">
+                                {/* Lesiones del local */}
+                                {r.injuries.home.length > 0 && (
+                                    <div className="flex-1">
+                                        <div className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">
+                                            {r.home.teamName}
+                                        </div>
+                                        <div className="flex flex-wrap gap-2">
+                                            {r.injuries.home.map((p) => (
+                                                <div
+                                                    key={p.id}
+                                                    className="relative flex flex-col items-center gap-1 px-2 py-1 text-[10px] bg-gray-50 dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 min-w-[60px]"
+                                                >
+                                                    <img
+                                                        src={`https://imagecache.365scores.com/image/upload/f_png,w_62,h_62,c_limit,q_auto:eco,dpr_2,d_Athletes:default.png,r_max,c_thumb,g_face,z_0.65/v21/Athletes/${p.athleteId}`}
+                                                        alt={p.name}
+                                                        className="w-8 h-8 object-cover rounded-full"
+                                                        onError={(e) => (e.currentTarget.src = '/placeholder-player.png')}
+                                                    />
+                                                    <span className="font-medium text-center">{p.name}</span>
+                                                    <span className="text-[8px] text-gray-400">{p.position}</span>
+                                                    {p.status === 'suspension' && (
+                                                        <Square className="w-3 h-3 fill-red-500 text-red-500" />
+                                                    )}
+                                                    {p.status === 'injury' && <span>🩹</span>}
+                                                    {p.status === 'doubtful' && (
+                                                        <AlertCircle className="w-3 h-3 text-yellow-500" />
+                                                    )}
+                                                    {p.expectedReturn && (
+                                                        <span className="text-[8px] text-gray-400">Regreso: {p.expectedReturn}</span>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Lesiones del visitante */}
+                                {r.injuries.away.length > 0 && (
+                                    <div className="flex-1">
+                                        <div className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">
+                                            {r.away.teamName}
+                                        </div>
+                                        <div className="flex flex-wrap gap-2">
+                                            {r.injuries.away.map((p) => (
+                                                <div
+                                                    key={p.id}
+                                                    className="relative flex flex-col items-center gap-1 px-2 py-1 text-[10px] bg-gray-50 dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 min-w-[60px]"
+                                                >
+                                                    <img
+                                                        src={`https://imagecache.365scores.com/image/upload/f_png,w_62,h_62,c_limit,q_auto:eco,dpr_2,d_Athletes:default.png,r_max,c_thumb,g_face,z_0.65/v21/Athletes/${p.athleteId}`}
+                                                        alt={p.name}
+                                                        className="w-8 h-8 object-cover rounded-full"
+                                                        onError={(e) => (e.currentTarget.src = '/placeholder-player.png')}
+                                                    />
+                                                    <span className="font-medium text-center">{p.name}</span>
+                                                    <span className="text-[8px] text-gray-400">{p.position}</span>
+                                                    {p.status === 'suspension' && (
+                                                        <Square className="w-3 h-3 fill-red-500 text-red-500" />
+                                                    )}
+                                                    {p.status === 'injury' && <span>🩹</span>}
+                                                    {p.status === 'doubtful' && (
+                                                        <AlertCircle className="w-3 h-3 text-yellow-500" />
+                                                    )}
+                                                    {p.expectedReturn && (
+                                                        <span className="text-[8px] text-gray-400">Regreso: {p.expectedReturn}</span>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                )}
+
                 {/* ============================================================ */}
                 {/* H2H (HISTORIAL) */}
                 {/* ============================================================ */}
