@@ -3,13 +3,13 @@
 
 import { useState, useMemo, useRef, useCallback, useEffect } from "react";
 import { Trophy, HelpCircle, Loader2, Filter } from "lucide-react";
-import { MatchCard } from "@/components/MatchCard";
 import { useMatchFilters } from "@/hooks/useMatchFilters";
 import { TabNavigation } from "@/components/TabNavigation";
 import { FilterModal, FilterOptions } from "@/components/FilterModal";
 import { scoreEngine } from "@/utils/scoringEngine";
 import { trapEngine } from "@/utils/trapEngine";
 import type { PredictionResult as SharedPredictionResult } from "@/types/index";
+import { MatchCard } from "./MatchCard";
 
 // ============================================================
 // INTERFACES
@@ -145,7 +145,7 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
     // RENDER
     // ============================================================
     return (
-        <div className="w-full mx-auto px-4 my-4">
+        <div className="w-full mx-auto my-4">
             {/* Barra superior */}
             <div className="flex items-center gap-2 flex-wrap">
                 <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 tracking-tight flex items-center gap-2 mx-auto">

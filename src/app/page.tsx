@@ -19,7 +19,7 @@ export default async function HomePage() {
   });
 
   return (
-    <main className="max-w-7xl mx-auto px-6 py-12">
+    <main className="w-full max-w-7xl mx-auto py-12">
 
       {matches.length === 0 ? (
         <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">

@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Roboto } from 'next/font/google';
 
 export const metadata: Metadata = {
   title: "Predicciones Futbol",
   description: "Predicciones con modelo de Poisson en tiempo real",
 };
 
+const roboto = Roboto({ subsets: ['latin'] })
 // const themeScript = `
 //   (function() {
 //     try {
@@ -23,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html lang="es" suppressHydrationWarning className={roboto.className}>
 
       <body className="bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 min-h-screen antialiased transition-colors">
         {children}

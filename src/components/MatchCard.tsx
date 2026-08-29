@@ -362,92 +362,12 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                 {/* ============================================================ */}
                 {/* CABECERA: Competición, hora, estadio, TV, árbitro */}
                 {/* ============================================================ */}
-                <div className="flex px-4 flex-wrap items-center gap-1 text-xs text-gray-500 dark:text-gray-400 mb-2">
-                    {/* <Clock className="w-3 h-3" />
-                    <span>{formatTime(r.startTime)}</span>
-                    <span className="hidden sm:inline">·</span>
-                    <span className="truncate max-w-30 sm:max-w-none">{r.competitionName}</span> */}
-                    {r.estadio && (
-                        <>
-                            <span className="hidden sm:inline">·</span>
-                            <span className="flex items-center gap-0.5">
-                                <MapPin className="w-3 h-3" /> {r.estadio.name}
-                            </span>
-                        </>
-                    )}
-                    {r.tv && r.tv.length > 0 && (
-                        <>
-                            <span className="hidden sm:inline">·</span>
-                            <span className="flex items-center gap-0.5">
-                                <Tv className="w-3 h-3" /> {r.tv.map(tv => tv.name).join(', ')}
-                            </span>
-                        </>
-                    )}
-                    {r.arbitro && r.arbitro.length > 0 && (
-                        <>
-                            <span className="hidden sm:inline">·</span>
-                            <span className="flex items-center gap-0.5">
-                                <UserRound className="w-3 h-3" /> {r.arbitro.map(a => a.name).join(', ')}
-                            </span>
-                        </>
-                    )}
-                </div>
+
 
                 {/* ============================================================ */}
                 {/* EQUIPOS Y FAVORITO */}
                 {/* ============================================================ */}
-                <div className="flex items-center justify-center mx-auto w-full my-2">
-                    {/* <div className="relative w-1/2 mx-auto">
-                        <div
-                            className="absolute inset-0  backdrop-blur-sm"
-                            style={{
-                                backgroundColor: r.home.colors.localColor + '85', // 50% de opacidad, o usa rgba
-                            }}
-                        />
-                        <div className="relative flex items-center justify-center gap-2 py-2 z-10">
-                            <img
-                                src={`https://imagecache.365scores.com/image/upload/f_png,w_32,h_32,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.home.id}`}
-                                alt={r.home.teamName}
-                                className="w-8 h-8 md:w-10 md:h-10 object-contain"
-                            />
-                            <span className="font-medium text-gray-800 dark:text-gray-100 text-sm md:text-base">
-                                {r.home.teamName}
-                            </span>
-                            {r.result && (
-                                <span className="text-sm font-bold text-gray-600 dark:text-gray-400">
-                                    {r.result.homeScore}
-                                </span>
-                            )}
-                        </div>
-                    </div> */}
 
-                    {/* <div className="relative w-1/2 mx-auto"> */}
-                    {/* Fondo con desenfoque y color de equipo (fondo semi-transparente) */}
-                    {/* <div
-                            className="absolute inset-0  backdrop-blur-sm"
-                            style={{
-                                backgroundColor: r.away.colors.localColor + '85',
-                                color: r.away.colors.awayColor
-                                // 50% de opacidad, o usa rgba
-                            }}
-                        /> */}
-                    {/* <div className="relative flex items-center justify-center gap-2 py-2 z-10">
-                            <img
-                                src={`https://imagecache.365scores.com/image/upload/f_png,w_32,h_32,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.away.id}`}
-                                alt={r.away.teamName}
-                                className="w-8 h-8 md:w-10 md:h-10 object-contain"
-                            />
-                            <span className="font-medium text-gray-800 dark:text-gray-100 text-sm md:text-base">
-                                {r.away.teamName}
-                            </span>
-                            {r.result && (
-                                <span className="text-sm font-bold text-gray-600 dark:text-gray-400">
-                                    {r.result.awayScore}
-                                </span>
-                            )}
-                        </div> */}
-                    {/* </div> */}
-                </div>
 
                 {/* Badges de favorito y trampa */}
                 {/* <div className="flex flex-wrap items-center gap-1 mb-2"> */}
