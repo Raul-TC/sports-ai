@@ -302,9 +302,9 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                 {r.home.teamName}
                             </span>
 
-                            {/* <span className="text-green-400 font-semibold">
+                            <span className="text-green-400 font-semibold">
                                 {r.prediction.moneyline.homeWin.prob}%
-                            </span> */}
+                            </span>
                         </div>
 
                         <div className="text-center">
@@ -355,9 +355,9 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                 {r.away.teamName}
                             </span>
 
-                            {/* <span className="text-green-400 font-semibold">
+                            <span className="text-green-400 font-semibold">
                                 {r.prediction.moneyline.awayWin.prob}%
-                            </span> */}
+                            </span>
                         </div>
 
                     </div>
@@ -545,8 +545,8 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                                                         <span className="text-[8px] text-gray-400">Regreso: {p.expectedReturn}</span>
                                                     )}
                                                     <span className=" font-medium">{p.appearances === undefined ? 'No ha jugado esta temporada' : p.appearances}</span>
-                                                    {p.goals && p.goals > 0 && <span className=" font-medium">{p.goals}</span>}
-                                                    {p.assists && p.assists > 0 && <span className=" font-medium">{p.assists}</span>}
+                                                    {p.goals && <span className=" font-medium">{p.goals}</span>}
+                                                    {p.assists && <span className=" font-medium">{p.assists}</span>}
                                                 </div>
                                             ))}
                                         </div>
