@@ -27,6 +27,7 @@ import { TeamMetrics, UnifiedTeamInfo } from "./unifiedStats";
 export interface PredictionResult {
     matchUrl: string;
     competitionName: string;
+    competitionId: number,
     startTime: string;
     home: UnifiedTeamInfo;
     away: UnifiedTeamInfo;

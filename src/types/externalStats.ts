@@ -103,6 +103,7 @@ export interface RawMatchData {
     informacionEquipos: {
         id: number,
         competitionDisplayName: string,
+        competitionId: number,
         home: {
             homeId: number,
             homeCompetitor: {
@@ -110,6 +111,7 @@ export interface RawMatchData {
                 color: string,
                 awayColor: string
                 // },
+                competitions: any[]
             }
             teamName: string,
             nameForURL: string,

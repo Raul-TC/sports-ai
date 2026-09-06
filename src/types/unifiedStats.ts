@@ -37,6 +37,8 @@ export interface MatchSummaryMetrics {
 export interface UnifiedMatch {
     matchUrl: string;
     competitionName: string;
+    competitionId: number,
+    competitions: any[],
     startTime: string;
     home: UnifiedTeamInfo;
     away: UnifiedTeamInfo;

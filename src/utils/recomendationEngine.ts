@@ -5,7 +5,7 @@ export function recommendationEngine(
     scoredPicks: ScoreResult[],
     trap: TrapResult,
     topN: number = 5,
-    minOdd: number = 1.25,
+    minOdd: number = 1.18,
     maxOdd: number = 5.0
 ): Recommendation | null {
     if (scoredPicks.length === 0) return null;

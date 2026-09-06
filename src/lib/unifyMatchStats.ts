@@ -551,9 +551,10 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
             const awayInjuries = extractMissingPlayers(awayMembers, members);
 
             // console.log({ members, homeInjuries, awayInjuries })
-            console.log({ match })
             return {
                 matchUrl: match.matchUrl,
+                competitionId: match.informacionEquipos.competitionId,
+                competitions: match.informacionEquipos.home.homeCompetitor.competitions,
                 competitionName: game.competitionDisplayName,
                 startTime: game.startTime,
                 home: { teamId: homeId, colors: { localColor: match.informacionEquipos?.home.homeCompetitor.color, awayColor: match.informacionEquipos?.home.homeCompetitor.awayColor }, teamName: match.informacionEquipos?.home.teamName, metrics: metrics.home, id: match.informacionEquipos?.home.homeId, injuries: match.informacionEquipos?.home.alineaciones },

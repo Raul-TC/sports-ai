@@ -2,12 +2,10 @@
 "use client";
 
 import { useState, useMemo, useRef, useCallback, useEffect } from "react";
-import { Trophy, HelpCircle, Loader2, Filter } from "lucide-react";
+import { Trophy, Loader2 } from "lucide-react";
 import { useMatchFilters } from "@/hooks/useMatchFilters";
 import { TabNavigation } from "@/components/TabNavigation";
-import { FilterModal, FilterOptions } from "@/components/FilterModal";
-import { scoreEngine } from "@/utils/scoringEngine";
-import { trapEngine } from "@/utils/trapEngine";
+import { FilterOptions } from "@/components/FilterModal";
 import type { PredictionResult as SharedPredictionResult } from "@/types/index";
 import { MatchCard } from "./MatchCard";
 
@@ -58,40 +56,35 @@ const defaultFilters: FilterOptions = {
     minOdd: 1.0,
     maxOdd: 10.0,
 };
-const LEAGUES = {
-    "LigaMX": { id: 141, name: "Liga MX", flag: "🇲🇽" },
-    "Brasileirão": { id: 113, name: "Brasileirão", flag: "🇧🇷" },
-    "MLS": { id: 104, name: "MLS", flag: "🇺🇸" },
-    "Argentina": { id: 72, name: "Liga Profesional", flag: "🇦🇷" },
-    "LaLiga": { id: 11, name: "LaLiga", flag: "🇪🇸" },
-    "Premier League": { id: 168, name: "Premier League", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿" },
-    "UEFA Champions League": { id: 332, name: "UEFA Champions League", flag: "🏆" },
-    "Conmebol Libertadores": { id: 102, name: "Conmebol Libertadores", flag: "🏆" },
-    "Conmebol Sudamericana": { id: 389, name: "Conmebol Sudamericana", flag: "🏆" },
-};
+
 
 export default function MatchesExplorer({ predictions, results }: MatchesExplorerProps) {
     const [selectedMatchUrl, setSelectedMatchUrl] = useState<string | null>(null);
     const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
     const { activeTab, setActiveTab, filteredPredictions, todayCount, futureCount, pastCount } = useMatchFilters(predictions, results);
+    const [selectedLeague, setSelectedLeague] = useState<string | null>(null);
 
     const toggleMatch = (url: string) => {
         setSelectedMatchUrl(selectedMatchUrl === url ? null : url);
     };
-    // ============================================================
-    // FETCH DE DATOS DE 365SCORES
-    // ============================================================
-    // async function fetchMatchData(id: number) {
-    //     const res = await fetch(`https://webws.365scores.com/web/games/results/?appTypeId=5&langId=14&timezoneName=America%2FMexico_City&competitors=${id}`);
-    //     return res.json();
-    // }
+
+    const leagueNames = useMemo(() => {
+        const names = new Set<string>();
+        filteredPredictions.forEach(p => {
+            if (p.competitionName) names.add(p.competitionName);
+        });
+        return Array.from(names).sort();
+    }, [filteredPredictions]);
+    const leagueFiltered = useMemo(() => {
+        if (!selectedLeague) return filteredPredictions;
+        return filteredPredictions.filter(p => p.competitionName === selectedLeague);
+    }, [filteredPredictions, selectedLeague]);
+
 
     // ============================================================
     // VISIBLES
     // ============================================================
-    const visiblePredictions = useMemo(() => {
-        return filteredPredictions.slice(0, visibleCount);
-    }, [filteredPredictions, visibleCount]);
+
 
     // ============================================================
     // FUNCIÓN DE FILTRADO CENTRALIZADA
@@ -139,7 +132,7 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
 
 
     // Lista para renderizar (sin los picks, solo los datos del partido)
-    const matches = visiblePredictions;
+    const matches = leagueFiltered;
 
     // ============================================================
     // RENDER
@@ -150,57 +143,78 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
             <div className="flex items-center gap-2 flex-wrap">
                 <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 tracking-tight flex items-center gap-2 mx-auto">
                     <Trophy className="w-6 h-6 text-indigo-500" />
-                    Estadísticas de Partidos
+                    Pronósticos de Partidos
                 </h2>
             </div>
 
-            <TabNavigation
-                activeTab={activeTab}
-                setActiveTab={setActiveTab}
-                todayCount={todayCount}
-                futureCount={futureCount}
-                pastCount={pastCount}
-            />
+            <div className="flex items-center gap-4 justify-between mb-2 border-b border-gray-200 dark:border-neutral-700">
 
-            {filteredPredictions.length === 0 ? (
-                <div className="text-center py-12 text-gray-400 dark:text-gray-500">
-                    {activeTab === "today"
-                        ? "No hay partidos programados para hoy."
-                        : activeTab === "future"
-                            ? "No hay partidos futuros."
-                            : "No hay partidos pasados."}
+                <TabNavigation
+                    activeTab={activeTab}
+                    setActiveTab={setActiveTab}
+                    todayCount={todayCount}
+                    futureCount={futureCount}
+                    pastCount={pastCount}
+                />
+
+                <div className="flex items-center gap-2 flex-wrap">
+                    <select id="league-select"
+                        value={selectedLeague || ''}
+                        onChange={(e) => setSelectedLeague(e.target.value || null)}
+                        className="bg-gray-50 dark:bg-neutral-800  dark:border-neutral-600 rounded-md px-3 py-1 text-sm cursor-pointer"
+                    >
+                        <option value="" className="block px-4 py-2 text-sm text-gray-300 cursor-pointer">Todas las ligas</option>
+
+                        {leagueNames.map(name => (
+                            <option className="block px-4 py-4 text-sm text-gray-300 cursor-pointer" key={name} value={name}>{name}</option>
+                        ))}
+                    </select>
+
+
                 </div>
-            ) : (
-                <>
-                    <p className="text-xs text-gray-400 dark:text-gray-500 mb-4">
-                        Mostrando {matches.length} de {visiblePredictions.length} partidos
-                    </p>
+            </div>
 
-                    {matches.map((r) => (
-                        <MatchCard
-                            key={r.matchUrl}
-                            prediction={r}
-                            onToggle={toggleMatch}
-                            isSelected={selectedMatchUrl === r.matchUrl}
-                            activeTab={activeTab}
-                        />
-                    ))}
-
-                    <div ref={loaderRef} className="py-4 flex justify-center items-center">
-                        {hasMore ? (
-                            <div className="flex items-center gap-2 text-sm text-gray-400 dark:text-gray-500">
-                                <Loader2 className="w-4 h-4 animate-spin" />
-                                Cargando más partidos...
-                            </div>
-                        ) : (
-                            <span className="text-sm text-gray-400 dark:text-gray-500">
-                                ✅ Todos los partidos cargados
-                            </span>
-                        )}
+            {
+                filteredPredictions.length === 0 ? (
+                    <div className="text-center py-12 text-gray-400 dark:text-gray-500">
+                        {activeTab === "today"
+                            ? "No hay partidos programados para hoy."
+                            : activeTab === "future"
+                                ? "No hay partidos futuros."
+                                : "No hay partidos pasados."}
                     </div>
-                </>
-            )}
+                ) : (
+                    <>
+                        <p className="text-xs text-gray-400 dark:text-gray-500 mb-4">
+                            Mostrando {matches.length} de {leagueFiltered.length} partidos
+                        </p>
 
-        </div>
+                        {matches.map((r) => (
+                            <MatchCard
+                                key={r.matchUrl}
+                                prediction={r}
+                                onToggle={toggleMatch}
+                                isSelected={selectedMatchUrl === r.matchUrl}
+                                activeTab={activeTab}
+                            />
+                        ))}
+
+                        <div ref={loaderRef} className="py-4 flex justify-center items-center">
+                            {hasMore ? (
+                                <div className="flex items-center gap-2 text-sm text-gray-400 dark:text-gray-500">
+                                    <Loader2 className="w-4 h-4 animate-spin" />
+                                    Cargando más partidos...
+                                </div>
+                            ) : (
+                                <span className="text-sm text-gray-400 dark:text-gray-500">
+                                    ✅ Todos los partidos cargados
+                                </span>
+                            )}
+                        </div>
+                    </>
+                )
+            }
+
+        </div >
     );
 }

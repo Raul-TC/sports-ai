@@ -137,7 +137,7 @@ export interface ExactScore {
     probability: number;
     odd: number;
 }
-const DEFAULT_GOAL_LINES = [0.5, 1.5, 2.5, 3.5, 4.5];
+const DEFAULT_GOAL_LINES = [0.5, 1.5, 2.5];
 const DEFAULT_CORNER_LINES = [6.5, 7.5, 8.5, 9.5, 10.5, 11.5];
 const DEFAULT_MAX_GOALS = 10;
 
@@ -711,6 +711,7 @@ export function calculateAllPredictions(matches: UnifiedMatch[], options: Predic
         return {
             matchUrl: match.matchUrl,
             competitionName: match.competitionName,
+            competitionId: match.competitionId,
             startTime: match.startTime,
             home: match.home,
             away: match.away,

@@ -16,10 +16,10 @@ export function TabNavigation({
     pastCount,
 }: TabNavigationProps) {
     return (
-        <div className="flex border-b border-gray-200 dark:border-neutral-700 overflow-x-auto">
+        <div className="flex  overflow-x-auto">
             <button
                 onClick={() => setActiveTab("today")}
-                className={`flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors border-b-2 whitespace-nowrap ${activeTab === "today"
+                className={`flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors border-b-2 whitespace-nowrap cursor-pointer ${activeTab === "today"
                     ? "border-indigo-500 text-indigo-600 dark:text-indigo-400"
                     : "border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
                     }`}
@@ -32,7 +32,7 @@ export function TabNavigation({
             </button>
             <button
                 onClick={() => setActiveTab("future")}
-                className={`flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors border-b-2 whitespace-nowrap ${activeTab === "future"
+                className={`flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors border-b-2 whitespace-nowrap cursor-pointer ${activeTab === "future"
                     ? "border-indigo-500 text-indigo-600 dark:text-indigo-400"
                     : "border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
                     }`}
@@ -45,7 +45,7 @@ export function TabNavigation({
             </button>
             <button
                 onClick={() => setActiveTab("past")}
-                className={`flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors border-b-2 whitespace-nowrap ${activeTab === "past"
+                className={`flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors border-b-2 whitespace-nowrap cursor-pointer ${activeTab === "past"
                     ? "border-indigo-500 text-indigo-600 dark:text-indigo-400"
                     : "border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
                     }`}
