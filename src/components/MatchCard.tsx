@@ -84,7 +84,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
         () => recommendationEngine(scoredPicks, trap, 5),
         [scoredPicks, trap]
     );
-    console.log({ recommendation, partido: r.home.teamName + " vs " + r.away.teamName })
+    //console.log({ recommendation, partido: r.home.teamName + " vs " + r.away.teamName })
     const { plays, altas, ratoneras, medias } = getBestPicks(r.prediction, r.home.teamName, r.away.teamName, trap.level);
 
     const formatTime = (iso: string) => {
@@ -458,10 +458,10 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                         )}
                     </span>
                 </div> */}
-                <div className="px-3 py-2 border-b border-gray-100 dark:border-neutral-800">
+                <div className="px-3 py-2 border-b border-gray-100 dark:border-neutral-800 bg-gray-900/40">
                     <div className="flex items-center justify-between text-[10px] text-gray-500 dark:text-gray-400">
                         <span className="font-medium text-gray-700 dark:text-gray-300">{r.competitionName}</span>
-                        <span className="flex items-center gap-1">
+                        <span className="flex items-center gap-1 text-gray-700 dark:text-gray-300">
                             <Clock className="w-3 h-3" />
                             {formatTime(r.startTime)}
                         </span>
@@ -472,14 +472,14 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                             <span>{r.estadio.name}</span>
                             {r.tv && r.tv.length > 0 && (
                                 <>
-                                    <span className="mx-1">·</span>
+                                    <span className="mx-1 text-gray-700 dark:text-gray-300">·</span>
                                     <Tv className="w-3 h-3" />
                                     <span>{r.tv.map(tv => tv.name).join(', ')}</span>
                                 </>
                             )}
                             {r.arbitro && r.arbitro.length > 0 && (
                                 <>
-                                    <span className="mx-1">·</span>
+                                    <span className="mx-1 text-gray-700 dark:text-gray-300">·</span>
                                     <UserRound className="w-3 h-3" />
                                     <span>{r.arbitro.map(a => a.name).join(', ')}</span>
                                 </>
