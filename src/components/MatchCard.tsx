@@ -45,6 +45,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
     const [showTooltip, setShowTooltip] = useState(false);
     const [showInjuries, setShowInjuries] = useState(false);
     const [currentTab, setCurrentTab] = useState<TabKey>('resumen');
+    const [h2hFilter, setH2hFilter] = useState<'all' | 'home' | 'away'>('all');
 
     // const handleClick = (e: React.MouseEvent) => {
     //     e.stopPropagation();
@@ -191,15 +192,39 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
         const currentHomeId = r.home.id;
         const currentAwayId = r.away.id;
 
-        // --- Variables para estadísticas ---
-        const totalGames = validGames.length;
+        // Aplicar filtro
+        const filteredGames = validGames.filter((h) => {
+            if (h2hFilter === 'home') {
+                return h.homeCompetitor.id === currentHomeId;
+            }
+            if (h2hFilter === 'away') {
+                return h.awayCompetitor.id === currentHomeId;
+            }
+            return true; // 'all'
+        });
+
+        if (filteredGames.length === 0) {
+            return (
+                <div className="my-3 pt-2 border-t border-gray-100 dark:border-neutral-800 px-4">
+                    <div className="flex items-center gap-2 mb-2">
+                        <History className="w-4 h-4 text-gray-400" />
+                        <span className="text-xs font-medium text-gray-600 dark:text-gray-400">
+                            Historial H2H
+                        </span>
+                    </div>
+                    <div className="text-xs text-gray-400">No hay partidos con este filtro.</div>
+                </div>
+            );
+        }
+
+        const totalGames = filteredGames.length;
         let totalGoals = 0;
         let bttsCount = 0;
         let over25Count = 0;
         let homeWins = 0, awayWins = 0, draws = 0;
         const scoreFreq: Record<string, number> = {};
 
-        for (const h of validGames) {
+        for (const h of filteredGames) {
             const homeScore = h.homeCompetitor.score;
             const awayScore = h.awayCompetitor.score;
             const total = homeScore + awayScore;
@@ -208,11 +233,9 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
             if (homeScore > 0 && awayScore > 0) bttsCount++;
             if (total >= 2.5) over25Count++;
 
-            // Frecuencia de marcadores
             const key = `${homeScore}-${awayScore}`;
             scoreFreq[key] = (scoreFreq[key] || 0) + 1;
 
-            // Victorias según el campo winner (o comparando goles si no existe)
             let winner = h.winner;
             if (!winner || winner === 0) {
                 if (homeScore > awayScore) winner = 1;
@@ -239,19 +262,50 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
         const awayWinPercent = (awayWins / totalGames) * 100;
         const drawPercent = (draws / totalGames) * 100;
 
+        // Botones de filtro
+        const filterOptions = [
+            { key: 'home', label: 'Local' },
+            { key: 'all', label: 'Todos' },
+            { key: 'away', label: 'Visita' },
+        ] as const;
+
         return (
             <div className="my-3 pt-2 border-t border-gray-100 dark:border-neutral-800 px-4">
-                <div className="flex items-center gap-2 mb-2">
-                    <History className="w-4 h-4 text-gray-400" />
-                    <span className="text-xs font-medium text-gray-600 dark:text-gray-400">
-                        Historial H2H
-                    </span>
-                    <span className="text-xs text-gray-400">
-                        ({homeWins}V - {draws}E - {awayWins}V · {totalGames} partidos)
-                    </span>
+                <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                        <History className="w-4 h-4 text-gray-400" />
+                        <span className="text-xs font-medium text-gray-600 dark:text-gray-400">
+                            Historial H2H
+                        </span>
+                        <span className="text-xs text-gray-400">
+                            ({homeWins}V - {draws}E - {awayWins}D · {totalGames} partidos)
+                        </span>
+                    </div>
+                    {/* Botones de filtro */}
+                    <div className="flex gap-1">
+                        {filterOptions.map((opt) => (
+                            <button
+                                key={opt.key}
+                                onClick={(e) => {
+                                    e.stopPropagation(); // Evita que se expanda el panel de odds
+                                    setH2hFilter(opt.key);
+                                }}
+                                className={`px-2 py-0.5 text-[10px] font-medium rounded-full border transition-colors ${h2hFilter === opt.key
+                                    ? 'bg-indigo-100 text-indigo-700 border-indigo-300 dark:bg-indigo-900/30 dark:text-indigo-300 dark:border-indigo-700'
+                                    : 'bg-gray-100 text-gray-600 border-gray-200 hover:bg-gray-200 dark:bg-neutral-800 dark:text-gray-400 dark:border-neutral-700 dark:hover:bg-neutral-700'
+                                    }`}
+                            >
+                                {opt.label} ({validGames.filter((h) => {
+                                    if (opt.key === 'home') return h.homeCompetitor.id === currentHomeId;
+                                    if (opt.key === 'away') return h.awayCompetitor.id === currentHomeId;
+                                    return true;
+                                }).length})
+                            </button>
+                        ))}
+                    </div>
                 </div>
 
-                {/* Estadísticas resumen en badges */}
+                {/* Estadísticas resumen */}
                 <div className="flex flex-wrap gap-1.5 mb-2">
                     <StatBadge label="Prom. goles" value={avgGoals.toFixed(1)} secondary />
                     <StatBadge label="BTTS" value={`${bttsPercent.toFixed(0)}%`} secondary />
@@ -264,7 +318,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
 
                 {/* Lista de partidos */}
                 <div className="flex flex-wrap gap-2 items-center">
-                    {validGames.slice(0, 8).map((el) => (
+                    {filteredGames.slice(0, 10).map((el) => (
                         <div
                             key={el.id}
                             className="flex items-center gap-1.5 text-xs bg-gray-50 dark:bg-neutral-800 px-2 py-1 rounded-lg border border-gray-200 dark:border-neutral-700"
@@ -291,8 +345,8 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                             </span>
                         </div>
                     ))}
-                    {validGames.length > 8 && (
-                        <span className="text-xs text-gray-400">+{validGames.length - 8} más</span>
+                    {filteredGames.length > 10 && (
+                        <span className="text-xs text-gray-400">+{filteredGames.length - 8} más</span>
                     )}
                 </div>
             </div>
@@ -394,32 +448,51 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
     // ============================================================
     // Renderizar con iconos y nombres
 
-    const renderRecentGames = (games: any[], title: string) => {
+    const renderRecentGames = (games: any[], title: string, teamId: number) => {
         if (games.length === 0) return null;
         return (
             <div className="flex flex-col gap-1 mb-2 px-4">
                 <span className="text-[10px] text-gray-400 font-medium">{title}</span>
                 <div className="flex flex-wrap gap-1 mx-auto">
-                    {games.map((el) => (
-                        <div
-                            key={el.id}
-                            className="flex items-center gap-0.5 text-[10px] bg-gray-50 dark:bg-neutral-800 px-1.5 py-0.5 rounded border border-gray-200 dark:border-neutral-700"
-                        >
-                            <img
-                                src={`https://imagecache.365scores.com/image/upload/f_png,w_20,h_20,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.homeCompetitor.id}`}
-                                className="w-4 h-4 object-contain"
-                                alt=""
-                            />
-                            <span className="text-gray-600 dark:text-gray-400">{el.homeCompetitor.score}</span>
-                            <span className="text-gray-400">vs</span>
-                            <span className="text-gray-600 dark:text-gray-400">{el.awayCompetitor.score}</span>
-                            <img
-                                src={`https://imagecache.365scores.com/image/upload/f_png,w_20,h_20,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.awayCompetitor.id}`}
-                                className="w-4 h-4 object-contain"
-                                alt=""
-                            />
-                        </div>
-                    ))}
+                    {games.map((el) => {
+                        // Determinar si el equipo es local o visitante en este partido
+                        const isHome = el.homeCompetitor.id === teamId;
+                        const isAway = el.awayCompetitor.id === teamId;
+                        if (!isHome && !isAway) return null; // seguridad
+
+                        const ourScore = isHome ? el.homeCompetitor.score : el.awayCompetitor.score;
+                        const opponentScore = isHome ? el.awayCompetitor.score : el.homeCompetitor.score;
+
+                        let resultClass = '';
+                        if (ourScore > opponentScore) {
+                            resultClass = 'border-green-500 bg-green-50 dark:bg-green-900/20';
+                        } else if (ourScore < opponentScore) {
+                            resultClass = 'border-red-500 bg-red-50 dark:bg-red-900/20';
+                        } else {
+                            resultClass = 'border-yellow-500 bg-yellow-50 dark:bg-yellow-900/20';
+                        }
+
+                        return (
+                            <div
+                                key={el.id}
+                                className={`flex items-center gap-0.5 text-[10px] px-1.5 py-0.5 rounded border ${resultClass}`}
+                            >
+                                <img
+                                    src={`https://imagecache.365scores.com/image/upload/f_png,w_20,h_20,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.homeCompetitor.id}`}
+                                    className="w-4 h-4 object-contain"
+                                    alt=""
+                                />
+                                <span className="text-gray-600 dark:text-gray-300">{el.homeCompetitor.score}</span>
+                                <span className="text-gray-400">vs</span>
+                                <span className="text-gray-600 dark:text-gray-300">{el.awayCompetitor.score}</span>
+                                <img
+                                    src={`https://imagecache.365scores.com/image/upload/f_png,w_20,h_20,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.awayCompetitor.id}`}
+                                    className="w-4 h-4 object-contain"
+                                    alt=""
+                                />
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         );
@@ -869,12 +942,12 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                         <div className="mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 px-4">
                                 <div className="space-y-1">
-                                    {renderRecentGames(homeGames, `Últimos ${homeGames.length} de ${r.home.teamName}`)}
-                                    {renderRecentGames(homeGamesLocal, `En casa`)}
+                                    {renderRecentGames(homeGames, `Últimos ${homeGames.length} de ${r.home.teamName}`, r.home.teamId)}
+                                    {renderRecentGames(homeGamesLocal, `En casa`, r.home.teamId)}
                                 </div>
                                 <div className="space-y-1">
-                                    {renderRecentGames(awayGames, `Últimos ${awayGames.length} de ${r.away.teamName}`)}
-                                    {renderRecentGames(awayGamesAway, `Como visitante`)}
+                                    {renderRecentGames(awayGames, `Últimos ${awayGames.length} de ${r.away.teamName}`, r.away.teamId)}
+                                    {renderRecentGames(awayGamesAway, `Como visitante`, r.away.teamId)}
                                 </div>
                             </div>
                         </div>
