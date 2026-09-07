@@ -35,7 +35,7 @@ function MarketRow({ label, prob, odd, isCorrect }: { label: string; prob: numbe
                         </span>
                     )}
                 </span>
-                <div className="flex items-center gap-2 ml-2 flex-shrink-0">
+                <div className="flex items-center gap-2 ml-2 shrink-0">
                     <span className={`font-bold tabular-nums ${getProbColor(prob)}`}>
                         {prob}%
                     </span>
@@ -47,7 +47,7 @@ function MarketRow({ label, prob, odd, isCorrect }: { label: string; prob: numbe
             <div className="w-full h-1.5 mt-1 rounded-full bg-neutral-100 dark:bg-neutral-800 overflow-hidden">
                 <div
                     className={`h-full rounded-full transition-all duration-300 ${isCorrect === undefined
-                        ? "bg-gradient-to-r from-blue-400 to-indigo-500"
+                        ? "bg-linear-to-r from-blue-400 to-indigo-500"
                         : isCorrect
                             ? "bg-green-500"
                             : "bg-red-500"
@@ -138,8 +138,8 @@ export default function OddsPanel({ prediction, homeTeam, awayTeam, results, com
                         <SummaryBadge label="Favorito" value={favorite.team} color="blue" />
                         <SummaryBadge label="Goles esperados" value={(homeExpectedGoals + awayExpectedGoals).toFixed(2)} color="green" />
                         <SummaryBadge label="Córners esperados" value={corners.expectedTotal} color="amber" />
-                        <SummaryBadge label="BTTS" value={bttsPrediction} color={bttsPrediction === "Sí" ? "green" : "red"} />
-                        <SummaryBadge label="Over/Under" value={overUnderPrediction} color="blue" />
+                        {/* <SummaryBadge label="BTTS" value={bttsPrediction} color={bttsPrediction === "Sí" ? "green" : "red"} /> */}
+                        {/* <SummaryBadge label="Over/Under" value={overUnderPrediction} color="blue" /> */}
                     </div>
                 </div>
                 {hasResult && (
@@ -260,7 +260,7 @@ export default function OddsPanel({ prediction, homeTeam, awayTeam, results, com
             </MarketSection>
 
             {/* ===== CÓRNERS ===== */}
-            <MarketSection title="Córners">
+            {/* <MarketSection title="Córners">
                 {corners.lines.map((cl) => (
                     <div key={cl.line} className="space-y-1 col-span-1">
                         <div className="text-xs text-neutral-400 font-medium text-center">Línea {cl.line}</div>
@@ -278,7 +278,7 @@ export default function OddsPanel({ prediction, homeTeam, awayTeam, results, com
                         />
                     </div>
                 ))}
-            </MarketSection>
+            </MarketSection> */}
 
             {/* ===== VALOR ESPERADO (EV) ===== */}
             {/* <div className="border-t border-neutral-100 dark:border-neutral-800 pt-3 mt-2">

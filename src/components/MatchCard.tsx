@@ -33,20 +33,67 @@ import { useMemo, useState } from "react";
 
 interface MatchCardProps {
     prediction: EnrichedPrediction;
-    isSelected: boolean;
-    onToggle: (url: string) => void;
     activeTab: "today" | "future" | "past";
 }
+/**
+ * Renderiza las estadísticas de un equipo agrupadas por categoría
+ */
+const renderTeamStatistics = (teamId: number, statistics: any[]) => {
+    // Filtrar estadísticas del equipo
+    const teamStats = statistics.filter((s) => s.competitorId === teamId);
+
+    // Agrupar por categoría (categoryName)
+    const grouped: Record<string, any[]> = {};
+    teamStats.forEach((stat) => {
+        const cat = stat.categoryName || 'General';
+        if (!grouped[cat]) grouped[cat] = [];
+        grouped[cat].push(stat);
+    });
+
+    // Ordenar categorías por categoryOrder (si existe) para mantener consistencia
+    const sortedCategories = Object.keys(grouped).sort((a, b) => {
+        const orderA = grouped[a][0]?.categoryOrder || 99;
+        const orderB = grouped[b][0]?.categoryOrder || 99;
+        return orderA - orderB;
+    });
+
+    return sortedCategories.map((cat) => (
+        <div key={cat} className="mb-2">
+            <div className="text-[9px] font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500 border-b border-gray-200 dark:border-neutral-700 pb-0.5 mb-1">
+                {cat}
+            </div>
+            {grouped[cat].map((stat) => (
+                <div key={stat.id} className="flex justify-between py-0.5 border-b border-gray-100 dark:border-neutral-700/50">
+                    <span className="text-gray-500 dark:text-gray-400">{stat.name}</span>
+                    <span className="font-medium text-gray-700 dark:text-gray-300">
+                        {stat.value || '-'}
+                        {stat.valuePercentage !== undefined && stat.valuePercentage !== null && (
+                            <span className="text-[9px] text-gray-400 ml-1">
+                                ({Math.round(stat.valuePercentage * 100)}%)
+                            </span>
+                        )}
+                    </span>
+                </div>
+            ))}
+        </div>
+    ));
+};
 type TabKey = 'resumen' | 'estadisticas' | 'historial' | 'bajas' | 'picks' | 'odds';
-export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: MatchCardProps) {
+export function MatchCard({ prediction: r, activeTab }: MatchCardProps) {
     const homeLambda = r.prediction.homeExpectedGoals || 0;
     const awayLambda = r.prediction.awayExpectedGoals || 0;
     const topScoresTwo = getTopScoreProbabilities(homeLambda, awayLambda, 10, 16);
-    const [showTooltip, setShowTooltip] = useState(false);
-    const [showInjuries, setShowInjuries] = useState(false);
     const [currentTab, setCurrentTab] = useState<TabKey>('resumen');
     const [h2hFilter, setH2hFilter] = useState<'all' | 'home' | 'away'>('all');
-
+    /**
+     * Renderiza las estadísticas de un equipo agrupadas por categoría
+     */
+    const StatRow = ({ label, value }: { label: string; value: string | number }) => (
+        <div className="flex justify-between border-b border-gray-100 dark:border-neutral-700/50 py-0.5">
+            <span className="text-gray-500 dark:text-gray-400">{label}</span>
+            <span className="font-medium text-gray-700 dark:text-gray-300">{value}</span>
+        </div>
+    );
     // const handleClick = (e: React.MouseEvent) => {
     //     e.stopPropagation();
     //     if (onClick) onClick(e);
@@ -216,6 +263,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                 </div>
             );
         }
+        // console.log({ filteredGames })
 
         const totalGames = filteredGames.length;
         let totalGoals = 0;
@@ -270,7 +318,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
         ] as const;
 
         return (
-            <div className="my-3 pt-2 border-t border-gray-100 dark:border-neutral-800 px-4">
+            <div className=" dark:border-neutral-800 px-4">
                 <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
                         <History className="w-4 h-4 text-gray-400" />
@@ -352,96 +400,6 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
             </div>
         );
     };
-    // const renderH2H = () => {
-    //     if (!r.h2h || r.h2h.length === 0) return null;
-
-    //     // Calcular resumen
-    //     const currentHomeId = r.home.id;
-    //     const currentAwayId = r.away.id;
-
-    //     // Filtrar partidos con scores válidos
-    //     const validGames = r.h2h.filter(
-    //         (h) =>
-    //             h.homeCompetitor?.score != null &&
-    //             h.awayCompetitor?.score != null
-    //     );
-
-    //     if (validGames.length === 0) return null;
-
-    //     let homeWins = 0,
-    //         awayWins = 0,
-    //         draws = 0;
-    //     let totalGoals = 0;
-
-    //     for (const h of validGames) {
-    //         const homeId = h.homeCompetitor.id;
-    //         const awayId = h.awayCompetitor.id;
-    //         const winner = h.winner; // 1 = local, 2 = visitante, -1 = empate
-
-    //         // Sumar goles totales (independientemente del ganador)
-    //         totalGoals += h.homeCompetitor.score + h.awayCompetitor.score;
-
-    //         if (winner === 1) {
-    //             // Ganó el local del partido histórico
-    //             if (homeId === currentHomeId) homeWins++;
-    //             else if (homeId === currentAwayId) awayWins++;
-    //             // Si no coincide con ninguno de los equipos actuales, no se cuenta
-    //         } else if (winner === 2) {
-    //             // Ganó el visitante del partido histórico
-    //             if (awayId === currentHomeId) homeWins++;
-    //             else if (awayId === currentAwayId) awayWins++;
-    //         } else if (winner === -1) {
-    //             draws++;
-    //         }
-    //     }
-
-    //     return (
-    //         <div className="my-3 pt-2 border-t border-gray-100 dark:border-neutral-800 px-4">
-    //             <div className="flex items-center gap-2 mb-2">
-    //                 <History className="w-4 h-4 text-gray-400" />
-    //                 <span className="text-xs font-medium text-gray-600 dark:text-gray-400">
-    //                     Historial H2H
-    //                 </span>
-    //                 <span className="text-xs text-gray-400">
-    //                     ({homeWins}V - {draws}E - {awayWins}V · {r.h2h.length} partidos)
-    //                 </span>
-    //             </div>
-    //             <div className="flex flex-wrap gap-2 items-center">
-    //                 {r.h2h.slice(0, 6).map((el) => (
-    //                     <div
-    //                         key={el.id}
-    //                         className="flex items-center gap-1.5 text-xs bg-gray-50 dark:bg-neutral-800 px-2 py-1 rounded-lg border border-gray-200 dark:border-neutral-700"
-    //                     >
-    //                         {/* Escudo local */}
-    //                         <img
-    //                             src={`https://imagecache.365scores.com/image/upload/f_png,w_20,h_20,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.homeCompetitor.id}`}
-    //                             alt={el.homeCompetitor.name}
-    //                             className="w-4 h-4 object-contain"
-    //                         />
-    //                         <span className="font-medium text-gray-700 dark:text-gray-300">
-    //                             {el.homeCompetitor.score}
-    //                         </span>
-    //                         <span className="text-gray-400">vs</span>
-    //                         <span className="font-medium text-gray-700 dark:text-gray-300">
-    //                             {el.awayCompetitor.score}
-    //                         </span>
-    //                         <img
-    //                             src={`https://imagecache.365scores.com/image/upload/f_png,w_20,h_20,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.awayCompetitor.id}`}
-    //                             alt={el.awayCompetitor.name}
-    //                             className="w-4 h-4 object-contain"
-    //                         />
-    //                         <span className="text-gray-400 text-[9px] ml-0.5">
-    //                             {new Date(el.startTime).toLocaleDateString("es-MX")}
-    //                         </span>
-    //                     </div>
-    //                 ))}
-    //                 {r.h2h.length > 6 && (
-    //                     <span className="text-xs text-gray-400">+{r.h2h.length - 6} más</span>
-    //                 )}
-    //             </div>
-    //         </div>
-    //     );
-    // };
 
     // ============================================================
     // RENDER DE ÚLTIMOS PARTIDOS
@@ -501,7 +459,7 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
     // ============================================================
     // RENDER PRINCIPAL
     // ============================================================
-
+    // console.log({ results: r.result })
     return (
         <div className="bg-white dark:bg-neutral-900  shadow-sm border border-gray-100 dark:border-neutral-800 overflow-hidden transition-all duration-200 hover:shadow-md my-4">
             {/* Fondo decorativo con colores de los equipos */}
@@ -888,69 +846,139 @@ export function MatchCard({ prediction: r, isSelected, onToggle, activeTab }: Ma
                         })()}
                     </div>
                 )}
+
                 {/* PESTAÑA: ESTADÍSTICAS */}
                 {currentTab === 'estadisticas' && (
-                    <div className="space-y-3 px-4">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <TeamStatsBlock
-                                team={r.home}
-                                goalLines={r.prediction.teamGoals.home}
-                                title={r.home.teamName}
-                                opponent={r.away}
-                                results={r.result}
-                            />
-                            <TeamStatsBlock
-                                team={r.away}
-                                goalLines={r.prediction.teamGoals.away}
-                                title={r.away.teamName}
-                                opponent={r.home}
-                                results={r.result}
-                            />
-                        </div>
-                        {/* Marcadores exactos (también pueden ir aquí) */}
+                    <div className="space-y-4 px-4 pb-2">
+                        {/* ============================================================ */}
+                        {/* 1. PRE‑MATCH (siempre visible)                                */}
+                        {/* ============================================================ */}
                         <div>
-                            <div className="flex items-center gap-2 mb-1">
-                                <span className="text-xs font-medium text-gray-500 dark:text-gray-400 flex items-center gap-1">
-                                    <Circle className="w-3 h-3" />
-                                    Marcadores más probables
+                            <h4 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2 flex items-center gap-2">
+                                <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-[10px] px-2 py-0.5 rounded-full font-medium">
+                                    Predicción
                                 </span>
+                                Estadísticas pre‑match
+                            </h4>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <TeamStatsBlock
+                                    team={r.home}
+                                    goalLines={r.prediction.teamGoals.home}
+                                    title={r.home.teamName}
+                                    opponent={r.away}
+                                    results={r.result}
+                                />
+                                <TeamStatsBlock
+                                    team={r.away}
+                                    goalLines={r.prediction.teamGoals.away}
+                                    title={r.away.teamName}
+                                    opponent={r.home}
+                                    results={r.result}
+                                />
                             </div>
-                            <div className="flex flex-wrap gap-1">
-                                {topScoresTwo.slice(0, 10).map((score, idx) => (
-                                    <StatBadge
-                                        key={idx}
-                                        label={`${(score.prob * 100).toFixed(1)}%`}
-                                        value={`${score.home}-${score.away}`}
-                                        icon={Goal}
-                                        secondary
-                                        description={`Probabilidad de que el marcador sea ${score.home}-${score.away}`}
-                                        scoreResult={results ? `${results.homeScore}-${results.awayScore}` : undefined}
-                                    />
-                                ))}
-                                {topScoresTwo.length === 0 && (
-                                    <span className="text-xs text-gray-400">No hay datos suficientes</span>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                )}
 
-                {/* PESTAÑA: HISTORIAL */}
-                {currentTab === 'historial' && (
-                    <div>
-                        {renderH2H()}
-                        <div className="mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 px-4">
-                                <div className="space-y-1">
-                                    {renderRecentGames(homeGames, `Últimos ${homeGames.length} de ${r.home.teamName}`, r.home.teamId)}
-                                    {renderRecentGames(homeGamesLocal, `En casa`, r.home.teamId)}
+                            {/* Marcadores más probables */}
+                            <div className="mt-3">
+                                <div className="flex items-center gap-2 mb-1">
+                                    <span className="text-xs font-medium text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                                        <Circle className="w-3 h-3" />
+                                        Marcadores más probables
+                                    </span>
                                 </div>
-                                <div className="space-y-1">
-                                    {renderRecentGames(awayGames, `Últimos ${awayGames.length} de ${r.away.teamName}`, r.away.teamId)}
-                                    {renderRecentGames(awayGamesAway, `Como visitante`, r.away.teamId)}
+                                <div className="flex flex-wrap gap-1">
+                                    {topScoresTwo.slice(0, 10).map((score, idx) => (
+                                        <StatBadge
+                                            key={idx}
+                                            label={`${(score.prob * 100).toFixed(1)}%`}
+                                            value={`${score.home}-${score.away}`}
+                                            icon={Goal}
+                                            secondary
+                                            description={`Probabilidad de que el marcador sea ${score.home}-${score.away}`}
+                                            scoreResult={results ? `${results.homeScore}-${results.awayScore}` : undefined}
+                                        />
+                                    ))}
+                                    {topScoresTwo.length === 0 && (
+                                        <span className="text-xs text-gray-400">No hay datos suficientes</span>
+                                    )}
                                 </div>
                             </div>
                         </div>
+
+                        {/* ============================================================ */}
+                        {/* 2. POST‑MATCH (solo si r.result existe)                      */}
+                        {/* ============================================================ */}
+                        {r.result && (
+                            <div className="border-t border-gray-200 dark:border-neutral-700 pt-3 mt-2">
+                                <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
+                                    <span className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-[10px] px-2 py-0.5 rounded-full font-medium">
+                                        Finalizado
+                                    </span>
+                                    Estadísticas del partido
+                                </h4>
+
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    {/* Local */}
+                                    <div className="bg-white dark:bg-neutral-800/50 rounded-lg border border-gray-200 dark:border-neutral-700 p-3">
+                                        <div className="flex items-center gap-2 mb-2">
+                                            <img
+                                                src={`https://imagecache.365scores.com/image/upload/f_png,w_24,h_24,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.home.id}`}
+                                                className="w-6 h-6 object-contain"
+                                                alt=""
+                                            />
+                                            <span className="font-semibold text-sm text-gray-800 dark:text-gray-200 truncate">
+                                                {r.home.teamName}
+                                            </span>
+                                            <span className="ml-auto text-lg font-bold text-gray-800 dark:text-gray-200">
+                                                {r.result.homeScore}
+                                            </span>
+                                        </div>
+                                        <div className="space-y-1.5 text-xs">
+                                            <StatRow label="Goles esperados (xG)" value={r.result.homeXG.toFixed(2)} />
+                                            <StatRow label="xG recibidos (xGA)" value={r.result.homeXGA.toFixed(2)} />
+                                            <StatRow label="Tiros totales" value={r.result.homeShots} />
+                                            <StatRow label="Tiros a puerta" value={r.result.homeShotsOnTarget} />
+                                            <StatRow label="Córners" value={r.result.homeCorners} />
+                                            <StatRow label="Faltas cometidas" value={r.result.homeFauls} />
+                                            <StatRow label="Faltas recibidas" value={r.result.homeFaulsReceived} />
+                                            <StatRow label="Tarjetas amarillas" value={r.result.homeYellowCards} />
+                                            <StatRow label="Tarjetas rojas" value={r.result.homeRedCards} />
+                                            <StatRow label="Fueras de juego" value={r.result.homeOffsides} />
+                                            <StatRow label="Salvadas de portero" value={r.result.homeGoalkeeperSaves} />
+                                        </div>
+                                    </div>
+
+                                    {/* Visitante */}
+                                    <div className="bg-white dark:bg-neutral-800/50 rounded-lg border border-gray-200 dark:border-neutral-700 p-3">
+                                        <div className="flex items-center gap-2 mb-2">
+                                            <img
+                                                src={`https://imagecache.365scores.com/image/upload/f_png,w_24,h_24,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${r.away.id}`}
+                                                className="w-6 h-6 object-contain"
+                                                alt=""
+                                            />
+                                            <span className="font-semibold text-sm text-gray-800 dark:text-gray-200 truncate">
+                                                {r.away.teamName}
+                                            </span>
+                                            <span className="ml-auto text-lg font-bold text-gray-800 dark:text-gray-200">
+                                                {r.result.awayScore}
+                                            </span>
+                                        </div>
+                                        <div className="space-y-1.5 text-xs">
+                                            <StatRow label="Goles esperados (xG)" value={r.result.awayXG.toFixed(2)} />
+                                            <StatRow label="xG recibidos (xGA)" value={r.result.awayXGA.toFixed(2)} />
+                                            <StatRow label="Tiros totales" value={r.result.awayShots} />
+                                            <StatRow label="Tiros a puerta" value={r.result.awayShotsOnTarget} />
+                                            <StatRow label="Córners" value={r.result.awayCorners} />
+                                            <StatRow label="Faltas cometidas" value={r.result.awayFauls} />
+                                            <StatRow label="Faltas recibidas" value={r.result.awayFaulsReceived} />
+                                            <StatRow label="Tarjetas amarillas" value={r.result.awayYellowCards} />
+                                            <StatRow label="Tarjetas rojas" value={r.result.awayRedCards} />
+                                            <StatRow label="Fueras de juego" value={r.result.awayOffsides} />
+                                            <StatRow label="Salvadas de portero" value={r.result.awayGoalkeeperSaves} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 )}
 

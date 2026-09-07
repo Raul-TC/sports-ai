@@ -193,8 +193,6 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
                             <MatchCard
                                 key={r.matchUrl}
                                 prediction={r}
-                                onToggle={toggleMatch}
-                                isSelected={selectedMatchUrl === r.matchUrl}
                                 activeTab={activeTab}
                             />
                         ))}
