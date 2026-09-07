@@ -326,7 +326,7 @@ export function MatchCard({ prediction: r, activeTab }: MatchCardProps) {
                             Historial H2H
                         </span>
                         <span className="text-xs text-gray-400">
-                            ({homeWins}V - {draws}E - {awayWins}D · {totalGames} partidos)
+                            ({homeWins}V - {draws}E - {awayWins}V · {totalGames} partidos)
                         </span>
                     </div>
                     {/* Botones de filtro */}
@@ -981,7 +981,23 @@ export function MatchCard({ prediction: r, activeTab }: MatchCardProps) {
                         )}
                     </div>
                 )}
-
+                {currentTab === 'historial' && (
+                    <div>
+                        {renderH2H()}
+                        <div className="mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 px-4">
+                                <div className="space-y-1">
+                                    {renderRecentGames(homeGames, `Últimos ${homeGames.length} de ${r.home.teamName}`, r.home.teamId)}
+                                    {renderRecentGames(homeGamesLocal, `En casa`, r.home.teamId)}
+                                </div>
+                                <div className="space-y-1">
+                                    {renderRecentGames(awayGames, `Últimos ${awayGames.length} de ${r.away.teamName}`, r.away.teamId)}
+                                    {renderRecentGames(awayGamesAway, `Como visitante`, r.away.teamId)}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
                 {/* PESTAÑA: BAJAS */}
                 {currentTab === 'bajas' && (
                     <div className="px-4">
