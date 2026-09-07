@@ -401,6 +401,18 @@ export function MatchCard({ prediction: r, activeTab }: MatchCardProps) {
         );
     };
 
+    const hasMissingData = (): boolean => {
+        // Comprobamos que existan las métricas de ambos equipos
+        if (!r.home?.metrics || !r.away?.metrics) return true;
+
+        const homeXG = r.home.metrics.xG ?? 0;
+        const homeXGA = r.home.metrics.xGA ?? 0;
+        const awayXG = r.away.metrics.xG ?? 0;
+        const awayXGA = r.away.metrics.xGA ?? 0;
+
+        // Si alguno de los valores es 0, consideramos que faltan datos
+        return homeXG === 0 || homeXGA === 0 || awayXG === 0 || awayXGA === 0;
+    };
     // ============================================================
     // RENDER DE ÚLTIMOS PARTIDOS
     // ============================================================
@@ -460,6 +472,14 @@ export function MatchCard({ prediction: r, activeTab }: MatchCardProps) {
     // RENDER PRINCIPAL
     // ============================================================
     // console.log({ results: r.result })
+    const getMissingMessage = () => {
+        const homeMissing = !r.home?.metrics?.xG || !r.home?.metrics?.xGA;
+        const awayMissing = !r.away?.metrics?.xG || !r.away?.metrics?.xGA;
+        if (homeMissing && awayMissing) return 'ambos equipos';
+        if (homeMissing) return `el equipo local (${r.home.teamName})`;
+        if (awayMissing) return `el equipo visitante (${r.away.teamName})`;
+        return null;
+    };
     return (
         <div className="bg-white dark:bg-neutral-900  shadow-sm border border-gray-100 dark:border-neutral-800 overflow-hidden transition-all duration-200 hover:shadow-md my-4">
             {/* Fondo decorativo con colores de los equipos */}
@@ -473,7 +493,44 @@ export function MatchCard({ prediction: r, activeTab }: MatchCardProps) {
                         ${r.away.colors.localColor}25 100%
                     )`
                 }} />
+                <div className="relative inset-0 px-3 py-2 dark:border-neutral-800 bg-gray-900/10">
+                    <div className="flex items-center justify-between text-[10px] text-gray-500 dark:text-gray-400">
+                        <span className="font-medium text-gray-700 dark:text-gray-300">{r.competitionName}</span>
+                        <span className="flex items-center gap-1 text-gray-700 dark:text-gray-300">
+                            <Clock className="w-3 h-3" />
+                            {formatTime(r.startTime)}
+                        </span>
+                    </div>
+                    <div className="flex items-center gap-2 text-[10px] text-gray-500 dark:text-gray-400 mt-1">
 
+                        {r.estadio && (
+                            <div className="flex items-center gap-1 text-[9px] text-gray-400 mt-0.5">
+                                <MapPin className="w-3 h-3" />
+                                <span>{r.estadio.name}</span>
+
+                            </div>)
+                        }
+                        {(r.tv && r.tv.length > 0) && (
+                            <div className="flex items-center gap-1 text-[9px] text-gray-400 mt-0.5">
+
+                                <span className="mx-1 text-gray-700 dark:text-gray-300">·</span>
+                                <Tv className="w-3 h-3" />
+                                <span>{r.tv.map(tv => tv.name).join(', ')}</span>
+                            </div>
+
+                        )}
+                        {r.arbitro && (
+                            <div className="flex items-center gap-1 text-[9px] text-gray-400 mt-0.5">
+
+                                <span className="mx-1 text-gray-700 dark:text-gray-300">·</span>
+                                <UserRound className="w-3 h-3" />
+                                <span>{r.arbitro.map(a => a.name).join(', ')}</span>
+                            </div>
+
+                        )}
+                    </div>
+
+                </div>
                 {/* <div className="flex justify-between w-full px-4 py-2 backdrop-blur-sm">
                     <span className="text-sm dark:text-gray-50 font-medium text-white">
                         {r.competitionName}
@@ -489,38 +546,19 @@ export function MatchCard({ prediction: r, activeTab }: MatchCardProps) {
                         )}
                     </span>
                 </div> */}
-                <div className="px-3 py-2 border-b border-gray-100 dark:border-neutral-800 bg-gray-900/40">
-                    <div className="flex items-center justify-between text-[10px] text-gray-500 dark:text-gray-400">
-                        <span className="font-medium text-gray-700 dark:text-gray-300">{r.competitionName}</span>
-                        <span className="flex items-center gap-1 text-gray-700 dark:text-gray-300">
-                            <Clock className="w-3 h-3" />
-                            {formatTime(r.startTime)}
-                        </span>
-                    </div>
-                    {r.estadio && (
-                        <div className="flex items-center gap-1 text-[9px] text-gray-400 mt-0.5">
-                            <MapPin className="w-3 h-3" />
-                            <span>{r.estadio.name}</span>
-                            {r.tv && r.tv.length > 0 && (
-                                <>
-                                    <span className="mx-1 text-gray-700 dark:text-gray-300">·</span>
-                                    <Tv className="w-3 h-3" />
-                                    <span>{r.tv.map(tv => tv.name).join(', ')}</span>
-                                </>
-                            )}
-                            {r.arbitro && r.arbitro.length > 0 && (
-                                <>
-                                    <span className="mx-1 text-gray-700 dark:text-gray-300">·</span>
-                                    <UserRound className="w-3 h-3" />
-                                    <span>{r.arbitro.map(a => a.name).join(', ')}</span>
-                                </>
-                            )}
-                        </div>
-                    )}
-                </div>
+
+
+
+
                 <div className="relative p-6 w-full">
                     {/* Cabecera: equipos, hora, etc. */}
 
+                    {hasMissingData() && (
+                        <div className="mb-2 p-2 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800 text-xs text-amber-700 dark:text-amber-300 flex items-center gap-2">
+                            <AlertCircle className="w-4 h-4 shrink-0" />
+                            <span>⚠️ Datos de xG/xGA incompletos para {getMissingMessage()}. Las predicciones pueden ser menos precisas.</span>
+                        </div>
+                    )}
                     <div className="flex items-center justify-between w-full">
                         <div className="w-full flex items-center">
                             <div className="flex flex-col items-center gap-2 w-full">
