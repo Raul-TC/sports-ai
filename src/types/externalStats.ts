@@ -1,3 +1,5 @@
+import { n } from "ollama/dist/shared/ollama.1bfa89da.mjs";
+
 export interface ExternalTeamStat {
     teamId: number;
     teamName: string;
@@ -78,8 +80,9 @@ export const DEFAULT_STAT_IDS: StatIdMap = {
 export interface RawGame {
     competitionDisplayName: string;
     startTime: string;
-    homeCompetitor: { id: number; name: string };
-    awayCompetitor: { id: number; name: string };
+    homeCompetitor: { id: number; name: string, mainCompetitionId: number | null };
+    awayCompetitor: { id: number; name: string, mainCompetitionId: number | null };
+
 }
 
 export interface RawStatEntry {
