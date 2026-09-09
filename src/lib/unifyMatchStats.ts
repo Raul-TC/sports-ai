@@ -141,6 +141,90 @@ export interface UnifyOptions {
  * fórmulas especificadas. Requiere que el JSON de cada partido tenga los
  * 3 bloques presentes — si falta alguno, el partido se omite con un warning.
  */
+const leagueFactors: Record<string, number> = {
+    'Premier League': 1.0,
+    'LaLiga': 0.95,
+    'Bundesliga': 0.92,
+    'Serie A': 0.90,
+    'Ligue 1': 0.85,
+    'Eredivisie': 0.75,
+    'MLS': 0.78,
+    'Eliteserien': 0.55,
+    'Niké Liga': 0.35,
+    'Primeira Liga': 0.88,
+    'Superliga': 0.85,
+    'Premier League (Ucrania)': 0.70, // Ojo, nombre exacto de la liga. Si es "Ukrainian Premier League" o "Premier League" a secas, necesito ajustarlo.
+    'Liga Checa': 0.65,
+    'Premier League (Azerbaiyán)': 0.35,
+    'Brasileirão': 0.80,
+    'Liga MX': 0.76,
+    'Liga Argentina': 0.76,
+};
+
+const LEAGUES: Record<string, number> = {
+    MLS: 104,
+    LigaMX: 141,
+    Brasileirão: 113,
+    Argentina: 72,
+    ConmebolLibertadores: 102,
+    ConmebolSudamericana: 389,
+    LeaguesCup: 7242,
+    LaLiga: 11,
+    ConferenceLeague: 7685,
+    Sudamericana: 389,
+    EuropaLeague: 596,
+    EFL: 9,
+    Ligue1: 35,
+    Bundesliga: 25,
+    Premier: 7,
+    eredivisie: 57,
+    primeiraLiga: 73,
+    serieA: 17,
+    superligaTurquia: 78,
+    champions: 572,
+    eliteserien: 131,
+    premierAzerbaiyan: 5618,
+    ligaCheca: 117,
+    LigaUcrania: 129,
+    jupiterProLeague: 98,
+    superLigaGriega: 84,
+    BundesLigaAustria: 111,
+    nikeLiga: 145,
+};
+
+// Factores por ID de competición (mainCompetitionId)
+export const LEAGUE_FACTORS_BY_ID: Record<number, number> = {
+    // Top 5 europeas
+    [LEAGUES.Premier]: 1.00,      // 7
+    [LEAGUES.LaLiga]: 0.95,       // 11
+    [LEAGUES.Bundesliga]: 0.92,   // 25
+    [LEAGUES.serieA]: 0.90,       // 17
+    [LEAGUES.Ligue1]: 0.85,       // 35
+
+    // Segunda línea europea
+    [LEAGUES.primeiraLiga]: 0.88, // 73
+    [LEAGUES.superligaTurquia]: 0.85, // 78
+    [LEAGUES.eredivisie]: 0.75,   // 57
+    [LEAGUES.BundesLigaAustria]: 0.60,   // 111
+    [LEAGUES.superLigaGriega]: 0.70,
+    [LEAGUES.jupiterProLeague]: 0.78,
+    [LEAGUES.LigaUcrania]: 0.70,
+    [LEAGUES.ligaCheca]: 0.65,
+    [LEAGUES.eliteserien]: 0.55,
+    [LEAGUES.nikeLiga]: 0.35,
+    [LEAGUES.premierAzerbaiyan]: 0.35,
+
+
+    // Américas
+    [LEAGUES.MLS]: 0.78,          // 104
+    [LEAGUES.LigaMX]: 0.76,       // 141
+    [LEAGUES.Brasileirão]: 0.80,  // 113
+    [LEAGUES.Argentina]: 0.76,    // 72
+
+    // Nota: Competiciones internacionales (Champions, Libertadores, etc.)
+    // no se usan como liga base. Para esos partidos, el mainCompetitionId
+    // del equipo seguirá siendo su liga doméstica.
+};
 export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {}): UnifiedMatch[] {
     const weights = options.weights ?? DEFAULT_WEIGHTS;
     const statIds = options.statIds ?? DEFAULT_STAT_IDS;
@@ -176,12 +260,34 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
             const awayU5 = getTeamBlockStats(ultimos5Block, awayId, statIds, statisticGroup);
             const awayU5LV = getTeamBlockStats(u5lvBlock, awayId, statIds, statisticGroup);
 
-            // ---- xG / xGA blend ponderado ----
-            const xGTotalLocal = weightedBlend(homeTodos.xGFor, homeU5.xGFor, homeU5LV.xGFor, weights);
-            const xGATotalLocal = weightedBlend(homeTodos.xGAgainst, homeU5.xGAgainst, homeU5LV.xGAgainst, weights);
-            const xGTotalesVisita = weightedBlend(awayTodos.xGFor, awayU5.xGFor, awayU5LV.xGFor, weights);
-            const xGATotalVisita = weightedBlend(awayTodos.xGAgainst, awayU5.xGAgainst, awayU5LV.xGAgainst, weights);
 
+            const homeLeagueId = match.stats.todos?.games[0].homeCompetitor?.mainCompetitionId ?? 0;
+            const awayLeagueId = match.stats.todos?.games[0].awayCompetitor?.mainCompetitionId ?? 0;
+
+            console.log({ homeLeagueId, awayLeagueId })
+            const homeFactor = LEAGUE_FACTORS_BY_ID[homeLeagueId] || 1.0;
+            const awayFactor = LEAGUE_FACTORS_BY_ID[awayLeagueId] || 1.0;
+
+            // Si el ID no está en el mapa, se usa 1.0 (sin ajuste)
+            if (!LEAGUE_FACTORS_BY_ID[homeLeagueId]) {
+                console.warn(`⚠️ Factor desconocido para ID ${homeLeagueId} (equipo ${match.informacionEquipos?.home?.teamName})`);
+            }
+            if (!LEAGUE_FACTORS_BY_ID[awayLeagueId]) {
+                console.warn(`⚠️ Factor desconocido para ID ${awayLeagueId} (equipo ${match.informacionEquipos?.away?.teamName})`);
+            }
+
+            // ---- xG / xGA blend ponderado ----
+            const xGTotalLocalSinAjustar = weightedBlend(homeTodos.xGFor, homeU5.xGFor, homeU5LV.xGFor, weights);
+            const xGATotalLocalSinAjustar = weightedBlend(homeTodos.xGAgainst, homeU5.xGAgainst, homeU5LV.xGAgainst, weights);
+            const xGTotalesVisitaSinAjustar = weightedBlend(awayTodos.xGFor, awayU5.xGFor, awayU5LV.xGFor, weights);
+            const xGATotalVisitaSinAjustar = weightedBlend(awayTodos.xGAgainst, awayU5.xGAgainst, awayU5LV.xGAgainst, weights);
+
+            //Ajustado por ligas en caso de competiciones por ejemplo Champions
+
+            const xGTotalLocal = xGTotalLocalSinAjustar * homeFactor;
+            const xGATotalLocal = xGATotalLocalSinAjustar * homeFactor;
+            const xGTotalesVisita = xGTotalesVisitaSinAjustar * awayFactor;
+            const xGATotalVisita = xGATotalVisitaSinAjustar * awayFactor;
 
             const golesLocal = weightedBlend(homeTodos.goalsFor, homeU5.goalsFor, homeU5LV.goalsFor, weights)
             const golesVisita = weightedBlend(awayTodos.goalsFor, awayU5.goalsFor, awayU5LV.goalsFor, weights)
@@ -546,7 +652,7 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
             const homeMembers = match.informacionEquipos?.home.alineaciones?.lineups?.members || []
             const awayMembers = match.informacionEquipos?.away.alineaciones?.lineups?.members || []
             const members = match.informacionEquipos?.members || []
-            console.log({ match })
+            // console.log({ match })
             const homeInjuries = extractMissingPlayers(homeMembers, members);
             const awayInjuries = extractMissingPlayers(awayMembers, members);
 
