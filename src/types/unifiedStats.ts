@@ -3,6 +3,7 @@ import { PlayerStatus } from "@/utils/playerStatus";
 
 export interface UnifiedTeamInfo {
     teamId: number;
+    DT: string | null;
     id: number;
     colors: {
         localColor: string,

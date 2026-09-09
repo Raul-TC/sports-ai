@@ -546,19 +546,33 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
             const homeMembers = match.informacionEquipos?.home.alineaciones?.lineups?.members || []
             const awayMembers = match.informacionEquipos?.away.alineaciones?.lineups?.members || []
             const members = match.informacionEquipos?.members || []
-            // console.log({ match })
+            console.log({ match })
             const homeInjuries = extractMissingPlayers(homeMembers, members);
             const awayInjuries = extractMissingPlayers(awayMembers, members);
 
-            // console.log({ members, homeInjuries, awayInjuries })
+            const getCoachName = (membersTeam: any[]): string | null => {
+                if (!membersTeam || !Array.isArray(membersTeam)) return null;
+                // Buscar el miembro que sea entrenador
+                const coach = membersTeam.find(
+                    (m) => m.statusText === "Management"
+                );
+                const coachMember = (members as any[]).find(
+                    (member: any) => member.id === coach?.id
+                );
+                return coachMember?.name || null;
+            };
+            const getHomeDT = getCoachName(homeMembers);
+            const getAwayDT = getCoachName(awayMembers);
+
+            // console.log({ homeDT: getHomeDT, awayDT: getAwayDT })
             return {
                 matchUrl: match.matchUrl,
                 competitionId: match.informacionEquipos.competitionId,
                 competitions: match.informacionEquipos.home.homeCompetitor.competitions,
                 competitionName: game.competitionDisplayName,
                 startTime: game.startTime,
-                home: { teamId: homeId, colors: { localColor: match.informacionEquipos?.home.homeCompetitor.color, awayColor: match.informacionEquipos?.home.homeCompetitor.awayColor }, teamName: match.informacionEquipos?.home.teamName, metrics: metrics.home, id: match.informacionEquipos?.home.homeId, injuries: match.informacionEquipos?.home.alineaciones },
-                away: { teamId: awayId, colors: { localColor: match.informacionEquipos?.away.awayCompetitor.color, awayColor: match.informacionEquipos?.away.awayCompetitor.awayColor }, teamName: match.informacionEquipos?.away.teamName, metrics: metrics.away, id: match.informacionEquipos?.away.awayId, injuries: match.informacionEquipos?.away.alineaciones },
+                home: { teamId: homeId, DT: getHomeDT, colors: { localColor: match.informacionEquipos?.home.homeCompetitor.color, awayColor: match.informacionEquipos?.home.homeCompetitor.awayColor }, teamName: match.informacionEquipos?.home.teamName, metrics: metrics.home, id: match.informacionEquipos?.home.homeId, injuries: match.informacionEquipos?.home.alineaciones },
+                away: { teamId: awayId, DT: getAwayDT, colors: { localColor: match.informacionEquipos?.away.awayCompetitor.color, awayColor: match.informacionEquipos?.away.awayCompetitor.awayColor }, teamName: match.informacionEquipos?.away.teamName, metrics: metrics.away, id: match.informacionEquipos?.away.awayId, injuries: match.informacionEquipos?.away.alineaciones },
                 matchMetrics: metrics.match,
                 recentMatches: match.recentMatches,
                 estadio: match.informacionEquipos?.estadio,

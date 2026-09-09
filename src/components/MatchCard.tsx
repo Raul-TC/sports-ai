@@ -592,6 +592,9 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
                                     alt={r.home.teamName}
                                 />
                                 <span className="font-bold text-xs md:text-lg">{r.home.teamName}</span>
+                                {r.home.DT && (
+                                    <span className="text-[10px] text-gray-400">DT: {r.home.DT}</span>
+                                )}
                                 <span className="text-green-400 font-semibold">
                                     {r.prediction.moneyline.homeWin.prob}%
                                 </span>
@@ -624,6 +627,9 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
                                     alt={r.away.teamName}
                                 />
                                 <span className="font-bold text-xs md:text-lg">{r.away.teamName}</span>
+                                {r.away.DT && (
+                                    <span className="text-[10px] text-gray-400">DT: {r.away.DT}</span>
+                                )}
                                 <span className="text-green-400 font-semibold">
                                     {r.prediction.moneyline.awayWin.prob}%
                                 </span>
