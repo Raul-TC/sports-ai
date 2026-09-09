@@ -8,6 +8,7 @@
 import { DEFAULT_STAT_IDS, RawMatchData, RawStatEntry, RawStatsBlock, StatIdMap, StatsFilterKey } from "@/types/externalStats";
 import { MatchMetrics, TeamMetrics, UnifiedMatch } from "@/types/unifiedStats";
 import { extractMissingPlayers } from "@/utils/playerStatus";
+import { get } from "http";
 
 export interface BlockWeights {
     todos: number;
@@ -265,8 +266,12 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
             const awayLeagueId = match.stats.todos?.games[0].awayCompetitor?.mainCompetitionId ?? 0;
 
             console.log({ homeLeagueId, awayLeagueId })
-            const homeFactor = LEAGUE_FACTORS_BY_ID[homeLeagueId] || 1.0;
-            const awayFactor = LEAGUE_FACTORS_BY_ID[awayLeagueId] || 1.0;
+            function getLeagueFactor(leagueId: number): number {
+                return LEAGUE_FACTORS_BY_ID[leagueId] ?? 1.0;
+            }
+            const homeFactor = homeLeagueId === awayLeagueId ? 1.0 : getLeagueFactor(homeLeagueId);
+            const awayFactor = homeLeagueId === awayLeagueId ? 1.0 : getLeagueFactor(awayLeagueId);
+
 
             // Si el ID no está en el mapa, se usa 1.0 (sin ajuste)
             if (!LEAGUE_FACTORS_BY_ID[homeLeagueId]) {
@@ -315,7 +320,23 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
             const awayLambdaClassic = (xGTotalesVisita + xGATotalLocal) / 2;
             // const golesEsperados = homeLambdaClassic + awayLambdaClassic;
 
-
+            console.log('=== DEBUG LIGA FACTOR ===');
+            console.log('Local:', match.informacionEquipos?.home?.teamName);
+            console.log('Local mainCompetitionId:', homeLeagueId);
+            console.log('Local factor:', homeFactor);
+            console.log('Visitante:', match.informacionEquipos?.away?.teamName);
+            console.log('Visitante mainCompetitionId:', awayLeagueId);
+            console.log('Visitante factor:', awayFactor);
+            console.log('xG local original:', xGTotalLocal);
+            console.log('xG local ajustado:', xGTotalLocal * homeFactor);
+            console.log('xGA local ajustado:', xGATotalLocal);
+            console.log('xGA local ajustado:', xGATotalLocal * homeFactor);
+            console.log('xG visitante original:', xGTotalesVisita);
+            console.log('xG visitante ajustado:', xGTotalesVisita * awayFactor);
+            console.log('xGA visitante ajustado:', xGATotalVisita);
+            console.log('xGA visitante ajustado:', xGATotalVisita * awayFactor);
+            console.log('homeLambda:', homeLambdaClassicNormal);
+            console.log('awayLambda:', awayLambdaClassic);
             // ---- shot_factor: blend ponderado de (remates / remates al arco) ----
             const shotFactorLocal =
                 (weights.todos * safeDiv(homeTodos.shotsOnTarget, homeTodos.shots)) +
