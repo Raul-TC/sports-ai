@@ -1,0 +1,57 @@
+[
+    {
+        "name": "San Diego FC",
+        "teamId": 80778,
+        "reasson": "Son malisimos como visitante, no anotan nada",
+        "liga": "MLS"
+    },
+    {
+        "name": "Charlotte FC",
+        "teamId": 69188,
+        "reasson": "Son malisimos como local, no anotan nada",
+        "liga": "MLS",
+        "betado": true
+    },
+    {
+        "name": "Houston Dynamo",
+        "teamId": 1346,
+        "reasson": "Son malisimos como visitante, no anotan nada",
+        "liga": "MLS",
+        "betado": true
+    },
+    {
+        "name": "New York City FC",
+        "teamId": 20622,
+        "reasson": "Son malisimos como local, no anotan nada",
+        "liga": "MLS",
+        "betado": true
+    },
+    {
+        "name": "Nashville SC",
+        "teamId": 51126,
+        "reasson": "Son malisimos como visitante, no anotan nada",
+        "liga": "MLS",
+        "betado": true
+    },
+    {
+        "name": "Seattle Sounders",
+        "teamId": 1347,
+        "reasson": "Son malisimos como local, no anotan nada",
+        "liga": "MLS",
+        "betado": true
+    },
+    {
+        "name": "New York Red Bulls",
+        "teamId": 1338,
+        "reasson": "Son malisimos como visitante, no anotan nada",
+        "liga": "MLS",
+        "betado": true
+    },
+    {
+        "name": "Palmeiras",
+        "teamId": 1222,
+        "reasson": "Equipo muy irregular, no se puede confiar en ellos",
+        "liga": "Brasileirao Serie A",
+        "betado": true
+    }
+]

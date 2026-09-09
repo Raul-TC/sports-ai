@@ -34,6 +34,7 @@ import { useMemo, useState } from "react";
 interface MatchCardProps {
     prediction: EnrichedPrediction;
     activeTab: "today" | "future" | "past";
+    blackList: any[]
 }
 /**
  * Renderiza las estadísticas de un equipo agrupadas por categoría
@@ -79,7 +80,7 @@ const renderTeamStatistics = (teamId: number, statistics: any[]) => {
     ));
 };
 type TabKey = 'resumen' | 'estadisticas' | 'historial' | 'bajas' | 'picks' | 'odds';
-export function MatchCard({ prediction: r, activeTab }: MatchCardProps) {
+export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProps) {
     const homeLambda = r.prediction.homeExpectedGoals || 0;
     const awayLambda = r.prediction.awayExpectedGoals || 0;
     const topScoresTwo = getTopScoreProbabilities(homeLambda, awayLambda, 10, 16);
@@ -88,6 +89,10 @@ export function MatchCard({ prediction: r, activeTab }: MatchCardProps) {
     /**
      * Renderiza las estadísticas de un equipo agrupadas por categoría
      */
+    const getBlacklistEntry = (teamName: string) => {
+        return blackList.find((item: any) => item.name === teamName) || null;
+    };
+
     const StatRow = ({ label, value }: { label: string; value: string | number }) => (
         <div className="flex justify-between border-b border-gray-100 dark:border-neutral-700/50 py-0.5">
             <span className="text-gray-500 dark:text-gray-400">{label}</span>
@@ -494,6 +499,23 @@ export function MatchCard({ prediction: r, activeTab }: MatchCardProps) {
                     )`
                 }} />
                 <div className="relative inset-0 px-3 py-2 dark:border-neutral-800 bg-gray-900/10">
+                    {(() => {
+                        const homeEntry = getBlacklistEntry(r.home.teamName);
+                        const awayEntry = getBlacklistEntry(r.away.teamName);
+                        if (homeEntry || awayEntry) {
+                            return (
+                                <div className="mt-2 px-3 py-1.5 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg text-xs text-amber-700 dark:text-amber-300 flex items-center gap-2">
+                                    <AlertCircle className="w-4 h-4 shrink-0" />
+                                    <span>
+                                        ⚠️ Advertencia: {homeEntry ? `${r.home.teamName}: ${homeEntry.reasson}` : ''}
+                                        {homeEntry && awayEntry && ' · '}
+                                        {awayEntry ? `${r.away.teamName}: ${awayEntry.reasson}` : ''}
+                                    </span>
+                                </div>
+                            );
+                        }
+                        return null;
+                    })()}
                     <div className="flex items-center justify-between text-[10px] text-gray-500 dark:text-gray-400">
                         <span className="font-medium text-gray-700 dark:text-gray-300">{r.competitionName}</span>
                         <span className="flex items-center gap-1 text-gray-700 dark:text-gray-300">
@@ -501,6 +523,7 @@ export function MatchCard({ prediction: r, activeTab }: MatchCardProps) {
                             {formatTime(r.startTime)}
                         </span>
                     </div>
+
                     <div className="flex items-center gap-2 text-[10px] text-gray-500 dark:text-gray-400 mt-1">
 
                         {r.estadio && (

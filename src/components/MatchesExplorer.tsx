@@ -8,7 +8,7 @@ import { TabNavigation } from "@/components/TabNavigation";
 import { FilterOptions } from "@/components/FilterModal";
 import type { PredictionResult as SharedPredictionResult } from "@/types/index";
 import { MatchCard } from "./MatchCard";
-
+import blacklist from "../app/data/matches/equiposBetados.json"
 // ============================================================
 // INTERFACES
 // ============================================================
@@ -194,6 +194,7 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
                                 key={r.matchUrl}
                                 prediction={r}
                                 activeTab={activeTab}
+                                blackList={blacklist}
                             />
                         ))}
 
