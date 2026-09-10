@@ -34,6 +34,7 @@ export interface PredictionResult {
     prediction: ExtendedMatchPrediction;
     volatility?: number;
     data?: Welcome[],
+    members?: any[],
     injuries?: {
         home: { id: number; name: string; position: string; reason: string; expectedReturn?: string; gamesPlayed?: number, status: string, appearances?: string, goals?: string, assists?: string, athleteId: string }[];
         away: { id: number; name: string; position: string; reason: string; expectedReturn?: string; gamesPlayed?: number, status: string, appearances?: string, goals?: string, assists?: string, athleteId: string }[];

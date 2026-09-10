@@ -200,13 +200,13 @@ export const LEAGUE_FACTORS_BY_ID: Record<number, number> = {
     [LEAGUES.LaLiga]: 0.95,       // 11
     [LEAGUES.Bundesliga]: 0.92,   // 25
     [LEAGUES.serieA]: 0.90,       // 17
-    [LEAGUES.Ligue1]: 0.85,       // 35
+    [LEAGUES.Ligue1]: 0.87,       // 35
 
     // Segunda línea europea
-    [LEAGUES.primeiraLiga]: 0.88, // 73
+    [LEAGUES.primeiraLiga]: 0.90, // 73
     [LEAGUES.superligaTurquia]: 0.85, // 78
-    [LEAGUES.eredivisie]: 0.75,   // 57
-    [LEAGUES.BundesLigaAustria]: 0.60,   // 111
+    [LEAGUES.eredivisie]: 0.85,   // 57
+    [LEAGUES.BundesLigaAustria]: 0.70,   // 111
     [LEAGUES.superLigaGriega]: 0.70,
     [LEAGUES.jupiterProLeague]: 0.78,
     [LEAGUES.LigaUcrania]: 0.70,
@@ -217,10 +217,10 @@ export const LEAGUE_FACTORS_BY_ID: Record<number, number> = {
 
 
     // Américas
-    [LEAGUES.MLS]: 0.78,          // 104
-    [LEAGUES.LigaMX]: 0.76,       // 141
-    [LEAGUES.Brasileirão]: 0.80,  // 113
-    [LEAGUES.Argentina]: 0.76,    // 72
+    [LEAGUES.MLS]: 0.70,          // 104
+    [LEAGUES.LigaMX]: 0.72,       // 141
+    [LEAGUES.Brasileirão]: 0.82,  // 113
+    [LEAGUES.Argentina]: 0.78,    // 72
 
     // Nota: Competiciones internacionales (Champions, Libertadores, etc.)
     // no se usan como liga base. Para esos partidos, el mainCompetitionId
@@ -265,7 +265,7 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
             const homeLeagueId = match.stats.todos?.games[0].homeCompetitor?.mainCompetitionId ?? 0;
             const awayLeagueId = match.stats.todos?.games[0].awayCompetitor?.mainCompetitionId ?? 0;
 
-            console.log({ homeLeagueId, awayLeagueId })
+            // console.log({ homeLeagueId, awayLeagueId })
             function getLeagueFactor(leagueId: number): number {
                 return LEAGUE_FACTORS_BY_ID[leagueId] ?? 1.0;
             }
@@ -289,10 +289,14 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
 
             //Ajustado por ligas en caso de competiciones por ejemplo Champions
 
-            const xGTotalLocal = xGTotalLocalSinAjustar * homeFactor;
-            const xGATotalLocal = xGATotalLocalSinAjustar * homeFactor;
-            const xGTotalesVisita = xGTotalesVisitaSinAjustar * awayFactor;
-            const xGATotalVisita = xGATotalVisitaSinAjustar * awayFactor;
+            const xGTotalLocal = xGTotalLocalSinAjustar;
+            const xGATotalLocal = xGATotalLocalSinAjustar;
+            const xGTotalesVisita = xGTotalesVisitaSinAjustar;
+            const xGATotalVisita = xGATotalVisitaSinAjustar;
+            // const xGTotalLocal = xGTotalLocalSinAjustar * homeFactor;
+            // const xGATotalLocal = xGATotalLocalSinAjustar * homeFactor;
+            // const xGTotalesVisita = xGTotalesVisitaSinAjustar * awayFactor;
+            // const xGATotalVisita = xGATotalVisitaSinAjustar * awayFactor;
 
             const golesLocal = weightedBlend(homeTodos.goalsFor, homeU5.goalsFor, homeU5LV.goalsFor, weights)
             const golesVisita = weightedBlend(awayTodos.goalsFor, awayU5.goalsFor, awayU5LV.goalsFor, weights)
@@ -320,23 +324,7 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
             const awayLambdaClassic = (xGTotalesVisita + xGATotalLocal) / 2;
             // const golesEsperados = homeLambdaClassic + awayLambdaClassic;
 
-            console.log('=== DEBUG LIGA FACTOR ===');
-            console.log('Local:', match.informacionEquipos?.home?.teamName);
-            console.log('Local mainCompetitionId:', homeLeagueId);
-            console.log('Local factor:', homeFactor);
-            console.log('Visitante:', match.informacionEquipos?.away?.teamName);
-            console.log('Visitante mainCompetitionId:', awayLeagueId);
-            console.log('Visitante factor:', awayFactor);
-            console.log('xG local original:', xGTotalLocal);
-            console.log('xG local ajustado:', xGTotalLocal * homeFactor);
-            console.log('xGA local ajustado:', xGATotalLocal);
-            console.log('xGA local ajustado:', xGATotalLocal * homeFactor);
-            console.log('xG visitante original:', xGTotalesVisita);
-            console.log('xG visitante ajustado:', xGTotalesVisita * awayFactor);
-            console.log('xGA visitante ajustado:', xGATotalVisita);
-            console.log('xGA visitante ajustado:', xGATotalVisita * awayFactor);
-            console.log('homeLambda:', homeLambdaClassicNormal);
-            console.log('awayLambda:', awayLambdaClassic);
+
             // ---- shot_factor: blend ponderado de (remates / remates al arco) ----
             const shotFactorLocal =
                 (weights.todos * safeDiv(homeTodos.shotsOnTarget, homeTodos.shots)) +
@@ -526,7 +514,15 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
             // const attackMultiplierAway = 1 + (shotFactorAway - 0.35) * 0.30 + (eficienciaOfensivaAway - 1) * 0.15 + (momentumRatingAway - 0.5) * 0.10 + (consistency - 0.5) * 0.05;
 
             // const homeLambda = xGLocalMatch
-            const homeLambda = homeLambdaClassicNormal * attackMultiplierLocal;
+            const leagueAdjustmentHome =
+                1 + ((homeFactor - awayFactor) * 0.25);
+
+            const leagueAdjustmentAway =
+                1 + ((awayFactor - homeFactor) * 0.25);
+
+            const baseHomeLambda = homeLambdaClassicNormal * leagueAdjustmentHome;
+            const baseAwayLambda = awayLambdaClassic * leagueAdjustmentAway;
+            const homeLambda = baseHomeLambda * attackMultiplierLocal;
             // const homeLambda =
             //     0.60 * xGTotalLocal +
             //     0.30 * xGATotalVisita +
@@ -536,7 +532,7 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
 
 
             // const awayLambda = xGAwayMatch
-            const awayLambda = awayLambdaClassic * attackMultiplierAway;
+            const awayLambda = baseAwayLambda * attackMultiplierAway;
             // const awayLambda =
             //     0.60 * xGTotalesVisita +
             //     0.30 * xGATotalLocal +
@@ -698,14 +694,15 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
                 competitions: match.informacionEquipos.home.homeCompetitor.competitions,
                 competitionName: game.competitionDisplayName,
                 startTime: game.startTime,
-                home: { teamId: homeId, DT: getHomeDT, colors: { localColor: match.informacionEquipos?.home.homeCompetitor.color, awayColor: match.informacionEquipos?.home.homeCompetitor.awayColor }, teamName: match.informacionEquipos?.home.teamName, metrics: metrics.home, id: match.informacionEquipos?.home.homeId, injuries: match.informacionEquipos?.home.alineaciones },
-                away: { teamId: awayId, DT: getAwayDT, colors: { localColor: match.informacionEquipos?.away.awayCompetitor.color, awayColor: match.informacionEquipos?.away.awayCompetitor.awayColor }, teamName: match.informacionEquipos?.away.teamName, metrics: metrics.away, id: match.informacionEquipos?.away.awayId, injuries: match.informacionEquipos?.away.alineaciones },
+                home: { teamId: homeId, DT: getHomeDT, plantilla: match.informacionEquipos?.home.alineaciones?.lineups, colors: { localColor: match.informacionEquipos?.home.homeCompetitor.color, awayColor: match.informacionEquipos?.home.homeCompetitor.awayColor }, teamName: match.informacionEquipos?.home.teamName, metrics: metrics.home, id: match.informacionEquipos?.home.homeId, injuries: match.informacionEquipos?.home.alineaciones },
+                away: { teamId: awayId, DT: getAwayDT, plantilla: match.informacionEquipos?.away.alineaciones?.lineups, colors: { localColor: match.informacionEquipos?.away.awayCompetitor.color, awayColor: match.informacionEquipos?.away.awayCompetitor.awayColor }, teamName: match.informacionEquipos?.away.teamName, metrics: metrics.away, id: match.informacionEquipos?.away.awayId, injuries: match.informacionEquipos?.away.alineaciones },
                 matchMetrics: metrics.match,
                 recentMatches: match.recentMatches,
                 estadio: match.informacionEquipos?.estadio,
                 tvNetworks: match.informacionEquipos?.tv,
                 arbitro: match.informacionEquipos?.arbitro,
                 h2h: match.h2h?.game.h2hGames,
+                members,
                 injuries: {
                     home: homeInjuries,
                     away: awayInjuries

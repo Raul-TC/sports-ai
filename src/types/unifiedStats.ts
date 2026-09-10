@@ -4,6 +4,10 @@ import { PlayerStatus } from "@/utils/playerStatus";
 export interface UnifiedTeamInfo {
     teamId: number;
     DT: string | null;
+    plantilla: {
+        formation: string
+        members: any[];
+    }
     id: number;
     colors: {
         localColor: string,
@@ -50,6 +54,7 @@ export interface UnifiedMatch {
     h2hSummary?: { total: number; homeWins: number; awayWins: number; draws: number; avgGoals: number };
     arbitro: { id: number, name: string }
     h2h: any[],
+    members: any[]
     injuries: {
         home: any,
         away: any

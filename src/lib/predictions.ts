@@ -709,6 +709,7 @@ export function calculateAllPredictions(matches: UnifiedMatch[], options: Predic
     return matches.sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime()).map((match) => {
         // console.log({ matches })
         return {
+            ...match,
             matchUrl: match.matchUrl,
             competitionName: match.competitionName,
             competitionId: match.competitionId,
@@ -722,7 +723,8 @@ export function calculateAllPredictions(matches: UnifiedMatch[], options: Predic
             tv: match.tvNetworks,
             arbitro: match.arbitro,
             h2h: match.h2h,
-            injuries: match.injuries
+            injuries: match.injuries,
+
             // injuries: match.home.injuries
         }
     });

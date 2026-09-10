@@ -53,5 +53,12 @@
         "reasson": "Equipo muy irregular, no se puede confiar en ellos",
         "liga": "Brasileirao Serie A",
         "betado": true
+    },
+    {
+        "name": "FC Cincinnati",
+        "teamId": 25287,
+        "reasson": "Equipo pendejo, 2 partidos seguidos sin meter gol, le expulsan a uno y no ataca mas",
+        "liga": "MLS",
+        "betado": true
     }
 ]
