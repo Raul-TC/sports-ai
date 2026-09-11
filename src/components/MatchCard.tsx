@@ -21,6 +21,7 @@ import {
     Zap,
     DollarSign,
     Shirt,
+    Trophy,
 } from "lucide-react";
 
 import { EnrichedPrediction } from "@/utils/enrichPredictions";
@@ -34,6 +35,7 @@ import { useMemo, useState } from "react";
 import { MatchStatsModal } from "./MatchStatsModal";
 import { SquadTeam } from "./SquadTeam";
 import { FormationPitch } from "./FormationPitch";
+import StandingsTable from "./StandingsTable";
 
 interface MatchCardProps {
     prediction: EnrichedPrediction;
@@ -83,7 +85,7 @@ const renderTeamStatistics = (teamId: number, statistics: any[]) => {
         </div>
     ));
 };
-type TabKey = 'resumen' | 'estadisticas' | 'historial' | 'bajas' | 'plantilla' | 'picks' | 'odds';
+type TabKey = 'resumen' | 'estadisticas' | 'historial' | 'bajas' | 'plantilla' | 'picks' | 'odds' | 'tabla';
 export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProps) {
     const homeLambda = r.prediction.homeExpectedGoals || 0;
     const awayLambda = r.prediction.awayExpectedGoals || 0;
@@ -100,18 +102,13 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
         return blackList.find((item: any) => item.name === teamName) || null;
     };
 
-    console.log({ r })
     const StatRow = ({ label, value }: { label: string; value: string | number }) => (
         <div className="flex justify-between border-b border-gray-100 dark:border-neutral-700/50 py-0.5">
             <span className="text-gray-500 dark:text-gray-400">{label}</span>
             <span className="font-medium text-gray-700 dark:text-gray-300">{value}</span>
         </div>
     );
-    // const handleClick = (e: React.MouseEvent) => {
-    //     e.stopPropagation();
-    //     if (onClick) onClick(e);
-    //     if (description) setShowTooltip((prev) => !prev);
-    // };
+
     const gate = useMemo(
         () => gateEngine(r.home, r.away, r.prediction),
         [r.home, r.away, r.prediction]
@@ -612,6 +609,18 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
                                     {r.home.DT && (
                                         <span className="text-[10px] text-gray-400">DT: {r.home.DT}</span>
                                     )}
+                                    {r.home.standings && (
+                                        <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/70 dark:bg-neutral-800/70 backdrop-blur-sm border border-gray-200/60 dark:border-neutral-700/50">
+                                            <span className="text-[9px] uppercase tracking-wider text-gray-400 dark:text-neutral-500 font-semibold">Pos</span>
+                                            <span className="text-[11px] font-black text-gray-900 dark:text-white tabular-nums">
+                                                {r.home.standings.position}º
+                                            </span>
+                                            <span className="w-px h-3 bg-gray-300 dark:bg-neutral-600" />
+                                            <span className="text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 tabular-nums">
+                                                {r.home.standings.points} pts
+                                            </span>
+                                        </div>
+                                    )}
                                     <span className="text-green-400 font-semibold">
                                         {r.prediction.moneyline.homeWin.prob}%
                                     </span>
@@ -647,6 +656,18 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
                                     {r.away.DT && (
                                         <span className="text-[10px] text-gray-400">DT: {r.away.DT}</span>
                                     )}
+                                    {r.away.standings && (
+                                        <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/70 dark:bg-neutral-800/70 backdrop-blur-sm border border-gray-200/60 dark:border-neutral-700/50">
+                                            <span className="text-[9px] uppercase tracking-wider text-gray-400 dark:text-neutral-500 font-semibold">Pos</span>
+                                            <span className="text-[11px] font-black text-gray-900 dark:text-white tabular-nums">
+                                                {r.away.standings.position}º
+                                            </span>
+                                            <span className="w-px h-3 bg-gray-300 dark:bg-neutral-600" />
+                                            <span className="text-[10px] font-semibold text-rose-600 dark:text-rose-400 tabular-nums">
+                                                {r.away.standings.points} pts
+                                            </span>
+                                        </div>
+                                    )}
                                     <span className="text-green-400 font-semibold">
                                         {r.prediction.moneyline.awayWin.prob}%
                                     </span>
@@ -669,6 +690,7 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
                             { key: "plantilla", label: "Plantilla", icon: Shirt },
                             { key: 'picks', label: 'Picks', icon: Zap },
                             { key: 'odds', label: 'Odds', icon: DollarSign },
+                            { key: 'tabla', label: 'Tabla', icon: Trophy },
                         ].map((tab) => {
                             const isActive = currentTab === tab.key;
                             const Icon = tab.icon;
@@ -1202,7 +1224,6 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
                                     roster={r.members ?? []}
                                     lineup={r.home.plantilla.members ?? []}
                                     onPlayerClick={(p) => {
-                                        console.log("🎯 CLICK JUGADOR:", p);
                                         setSelectedPlayer(p)
                                     }}
 
@@ -1215,6 +1236,23 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
                                     onPlayerClick={setSelectedPlayer}
                                 />
                             </div>
+                        </div>
+                    )}
+
+                    {currentTab === 'tabla' && (
+                        <div className="px-4">
+                            {r.standings?.rows?.length > 0 ? (
+                                <StandingsTable
+                                    title={r.standings.displayName ?? r.competitionName}
+                                    standings={r.standings.rows}
+                                    highlightTeamIds={[r.home.id, r.away.id]}
+                                    destinations={r.standings.destinations}
+                                />
+                            ) : (
+                                <div className="text-center py-8 text-xs text-gray-400">
+                                    Sin tabla de posiciones disponible.
+                                </div>
+                            )}
                         </div>
                     )}
                     {/* PESTAÑA: PICKS */}

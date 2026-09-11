@@ -1,5 +1,3 @@
-import { ExternalMatchStats, ExternalTeamStat } from "@/types/externalStats";
-
 export interface StatIdMap {
     goalsFor: number;
     goalsAgainst: number;
@@ -66,48 +64,3 @@ export function extractStatValue(
     );
     return entry ? parseFloat(entry.value) || 0 : 0;
 }
-
-/**
- * Separa el JSON crudo (arreglo de N partidos) en un arreglo de
- * ExternalMatchStats — un objeto independiente por partido, cada uno
- * con las stats de su propio local y visitante ya extraídas.
- */
-// export function parseExternalStats(raw: RawMatchData[], options: ParseOptions = {}): ExternalMatchStats[] {
-//     const filterKey = options.filterKey ?? "ultimos5";
-//     const statisticGroup = options.statisticGroup === undefined ? 2 : options.statisticGroup;
-//     const statIds = options.statIds ?? DEFAULT_STAT_IDS;
-
-//     return raw
-//         .map((match): ExternalMatchStats | null => {
-//             const block = match.stats[filterKey];
-//             console.log({ block, filterKey })
-//             if (!block || !block.games?.length) {
-//                 console.warn(`⚠️ Sin bloque "${filterKey}" para ${match.matchUrl} — se omite.`);
-//                 return null;
-//             }
-
-//             const { statistics, games } = block;
-//             const game = games[0];
-//             const homeId = game.homeCompetitor.id;
-//             const awayId = game.awayCompetitor.id;
-
-//             const buildTeamStat = (teamId: number, teamName: string): ExternalTeamStat => ({
-//                 teamId,
-//                 teamName,
-//                 goalsFor: extractStatValue(statistics, statIds.goalsFor, teamId, statisticGroup),
-//                 goalsAgainst: extractStatValue(statistics, statIds.goalsAgainst, teamId, statisticGroup),
-//                 xGFor: extractStatValue(statistics, statIds.xGFor, teamId, statisticGroup),
-//                 xGAgainst: extractStatValue(statistics, statIds.xGAgainst, teamId, statisticGroup),
-//                 cornersAvg: extractStatValue(statistics, statIds.corners, teamId, statisticGroup),
-//             });
-
-//             return {
-//                 matchUrl: match.matchUrl,
-//                 competitionName: game.competitionDisplayName,
-//                 startTime: game.startTime,
-//                 home: buildTeamStat(homeId, game.homeCompetitor.name),
-//                 away: buildTeamStat(awayId, game.awayCompetitor.name),
-//             };
-//         })
-//         .filter((m): m is ExternalMatchStats => m !== null);
-// }

@@ -9,6 +9,7 @@ import { FilterOptions } from "@/components/FilterModal";
 import type { PredictionResult as SharedPredictionResult } from "@/types/index";
 import { MatchCard } from "./MatchCard";
 import blacklist from "../app/data/matches/equiposBetados.json"
+import TeamsLineStats from "./TeamsLineStats";
 // ============================================================
 // INTERFACES
 // ============================================================
@@ -24,6 +25,7 @@ interface TeamMetrics {
     efficiency: number;
     precisionDrop: number;
     corners: number;
+    cornersConceded: number;   // 🆕
     shots: number;
     shotsOT: number;
 }
@@ -147,6 +149,7 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
                 </h2>
             </div>
 
+            <TeamsLineStats predictions={filteredPredictions} minMatches={10} />
             <div className="flex items-center gap-4 justify-between mb-2 border-b border-gray-200 dark:border-neutral-700">
 
                 <TabNavigation
@@ -156,6 +159,7 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
                     futureCount={futureCount}
                     pastCount={pastCount}
                 />
+                {/* <PredictionsSummaryTable predictions={filteredPredictions} /> */}
 
                 <div className="flex items-center gap-2 flex-wrap">
                     <select id="league-select"
