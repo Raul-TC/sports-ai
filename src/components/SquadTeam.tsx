@@ -207,7 +207,6 @@ export function SquadTeam({
         lineupCompetitorId ??
         (roster ?? []).find((p: any) => p.competitorId === teamId)?.competitorId ??
         teamId;
-    console.log("SquadTeam:", teamName, "teamId:", teamId, "effective:", effectiveTeamId, "rosterCount:", teamRoster.length, "lineupCount:", lineup?.length);
     const starters: any[] = [];
     const subs: any[] = [];
     const missing: any[] = [];

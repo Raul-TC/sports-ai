@@ -61,6 +61,7 @@ export function TeamStatsBlock({ team, title, opponent, goalLines, results }: Te
             case 'Tiros': return opponentM.shots;
             case 'Tiro a Puerta': return opponentM.shotsOT;
             case 'Córners': return opponentM.corners;
+            case 'Corners Concedidos': return opponentM.cornersConceded;
             case 'Eficiencia Of': return opponentM.offensiveEfficiency;
             case 'Eficiencia Def': return opponentM.xGA > 0 ? opponentM.golesRecibidos / opponentM.xGA : 1;
             case 'Goles Previstos': return opponentM.expectedGoals;
@@ -172,6 +173,12 @@ export function TeamStatsBlock({ team, title, opponent, goalLines, results }: Te
             value: m.corners.toFixed(1),
             icon: CornerDownRight,
             description: "Saques de esquina a favor.",
+        },
+        {
+            label: "Córners Concedidos",
+            value: m.cornersConceded.toFixed(1),
+            icon: CornerDownRight,
+            description: "Saques de esquina concedidos",
         },
         {
             label: "Eficiencia Of",

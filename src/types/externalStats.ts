@@ -1,5 +1,7 @@
 // import { n } from "ollama/dist/shared/ollama.1bfa89da.mjs";
 
+import { StandingsBlock } from "@/components/StandingsTable";
+
 export interface ExternalTeamStat {
     teamId: number;
     teamName: string;
@@ -82,7 +84,7 @@ export interface RawGame {
     startTime: string;
     homeCompetitor: { id: number; name: string, mainCompetitionId: number | null };
     awayCompetitor: { id: number; name: string, mainCompetitionId: number | null };
-
+    competitionId: number
 }
 
 export interface RawStatEntry {
@@ -95,6 +97,7 @@ export interface RawStatEntry {
 export interface RawStatsBlock {
     statistics: RawStatEntry[];
     games: RawGame[];
+    competitions: any[]
 }
 export type StatsFilterKey = "todos" | "ultimos5" | "ultimos5LocalVisita";
 
@@ -118,7 +121,21 @@ export interface RawMatchData {
             }
             teamName: string,
             nameForURL: string,
-            alineaciones: any
+            alineaciones: any,
+            standings?: {
+                position: number;
+                points: number;
+                played: number;
+                wins: number;
+                draws: number;
+                losses: number;
+                goalsFor: number;
+                goalsAgainst: number;
+                goalDiff: number;
+                pct?: string;
+                recentForm?: number[];
+                displayName?: string;
+            } | null;
         },
         away: {
             awayId: number,
@@ -130,7 +147,21 @@ export interface RawMatchData {
             }
             teamName: string,
             nameForURL: string,
-            alineaciones: any
+            alineaciones: any,
+            standings?: {
+                position: number;
+                points: number;
+                played: number;
+                wins: number;
+                draws: number;
+                losses: number;
+                goalsFor: number;
+                goalsAgainst: number;
+                goalDiff: number;
+                pct?: string;
+                recentForm?: number[];
+                displayName?: string;
+            } | null;
         },
         estadio: {
             id: number,
@@ -178,7 +209,8 @@ export interface RawMatchData {
             homeCompetitor: any[],
             awayCompetitor: any[],
         }
-    }
+    },
+    standings: StandingsBlock
 }
 
 export interface ParseOptions {

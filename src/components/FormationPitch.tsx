@@ -41,7 +41,6 @@ export function FormationPitch({
             : posId === 2 ? "ring-blue-300"
                 : posId === 3 ? "ring-emerald-300"
                     : "ring-rose-300";
-    console.log({ formation })
     return (
         <div className="space-y-2">
             {/* Header */}

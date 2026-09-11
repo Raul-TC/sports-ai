@@ -1,5 +1,4 @@
-import { PredictionOptions } from "@/lib/predictions";
-import { PlayerStatus } from "@/utils/playerStatus";
+import { StandingsBlock } from "@/components/StandingsTable";
 
 export interface UnifiedTeamInfo {
     teamId: number;
@@ -18,7 +17,21 @@ export interface UnifiedTeamInfo {
     injuries?: {
         home: { id: number; name: string; position: string; reason: string; expectedReturn?: string; gamesPlayed?: number }[];
         away: { id: number; name: string; position: string; reason: string; expectedReturn?: string; gamesPlayed?: number }[];
-    }[]
+    }[],
+    standings?: {
+        position: number;
+        points: number;
+        played: number;
+        wins: number;
+        draws: number;
+        losses: number;
+        goalsFor: number;
+        goalsAgainst: number;
+        goalDiff: number;
+        pct?: string;
+        recentForm?: number[];
+        displayName?: string;
+    } | null;
 }
 
 export interface MatchMetrics {
@@ -59,6 +72,7 @@ export interface UnifiedMatch {
         home: any,
         away: any
     }
+    standings: StandingsBlock
 }
 
 export interface TeamMetrics {
@@ -72,6 +86,7 @@ export interface TeamMetrics {
     efficiency: number;
     precisionDrop: number;
     corners: number
+    cornersConceded: number,
     shots: number,
     shotsOT: number,
     foulsCommitted: number;

@@ -30,6 +30,7 @@ interface TeamBlockStats {
     shots: number;
     shotsOnTarget: number;
     corners: number
+    cornersConceded: number;
     foulsCommitted: number;
     foulsReceived: number;
     offsides: number;
@@ -74,6 +75,7 @@ function getTeamBlockStats(
         shots: extractStatValue(block.statistics, statIds.shots, teamId, statisticGroup),
         shotsOnTarget: extractStatValue(block.statistics, statIds.shotsOnTarget, teamId, statisticGroup),
         corners: extractStatValue(block.statistics, statIds.corners, teamId, statisticGroup),
+        cornersConceded: extractStatValue(block.statistics, 9991, teamId, statisticGroup),   // 🆕
         foulsCommitted: extractStatValue(block.statistics, statIds.foulsCommitted, teamId, statisticGroup),
         foulsReceived: extractStatValue(block.statistics, statIds.foulsReceived, teamId, statisticGroup),
         offsides: extractStatValue(block.statistics, statIds.offsides, teamId, statisticGroup),
@@ -231,7 +233,6 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
     const statIds = options.statIds ?? DEFAULT_STAT_IDS;
     const statisticGroup = options.statisticGroup === undefined ? 2 : options.statisticGroup;
 
-    // console.log({ statIds })
     return raw
         .map((match): UnifiedMatch | null => {
             const requiredKeys: StatsFilterKey[] = ["todos", "ultimos5", "ultimos5LocalVisita"];
@@ -254,6 +255,7 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
             const homeId = game.homeCompetitor.id;
             const awayId = game.awayCompetitor.id;
             // Extraer stats crudas de cada bloque, para ambos equipos
+            // console.log({ homeId, awayId })
             const homeTodos = getTeamBlockStats(todosBlock, homeId, statIds, statisticGroup);
             const homeU5 = getTeamBlockStats(ultimos5Block, homeId, statIds, statisticGroup);
             const homeU5LV = getTeamBlockStats(u5lvBlock, homeId, statIds, statisticGroup);
@@ -275,10 +277,10 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
 
             // Si el ID no está en el mapa, se usa 1.0 (sin ajuste)
             if (!LEAGUE_FACTORS_BY_ID[homeLeagueId]) {
-                console.warn(`⚠️ Factor desconocido para ID ${homeLeagueId} (equipo ${match.informacionEquipos?.home?.teamName})`);
+                // console.warn(`⚠️ Factor desconocido para ID ${homeLeagueId} (equipo ${match.informacionEquipos?.home?.teamName})`);
             }
             if (!LEAGUE_FACTORS_BY_ID[awayLeagueId]) {
-                console.warn(`⚠️ Factor desconocido para ID ${awayLeagueId} (equipo ${match.informacionEquipos?.away?.teamName})`);
+                // console.warn(`⚠️ Factor desconocido para ID ${awayLeagueId} (equipo ${match.informacionEquipos?.away?.teamName})`);
             }
 
             // ---- xG / xGA blend ponderado ----
@@ -416,6 +418,15 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
             const cornersAwayPonderado = ((weights.todos * awayTodos.corners) +
                 (weights.ultimos5 * awayU5.corners) +
                 (weights.ultimos5LocalVisita * awayU5LV.corners));
+
+            // 🆕 Córners concedidos ponderados
+            const cornersConcededHomePonderado = ((weights.todos * homeTodos.cornersConceded) +
+                (weights.ultimos5 * homeU5.cornersConceded) +
+                (weights.ultimos5LocalVisita * homeU5LV.cornersConceded));
+
+            const cornersConcededAwayPonderado = ((weights.todos * awayTodos.cornersConceded) +
+                (weights.ultimos5 * awayU5.cornersConceded) +
+                (weights.ultimos5LocalVisita * awayU5LV.cornersConceded));
 
             const defensiveLocal = safeDiv(xGATotalLocal, golesRecibidosLocal);
             const defensiveEfficiencyLocal = normalize(defensiveLocal, 0.5, 1.5)
@@ -593,7 +604,7 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
 
 
 
-            const buildTeamMetrics = (goles: number, golesRecibidos: number, xG: number, xGA: number, expectedGoals: number, shotFactor: number, offensiveEfficiency: number, efficiency: number, precisionDrop: number, corners: number, shots: number, shotOT: number, foulsCommitted: number, foulsReceived: number, offsides: number, saves: number, ratioFaltas: number, tarjetasAmarillas: number): TeamMetrics => ({
+            const buildTeamMetrics = (goles: number, golesRecibidos: number, xG: number, xGA: number, expectedGoals: number, shotFactor: number, offensiveEfficiency: number, efficiency: number, precisionDrop: number, corners: number, cornersConceded: number, shots: number, shotOT: number, foulsCommitted: number, foulsReceived: number, offsides: number, saves: number, ratioFaltas: number, tarjetasAmarillas: number): TeamMetrics => ({
                 golesPerPartido: +goles.toFixed(3),
                 golesRecibidos: +golesRecibidos.toFixed(3),
                 xG: +xG.toFixed(3),
@@ -604,6 +615,7 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
                 efficiency: +efficiency.toFixed(3),
                 precisionDrop: +precisionDrop.toFixed(3),
                 corners: +corners.toFixed(3),
+                cornersConceded: +cornersConceded.toFixed(3),
                 shots: +shots.toFixed(3),
                 shotsOT: +shotOT.toFixed(3),
                 foulsCommitted: +foulsCommitted.toFixed(3),
@@ -627,6 +639,7 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
                     eficienciaLocal,
                     precisionDropLocal,
                     expectedHomeCorners,
+                    cornersConcededHomePonderado,   // 🆕
                     shotsHomePonderado,
                     shotsOTHomePonderado,
                     foulsCommittedLocal,
@@ -648,6 +661,7 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
                     eficienciaVisita,
                     precisionDropAway,
                     expectedAwayCorners,
+                    cornersConcededAwayPonderado,   // 🆕
                     shotsAwayPonderado,
                     shotsOTAwayPonderado,
                     foulsCommittedAway,
@@ -690,14 +704,18 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
             // console.log({ homeDT: getHomeDT, awayDT: getAwayDT })
             return {
                 matchUrl: match.matchUrl,
-                competitionId: match.informacionEquipos.competitionId,
-                competitions: match.informacionEquipos.home.homeCompetitor.competitions,
+                competitionId: match?.informacionEquipos?.competitionId || match.stats.todos!.games[0].competitionId,
+                competitions: match?.informacionEquipos?.home?.homeCompetitor?.competitions || match?.stats?.todos?.competitions,
                 competitionName: game.competitionDisplayName,
                 startTime: game.startTime,
-                home: { teamId: homeId, DT: getHomeDT, plantilla: match.informacionEquipos?.home.alineaciones?.lineups, colors: { localColor: match.informacionEquipos?.home.homeCompetitor.color, awayColor: match.informacionEquipos?.home.homeCompetitor.awayColor }, teamName: match.informacionEquipos?.home.teamName, metrics: metrics.home, id: match.informacionEquipos?.home.homeId, injuries: match.informacionEquipos?.home.alineaciones },
-                away: { teamId: awayId, DT: getAwayDT, plantilla: match.informacionEquipos?.away.alineaciones?.lineups, colors: { localColor: match.informacionEquipos?.away.awayCompetitor.color, awayColor: match.informacionEquipos?.away.awayCompetitor.awayColor }, teamName: match.informacionEquipos?.away.teamName, metrics: metrics.away, id: match.informacionEquipos?.away.awayId, injuries: match.informacionEquipos?.away.alineaciones },
+                home: {
+                    teamId: homeId, DT: getHomeDT, plantilla: match.informacionEquipos?.home.alineaciones?.lineups, colors: { localColor: match.informacionEquipos?.home.homeCompetitor?.color, awayColor: match.informacionEquipos?.home.homeCompetitor?.awayColor }, teamName: match.informacionEquipos?.home.teamName, metrics: metrics.home, id: match.informacionEquipos?.home.homeId, injuries: match.informacionEquipos?.home.alineaciones, standings: match.informacionEquipos?.home.standings ?? null,   // 🆕
+                },
+                away: {
+                    teamId: awayId, DT: getAwayDT, plantilla: match.informacionEquipos?.away.alineaciones?.lineups, colors: { localColor: match.informacionEquipos?.away.awayCompetitor?.color, awayColor: match.informacionEquipos?.away.awayCompetitor?.awayColor }, teamName: match.informacionEquipos?.away.teamName, metrics: metrics.away, id: match.informacionEquipos?.away.awayId, injuries: match.informacionEquipos?.away.alineaciones, standings: match.informacionEquipos?.away.standings ?? null,   // 🆕
+                },
                 matchMetrics: metrics.match,
-                recentMatches: match.recentMatches,
+                recentMatches: match?.recentMatches,
                 estadio: match.informacionEquipos?.estadio,
                 tvNetworks: match.informacionEquipos?.tv,
                 arbitro: match.informacionEquipos?.arbitro,
@@ -706,12 +724,8 @@ export function unifyMatchStats(raw: RawMatchData[], options: UnifyOptions = {})
                 injuries: {
                     home: homeInjuries,
                     away: awayInjuries
-                }
-                // venue?: { id: number; name: string; capacity: number };
-                // tvNetworks?: { id: number; name: string; countryId: number }[];
-                // recentMatches?: { home: any; away: any };
-                // h2hSummary?: { total: number; homeWins: number; awayWins: number; draws: number; avgGoals: number };
-
+                },
+                standings: match.standings
             } satisfies UnifiedMatch;
         })
         .filter((m): m is UnifiedMatch => m !== null);
