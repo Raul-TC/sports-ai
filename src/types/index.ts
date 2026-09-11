@@ -1,6 +1,7 @@
 import { ExtendedMatchPrediction } from "@/lib/predictions";
 import { Welcome } from "@/utils/enrichPredictions";
 import { TeamMetrics, UnifiedTeamInfo } from "./unifiedStats";
+import { StandingRow, StandingsBlock } from "@/components/StandingsTable";
 
 // export interface TeamMetrics {
 //     golesPerPartido: number;
@@ -44,6 +45,7 @@ export interface PredictionResult {
     recentMatches: { home: any; away: any };
     h2h: any[]
     arbitro: { id: number, name: string }[]
+    standings: StandingsBlock
 }
 
 export interface ExcludedTeam {
