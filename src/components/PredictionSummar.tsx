@@ -229,7 +229,7 @@ export default function PredictionsSummaryTable({ predictions }: Props) {
                                         key={r.matchUrl}
                                         className="border-t border-gray-100 dark:border-neutral-800 hover:bg-gray-50/60 dark:hover:bg-neutral-800/30"
                                     >
-                                        <td className="px-3 py-2 min-w-[220px]">
+                                        <td className="px-3 py-2 min-w-55">
                                             <div className="font-semibold text-gray-800 dark:text-neutral-100 truncate">
                                                 {r.homeTeam} <span className="text-gray-400">vs</span> {r.awayTeam}
                                             </div>
@@ -397,7 +397,7 @@ function CellWinner({
     return (
         <div className="flex flex-col items-center gap-0.5">
             <span className="text-[9px] text-gray-400 dark:text-neutral-500">Pred.</span>
-            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 max-w-[80px] truncate">
+            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 max-w-20 truncate">
                 {label}
             </span>
             <span className="text-[9px] text-gray-400 dark:text-neutral-500 tabular-nums">

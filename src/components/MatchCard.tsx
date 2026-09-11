@@ -85,6 +85,66 @@ const renderTeamStatistics = (teamId: number, statistics: any[]) => {
         </div>
     ));
 };
+
+/**
+ * Cuando AA y Over 2.5 tienen probabilidades parecidas, decide cuál escoger
+ * analizando el balance de los ataques (lambdas).
+ */
+function decideBTTSvsOver25(
+    homeLambda: number,
+    awayLambda: number,
+    probBTTS: number,      // en % (0-100)
+    probOver25: number,    // en % (0-100)
+) {
+    const gap = Math.abs(probBTTS - probOver25);
+    const isClose = gap < 8;   // menos de 8% de diferencia = "parejos"
+
+    const weakest = Math.min(homeLambda, awayLambda);
+    const strongest = Math.max(homeLambda, awayLambda);
+    const totalLambda = homeLambda + awayLambda;
+    const balanceRatio = strongest > 0 ? weakest / strongest : 1;
+
+    // Si NO están parejos, no hay conflicto → cada uno a lo suyo
+    if (!isClose) return null;
+
+    // Caso 1: Ataque muy desequilibrado (un equipo casi no genera)
+    if (weakest < 0.9) {
+        return {
+            choice: "Over 2.5",
+            reason: `El ataque más débil solo tiene xG ${weakest.toFixed(2)} — riesgo real de que no marque`,
+            warning: `Si el equipo con xG ${weakest.toFixed(2)} no anota, el AA falla incluso con 4-0`,
+            level: "high" as const,
+        };
+    }
+
+    // Caso 2: Ambos ataques fuertes y equilibrados → BTTS más fiable
+    if (weakest >= 1.1 && balanceRatio > 0.65) {
+        return {
+            choice: "Ambos Anotan",
+            reason: `Ataques equilibrados (${homeLambda.toFixed(2)} vs ${awayLambda.toFixed(2)}) — ambos deberían marcar`,
+            warning: `Con Over 2.5 solo necesitas 3 goles, pero el AA paga más cuando se cumple`,
+            level: "high" as const,
+        };
+    }
+
+    // Caso 3: Zona gris (equilibrado pero débil, o semi-desequilibrado)
+    if (balanceRatio < 0.5) {
+        return {
+            choice: "Over 2.5",
+            reason: `Ataque desequilibrado (${strongest.toFixed(2)} vs ${weakest.toFixed(2)}) — el fuerte puede llegar a 3 goles solo`,
+            warning: `El débil tiene ${weakest.toFixed(2)} xG, poco probable que marque`,
+            level: "medium" as const,
+        };
+    }
+
+    // Fallback: el de mayor probabilidad, pero avisar
+    return {
+        choice: probBTTS > probOver25 ? "Ambos Anotan" : "Over 2.5",
+        reason: `Probabilidades parecidas (${probBTTS.toFixed(0)}% vs ${probOver25.toFixed(0)}%) — escoge el de mayor probabilidad`,
+        warning: `Ataques semi-parejos, revisa el contexto del partido`,
+        level: "low" as const,
+    };
+}
 type TabKey = 'resumen' | 'estadisticas' | 'historial' | 'bajas' | 'plantilla' | 'picks' | 'odds' | 'tabla';
 export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProps) {
     const homeLambda = r.prediction.homeExpectedGoals || 0;
@@ -158,6 +218,40 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
     // ============================================================
     // FUNCIONES AUXILIARES PARA MOSTRAR DATOS
     // ============================================================
+    /**
+  * Detecta cómo terminó el partido y quién ganó.
+  * Devuelve { label, winnerId } donde label es "PEN", "ET" o null.
+  */
+    function getMatchOutcome(game: any) {
+        const status = game.statusText ?? "";
+        const homeId = game.homeCompetitor?.id;
+        const awayId = game.awayCompetitor?.id;
+
+        // ¿Hubo penales o tiempo extra?
+        const isPen = status === "Por penaltis" || status === "Finalizado por penaltis";
+        const isET = status === "En Tiempo Extra" || status === "Finalizado en Tiempo Extra";
+
+        // Ganador: primero intenta con isWinner, si no, por score
+        let winnerId: number | null = null;
+        if (game.homeCompetitor?.isWinner === true) winnerId = homeId;
+        else if (game.awayCompetitor?.isWinner === true) winnerId = awayId;
+        else {
+            // Fallback por score
+            const hs = game.homeCompetitor?.score;
+            const as = game.awayCompetitor?.score;
+            if (hs != null && as != null) {
+                if (hs > as) winnerId = homeId;
+                else if (as > hs) winnerId = awayId;
+            }
+        }
+
+        return {
+            isPen,
+            isET,
+            label: isPen ? "PEN" : isET ? "ET" : null,
+            winnerId,
+        };
+    }
 
     // Filtrar últimos partidos
     const homeGames = r.recentMatches?.home
@@ -166,13 +260,26 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
             (el.homeCompetitor.id === r.home.id || el.awayCompetitor.id === r.home.id))
         .slice(0, 5)
         .sort((a: { startTime: string | number | Date; }, b: { startTime: string | number | Date; }) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime()) || [];
+    const homeGamesLeague = r.recentMatches?.home
+        ?.filter((el: { competitionId: number; statusText: string; homeCompetitor: { id: number; }; awayCompetitor: { id: number; }; }) => el.competitionId === r.competitionId &&
+            (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') &&
+            (el.homeCompetitor.id === r.home.id || el.awayCompetitor.id === r.home.id))
+        .slice(0, 5)
+        .sort((a: { startTime: string | number | Date; }, b: { startTime: string | number | Date; }) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime()) || [];
 
+    const awayGamesLeague = r.recentMatches?.away
+        ?.filter((el: { competitionId: number; statusText: string; awayCompetitor: { id: number; }; }) => el.competitionId === r.competitionId &&
+            (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') &&
+            (el.awayCompetitor.id === r.away.id))
+        .slice(0, 5)
+        .sort((a: { startTime: string | number | Date; }, b: { startTime: string | number | Date; }) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime()) || [];
     const homeGamesLocal = r.recentMatches?.home
         ?.filter((el: { competitionDisplayName: string; statusText: string; homeCompetitor: { id: number; }; }) => el.competitionDisplayName !== 'Partido Amistoso' &&
             (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') &&
             (el.homeCompetitor.id === r.home.id))
         .slice(0, 5)
         .sort((a: { startTime: string | number | Date; }, b: { startTime: string | number | Date; }) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime()) || [];
+    // console.log({ homeGamesLeague })
 
     const awayGames = r.recentMatches?.away
         ?.filter((el: { competitionDisplayName: string; statusText: string; homeCompetitor: { id: number; }; awayCompetitor: { id: number; }; }) => el.competitionDisplayName !== 'Partido Amistoso' &&
@@ -245,7 +352,7 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
                 h.awayCompetitor?.score !== undefined
         );
         if (validGames.length === 0) return null;
-
+        console.log({ validGames, name: r.competitionName })
         const currentHomeId = r.home.id;
         const currentAwayId = r.away.id;
 
@@ -376,8 +483,10 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
 
                 {/* Lista de partidos */}
                 <div className="flex flex-wrap gap-2 items-center">
-                    {filteredGames.slice(0, 10).map((el) => (
-                        <div
+                    {filteredGames.slice(0, 10).map((el) => {
+                        const { isPen, isET, label, winnerId } = getMatchOutcome(el);
+
+                        return (<div
                             key={el.id}
                             className="flex items-center gap-1.5 text-xs bg-gray-50 dark:bg-neutral-800 px-2 py-1 rounded-lg border border-gray-200 dark:border-neutral-700"
                             onClick={(e) => {
@@ -385,6 +494,10 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
                                 setSelectedGameId(el.id)
                             }}
                         >
+                            {/* ✓ junto al ganador en caso de penales */}
+                            {isPen && winnerId === el.homeCompetitor.id && (
+                                <span className="text-emerald-600 dark:text-emerald-400 font-bold text-[9px]">✓</span>
+                            )}
                             <img
                                 src={`https://imagecache.365scores.com/image/upload/f_png,w_20,h_20,c_limit,q_auto:eco,dpr_2,d_Competitors:default1.png/v5/Competitors/${el.homeCompetitor.id}`}
                                 alt={el.homeCompetitor.name}
@@ -393,6 +506,7 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
                             <span className="font-medium text-gray-700 dark:text-gray-300">
                                 {el.homeCompetitor.score}
                             </span>
+
                             <span className="text-gray-400">vs</span>
                             <span className="font-medium text-gray-700 dark:text-gray-300">
                                 {el.awayCompetitor.score}
@@ -402,11 +516,26 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
                                 alt={el.awayCompetitor.name}
                                 className="w-4 h-4 object-contain"
                             />
+                            {/* ✓ junto al ganador en caso de penales */}
+                            {isPen && winnerId === el.awayCompetitor.id && (
+                                <span className="text-emerald-600 dark:text-emerald-400 font-bold text-[9px]">✓</span>
+                            )}
+                            {/* 🆕 Badge "PEN" o "ET" */}
+                            {label && (
+                                <span className={`text-[8px] font-bold px-1 rounded uppercase tracking-wider ${isPen
+                                    ? "bg-amber-200 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300"
+                                    : "bg-purple-200 text-purple-800 dark:bg-purple-950/60 dark:text-purple-300"
+                                    }`}>
+                                    {label === "PEN" ? "PEN" : "TE"}
+                                </span>
+                            )}
                             <span className="text-gray-400 text-[9px] ml-0.5">
                                 {new Date(el.startTime).toLocaleDateString("es-MX")}
                             </span>
-                        </div>
-                    ))}
+
+                        </div>)
+
+                    })}
                     {filteredGames.length > 10 && (
                         <span className="text-xs text-gray-400">+{filteredGames.length - 8} más</span>
                     )}
@@ -471,6 +600,7 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
                                     alt=""
                                 />
                                 <span className="text-gray-600 dark:text-gray-300">{el.homeCompetitor.score}</span>
+                                <span className="text-gray-400">-</span>
                                 <span className="text-gray-400">vs</span>
                                 <span className="text-gray-600 dark:text-gray-300">{el.awayCompetitor.score}</span>
                                 <img
@@ -796,7 +926,7 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
                                 const oddOver1_5_est = 1 / probOver1_5;
                                 const oddOver2_5_est = 1 / probOver2_5;
 
-                                // Reglas para Over 2.5
+                                // Reglas de confianza (igual que antes)
                                 let over25Confidence = '';
                                 let over25Color = '';
                                 if (totalLambda > 3.0) { over25Confidence = 'Excelente'; over25Color = 'bg-green-600 text-white'; }
@@ -804,7 +934,6 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
                                 else if (totalLambda >= 2.3) { over25Confidence = 'Arriesgado'; over25Color = 'bg-red-500 text-white'; }
                                 else { over25Confidence = 'Evitar'; over25Color = 'bg-red-500 text-white'; }
 
-                                // Reglas para BTTS
                                 let bttsConfidence = '';
                                 let bttsColor = '';
                                 const probBTTS_pct = probBTTS * 100;
@@ -813,7 +942,6 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
                                 else if (probBTTS_pct >= 58) { bttsConfidence = 'Arriesgado'; bttsColor = 'bg-yellow-500 text-white'; }
                                 else { bttsConfidence = 'Evitar'; bttsColor = 'bg-red-500 text-white'; }
 
-                                // Reglas para Over 1.5 (simple: si > 80% excelente, >70% bueno, >60% dudoso, sino evitar)
                                 let over15Confidence = '';
                                 let over15Color = '';
                                 const probOver1_5_pct = probOver1_5 * 100;
@@ -822,7 +950,6 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
                                 else if (probOver1_5_pct >= 60) { over15Confidence = 'Dudoso'; over15Color = 'bg-yellow-500 text-white'; }
                                 else { over15Confidence = 'Evitar'; over15Color = 'bg-red-500 text-white'; }
 
-                                // Objeto con todos los mercados
                                 const markets = [
                                     {
                                         key: 'BTTS',
@@ -856,8 +983,7 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
                                     },
                                 ];
 
-                                // Orden de prioridad para elegir el mejor: Excelente > Bueno > Dudoso > Evitar
-                                const priority = { Excelente: 4, Bueno: 3, Dudoso: 2, Evitar: 1 };
+                                const priority = { Excelente: 4, Bueno: 3, Dudoso: 2, Arriesgado: 2, Evitar: 1 };
                                 const best = markets.reduce((best, current) => {
                                     const bestScore = priority[best.confidence as keyof typeof priority] || 0;
                                     const currentScore = priority[current.confidence as keyof typeof priority] || 0;
@@ -866,12 +992,46 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
                                     return best;
                                 }, markets[0]);
 
+                                // 🆕 Decidir cuando AA y Over 2.5 están parejos
+                                const tieBreaker = decideBTTSvsOver25(
+                                    homeLambda,
+                                    awayLambda,
+                                    probBTTS_pct,
+                                    probOver2_5 * 100
+                                );
+
                                 return (
                                     <div className="p-3 bg-indigo-50 dark:bg-indigo-900/20 rounded-md border border-indigo-200 dark:border-indigo-800">
                                         <div className="text-xs font-semibold text-indigo-700 dark:text-indigo-300 flex items-center gap-1 mb-2">
                                             <Sparkles className="w-3 h-3" />
                                             Mejor opción según estadísticas
                                         </div>
+
+                                        {/* 🆕 Alerta cuando hay conflicto AA vs Over 2.5 */}
+                                        {tieBreaker && (
+                                            <div className={`mb-2 p-2 rounded-lg border text-[11px] flex items-start gap-2 ${tieBreaker.level === "high"
+                                                ? "bg-amber-50 dark:bg-amber-950/30 border-amber-300 dark:border-amber-800 text-amber-800 dark:text-amber-300"
+                                                : tieBreaker.level === "medium"
+                                                    ? "bg-yellow-50 dark:bg-yellow-950/30 border-yellow-300 dark:border-yellow-800 text-yellow-800 dark:text-yellow-300"
+                                                    : "bg-blue-50 dark:bg-blue-950/30 border-blue-300 dark:border-blue-800 text-blue-800 dark:text-blue-300"
+                                                }`}>
+                                                <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                                                <div className="flex-1">
+                                                    <div className="flex flex-wrap items-center gap-1.5 mb-0.5">
+                                                        <span className="font-bold">⚠️ AA y Over 2.5 están parejos</span>
+                                                        <span className="px-1.5 py-0.5 rounded-full bg-white/60 dark:bg-neutral-900/40 font-bold text-[10px]">
+                                                            Recomendado: {tieBreaker.choice}
+                                                        </span>
+                                                    </div>
+                                                    <div className="text-[10px] opacity-90 leading-relaxed">
+                                                        <b>Por qué:</b> {tieBreaker.reason}
+                                                    </div>
+                                                    <div className="text-[10px] opacity-75 mt-0.5 italic">
+                                                        💡 {tieBreaker.warning}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
 
                                         {/* Mejor pick destacado */}
                                         <div className="flex flex-wrap items-center gap-2 text-xs">
@@ -926,7 +1086,7 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
                                             ))}
                                         </div>
 
-                                        {/* Pick original del motor (opcional) */}
+                                        {/* Pick original del motor */}
                                         {recommendation && (
                                             <div className="mt-2 pt-1 border-t border-indigo-200 dark:border-indigo-800">
                                                 <div className="flex flex-wrap items-center gap-1 text-[10px] text-gray-500 dark:text-gray-400">
@@ -1096,10 +1256,13 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
                                     <div className="space-y-1">
                                         {renderRecentGames(homeGames, `Últimos ${homeGames.length} de ${r.home.teamName}`, r.home.teamId)}
                                         {renderRecentGames(homeGamesLocal, `En casa`, r.home.teamId)}
+                                        {renderRecentGames(homeGamesLeague, `Ultimos 5 en liga`, r.home.teamId)}
                                     </div>
                                     <div className="space-y-1">
                                         {renderRecentGames(awayGames, `Últimos ${awayGames.length} de ${r.away.teamName}`, r.away.teamId)}
                                         {renderRecentGames(awayGamesAway, `Como visitante`, r.away.teamId)}
+                                        {renderRecentGames(awayGamesLeague, `Ultimos 5 en liga`, r.away.teamId)}
+
                                     </div>
                                 </div>
                             </div>
@@ -1122,7 +1285,7 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
                                                         {r.injuries.home.map((p) => (
                                                             <div
                                                                 key={p.id}
-                                                                className="relative flex flex-col items-center gap-1 px-2 py-1 text-[10px] bg-gray-50 dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 min-w-[60px]"
+                                                                className="relative flex flex-col items-center gap-1 px-2 py-1 text-[10px] bg-gray-50 dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 min-w-15"
                                                             >
                                                                 <img
                                                                     src={`https://imagecache.365scores.com/image/upload/f_png,w_62,h_62,c_limit,q_auto:eco,dpr_2,d_Athletes:default.png,r_max,c_thumb,g_face,z_0.65/v21/Athletes/${p.athleteId}`}
@@ -1161,7 +1324,7 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
                                                         {r.injuries.away.map((p) => (
                                                             <div
                                                                 key={p.id}
-                                                                className="relative flex flex-col items-center gap-1 px-2 py-1 text-[10px] bg-gray-50 dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 min-w-[60px]"
+                                                                className="relative flex flex-col items-center gap-1 px-2 py-1 text-[10px] bg-gray-50 dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 min-w-15"
                                                             >
                                                                 <img
                                                                     src={`https://imagecache.365scores.com/image/upload/f_png,w_62,h_62,c_limit,q_auto:eco,dpr_2,d_Athletes:default.png,r_max,c_thumb,g_face,z_0.65/v21/Athletes/${p.athleteId}`}
@@ -1452,7 +1615,7 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
 
             {selectedPlayer && (
                 <div
-                    className="fixed inset-0 z-[999] flex items-center justify-center bg-neutral-950/70 backdrop-blur-sm p-3"
+                    className="fixed inset-0 z-999 flex items-center justify-center bg-neutral-950/70 backdrop-blur-sm p-3"
                     onClick={() => setSelectedPlayer(null)}
                 >
                     <div
@@ -1460,7 +1623,7 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
                         onClick={(e) => e.stopPropagation()}
                     >
                         {/* Header */}
-                        <div className="relative bg-gradient-to-br from-indigo-500/10 via-transparent to-rose-500/10 dark:from-indigo-950/40 dark:to-rose-950/30 p-5">
+                        <div className="relative bg-linear-to-br from-indigo-500/10 via-transparent to-rose-500/10 dark:from-indigo-950/40 dark:to-rose-950/30 p-5">
                             <button
                                 type="button"
                                 onClick={() => setSelectedPlayer(null)}

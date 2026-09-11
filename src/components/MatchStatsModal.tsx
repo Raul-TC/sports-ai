@@ -37,7 +37,6 @@ export function MatchStatsModal({ gameId, onClose }: MatchStatsModalProps) {
             .finally(() => setLoading(false));
     }, [gameId]);
 
-    // Cerrar con ESC
     useEffect(() => {
         const handleKey = (e: KeyboardEvent) => {
             if (e.key === "Escape") onClose();
@@ -91,11 +90,11 @@ export function MatchStatsModal({ gameId, onClose }: MatchStatsModalProps) {
         return (
             <div className="flex h-1 rounded-full overflow-hidden bg-neutral-100 dark:bg-neutral-800 my-1.5">
                 <div
-                    className="bg-gradient-to-r from-indigo-500 to-indigo-400 rounded-full transition-all duration-500 ease-out"
+                    className="bg-linear-to-r from-indigo-500 to-indigo-400 rounded-full transition-all duration-500 ease-out"
                     style={{ width: `${homePct}%` }}
                 />
                 <div
-                    className="bg-gradient-to-r from-rose-400 to-rose-500 rounded-full transition-all duration-500 ease-out"
+                    className="bg-linear-to-r from-rose-400 to-rose-500 rounded-full transition-all duration-500 ease-out"
                     style={{ width: `${100 - homePct}%` }}
                 />
             </div>
@@ -114,7 +113,7 @@ export function MatchStatsModal({ gameId, onClose }: MatchStatsModalProps) {
                 {/* Header con marcador */}
                 <div className="relative overflow-hidden">
                     {/* Fondo con gradiente */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-transparent to-rose-500/10" />
+                    <div className="absolute inset-0 bg-linear-to-br from-indigo-500/10 via-transparent to-rose-500/10" />
                     <div className="absolute -top-20 -right-20 w-60 h-60 bg-indigo-500/10 rounded-full blur-3xl" />
                     <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-rose-500/10 rounded-full blur-3xl" />
 
@@ -184,8 +183,9 @@ export function MatchStatsModal({ gameId, onClose }: MatchStatsModalProps) {
                                             </span>
                                         </div>
                                         <span className="text-[9px] uppercase tracking-widest text-neutral-400 font-medium">
-                                            {home.score === away.score ? "Empate" : home.score > away.score ? `${home.name} gana` : `${away.name} gana`}
+                                            {game.statusText === 'Por penaltis' ? game.winDescription : home.score === away.score ? "Empate" : home.score > away.score ? `${home.name} gana` : `${away.name} gana`}
                                         </span>
+
                                     </div>
 
                                     {/* Visitante */}
@@ -225,11 +225,11 @@ export function MatchStatsModal({ gameId, onClose }: MatchStatsModalProps) {
                                     >
                                         {/* Encabezado categoría */}
                                         <div className="flex items-center gap-2 mb-3">
-                                            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-200 to-transparent dark:via-neutral-700" />
+                                            <div className="h-px flex-1 bg-linear-to-r from-transparent via-neutral-200 to-transparent dark:via-neutral-700" />
                                             <span className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 px-2">
                                                 {cat}
                                             </span>
-                                            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-neutral-200 to-transparent dark:via-neutral-700" />
+                                            <div className="h-px flex-1 bg-linear-to-r from-transparent via-neutral-200 to-transparent dark:via-neutral-700" />
                                         </div>
 
                                         {/* Stats */}
