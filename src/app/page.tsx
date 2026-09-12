@@ -1,6 +1,6 @@
 import { calculateAllPredictions } from "@/lib/predictions";
 import MatchesExplorer from "@/components/MatchesExplorer";
-import data from '@/app/data/matches/mundial.json'
+// import data from '@/app/data/matches/mundial.json'
 import dataTwo from '@/app/data/matches/results_complete.json'
 import dataThree from '@/app/data/matches/results_completev2.json'
 import dataFour from '@/app/data/matches/results_completev3.json'
@@ -36,8 +36,8 @@ export default async function HomePage() {
     return result;
   }
   const rawMatches = mergeUniqueMatches(
-    (data as any[]),
-    (dataTwo as any[]),
+    // (data as any[]),
+    // (dataTwo as any[]),
     (dataThree as any[]),
     (dataFour as any[]),
   )
