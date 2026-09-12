@@ -57,8 +57,36 @@
     {
         "name": "FC Cincinnati",
         "teamId": 25287,
-        "reasson": "Equipo pendejo, 2 partidos seguidos sin meter gol, le expulsan a uno y no ataca mas",
+        "reasson": "Equipo pendejo, 2 partidos seguidos sin meter gol, le expulsan a uno y no ataca mas,meter over envez de AA",
         "liga": "MLS",
+        "betado": true
+    },
+    {
+        "name": "AZ Alkmaar",
+        "teamId": 699,
+        "reasson": "Equipo pendejo, tienen malisima punteria y todas fallan!, no meter over 2.5 mejor AA",
+        "liga": "Eredivisie",
+        "betado": true
+    },
+    {
+        "name": "Go Ahead Eagles",
+        "teamId": 714,
+        "reasson": "Equipo pendejo, tienen malisima punteria y todas fallan!, no meter over 2.5 de local si AA",
+        "liga": "Eredivisie",
+        "betado": true
+    },
+    {
+        "name": "Twente",
+        "teamId": 696,
+        "reasson": "Equipo pendejo, no tienen buena punteria y todas fallan!, no meter over 2.5 de local pero si Gana",
+        "liga": "Eredivisie",
+        "betado": true
+    },
+    {
+        "name": "N.E.C Nijmegen",
+        "teamId": 700,
+        "reasson": "Equipo pendejo, tienen malisima punteria, perdio contra un ascendido, no meter AA mejor over",
+        "liga": "Eredivisie",
         "betado": true
     }
 ]
