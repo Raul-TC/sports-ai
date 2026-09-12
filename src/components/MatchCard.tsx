@@ -145,7 +145,396 @@ function decideBTTSvsOver25(
         level: "low" as const,
     };
 }
+type Confidence = "Premium" | "Muy Bueno" | "Excelente" | "Bueno" | "Evitar";
+
+interface PickRecommendation {
+    market: "AA" | "O1.5" | "O2.5";
+    label: string;
+    emoji: string;
+    confidence: Confidence;
+    color: string;
+    probability: number;      // % estimado
+    fairOdd: number;          // cuota justa calculada
+    realOdd: number | null;   // cuota real si existe
+    edge: number | null;      // valor esperado %
+    reason: string[];         // motivos por los que se recomienda
+}
+
+/**
+ * Motor de recomendación basado en reglas de xG, BTTS y ShotsOT.
+ * Devuelve todos los mercados evaluados ordenados por confianza.
+ */
+function recommendPicks({
+    homeXG,
+    awayXG,
+    homeXGA,
+    awayXGA,
+    shotsOTTotal,
+    probBTTS,        // en % (0-100)
+    probOver15,      // en % (0-100)
+    probOver25,      // en % (0-100)
+    realOddBTTS,
+    realOddOver15,
+    realOddOver25,
+}: {
+    homeXG: number;
+    awayXG: number;
+    homeXGA: number;
+    awayXGA: number;
+    shotsOTTotal: number;
+    probBTTS: number;
+    probOver15: number;
+    probOver25: number;
+    realOddBTTS: number | null;
+    realOddOver15: number | null;
+    realOddOver25: number | null;
+}): PickRecommendation[] {
+    const totalXG = homeXG + awayXG;
+    const picks: PickRecommendation[] = [];
+
+    // ============================================================
+    // OVER 1.5
+    // ============================================================
+    if (totalXG >= 3.0 && shotsOTTotal >= 9 && probBTTS >= 55) {
+        picks.push({
+            market: "O1.5", label: "Over 1.5 Goles", emoji: "⬆️",
+            confidence: "Premium", color: "bg-purple-600 text-white",
+            probability: probOver15, fairOdd: 100 / probOver15,
+            realOdd: realOddOver15,
+            edge: realOddOver15 ? (probOver15 / 100) * realOddOver15 - 1 : null,
+            reason: [
+                `xG total ${totalXG.toFixed(2)} ≥ 3.0`,
+                `ShotsOT ${shotsOTTotal} ≥ 9`,
+                `BTTS ${probBTTS.toFixed(0)}% ≥ 55%`,
+            ],
+        });
+    } else if (totalXG >= 2.5 && shotsOTTotal >= 8) {
+        picks.push({
+            market: "O1.5", label: "Over 1.5 Goles", emoji: "⬆️",
+            confidence: "Muy Bueno", color: "bg-emerald-600 text-white",
+            probability: probOver15, fairOdd: 100 / probOver15,
+            realOdd: realOddOver15,
+            edge: realOddOver15 ? (probOver15 / 100) * realOddOver15 - 1 : null,
+            reason: [
+                `xG total ${totalXG.toFixed(2)} ≥ 2.5`,
+                `ShotsOT ${shotsOTTotal} ≥ 8`,
+            ],
+        });
+    } else if (totalXG >= 2.2 && shotsOTTotal >= 7) {
+        picks.push({
+            market: "O1.5", label: "Over 1.5 Goles", emoji: "⬆️",
+            confidence: "Bueno", color: "bg-emerald-500 text-white",
+            probability: probOver15, fairOdd: 100 / probOver15,
+            realOdd: realOddOver15,
+            edge: realOddOver15 ? (probOver15 / 100) * realOddOver15 - 1 : null,
+            reason: [
+                `xG total ${totalXG.toFixed(2)} ≥ 2.2`,
+                `ShotsOT ${shotsOTTotal} ≥ 7`,
+            ],
+        });
+    }
+
+    // ============================================================
+    // AMBOS ANOTAN (BTTS)
+    // ============================================================
+    if (probBTTS >= 67) {
+        picks.push({
+            market: "AA", label: "Ambos Anotan", emoji: "⚽",
+            confidence: "Premium", color: "bg-purple-600 text-white",
+            probability: probBTTS, fairOdd: 100 / probBTTS,
+            realOdd: realOddBTTS,
+            edge: realOddBTTS ? (probBTTS / 100) * realOddBTTS - 1 : null,
+            reason: [`BTTS ${probBTTS.toFixed(0)}% ≥ 67%`],
+        });
+    } else if (
+        homeXG >= 1.2 && awayXG >= 1.1 &&
+        probBTTS >= 62 &&
+        homeXGA >= 1.1 && awayXGA >= 1.1
+    ) {
+        picks.push({
+            market: "AA", label: "Ambos Anotan", emoji: "⚽",
+            confidence: "Muy Bueno", color: "bg-emerald-600 text-white",
+            probability: probBTTS, fairOdd: 100 / probBTTS,
+            realOdd: realOddBTTS,
+            edge: realOddBTTS ? (probBTTS / 100) * realOddBTTS - 1 : null,
+            reason: [
+                `xG local ${homeXG.toFixed(2)} ≥ 1.2`,
+                `xG visita ${awayXG.toFixed(2)} ≥ 1.1`,
+                `BTTS ${probBTTS.toFixed(0)}% ≥ 62%`,
+                `xGA local/visita ≥ 1.1`,
+            ],
+        });
+    } else if (
+        homeXG >= 1.0 && awayXG >= 0.9 &&
+        probBTTS >= 58 &&
+        homeXGA >= 1.1 && awayXGA >= 1.1
+    ) {
+        picks.push({
+            market: "AA", label: "Ambos Anotan", emoji: "⚽",
+            confidence: "Bueno", color: "bg-emerald-500 text-white",
+            probability: probBTTS, fairOdd: 100 / probBTTS,
+            realOdd: realOddBTTS,
+            edge: realOddBTTS ? (probBTTS / 100) * realOddBTTS - 1 : null,
+            reason: [
+                `xG local ${homeXG.toFixed(2)} ≥ 1.0`,
+                `xG visita ${awayXG.toFixed(2)} ≥ 0.9`,
+                `BTTS ${probBTTS.toFixed(0)}% ≥ 58%`,
+            ],
+        });
+    }
+
+    // ============================================================
+    // OVER 2.5
+    // ============================================================
+    if (totalXG < 2.4 || probBTTS < 50) {
+        picks.push({
+            market: "O2.5", label: "Over 2.5 Goles", emoji: "🔥",
+            confidence: "Evitar", color: "bg-red-500 text-white",
+            probability: probOver25, fairOdd: 100 / probOver25,
+            realOdd: realOddOver25,
+            edge: null,
+            reason: [
+                `xG total ${totalXG.toFixed(2)} < 2.4`,
+                probBTTS < 50 ? `BTTS ${probBTTS.toFixed(0)}% < 50%` : "",
+            ].filter(Boolean),
+        });
+    } else if (totalXG >= 3.2 && probBTTS >= 65 && shotsOTTotal >= 10) {
+        picks.push({
+            market: "O2.5", label: "Over 2.5 Goles", emoji: "🔥",
+            confidence: "Premium", color: "bg-purple-600 text-white",
+            probability: probOver25, fairOdd: 100 / probOver25,
+            realOdd: realOddOver25,
+            edge: realOddOver25 ? (probOver25 / 100) * realOddOver25 - 1 : null,
+            reason: [
+                `xG total ${totalXG.toFixed(2)} ≥ 3.2`,
+                `BTTS ${probBTTS.toFixed(0)}% ≥ 65%`,
+                `ShotsOT ${shotsOTTotal} ≥ 10`,
+            ],
+        });
+    } else if (totalXG >= 3.0 && probBTTS >= 62 && shotsOTTotal >= 9) {
+        picks.push({
+            market: "O2.5", label: "Over 2.5 Goles", emoji: "🔥",
+            confidence: "Excelente", color: "bg-emerald-600 text-white",
+            probability: probOver25, fairOdd: 100 / probOver25,
+            realOdd: realOddOver25,
+            edge: realOddOver25 ? (probOver25 / 100) * realOddOver25 - 1 : null,
+            reason: [
+                `xG total ${totalXG.toFixed(2)} ≥ 3.0`,
+                `BTTS ${probBTTS.toFixed(0)}% ≥ 62%`,
+                `ShotsOT ${shotsOTTotal} ≥ 9`,
+            ],
+        });
+    } else if (totalXG >= 2.8 && probBTTS >= 58 && shotsOTTotal >= 8) {
+        picks.push({
+            market: "O2.5", label: "Over 2.5 Goles", emoji: "🔥",
+            confidence: "Bueno", color: "bg-emerald-500 text-white",
+            probability: probOver25, fairOdd: 100 / probOver25,
+            realOdd: realOddOver25,
+            edge: realOddOver25 ? (probOver25 / 100) * realOddOver25 - 1 : null,
+            reason: [
+                `xG total ${totalXG.toFixed(2)} ≥ 2.8`,
+                `BTTS ${probBTTS.toFixed(0)}% ≥ 58%`,
+                `ShotsOT ${shotsOTTotal} ≥ 8`,
+            ],
+        });
+    }
+
+    return picks;
+}
+
+interface AvoidPick {
+    market: "AA" | "O1.5" | "O2.5";
+    label: string;
+    emoji: string;
+    severity: "alta" | "media" | "baja";
+    reasons: string[];   // motivos por los que evitar
+}
+
+/**
+ * Detecta picks que NO se deberían jugar según reglas y contexto.
+ * Cada regla busca una combinación de métricas que históricamente rompe el mercado.
+ */
+function detectAvoidPicks({
+    homeXG,
+    awayXG,
+    homeXGA,
+    awayXGA,
+    shotsOTTotal,
+    probBTTS,
+    probOver15,
+    probOver25,
+    totalXG,
+    homeTeamName,
+    awayTeamName
+}: {
+    homeXG: number;
+    awayXG: number;
+    homeXGA: number;
+    awayXGA: number;
+    shotsOTTotal: number;
+    probBTTS: number;
+    probOver15: number;
+    probOver25: number;
+    totalXG: number;
+    homeTeamName: string;   // 🆕
+    awayTeamName: string;
+}): AvoidPick[] {
+    const avoid: AvoidPick[] = [];
+
+    // ============================================================
+    // EVITAR OVER 2.5
+    // ============================================================
+    if (totalXG < 2.4 || probBTTS < 50) {
+        const reasons: string[] = [];
+        if (totalXG < 2.4) reasons.push(`xG total ${totalXG.toFixed(2)} < 2.4 (bajo)`);
+        if (probBTTS < 50) reasons.push(`BTTS ${probBTTS.toFixed(0)}% < 50% (raro que ambos marquen)`);
+        avoid.push({
+            market: "O2.5", label: "Over 2.5 Goles", emoji: "🔥",
+            severity: "alta",
+            reasons,
+        });
+    } else if (totalXG < 2.8) {
+        avoid.push({
+            market: "O2.5", label: "Over 2.5 Goles", emoji: "🔥",
+            severity: "media",
+            reasons: [
+                `xG total ${totalXG.toFixed(2)} < 2.8 (zona gris)`,
+                shotsOTTotal < 8 ? `ShotsOT ${shotsOTTotal.toFixed(1)} < 8` : "",
+            ].filter(Boolean),
+        });
+    }
+
+    // ============================================================
+    // EVITAR AMBOS ANOTAN
+    // ============================================================
+    if (homeXG < 0.9 || awayXG < 0.9) {
+        const weakIsHome = homeXG < awayXG;
+        const weakTeam = weakIsHome ? homeTeamName : awayTeamName;
+        const weakXG = Math.min(homeXG, awayXG);
+        avoid.push({
+            market: "AA", label: "Ambos Anotan", emoji: "⚽",
+            severity: "alta",
+            reasons: [
+                `${weakTeam} tiene xG ${weakXG.toFixed(2)} < 0.9`,
+                `Riesgo alto de que ${weakTeam} no marque`,
+            ],
+        });
+    } else if (probBTTS < 55 && (homeXG < 1.1 || awayXG < 1.1)) {
+        const weakIsHome = homeXG < awayXG;
+        const weakTeam = weakIsHome ? homeTeamName : awayTeamName;
+        const weakXG = Math.min(homeXG, awayXG);
+        avoid.push({
+            market: "AA", label: "Ambos Anotan", emoji: "⚽",
+            severity: "media",
+            reasons: [
+                `BTTS ${probBTTS.toFixed(0)}% < 55%`,
+                `${weakTeam} tiene xG bajo (${weakXG.toFixed(2)} < 1.1)`,
+            ],
+        });
+    }
+
+    // Defensa sólida de un equipo
+    if (homeXGA < 0.8 || awayXGA < 0.8) {
+        const strongIsHome = homeXGA < awayXGA;
+        const strongDef = strongIsHome ? homeTeamName : awayTeamName;
+        const minXGA = Math.min(homeXGA, awayXGA);
+        avoid.push({
+            market: "AA", label: "Ambos Anotan", emoji: "⚽",
+            severity: homeXGA < 0.7 || awayXGA < 0.7 ? "alta" : "media",
+            reasons: [
+                `${strongDef} concede poco (xGA ${minXGA.toFixed(2)})`,
+                `Defensa sólida de ${strongDef} — difícil que le marquen`,
+            ],
+        });
+    }
+
+    // ============================================================
+    // EVITAR OVER 1.5
+    // ============================================================
+    if (totalXG < 1.8) {
+        avoid.push({
+            market: "O1.5", label: "Over 1.5 Goles", emoji: "⬆️",
+            severity: "alta",
+            reasons: [
+                `xG total ${totalXG.toFixed(2)} < 1.8 (partido muy cerrado)`,
+                `Se espera que haya 0-1 goles`,
+            ],
+        });
+    } else if (totalXG < 2.0 && shotsOTTotal < 6) {
+        avoid.push({
+            market: "O1.5", label: "Over 1.5 Goles", emoji: "⬆️",
+            severity: "media",
+            reasons: [
+                `xG total ${totalXG.toFixed(2)} < 2.0`,
+                `ShotsOT totales ${shotsOTTotal.toFixed(1)} < 6`,
+            ],
+        });
+    }
+
+    // ============================================================
+    // REGLAS CRUZADAS (afectan a varios mercados)
+    // ============================================================
+
+    // Ambos ataques flojos → evitar over y AA
+    if (homeXG < 1.0 && awayXG < 1.0) {
+        // Solo añadir si no está ya
+        if (!avoid.some((a) => a.market === "O2.5")) {
+            avoid.push({
+                market: "O2.5", label: "Over 2.5 Goles", emoji: "🔥",
+                severity: "alta",
+                reasons: ["Ambos ataques con xG < 1.0 (partido cerrado)"],
+            });
+        }
+    }
+
+    // Un solo equipo ataca → evitar AA
+    if (
+        (homeXG >= 1.8 && awayXG < 0.8) ||
+        (awayXG >= 1.8 && homeXG < 0.8)
+    ) {
+        const strongIsHome = homeXG > awayXG;
+        const strongTeam = strongIsHome ? homeTeamName : awayTeamName;
+        const weakTeam = strongIsHome ? awayTeamName : homeTeamName;
+        const weakXG = Math.min(homeXG, awayXG);
+
+        if (!avoid.some((a) => a.market === "AA")) {
+            avoid.push({
+                market: "AA", label: "Ambos Anotan", emoji: "⚽",
+                severity: "alta",
+                reasons: [
+                    `Ataque muy desequilibrado`,
+                    `${strongTeam} puede meter 3-4 goles solo`,
+                    `${weakTeam} apenas ataca (xG ${weakXG.toFixed(2)})`,
+                ],
+            });
+        }
+    }
+
+    // Deduplicar por mercado y priorizar la severidad más alta
+    const dedup = new Map<string, AvoidPick>();
+    for (const p of avoid) {
+        const existing = dedup.get(p.market);
+        if (!existing) {
+            dedup.set(p.market, p);
+        } else {
+            const sevOrder = { alta: 3, media: 2, baja: 1 };
+            if (sevOrder[p.severity] > sevOrder[existing.severity]) {
+                dedup.set(p.market, p);
+            } else {
+                // Fusionar razones
+                existing.reasons = [...new Set([...existing.reasons, ...p.reasons])];
+            }
+        }
+    }
+
+    return Array.from(dedup.values()).sort((a, b) => {
+        const sevOrder = { alta: 3, media: 2, baja: 1 };
+        return sevOrder[b.severity] - sevOrder[a.severity];
+    });
+}
+
 type TabKey = 'resumen' | 'estadisticas' | 'historial' | 'bajas' | 'plantilla' | 'picks' | 'odds' | 'tabla';
+
 export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProps) {
     const homeLambda = r.prediction.homeExpectedGoals || 0;
     const awayLambda = r.prediction.awayExpectedGoals || 0;
@@ -260,6 +649,7 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
             (el.homeCompetitor.id === r.home.id || el.awayCompetitor.id === r.home.id))
         .slice(0, 5)
         .sort((a: { startTime: string | number | Date; }, b: { startTime: string | number | Date; }) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime()) || [];
+
     const homeGamesLeague = r.recentMatches?.home
         ?.filter((el: { competitionId: number; statusText: string; homeCompetitor: { id: number; }; awayCompetitor: { id: number; }; }) => el.competitionId === r.competitionId &&
             (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') &&
@@ -268,11 +658,12 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
         .sort((a: { startTime: string | number | Date; }, b: { startTime: string | number | Date; }) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime()) || [];
 
     const awayGamesLeague = r.recentMatches?.away
-        ?.filter((el: { competitionId: number; statusText: string; awayCompetitor: { id: number; }; }) => el.competitionId === r.competitionId &&
+        ?.filter((el: { competitionId: number; homeCompetitor: { id: number; }; statusText: string; awayCompetitor: { id: number; }; }) => el.competitionId === r.competitionId &&
             (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') &&
-            (el.awayCompetitor.id === r.away.id))
+            (el.homeCompetitor.id === r.away.id || el.awayCompetitor.id === r.away.id))
         .slice(0, 5)
         .sort((a: { startTime: string | number | Date; }, b: { startTime: string | number | Date; }) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime()) || [];
+
     const homeGamesLocal = r.recentMatches?.home
         ?.filter((el: { competitionDisplayName: string; statusText: string; homeCompetitor: { id: number; }; }) => el.competitionDisplayName !== 'Partido Amistoso' &&
             (el.statusText === 'Finalizado' || el.statusText === 'Por penaltis') &&
@@ -922,175 +1313,234 @@ export function MatchCard({ prediction: r, activeTab, blackList }: MatchCardProp
                                 const probOver1_5 = 1 - (Math.exp(-totalLambda) * (1 + totalLambda));
                                 const probOver2_5 = 1 - (Math.exp(-totalLambda) * (1 + totalLambda + Math.pow(totalLambda, 2) / 2));
 
-                                const oddBTTS_est = 1 / probBTTS;
-                                const oddOver1_5_est = 1 / probOver1_5;
-                                const oddOver2_5_est = 1 / probOver2_5;
-
-                                // Reglas de confianza (igual que antes)
-                                let over25Confidence = '';
-                                let over25Color = '';
-                                if (totalLambda > 3.0) { over25Confidence = 'Excelente'; over25Color = 'bg-green-600 text-white'; }
-                                else if (totalLambda >= 2.7) { over25Confidence = 'Dudoso'; over25Color = 'bg-yellow-500 text-white'; }
-                                else if (totalLambda >= 2.3) { over25Confidence = 'Arriesgado'; over25Color = 'bg-red-500 text-white'; }
-                                else { over25Confidence = 'Evitar'; over25Color = 'bg-red-500 text-white'; }
-
-                                let bttsConfidence = '';
-                                let bttsColor = '';
                                 const probBTTS_pct = probBTTS * 100;
-                                if (probBTTS_pct > 67) { bttsConfidence = 'Excelente'; bttsColor = 'bg-green-600 text-white'; }
-                                else if (probBTTS_pct >= 62) { bttsConfidence = 'Bueno'; bttsColor = 'bg-green-500 text-white'; }
-                                else if (probBTTS_pct >= 58) { bttsConfidence = 'Arriesgado'; bttsColor = 'bg-yellow-500 text-white'; }
-                                else { bttsConfidence = 'Evitar'; bttsColor = 'bg-red-500 text-white'; }
-
-                                let over15Confidence = '';
-                                let over15Color = '';
                                 const probOver1_5_pct = probOver1_5 * 100;
-                                if (probOver1_5_pct > 80) { over15Confidence = 'Excelente'; over15Color = 'bg-green-600 text-white'; }
-                                else if (probOver1_5_pct >= 70) { over15Confidence = 'Bueno'; over15Color = 'bg-green-500 text-white'; }
-                                else if (probOver1_5_pct >= 60) { over15Confidence = 'Dudoso'; over15Color = 'bg-yellow-500 text-white'; }
-                                else { over15Confidence = 'Evitar'; over15Color = 'bg-red-500 text-white'; }
+                                const probOver2_5_pct = probOver2_5 * 100;
 
-                                const markets = [
-                                    {
-                                        key: 'BTTS',
-                                        label: 'Ambos Anotan',
-                                        prob: probBTTS_pct,
-                                        odd: oddBTTS_est,
-                                        realOdd: r.prediction.btts.yes.odd,
-                                        confidence: bttsConfidence,
-                                        color: bttsColor,
-                                        emoji: '⚽',
-                                    },
-                                    {
-                                        key: 'Over1.5',
-                                        label: 'Over 1.5',
-                                        prob: probOver1_5_pct,
-                                        odd: oddOver1_5_est,
-                                        realOdd: null,
-                                        confidence: over15Confidence,
-                                        color: over15Color,
-                                        emoji: '⬆️',
-                                    },
-                                    {
-                                        key: 'Over2.5',
-                                        label: 'Over 2.5',
-                                        prob: probOver2_5 * 100,
-                                        odd: oddOver2_5_est,
-                                        realOdd: null,
-                                        confidence: over25Confidence,
-                                        color: over25Color,
-                                        emoji: '⬆️⬆️',
-                                    },
-                                ];
+                                // ShotsOT totales esperados (suma de ambos equipos)
+                                const shotsOTTotal = (r.home.metrics.shotsOT ?? 0) + (r.away.metrics.shotsOT ?? 0);
 
-                                const priority = { Excelente: 4, Bueno: 3, Dudoso: 2, Arriesgado: 2, Evitar: 1 };
-                                const best = markets.reduce((best, current) => {
-                                    const bestScore = priority[best.confidence as keyof typeof priority] || 0;
-                                    const currentScore = priority[current.confidence as keyof typeof priority] || 0;
-                                    if (currentScore > bestScore) return current;
-                                    if (currentScore === bestScore && current.prob > best.prob) return current;
-                                    return best;
-                                }, markets[0]);
+                                // 🆕 Motor de recomendación con reglas
+                                const picks = recommendPicks({
+                                    homeXG: homeLambda,
+                                    awayXG: awayLambda,
+                                    homeXGA: r.home.metrics.xGA ?? 0,
+                                    awayXGA: r.away.metrics.xGA ?? 0,
+                                    shotsOTTotal,
+                                    probBTTS: probBTTS_pct,
+                                    probOver15: probOver1_5_pct,
+                                    probOver25: probOver2_5_pct,
+                                    realOddBTTS: r.prediction.btts?.yes?.odd ?? null,
+                                    realOddOver15: r.prediction.goalLines[0].overOdd ?? null,
+                                    realOddOver25: r.prediction.goalLines[1].overOdd ?? null,
+                                });
 
-                                // 🆕 Decidir cuando AA y Over 2.5 están parejos
-                                const tieBreaker = decideBTTSvsOver25(
-                                    homeLambda,
-                                    awayLambda,
-                                    probBTTS_pct,
-                                    probOver2_5 * 100
-                                );
+                                // Ordenar por prioridad de confianza
+                                const priority: Record<Confidence, number> = {
+                                    "Premium": 5,
+                                    "Muy Bueno": 4,
+                                    "Excelente": 4,
+                                    "Bueno": 3,
+                                    "Evitar": 1,
+                                };
+
+                                const best = picks
+                                    .filter((p) => p.confidence !== "Evitar")
+                                    .sort((a, b) => {
+                                        const pd = priority[b.confidence] - priority[a.confidence];
+                                        if (pd !== 0) return pd;
+                                        return b.probability - a.probability;
+                                    })[0];
+
+                                const avoid = picks.filter((p) => p.confidence === "Evitar");
 
                                 return (
                                     <div className="p-3 bg-indigo-50 dark:bg-indigo-900/20 rounded-md border border-indigo-200 dark:border-indigo-800">
                                         <div className="text-xs font-semibold text-indigo-700 dark:text-indigo-300 flex items-center gap-1 mb-2">
                                             <Sparkles className="w-3 h-3" />
-                                            Mejor opción según estadísticas
+                                            Recomendación del motor
                                         </div>
 
-                                        {/* 🆕 Alerta cuando hay conflicto AA vs Over 2.5 */}
-                                        {tieBreaker && (
-                                            <div className={`mb-2 p-2 rounded-lg border text-[11px] flex items-start gap-2 ${tieBreaker.level === "high"
-                                                ? "bg-amber-50 dark:bg-amber-950/30 border-amber-300 dark:border-amber-800 text-amber-800 dark:text-amber-300"
-                                                : tieBreaker.level === "medium"
-                                                    ? "bg-yellow-50 dark:bg-yellow-950/30 border-yellow-300 dark:border-yellow-800 text-yellow-800 dark:text-yellow-300"
-                                                    : "bg-blue-50 dark:bg-blue-950/30 border-blue-300 dark:border-blue-800 text-blue-800 dark:text-blue-300"
-                                                }`}>
-                                                <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-                                                <div className="flex-1">
-                                                    <div className="flex flex-wrap items-center gap-1.5 mb-0.5">
-                                                        <span className="font-bold">⚠️ AA y Over 2.5 están parejos</span>
-                                                        <span className="px-1.5 py-0.5 rounded-full bg-white/60 dark:bg-neutral-900/40 font-bold text-[10px]">
-                                                            Recomendado: {tieBreaker.choice}
-                                                        </span>
-                                                    </div>
-                                                    <div className="text-[10px] opacity-90 leading-relaxed">
-                                                        <b>Por qué:</b> {tieBreaker.reason}
-                                                    </div>
-                                                    <div className="text-[10px] opacity-75 mt-0.5 italic">
-                                                        💡 {tieBreaker.warning}
+                                        {/* Sin picks recomendados */}
+                                        {!best && avoid.length > 0 && (
+                                            <div className="p-2 rounded-lg bg-red-50 dark:bg-red-950/30 border border-red-300 dark:border-red-800 text-[11px] text-red-800 dark:text-red-300 flex items-start gap-2">
+                                                <span className="text-lg leading-none">🚫</span>
+                                                <div>
+                                                    <div className="font-bold mb-0.5">Evitar apostar en este partido</div>
+                                                    <div className="opacity-90">
+                                                        {avoid.map((p) => p.reason.join(" · ")).join(" | ")}
                                                     </div>
                                                 </div>
                                             </div>
                                         )}
 
-                                        {/* Mejor pick destacado */}
-                                        <div className="flex flex-wrap items-center gap-2 text-xs">
-                                            <span className="font-medium">🎯 {best.emoji} {best.label}</span>
-                                            <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${best.color}`}>
-                                                {best.confidence}
-                                            </span>
-                                            <span className="bg-indigo-100 dark:bg-indigo-800/50 px-1.5 py-0.5 rounded-full">
-                                                Prob: {best.prob.toFixed(1)}%
-                                            </span>
-                                            <span className="bg-indigo-100 dark:bg-indigo-800/50 px-1.5 py-0.5 rounded-full">
-                                                Cuota estimada: {best.odd.toFixed(2)}
-                                            </span>
-                                            {best.realOdd && (
-                                                <span className="bg-green-100 dark:bg-green-800/50 px-1.5 py-0.5 rounded-full text-green-700 dark:text-green-300">
-                                                    Cuota real: {best.realOdd.toFixed(2)}
-                                                </span>
-                                            )}
-                                            <span className="text-gray-400 text-[10px]">
-                                                {best.key === 'BTTS'
-                                                    ? `xG local ${homeLambda.toFixed(2)} · xG visitante ${awayLambda.toFixed(2)}`
-                                                    : `Goles esperados totales ${totalLambda.toFixed(2)}`}
-                                            </span>
-                                        </div>
+                                        {/* Sin picks en absoluto */}
+                                        {picks.length === 0 && (
+                                            <div className="p-2 rounded-lg bg-gray-50 dark:bg-neutral-800/60 border border-gray-200 dark:border-neutral-700 text-[11px] text-gray-600 dark:text-neutral-400 text-center">
+                                                Ninguna regla se cumple. Sin recomendación clara.
+                                            </div>
+                                        )}
 
-                                        {/* Tabla comparativa de los tres mercados */}
-                                        <div className="mt-2 grid grid-cols-1 sm:grid-cols-3 gap-1 text-[10px]">
-                                            {markets.map((m) => (
-                                                <div
-                                                    key={m.key}
-                                                    className={`flex flex-col items-center p-1.5 rounded border ${m.key === best.key
-                                                        ? 'border-indigo-400 dark:border-indigo-600 bg-indigo-100/50 dark:bg-indigo-800/30'
-                                                        : 'border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-800/30'
-                                                        }`}
-                                                >
-                                                    <span className="font-medium">{m.emoji} {m.label}</span>
-                                                    <span className={`px-1.5 py-0.5 rounded-full text-[9px] font-bold ${m.color}`}>
-                                                        {m.confidence}
+                                        {/* Mejor pick destacado */}
+                                        {best && (
+                                            <>
+                                                <div className="flex flex-wrap items-center gap-2 text-xs">
+                                                    <span className="font-medium">🎯 {best.emoji} {best.label}</span>
+                                                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${best.color}`}>
+                                                        {best.confidence}
                                                     </span>
-                                                    <span className="text-gray-600 dark:text-gray-300">
-                                                        {m.prob.toFixed(0)}% · {m.odd.toFixed(2)}
+                                                    <span className="bg-indigo-100 dark:bg-indigo-800/50 px-1.5 py-0.5 rounded-full">
+                                                        Prob: {best.probability.toFixed(1)}%
                                                     </span>
-                                                    {m.realOdd && (
-                                                        <span className="text-green-600 dark:text-green-400 text-[9px]">
-                                                            real {m.realOdd.toFixed(2)}
+                                                    <span className="bg-indigo-100 dark:bg-indigo-800/50 px-1.5 py-0.5 rounded-full">
+                                                        Momio justo: {best.fairOdd.toFixed(2)}
+                                                    </span>
+                                                    {best.realOdd && (
+                                                        <span className={`px-1.5 py-0.5 rounded-full ${best.edge && best.edge > 0
+                                                            ? "bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300"
+                                                            : "bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300"
+                                                            }`}>
+                                                            Real: {best.realOdd.toFixed(2)}
+                                                            {best.edge !== null && ` (EV ${(best.edge * 100).toFixed(1)}%)`}
                                                         </span>
                                                     )}
-                                                    {m.key === best.key && (
-                                                        <span className="text-indigo-600 dark:text-indigo-300 text-[9px] font-bold">⭐ Recomendado</span>
-                                                    )}
                                                 </div>
-                                            ))}
+
+                                                {/* Razones */}
+                                                <div className="mt-2 flex flex-wrap gap-1 text-[10px]">
+                                                    {best.reason.map((reason, i) => (
+                                                        <span
+                                                            key={i}
+                                                            className="bg-white/60 dark:bg-neutral-900/40 border border-indigo-200 dark:border-indigo-800 px-1.5 py-0.5 rounded-full"
+                                                        >
+                                                            ✓ {reason}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </>
+                                        )}
+
+                                        {/* Todos los picks evaluados */}
+                                        {picks.length > 0 && (
+                                            <div className="mt-3 pt-2 border-t border-indigo-200 dark:border-indigo-800">
+                                                <div className="text-[10px] uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5">
+                                                    Análisis completo
+                                                </div>
+                                                <div className="space-y-1">
+                                                    {picks.map((p) => (
+                                                        <div
+                                                            key={p.market}
+                                                            className={`flex items-center gap-2 text-[10px] p-1.5 rounded border ${p.market === best?.market
+                                                                ? "border-indigo-400 dark:border-indigo-600 bg-indigo-100/50 dark:bg-indigo-800/30"
+                                                                : "border-gray-200 dark:border-gray-700 bg-white/40 dark:bg-neutral-900/40"
+                                                                }`}
+                                                        >
+                                                            <span className="font-semibold w-16">
+                                                                {p.emoji} {p.market}
+                                                            </span>
+                                                            <span className={`px-1.5 py-0.5 rounded-full text-[9px] font-bold ${p.color}`}>
+                                                                {p.confidence}
+                                                            </span>
+                                                            <span className="text-gray-500 dark:text-gray-400">
+                                                                {p.probability.toFixed(0)}% · Justo {p.fairOdd.toFixed(2)}
+                                                            </span>
+                                                            {p.realOdd && (
+                                                                <span className={p.edge && p.edge > 0 ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}>
+                                                                    Real {p.realOdd.toFixed(2)}
+                                                                </span>
+                                                            )}
+                                                            {p.market === best?.market && (
+                                                                <span className="ml-auto text-indigo-600 dark:text-indigo-300 font-bold">
+                                                                    ⭐ Recomendado
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+                                        {/* 🆕 Picks a evitar */}
+                                        {(() => {
+                                            const avoidPicks = detectAvoidPicks({
+                                                homeTeamName: r.home.teamName,
+                                                awayTeamName: r.away.teamName,
+                                                homeXG: homeLambda,
+                                                awayXG: awayLambda,
+                                                homeXGA: r.home.metrics.xGA ?? 0,
+                                                awayXGA: r.away.metrics.xGA ?? 0,
+                                                shotsOTTotal,
+                                                probBTTS: probBTTS_pct,
+                                                probOver15: probOver1_5_pct,
+                                                probOver25: probOver2_5_pct,
+                                                totalXG: totalLambda,
+                                            });
+
+                                            if (avoidPicks.length === 0) return null;
+
+                                            return (
+                                                <div className="mt-3 pt-2 border-t border-indigo-200 dark:border-indigo-800">
+                                                    <div className="text-[10px] uppercase tracking-wider text-red-600 dark:text-red-400 font-bold mb-1.5 flex items-center gap-1">
+                                                        🚫 NO jugar
+                                                    </div>
+                                                    <div className="space-y-1.5">
+                                                        {avoidPicks.map((a) => {
+                                                            const sevStyle =
+                                                                a.severity === "alta"
+                                                                    ? "bg-red-50 dark:bg-red-950/30 border-red-300 dark:border-red-800"
+                                                                    : a.severity === "media"
+                                                                        ? "bg-orange-50 dark:bg-orange-950/30 border-orange-300 dark:border-orange-800"
+                                                                        : "bg-yellow-50 dark:bg-yellow-950/30 border-yellow-300 dark:border-yellow-800";
+                                                            const sevLabel =
+                                                                a.severity === "alta" ? "ALTO RIESGO"
+                                                                    : a.severity === "media" ? "MEDIO RIESGO"
+                                                                        : "BAJO RIESGO";
+                                                            const sevColor =
+                                                                a.severity === "alta" ? "bg-red-600 text-white"
+                                                                    : a.severity === "media" ? "bg-orange-600 text-white"
+                                                                        : "bg-yellow-600 text-white";
+
+                                                            return (
+                                                                <div
+                                                                    key={a.market}
+                                                                    className={`p-2 rounded-lg border text-[10px] ${sevStyle}`}
+                                                                >
+                                                                    <div className="flex items-center gap-2 mb-1">
+                                                                        <span className="text-base leading-none">{a.emoji}</span>
+                                                                        <span className="font-bold text-gray-800 dark:text-neutral-100">
+                                                                            Evitar {a.label}
+                                                                        </span>
+                                                                        <span className={`ml-auto text-[9px] font-bold px-1.5 py-0.5 rounded-full ${sevColor}`}>
+                                                                            {sevLabel}
+                                                                        </span>
+                                                                    </div>
+                                                                    <ul className="space-y-0.5 pl-5 text-gray-700 dark:text-neutral-300">
+                                                                        {a.reasons.map((reason, i) => (
+                                                                            <li key={i} className="flex items-start gap-1.5">
+                                                                                <span className="text-red-500 mt-0.5">•</span>
+                                                                                <span className="flex-1">{reason}</span>
+                                                                            </li>
+                                                                        ))}
+                                                                    </ul>
+                                                                </div>
+                                                            );
+                                                        })}
+                                                    </div>
+                                                </div>
+                                            );
+                                        })()}
+                                        {/* Métricas de contexto */}
+                                        <div className="mt-2 pt-2 border-t border-indigo-200 dark:border-indigo-800 flex flex-wrap gap-x-3 gap-y-1 text-[10px] text-gray-500 dark:text-gray-400">
+                                            <span>xG total: <b className="text-gray-700 dark:text-gray-200">{totalLambda.toFixed(2)}</b></span>
+                                            <span>ShotsOT total: <b className="text-gray-700 dark:text-gray-200">{shotsOTTotal.toFixed(1)}</b></span>
+                                            <span>BTTS: <b className="text-gray-700 dark:text-gray-200">{probBTTS_pct.toFixed(0)}%</b></span>
+                                            <span>xGA local/vis: <b className="text-gray-700 dark:text-gray-200">{(r.home.metrics.xGA ?? 0).toFixed(2)} / {(r.away.metrics.xGA ?? 0).toFixed(2)}</b></span>
                                         </div>
 
-                                        {/* Pick original del motor */}
+                                        {/* Pick original del motor (opcional, mantener) */}
                                         {recommendation && (
-                                            <div className="mt-2 pt-1 border-t border-indigo-200 dark:border-indigo-800">
+                                            <div className="mt-2 pt-2 border-t border-indigo-200 dark:border-indigo-800">
                                                 <div className="flex flex-wrap items-center gap-1 text-[10px] text-gray-500 dark:text-gray-400">
-                                                    <span>Pick original:</span>
+                                                    <span>Pick scoring engine:</span>
                                                     <span className="font-medium">{recommendation.pick.market}</span>
                                                     <span className="font-bold">{recommendation.pick.selection}</span>
                                                     <span className="bg-indigo-50 dark:bg-indigo-900/20 px-1.5 py-0.5 rounded-full">

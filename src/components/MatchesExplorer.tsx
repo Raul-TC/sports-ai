@@ -10,6 +10,8 @@ import type { PredictionResult as SharedPredictionResult } from "@/types/index";
 import { MatchCard } from "./MatchCard";
 import blacklist from "../app/data/matches/equiposBetados.json"
 import TeamsLineStats from "./TeamsLineStats";
+import PredictionsSummaryTable from "./PredictionSummar";
+import TopPicksModal from "./TopPicksModal";
 // ============================================================
 // INTERFACES
 // ============================================================
@@ -65,6 +67,7 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
     const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
     const { activeTab, setActiveTab, filteredPredictions, todayCount, futureCount, pastCount } = useMatchFilters(predictions, results);
     const [selectedLeague, setSelectedLeague] = useState<string | null>(null);
+    const [showTopPicks, setShowTopPicks] = useState(false);
 
     const toggleMatch = (url: string) => {
         setSelectedMatchUrl(selectedMatchUrl === url ? null : url);
@@ -149,7 +152,8 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
                 </h2>
             </div>
 
-            <TeamsLineStats predictions={filteredPredictions} minMatches={10} />
+            {activeTab === 'past' && <TeamsLineStats predictions={filteredPredictions} minMatches={10} />}
+
             <div className="flex items-center gap-4 justify-between mb-2 border-b border-gray-200 dark:border-neutral-700">
 
                 <TabNavigation
@@ -159,22 +163,38 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
                     futureCount={futureCount}
                     pastCount={pastCount}
                 />
-                {/* <PredictionsSummaryTable predictions={filteredPredictions} /> */}
+                <div className="flex gap-x-4">
 
-                <div className="flex items-center gap-2 flex-wrap">
-                    <select id="league-select"
-                        value={selectedLeague || ''}
-                        onChange={(e) => setSelectedLeague(e.target.value || null)}
-                        className="bg-gray-50 dark:bg-neutral-800  dark:border-neutral-600 rounded-md px-3 py-1 text-sm cursor-pointer"
-                    >
-                        <option value="" className="block px-4 py-2 text-sm text-gray-300 cursor-pointer">Todas las ligas</option>
-
-                        {leagueNames.map(name => (
-                            <option className="block px-4 py-4 text-sm text-gray-300 cursor-pointer" key={name} value={name}>{name}</option>
-                        ))}
-                    </select>
+                    <div className="flex items-center gap-2 flex-wrap">
+                        {/* 🆕 Botón Top Picks */}
+                        <button
+                            onClick={() => setShowTopPicks(true)}
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold bg-linear-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white shadow-sm hover:shadow-md transition-all"
+                        >
+                            <Trophy className="w-4 h-4" />
+                            Mejores partidos
+                        </button>
 
 
+                    </div>
+                    {/* <PredictionsSummaryTable predictions={filteredPredictions} /> */}
+
+
+                    <div className="flex items-center gap-2 flex-wrap w-fit">
+                        <select id="league-select"
+                            value={selectedLeague || ''}
+                            onChange={(e) => setSelectedLeague(e.target.value || null)}
+                            className="bg-gray-50 dark:bg-neutral-800  dark:border-neutral-600 rounded-md px-3 py-1 text-sm cursor-pointer"
+                        >
+                            <option value="" className="block px-4 py-2 text-sm text-gray-300 cursor-pointer">Todas las ligas</option>
+
+                            {leagueNames.map(name => (
+                                <option className="block px-4 py-4 text-sm text-gray-300 cursor-pointer" key={name} value={name}>{name}</option>
+                            ))}
+                        </select>
+
+
+                    </div>
                 </div>
             </div>
 
@@ -217,7 +237,17 @@ export default function MatchesExplorer({ predictions, results }: MatchesExplore
                     </>
                 )
             }
-
+            {showTopPicks && (
+                <TopPicksModal
+                    predictions={leagueFiltered}
+                    onClose={() => setShowTopPicks(false)}
+                    onSelectMatch={(url) => {
+                        // Opcional: scroll al partido seleccionado
+                        const el = document.querySelector(`[data-match-url="${url}"]`);
+                        if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+                    }}
+                />
+            )}
         </div >
     );
 }

@@ -3,6 +3,7 @@ import MatchesExplorer from "@/components/MatchesExplorer";
 import data from '@/app/data/matches/mundial.json'
 import dataTwo from '@/app/data/matches/results_complete.json'
 import dataThree from '@/app/data/matches/results_completev2.json'
+import dataFour from '@/app/data/matches/results_completev3.json'
 import dataResults from '@/app/data/matches/results.json'
 import { unifyMatchStats } from "@/lib/unifyMatchStats";
 export const dynamic = "force-dynamic";
@@ -38,6 +39,7 @@ export default async function HomePage() {
     (data as any[]),
     (dataTwo as any[]),
     (dataThree as any[]),
+    (dataFour as any[]),
   )
   const matches = unifyMatchStats(rawMatches as any)
 

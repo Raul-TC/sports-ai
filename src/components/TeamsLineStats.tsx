@@ -318,7 +318,7 @@ export default function TeamsLineStats({ predictions, minMatches = 3 }: Props) {
         );
     }
 
-    const displayed = expanded ? teams : teams.slice(0, 10);
+    const displayed = teams;
 
     return (
         <div className="mt-6 rounded-2xl border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 overflow-hidden">
@@ -373,7 +373,7 @@ export default function TeamsLineStats({ predictions, minMatches = 3 }: Props) {
             </div>
 
             {/* Tabla */}
-            <div className="overflow-x-auto">
+            <div className="overflow-auto max-h-[500px] custom-scrollbar">
                 <table className="w-full text-xs">
                     <thead className="bg-gray-50 dark:bg-neutral-800/60">
                         <tr className="text-[10px] uppercase tracking-wider text-gray-500 dark:text-neutral-400">
@@ -485,14 +485,14 @@ export default function TeamsLineStats({ predictions, minMatches = 3 }: Props) {
             </div>
 
             {/* Ver más */}
-            {teams.length > 10 && (
+            {/* {teams.length > 30 && (
                 <button
                     onClick={() => setExpanded((v) => !v)}
                     className="w-full py-2 text-[11px] font-semibold text-indigo-600 dark:text-indigo-300 hover:bg-indigo-50/60 dark:hover:bg-indigo-950/30 transition border-t border-gray-100 dark:border-neutral-800"
                 >
                     {expanded ? "Ver solo top 10" : `Ver todos (${teams.length})`}
                 </button>
-            )}
+            )} */}
         </div>
     );
 }
